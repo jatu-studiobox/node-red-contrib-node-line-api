@@ -1,0 +1,52 @@
+{
+    "node-line-notify": {
+        "line-notify": "LINE Notify",
+        "label": {
+            "name": "Name",
+            "token": "LINE Notify Access Token",
+            "tabMessage": "ข้อความ",
+            "tabImage": "รูปภาพ",
+            "tabSticker": "สติ๊กเกอร์",
+            "message": "ข้อความ",
+            "extdata": "ใช้ข้อมูลการส่งจากภายนอก",
+            "notUseImage": "ไม่ใช้งาน",
+            "useImageUrl": "ใช้ Url รูปภาพ",
+            "useUploadImage": "ใช้อัพโหลดรูปภาพ",
+            "imageFullsize": "URL รูปภาพขนาดจริง",
+            "imageThumbnail": "URL Thumbnail รูปภาพ",
+            "imageFile": "อัพโหลดรูปภาพ",
+            "imageFileTip": "Tip: 'อัพโหลดรูปภาพ' ระบุเส้นทางไปยังไฟล์ที่ต้องการอัพโหลดแบบเต็มรูป เช่น C:\\folder\\image.jpg (รองรับเฉพาะ .png และ .jpg)",
+            "useSticker": "ใช้งาน Sticker",
+            "stickerId": "Sticker ID",
+            "packageId": "Package ID",
+            "remarkIntegerOnly": "(ระบุเป็นเลขจำนวนเต็ม)",
+            "gotoSticker": "ไปที่ LINE List of available stickers",
+            "disabledNotify": "ปิดป๊อบอัพแจ้งเตือนผู้ใช้งาน"
+        },
+        "errors": {
+            "notFoundToken": "ไม่พบ Access Token",
+            "messageRequired": "ต้องการค่า message",
+            "messageInvalid": "message ไม่ถูกต้อง",
+            "messageEmpty": "message ไม่สามารถว่างได้",
+            "useImageUrlRequired": "ต้องการค่า useImageUrl",
+            "useImageUrlInvalid": "useImageUrl ไม่ถูกต้อง",
+            "imageFullsizeUrlRequired": "ต้องการค่า imageFullsizeUrl",
+            "imageFullsizeUrlInvalid": "imageFullsizeUrl ไม่ถูกต้อง",
+            "imageThumbnailUrlRequired": "ต้องการค่า imageThumbnailUrl",
+            "imageThumbnailUrlInvalid": "imageThumbnailUrl ไม่ถูกต้อง",
+            "useImageFileRequired": "ต้องการค่า useImageFile",
+            "useImageFileInvalid": "useImageFile ไม่ถูกต้อง",
+            "imageFileRequired": "ต้องการค่า imageFile",
+            "imageFileInvalid": "imageFile ไม่ถูกต้อง",
+            "useStickerRequired": "ต้องการค่า useSticker",
+            "useStickerInvalid": "useSticker ไม่ถูกต้อง",
+            "stickerPackageIdRequired": "ต้องการค่า stickerPackageId",
+            "stickerPackageIdInvalid": "stickerPackageId ไม่ถูกต้อง",
+            "stickerIdRequired": "ต้องการค่า stickerId",
+            "stickerIdInvalid": "stickerId ไม่ถูกต้อง"
+        },
+        "send-result": {
+            "success": "ส่งข้อความสำเร็จ: "
+        }
+    }
+}

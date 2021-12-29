@@ -1,0 +1,408 @@
+<style>
+    input[type=password]::-ms-reveal,
+    input[type=password]::-ms-clear {
+        display: none;
+    }
+</style>
+<style>
+    .labelDisabled {
+        color: darkgray;
+        cursor: not-allowed !important;
+    }
+    .tabcontent {
+        display: none;
+        padding: 12px 10px;        
+        border-left: 1px solid #bbb;
+        border-right: 1px solid #bbb;
+        border-bottom: 1px solid #bbb;
+    }
+</style>
+<script type="text/html" data-template-name="node-line-notify">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="node-line-notify.label.name" /></label>
+        <input type="text" id="node-input-name" placeholder="Name" />
+    </div>
+    <div style="clear: both; color: #555; margin-bottom: 12px;">
+        <label for="node-input-token"><i class="fa fa-key"></i> <span data-i18n="node-line-notify.label.token" /></label>
+        <div>
+            <input style="width: 90%" type="password" id="node-input-token" placeholder="Access Token" />
+            <button type="button" class="red-ui-button" id="node-button-displaytoken"><i id="label-button" class="fa fa-eye"></i></button>
+            <input type="checkbox" id="node-input-hasToken" style="display:none" />
+        </div>
+    </div>
+    <div style="clear: both; color: #555; display: flex; flex-direction: row; gap: 10px;">
+        <label for="node-input-useExternalData"><i class="fa fa-sign-in"></i> <span data-i18n="node-line-notify.label.extdata" /></label>
+        <input type="checkbox" id="node-input-useExternalData" />
+    </div>
+    <div style="clear: both; color: #555; display: flex; flex-direction: row; gap: 10px;">
+        <label for="node-input-disabledPushNotification"><i class="fa fa-bell-slash"></i> <span data-i18n="node-line-notify.label.disabledNotify" /></label>
+        <input type="checkbox" id="node-input-disabledPushNotification" />
+    </div>
+    <div style="clear: both; margin-bottom: 12px;">
+        <div class="red-ui-tabs" id="node-ui-tabs">
+            <div>
+                <ul style="width: 100%;" id="node-config-line-tabs">
+                    <li class="red-ui-tab" id="tabMessage" style="width: 31.6226%;">
+                        <a href="#" class="red-ui-tab-label" data-i18n="[title]node-line-notify.label.tabMessage">
+                            <span class="red-ui-text-bidi-aware" dir>
+                                <i class="fa fa-comment fa-fw"></i> <span data-i18n="node-line-notify.label.tabMessage" />
+                            </span>
+                        </a>
+                        <span class="red-ui-tabs-fade"></span>
+                        <span class="red-ui-tabs-badges"></span>
+                    </li>
+                    <li class="red-ui-tab" id="tabImage" style="width: 31.6226%;">
+                        <a href="#" class="red-ui-tab-label" data-i18n="[title]node-line-notify.label.tabImage">
+                            <span class="red-ui-text-bidi-aware" dir>
+                                <i class="fa fa-picture-o"></i> <span data-i18n="node-line-notify.label.tabImage" />
+                            </span>
+                        </a>
+                        <span class="red-ui-tabs-fade"></span>
+                        <span class="red-ui-tabs-badges"></span>
+                    </li>
+                    <li class="red-ui-tab" id="tabSticker" style="width: 31.6226%;">
+                        <a href="#" class="red-ui-tab-label" data-i18n="[title]node-line-notify.label.tabSticker">
+                            <span class="red-ui-text-bidi-aware" dir>
+                                <i class="fa fa-puzzle-piece"></i> <span data-i18n="node-line-notify.label.tabSticker" />
+                            </span>
+                        </a>
+                        <span class="red-ui-tabs-fade"></span>
+                        <span class="red-ui-tabs-badges"></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div style="clear: both;"></div>
+        <div id="bodyMessage" class="tabcontent">
+            <div class="form-row">
+                <label for="node-input-message"><span data-i18n="node-line-notify.label.message" /></label>
+                <textarea id="node-input-message" rows="4" style="width: 100%;resize: none;"></textarea>
+            </div>
+        </div>
+        <div id="bodyImage" class="tabcontent">
+            <div style="clear: both; color: #555; margin-bottom: 5px;">
+                <span class="button-group">
+                    <button type="button" id="node-button-notUseImage" class="red-ui-button toggle selected img-button-group"><span data-i18n="node-line-notify.label.notUseImage" /></button><button type="button" id="node-button-useImageUrl" class="red-ui-button toggle img-button-group"><span data-i18n="node-line-notify.label.useImageUrl" /></button><button type="button" id="node-button-useUploadImage" class="red-ui-button toggle img-button-group"><span data-i18n="node-line-notify.label.useUploadImage" /></button>
+                    <input type="checkbox" id="node-input-useImageUrl" style="display: none;" />
+                    <input type="checkbox" id="node-input-useImageFile" style="display: none;" />
+                </span>
+            </div> 
+            <div style="clear: both; color: #555; margin-bottom: 5px;">
+                <label for="node-input-imageFullsizeUrl"><span data-i18n="node-line-notify.label.imageFullsize" /></label>
+                <div>
+                    <input style="width: 100%" type="text" id="node-input-imageFullsizeUrl" />
+                </div>
+            </div>
+            <div style="clear: both; color: #555; margin-bottom: 12px;">
+                <label for="node-input-imageThumbnailUrl"><span data-i18n="node-line-notify.label.imageThumbnail" /></label>
+                <div>
+                    <input style="width: 100%" type="text" id="node-input-imageThumbnailUrl" />
+                </div>
+            </div>
+            <div style="clear: both; color: #555; margin-bottom: 12px;">
+                <label for="node-input-imageFile"><span data-i18n="node-line-notify.label.imageFile" /></label>
+                <div>
+                    <input style="width: 100%" type="text" id="node-input-imageFile" />
+                </div>
+            </div>
+            <div class="form-tips">
+                <span data-i18n="node-line-notify.label.imageFileTip" />
+            </div>
+        </div> 
+        <div id="bodySticker" class="tabcontent">
+            <div style="clear: both; color: #555; margin-bottom: 5px; display: flex; flex-direction: row; gap: 10px;">
+                <label for="node-input-useSticker"><span data-i18n="node-line-notify.label.useSticker" /></label>
+                <input type="checkbox" id="node-input-useSticker" />
+            </div>
+            <div class="form-row">
+                <label for="node-input-lineStickerPackageId"><span data-i18n="node-line-notify.label.packageId" /></label>
+                <input style="width: 100px;text-align: end;" type="text" id="node-input-lineStickerPackageId" /> <span data-i18n="node-line-notify.label.remarkIntegerOnly" />
+            </div>
+            <div class="form-row">
+                <label for="node-input-lineStickerId"><span data-i18n="node-line-notify.label.stickerId" /></label>
+                <input style="width: 100px;text-align: end;" type="text" id="node-input-lineStickerId" /> <span data-i18n="node-line-notify.label.remarkIntegerOnly" />
+            </div>
+            <div>
+                <a target="_blank" href="https://developers.line.biz/en/docs/messaging-api/sticker-list/"><i class="fa fa-external-link"></i> <span data-i18n="node-line-notify.label.gotoSticker" /></a>
+            </div>            
+        </div>
+    </div>
+</script>
+<script type="text/javascript">
+    // Restricts input for the set of matched elements to the given inputFilter function.
+    (function($) {
+        $.fn.inputFilter = function(inputFilter) {
+            return this.on("input keydown keyup mousedown mouseup select contextmenu drop", function() {
+                if (inputFilter(this.value)) {
+                    this.oldValue = this.value;
+                    this.oldSelectionStart = this.selectionStart;
+                    this.oldSelectionEnd = this.selectionEnd;
+                } else if (this.hasOwnProperty("oldValue")) {
+                    this.value = this.oldValue;
+                    this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+                } else {
+                    this.value = "";
+                }
+            });
+        };
+    }(jQuery));
+    RED.nodes.registerType('node-line-notify', {
+        category: "LINE API",
+        color: "#00b900",
+        icon: "font-awesome/fa-bell-o",
+        defaults: {
+            name: {
+                value: ""
+            },
+            message: {
+                value: "Hi, this message is from LINE Notify. 😊",
+                required: true,
+                validate: function(v) {
+                    return (v.length) > 0 && !v.match(/^\s*$/);
+                }
+            },
+            useExternalData:{
+                value: false
+            },
+            useImageUrl: {
+                value: false
+            },
+            imageFullsizeUrl:{
+                value: "",
+                require: function() {
+                    return this.useImageUrl;
+                },
+                validate: function(v) {
+                    if ($("#node-input-useImageUrl").is(':checked')) {
+                        return (v.length) > 0 && (v.match(/(http[s]?:\/\/.*\.(?:jpg))/i));
+                    } else {
+                        return true;
+                    }
+                }
+            },
+            imageThumbnailUrl: {
+                value: "",
+                require: function() {
+                    return this.useImageUrl;
+                },
+                validate: function(v) {
+                    if ($("#node-input-useImageUrl").is(':checked')) {
+                        return (v.length) > 0 && (v.match(/(http[s]?:\/\/.*\.(?:jpg))/i));
+                    } else {
+                        return true;
+                    }
+                }
+            },
+            useImageFile: {
+                value: false
+            },
+            imageFile: {
+                value: "",
+                require: function() {
+                    return this.useImageFile;
+                },
+                validate: function(v) {
+                    if ($("#node-input-useImageFile").is(':checked')) {
+                        return (v.length) > 0 && (/^[a-z]:((\\|\/)[a-z0-9\s_@\-^!#$%&+={}\[\]]+)+\.(png|jpg)$/i.test(v));
+                    } else {
+                        return true;
+                    }
+                }
+            },
+            useSticker: {
+                value: false
+            },
+            lineStickerPackageId: {
+                value: 1,
+                require: function() {
+                    return this.useSticker;
+                },
+                validate: function(v) {
+                    if ($("#node-input-useSticker").is(':checked')) {
+                        return (v.length) > 0 && (v.match(/^\d*$/));
+                    } else {
+                        return true;
+                    }
+                }
+            },
+            lineStickerId: {
+                value: 1,
+                require: function() {
+                    return this.useSticker;
+                },
+                validate: function(v) {
+                    if ($("#node-input-useSticker").is(':checked')) {
+                        return (v.length) > 0 && (v.match(/^\d*$/));
+                    } else {
+                        return true;
+                    }
+                }
+            },
+            disabledPushNotification:{
+                value: false
+            },
+            hasToken: {
+                value: false,
+                validate: function(v) {
+                    return v;
+                }
+            }
+        },
+        credentials: {
+            token: {
+                type: "text",
+                required: true
+            }
+        },
+        paletteLabel: "LINE Notify",
+        label: function () {
+            return this.name || "LINE Notify";
+        },
+        inputs: 1,
+        outputs: 1,
+        oneditprepare: function () {
+            function openTab(pageName, elmnt) {
+                // remove active class
+                $('.tabcontent').each(function(i, obj) {
+                    $(this).css({ display: "none" });
+                });
+                // remove active class
+                $('.red-ui-tab').each(function(i, obj) {
+                    $(this).removeClass("active");
+                });
+                // Show the specific tab content
+                $("#" + pageName).css({ display: "block" });
+                // Add current tab active
+                $(elmnt).addClass("active");
+            }
+            function setSelectedImageButton() {
+                $(".img-button-group").removeClass("selected");
+                if ($("#node-input-useImageUrl").is(":checked") && !$("#node-input-useImageFile").is(":checked")) {
+                    $("#node-button-useImageUrl").addClass("selected");
+                } else if (!$("#node-input-useImageUrl").is(":checked") && $("#node-input-useImageFile").is(":checked")) {
+                    $("#node-button-useUploadImage").addClass("selected");
+                } else {
+                    $("#node-button-notUseImage").addClass("selected");
+                }
+            }
+            $("#node-button-displaytoken").mousedown(function () {
+                document.getElementById("node-input-token").type = "text";
+                $("#label-button").removeClass("fa fa-eye").addClass("fa fa-eye-slash");
+            });
+            $("#node-button-displaytoken").mouseup(function () {
+                document.getElementById("node-input-token").type = "password";
+                $("#label-button").removeClass("fa fa-eye-slash").addClass("fa fa-eye");
+            });
+            $("#node-input-useExternalData").change(function () {
+                // disabled all Tabs 
+                if ($(this).is(':checked')) {
+                    $("#tabMessage").click();
+                    $("#node-ui-tabs").css({ "pointer-events": "none" });
+                } else {
+                    $("#node-ui-tabs").css({ "pointer-events": "" });
+                }
+                // disable 'message' section
+                $("#node-input-message").prop("disabled", $(this).is(':checked'));
+                if ($(this).is(':checked')) {
+                    $("label[for='node-input-message']").addClass('labelDisabled');
+                } else {
+                    $("label[for='node-input-message']").removeClass('labelDisabled');
+                }
+            });
+            $(".img-button-group").on("click", function() {
+                $(".img-button-group").removeClass("selected");
+                $(this).addClass("selected");
+                if ($(this).attr('id').indexOf("notUseImage") !== -1) {
+                    if ($("#node-input-useImageUrl").is(":checked")) {
+                        $("#node-input-useImageUrl").trigger('click');
+                    }
+                    if ($("#node-input-useImageFile").is(":checked")) {
+                        $("#node-input-useImageFile").trigger('click');
+                    }
+                } else if ($(this).attr('id').indexOf("useImageUrl") !== -1) {
+                    if (!$("#node-input-useImageUrl").is(":checked")) {
+                        $("#node-input-useImageUrl").trigger('click');
+                    }
+                    if ($("#node-input-useImageFile").is(":checked")) {
+                        $("#node-input-useImageFile").trigger('click');
+                    }
+                } else if ($(this).attr('id').indexOf("useUploadImage") !== -1) {
+                    if ($("#node-input-useImageUrl").is(":checked")) {
+                        $("#node-input-useImageUrl").trigger('click');
+                    }
+                    if (!$("#node-input-useImageFile").is(":checked")) {
+                        $("#node-input-useImageFile").trigger('click');
+                    }
+                }
+            });
+            $("#node-input-useImageUrl").change(function () {
+                $("#node-input-imageFullsizeUrl").prop("disabled", !$(this).is(':checked'));
+                $("#node-input-imageThumbnailUrl").prop("disabled", !$(this).is(':checked'));
+                if ($(this).is(':checked')) {
+                    $("label[for='node-input-imageFullsizeUrl']").removeClass('labelDisabled');
+                    $("label[for='node-input-imageThumbnailUrl']").removeClass('labelDisabled');
+                } else {
+                    $("label[for='node-input-imageFullsizeUrl']").addClass('labelDisabled');
+                    $("label[for='node-input-imageThumbnailUrl']").addClass('labelDisabled');
+                }
+            });
+            $("#node-input-useImageFile").change(function () {
+                $("#node-input-imageFile").prop("disabled", !$(this).is(':checked'));
+                if ($(this).is(':checked')) {
+                    $("label[for='node-input-imageFile']").removeClass('labelDisabled');
+                } else {
+                    $("label[for='node-input-imageFile']").addClass('labelDisabled');
+                }
+            });
+            $("#node-input-useSticker").change(function () {
+                $("#node-input-lineStickerPackageId").prop("disabled", !$(this).is(':checked'));
+                $("#node-input-lineStickerId").prop("disabled", !$(this).is(':checked'));
+                if ($(this).is(':checked')) {
+                    $("label[for='node-input-lineStickerPackageId']").removeClass('labelDisabled');
+                    $("label[for='node-input-lineStickerId']").removeClass('labelDisabled');
+                } else {
+                    $("label[for='node-input-lineStickerPackageId']").addClass('labelDisabled');
+                    $("label[for='node-input-lineStickerId']").addClass('labelDisabled');
+                }
+            });
+            $("#node-input-lineStickerPackageId").inputFilter(function(value) {
+                return /^\d*$/.test(value);
+            });
+            $("#node-input-lineStickerId").inputFilter(function(value) {
+                return /^\d*$/.test(value);
+            });
+            $("#node-input-lineStickerPackageId").blur(function(){
+                $("#node-input-lineStickerPackageId").val($("#node-input-lineStickerPackageId").val().replace(/^0+/, ''));
+            });
+            $("#node-input-lineStickerId").blur(function(){
+                $("#node-input-lineStickerId").val($("#node-input-lineStickerId").val().replace(/^0+/, ''));
+            });
+            $("#tabMessage").click(function() {
+                openTab('bodyMessage', this);
+            });
+            $("#tabImage").click(function() {
+                openTab('bodyImage', this);
+            });
+            $("#tabSticker").click(function() {
+                openTab('bodySticker', this);
+            });
+            $("#tabMessage").click();
+            setSelectedImageButton();
+        },
+        oneditsave: function () {
+            if (/^\s*$/.test($("#node-input-token").val())) {
+                if ($("#node-input-hasToken").is(":checked")) {
+                    $("#node-input-hasToken").trigger('click');
+                }
+            } else {
+                if (!$("#node-input-hasToken").is(":checked")) {
+                    $("#node-input-hasToken").trigger('click');
+                }
+            }
+        },
+        oneditcancel: function () {
+            // myEditor.destroy();
+            // delete myEditor;
+        }
+    });
+</script>

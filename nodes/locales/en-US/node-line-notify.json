@@ -1,0 +1,52 @@
+{
+    "node-line-notify": {
+        "line-notify": "LINE Notify",
+        "label": {
+            "name": "Name",
+            "token": "LINE Notify Access Token",
+            "tabMessage": "Message",
+            "tabImage": "Image",
+            "tabSticker": "Sticker",
+            "message": "Message",
+            "extdata": "Use external data",
+            "notUseImage": "Not Use",
+            "useImageUrl": "Image URL",
+            "useUploadImage": "Upload Image",
+            "imageFullsize": "Fullsize URL",
+            "imageThumbnail": "Thumbnail URL",
+            "imageFile": "Upload Image",
+            "imageFileTip": "Tip: 'Upload Image' should be an absolute path to upload image file, e.g. C:\\folder\\image.jpg (Support .png and .jpg)",
+            "useSticker": "Use Sticker",
+            "stickerId": "Sticker ID",
+            "packageId": "Package ID",
+            "remarkIntegerOnly": "(Integer Only)",
+            "gotoSticker": "Go to LINE List of available stickers",
+            "disabledNotify": "Disabled user push Notification"
+        },
+        "errors": {
+            "notFoundToken": "Not found Access Token",
+            "messageRequired": "message is required",
+            "messageInvalid": "message is invalid",
+            "messageEmpty": "message cannot be empty",
+            "useImageUrlRequired": "useImageUrl is required",
+            "useImageUrlInvalid": "useImageUrl is invalid",
+            "imageFullsizeUrlRequired": "imageFullsizeUrl is required",
+            "imageFullsizeUrlInvalid": "imageFullsizeUrl is invalid",
+            "imageThumbnailUrlRequired": "imageThumbnailUrl is required",
+            "imageThumbnailUrlInvalid": "imageThumbnailUrl is invalid",
+            "useImageFileRequired": "useImageFile is required",
+            "useImageFileInvalid": "useImageFile is invalid",
+            "imageFileRequired": "imageFile is required",
+            "imageFileInvalid": "imageFile is invalid",
+            "useStickerRequired": "useSticker is required",
+            "useStickerInvalid": "useSticker is invalid",
+            "stickerPackageIdRequired": "stickerPackageId is required",
+            "stickerPackageIdInvalid": "stickerPackageId is invalid",
+            "stickerIdRequired": "stickerId is required",
+            "stickerIdInvalid": "stickerId is invalid"
+        },
+        "send-result": {
+            "success": "Send message success: "
+        }
+    }
+}
