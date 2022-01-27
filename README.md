@@ -41,10 +41,10 @@ Using *msg* object.
 | imageFullsizeUrl  | No (*Yes, if useImageUrl is true*)  | string      | Image URL. Maximum size of 2048×2048px JPEG.  |
 | imageThumbnailUrl | No (*Yes, if useImageUrl is true*)  | string      | Image URL. Maximum size of 240×240px JPEG.    |
 | useImageFile      | Yes                                 | boolean     | *true* : Upload a image file to the LINE server. Additional *imageFile* must be specified.<br />*false* : Not upload a image file to the LINE server.|
-| imageFile         | No (*Yes, if useImageFile is true*) | string      | Should be an absolute path to upload image file, e.g. C:\folder\image.jpg (Support .png and .jpg)<br />If you specified all imageFullsizeUrl, imageThumbnailUrl and imageFile. imageFile takes precedence. See more detail at [LINE Notify API Document](https://notify-bot.line.me/doc/en/) |
+| imageFile         | No (*Yes, if useImageFile is true*) | string      | Should be an absolute path to upload image file, e.g. C:\folder\image.jpg (Support .png and .jpg)<br />If you specified all *imageFullsizeUrl*, *imageThumbnailUrl* and *imageFile*. The *imageFile* takes precedence. See more detail at [LINE Notify API Document](https://notify-bot.line.me/doc/en/) |
 | useSticker        | Yes                                 | boolean     | *true* : Use sticker with LINE Notify. Additional *stickerPackageId* and *stickerId* must be specified.<br />*false* : Not use sticker with LINE Notify.|
-| stickerId         | No (*Yes, if useSticker is true*)   | number      | LINE Sticker Id.  |
-| stickerPackageId  | No (*Yes, if useSticker is true*)   | number      | LINE Package Id of sticker Id.  |
+| stickerId         | No (*Yes, if useSticker is true*)   | number      | LINE Sticker Id. See more details at [LINE List of available stickers](https://developers.line.biz/en/docs/messaging-api/sticker-list/ |
+| stickerPackageId  | No (*Yes, if useSticker is true*)   | number      | LINE Package Id of sticker Id. See more details at [LINE List of available stickers](https://developers.line.biz/en/docs/messaging-api/sticker-list/ |
 
 ##### Output
 Using *msg* object.
@@ -57,6 +57,7 @@ Using *msg* object.
 
 #### More details
 See more details at [LINE Notify API Document](https://notify-bot.line.me/doc/en/).
+
 See more details about Sticker ID and Package ID at [LINE List of available stickers](https://developers.line.biz/en/docs/messaging-api/sticker-list/).
 
 
