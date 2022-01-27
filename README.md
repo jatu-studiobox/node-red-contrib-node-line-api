@@ -34,15 +34,30 @@ You can send your information, which you want to notify at LINE Notify, through 
 ##### Input
 Using *msg* object.
 
-| Property          | Mandatory  | Type            | Description |
-| ----------------- |:----------:|:---------------:| ----------- |
-| message           | Yes        | string          | 1000 characters max |
-| useImageUrl       | Yes        | boolean         | *true* : Use image URL with LINE Notify. Additional *imageFullsizeUrl* and *imageThumbnailUrl* must be specified.<br />*false* : Not use image URL with LINE Notify.|
-| imageFullsizeUrl  | *Yes, if useImageUrl is true* | string      | Image URL. Maximum size of 2048×2048px JPEG.  |
-| imageThumbnailUrl | *Yes, if useImageUrl is true* | string      | Image URL. size of 240×240px JPEG.  |
+| Property          | Mandatory                           | Type        | Description |
+| ----------------- |:-----------------------------------:|:-----------:| ----------- |
+| message           | Yes                                 | string      | 1000 characters max |
+| useImageUrl       | Yes                                 | boolean     | *true* : Use image URL with LINE Notify. Additional *imageFullsizeUrl* and *imageThumbnailUrl* must be specified.<br />*false* : Not use image URL with LINE Notify.|
+| imageFullsizeUrl  | No (*Yes, if useImageUrl is true*)  | string      | Image URL. Maximum size of 2048×2048px JPEG.  |
+| imageThumbnailUrl | No (*Yes, if useImageUrl is true*)  | string      | Image URL. Maximum size of 240×240px JPEG.    |
+| useImageFile      | Yes                                 | boolean     | *true* : Upload a image file to the LINE server. Additional *imageFile* must be specified.<br />*false* : Not upload a image file to the LINE server.|
+| imageFile         | No (*Yes, if useImageFile is true*) | string      | Should be an absolute path to upload image file, e.g. C:\folder\image.jpg (Support .png and .jpg)<br />If you specified all imageFullsizeUrl, imageThumbnailUrl and imageFile. imageFile takes precedence. See more detail at [LINE Notify API Document](https://notify-bot.line.me/doc/en/) |
+| useSticker        | Yes                                 | boolean     | *true* : Use sticker with LINE Notify. Additional *stickerPackageId* and *stickerId* must be specified.<br />*false* : Not use sticker with LINE Notify.|
+| stickerId         | No (*Yes, if useSticker is true*)   | number      | LINE Sticker Id.  |
+| stickerPackageId  | No (*Yes, if useSticker is true*)   | number      | LINE Package Id of sticker Id.  |
 
-#### Reference
-[LINE Notify API Document](https://notify-bot.line.me/doc/en/)
+##### Output
+Using *msg* object.
+
+| Property          | Type        | Description |
+| ----------------- |:-----------:| ----------- |
+| status            | number      | Result status code |
+| payload           | string      | Result status message |
+
+
+#### More details
+See more details at [LINE Notify API Document](https://notify-bot.line.me/doc/en/).
+See more details about Sticker ID and Package ID at [LINE List of available stickers](https://developers.line.biz/en/docs/messaging-api/sticker-list/).
 
 
 
