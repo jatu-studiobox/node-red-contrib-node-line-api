@@ -3,7 +3,7 @@ LINE API nodes for NODE-RED. Each version consists of the following nodes:
 
 ## Version
 
-0.5.0
+0.5.2
 * LINE Notify API node
 ---
 ## Installation
