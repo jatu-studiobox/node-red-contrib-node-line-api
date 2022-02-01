@@ -3,7 +3,7 @@ LINE API nodes for NODE-RED. Each version consists of the following nodes:
 
 ## Version
 
-1.0.0
+0.5.0
 * LINE Notify API node
 ---
 ## Installation
@@ -16,7 +16,7 @@ npm install node-red-contrib-node-line-api
 
 ### LINE Notify API Node
 
-NODE-RED node for sending message notification to LINE Notify.
+NODE-RED node for sending message notification to LINE Notify. You can use LINE notify API through this Node, include uploading image file.
 
 #### Usage
 
@@ -59,12 +59,4 @@ Using *msg* object.
 See more details at [LINE Notify API Document](https://notify-bot.line.me/doc/en/).
 
 See more details about Sticker ID and Package ID at [LINE List of available stickers](https://developers.line.biz/en/docs/messaging-api/sticker-list/).
-
-
-
-
-
-
-
-
 
