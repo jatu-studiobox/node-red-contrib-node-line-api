@@ -1,5 +1,5 @@
 # node-red-contrib-node-line-api
-LINE API nodes for NODE-RED. Each versin consists of the following nodes:
+LINE API nodes for NODE-RED. Each version consists of the following nodes:
 
 ## Version
 

@@ -183,6 +183,7 @@ module.exports = function (RED) {
         node.on('input', function (msg) {
             if (!node.accessToken) {
                 msg.payload = RED._("node-line-notify.errors.notFoundToken");
+                msg.status = -1;
                 setError(node, msg);
                 return;
             } else {
@@ -191,6 +192,7 @@ module.exports = function (RED) {
                     const result = validateExternalData(msg);   // validate external data
                     if (result.isError) {   // if external data has error
                         msg.payload = result.message;
+                        msg.status = -1;
                         setError(node, msg);
                         return;
                     } else {    // if external data does not has error -> map data
