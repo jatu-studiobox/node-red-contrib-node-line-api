@@ -1,0 +1,107 @@
+[
+    {
+        "id": "063e3311c63663e4",
+        "type": "tab",
+        "label": "Example Line Notify Sticker",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "6e130a314a49dac9",
+        "type": "node-line-notify",
+        "z": "063e3311c63663e4",
+        "name": "",
+        "message": "Hi, this message is from LINE Notify. 😊",
+        "useExternalData": true,
+        "useImageUrl": false,
+        "imageFullsizeUrl": "",
+        "imageThumbnailUrl": "",
+        "useImageFile": false,
+        "imageFile": "",
+        "useSticker": false,
+        "lineStickerPackageId": 1,
+        "lineStickerId": 1,
+        "disabledPushNotification": false,
+        "hasToken": true,
+        "x": 390,
+        "y": 140,
+        "wires": [
+            [
+                "14ae75e960ca5435"
+            ]
+        ]
+    },
+    {
+        "id": "6d42d53cb7fbd1d6",
+        "type": "inject",
+        "z": "063e3311c63663e4",
+        "name": "send msg",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "message",
+                "v": "LINE Notify with sticker. 😊",
+                "vt": "str"
+            },
+            {
+                "p": "useImageUrl",
+                "v": "false",
+                "vt": "bool"
+            },
+            {
+                "p": "useImageFile",
+                "v": "false",
+                "vt": "bool"
+            },
+            {
+                "p": "useSticker",
+                "v": "true",
+                "vt": "bool"
+            },
+            {
+                "p": "stickerPackageId",
+                "v": "6325",
+                "vt": "num"
+            },
+            {
+                "p": "stickerId",
+                "v": "10979904",
+                "vt": "num"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 140,
+        "wires": [
+            [
+                "6e130a314a49dac9"
+            ]
+        ]
+    },
+    {
+        "id": "14ae75e960ca5435",
+        "type": "debug",
+        "z": "063e3311c63663e4",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 610,
+        "y": 140,
+        "wires": []
+    }
+]

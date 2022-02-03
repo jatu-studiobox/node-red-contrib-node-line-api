@@ -25,6 +25,7 @@
         },
         "errors": {
             "notFoundToken": "ไม่พบ Access Token",
+            "imgFileNotFound": "ไม่พบรูปภาพ",
             "messageRequired": "ต้องการค่า message",
             "messageInvalid": "message ไม่ถูกต้อง",
             "messageEmpty": "message ไม่สามารถว่างได้",

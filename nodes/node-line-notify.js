@@ -3,13 +3,13 @@ const axios = require("axios");
 const FormData = require("form-data");
 const fs = require("fs");
 const BASE_URL = 'https://notify-api.line.me';
-const PATH =  '/api/notify';
+const PATH = '/api/notify';
 
 module.exports = function (RED) {
     // Setting Error function
     function setError(node, message) {
         node.error(message);
-        node.status({ fill: "red", shape: "ring", text: message.payload});
+        node.status({ fill: "red", shape: "ring", text: message.payload });
     }
     // Validate External Data function
     function validateExternalData(msg) {
@@ -22,7 +22,7 @@ module.exports = function (RED) {
             if (typeof msg.message !== 'string') {
                 result.isError = true;
                 result.message = RED._("node-line-notify.errors.messageInvalid");
-                
+
             } else if (msg.message.match(/^\s*$/)) {
                 result.isError = true;
                 result.message = RED._("node-line-notify.errors.messageEmpty");
@@ -179,6 +179,7 @@ module.exports = function (RED) {
         this.lineStickerId = config.lineStickerId;
         this.disabledPushNotification = config.disabledPushNotification;
         let node = this;
+        let resultMessage = "";
 
         node.on('input', function (msg) {
             if (!node.accessToken) {
@@ -202,12 +203,20 @@ module.exports = function (RED) {
                             formLineNotify.append("imageThumbnail", msg.imageThumbnailUrl);
                         }
                         if (msg.useImageFile) {
-                            formLineNotify.append("imageFile", fs.createReadStream(msg.imageFile));
+                            if (fs.existsSync(msg.imageFile)) {
+                                formLineNotify.append("imageFile", fs.createReadStream(msg.imageFile));
+                            } else {
+                                msg.payload = RED._("node-line-notify.errors.imgFileNotFound");
+                                msg.status = -1;
+                                setError(node, msg);
+                                return;
+                            }                            
                         }
                         if (msg.useSticker) {
                             formLineNotify.append("stickerPackageId", msg.stickerPackageId);
                             formLineNotify.append("stickerId", msg.stickerId);
                         }
+                        resultMessage = msg.message;
                     }
                 } else {    // use internal data
                     formLineNotify.append("message", node.message);
@@ -216,17 +225,25 @@ module.exports = function (RED) {
                         formLineNotify.append("imageThumbnail", node.imageThumbnailUrl);
                     }
                     if (node.useImageFile) {
-                        formLineNotify.append("imageFile", fs.createReadStream(node.imageFile));
+                        if (fs.existsSync(node.imageFile)) {
+                            formLineNotify.append("imageFile", fs.createReadStream(node.imageFile));
+                        } else {
+                            msg.payload = RED._("node-line-notify.errors.imgFileNotFound");
+                            msg.status = -1;
+                            setError(node, msg);
+                            return;
+                        }
                     }
                     if (node.useSticker) {
                         formLineNotify.append("stickerPackageId", node.lineStickerPackageId);
                         formLineNotify.append("stickerId", node.lineStickerId);
                     }
+                    resultMessage = node.message;
                 }
                 if (node.disabledPushNotification) {
                     formLineNotify.append("notificationDisabled", true);
                 }
-                
+
                 let lineConfig = {
                     url: BASE_URL + PATH,
                     method: 'POST',
@@ -239,16 +256,16 @@ module.exports = function (RED) {
                 };
                 axios(lineConfig).then((res) => {
                     msg.status = res.data.status;
-                    msg.payload = RED._("node-line-notify.send-result.success");
+                    msg.payload = RED._("node-line-notify.send-result.success") + resultMessage;
                     node.send(msg);
-                    node.status({fill: "green", shape: "dot", text: "success"});
+                    node.status({ fill: "green", shape: "dot", text: "success" });
                 })
-                .catch((error) => {
-                    console.log(error);
-                    msg.status = error.response.data.status;
-                    msg.payload = error.response.data.message;
-                    setError(node, msg);
-                });
+                    .catch((error) => {
+                        console.log(error);
+                        msg.status = error.response.data.status;
+                        msg.payload = error.response.data.message;
+                        setError(node, msg);
+                    });
             }
         });
     }
@@ -256,7 +273,7 @@ module.exports = function (RED) {
     RED.nodes.registerType("node-line-notify", NodeLineNotify, {
         credentials: {
             token: {
-                type:"text"
+                type: "text"
             }
         }
     });

@@ -1,0 +1,107 @@
+[
+    {
+        "id": "51c26299e6ac2596",
+        "type": "tab",
+        "label": "Example Line Notify Image URL",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "1b4419e67915710f",
+        "type": "node-line-notify",
+        "z": "51c26299e6ac2596",
+        "name": "",
+        "message": "Hi, this message is from LINE Notify. 😊",
+        "useExternalData": true,
+        "useImageUrl": false,
+        "imageFullsizeUrl": "",
+        "imageThumbnailUrl": "",
+        "useImageFile": false,
+        "imageFile": "",
+        "useSticker": false,
+        "lineStickerPackageId": 1,
+        "lineStickerId": 1,
+        "disabledPushNotification": false,
+        "hasToken": true,
+        "x": 370,
+        "y": 140,
+        "wires": [
+            [
+                "0709b99a9a64f006"
+            ]
+        ]
+    },
+    {
+        "id": "f1c06575fe523516",
+        "type": "inject",
+        "z": "51c26299e6ac2596",
+        "name": "send msg",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "message",
+                "v": "LINE Notify with Image URL. 😊 https://www.pinterest.com/pin/826480969106803951/",
+                "vt": "str"
+            },
+            {
+                "p": "useImageUrl",
+                "v": "true",
+                "vt": "bool"
+            },
+            {
+                "p": "imageFullsizeUrl",
+                "v": "https://i.pinimg.com/564x/8d/d3/e7/8dd3e787ab5b950db32633fe7de9aeb4.jpg",
+                "vt": "str"
+            },
+            {
+                "p": "imageThumbnailUrl",
+                "v": "https://i.pinimg.com/236x/8d/d3/e7/8dd3e787ab5b950db32633fe7de9aeb4.jpg",
+                "vt": "str"
+            },
+            {
+                "p": "useImageFile",
+                "v": "false",
+                "vt": "bool"
+            },
+            {
+                "p": "useSticker",
+                "v": "false",
+                "vt": "bool"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 140,
+        "wires": [
+            [
+                "1b4419e67915710f"
+            ]
+        ]
+    },
+    {
+        "id": "0709b99a9a64f006",
+        "type": "debug",
+        "z": "51c26299e6ac2596",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 590,
+        "y": 140,
+        "wires": []
+    }
+]

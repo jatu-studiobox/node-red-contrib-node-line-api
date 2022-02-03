@@ -1,0 +1,97 @@
+[
+    {
+        "id": "4e04b40ec7d7e343",
+        "type": "tab",
+        "label": "Example Line Notify Basic Message",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "419039b8ef4161d7",
+        "type": "inject",
+        "z": "4e04b40ec7d7e343",
+        "name": "send msg",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "message",
+                "v": "Hi, this message is from LINE Notify. 😊",
+                "vt": "str"
+            },
+            {
+                "p": "useImageUrl",
+                "v": "false",
+                "vt": "bool"
+            },
+            {
+                "p": "useImageFile",
+                "v": "false",
+                "vt": "bool"
+            },
+            {
+                "p": "useSticker",
+                "v": "false",
+                "vt": "bool"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 120,
+        "wires": [
+            [
+                "0ac7b2e24f93605c"
+            ]
+        ]
+    },
+    {
+        "id": "586b18d0a3f6634e",
+        "type": "debug",
+        "z": "4e04b40ec7d7e343",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 550,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "0ac7b2e24f93605c",
+        "type": "node-line-notify",
+        "z": "4e04b40ec7d7e343",
+        "name": "",
+        "message": "Hi, this message is from LINE Notify. 😊",
+        "useExternalData": true,
+        "useImageUrl": false,
+        "imageFullsizeUrl": "",
+        "imageThumbnailUrl": "",
+        "useImageFile": false,
+        "imageFile": "",
+        "useSticker": false,
+        "lineStickerPackageId": 1,
+        "lineStickerId": 1,
+        "disabledPushNotification": false,
+        "hasToken": true,
+        "x": 350,
+        "y": 120,
+        "wires": [
+            [
+                "586b18d0a3f6634e"
+            ]
+        ]
+    }
+]

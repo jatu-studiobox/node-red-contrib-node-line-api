@@ -25,6 +25,7 @@
         },
         "errors": {
             "notFoundToken": "Not found Access Token",
+            "imgFileNotFound": "Image file not found",
             "messageRequired": "message is required",
             "messageInvalid": "message is invalid",
             "messageEmpty": "message cannot be empty",
