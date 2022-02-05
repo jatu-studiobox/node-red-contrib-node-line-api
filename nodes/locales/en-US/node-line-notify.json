@@ -26,9 +26,9 @@
         "errors": {
             "notFoundToken": "Not found Access Token",
             "imgFileNotFound": "Image file not found",
-            "messageRequired": "message is required",
-            "messageInvalid": "message is invalid",
-            "messageEmpty": "message cannot be empty",
+            "messageRequired": "payload is required",
+            "messageInvalid": "payload is invalid",
+            "messageEmpty": "payload cannot be empty",
             "useImageUrlRequired": "useImageUrl is required",
             "useImageUrlInvalid": "useImageUrl is invalid",
             "imageFullsizeUrlRequired": "imageFullsizeUrl is required",

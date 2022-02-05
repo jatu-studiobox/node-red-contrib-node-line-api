@@ -18,12 +18,12 @@ module.exports = function (RED) {
             message: ""
         };
         // validate message
-        if (typeof msg.message !== 'undefined') {
-            if (typeof msg.message !== 'string') {
+        if (typeof msg.payload !== 'undefined') {
+            if (typeof msg.payload !== 'string') {
                 result.isError = true;
                 result.message = RED._("node-line-notify.errors.messageInvalid");
 
-            } else if (msg.message.match(/^\s*$/)) {
+            } else if (msg.payload.match(/^\s*$/)) {
                 result.isError = true;
                 result.message = RED._("node-line-notify.errors.messageEmpty");
             }
@@ -41,11 +41,8 @@ module.exports = function (RED) {
                 result.message = RED._("node-line-notify.errors.useImageUrlInvalid");
             }
         } else {
-            result.isError = true;
-            result.message = RED._("node-line-notify.errors.useImageUrlRequired");
-        }
-        if (result.isError) {
-            return result;
+            // v0.6.0 -> not force to send but default to false
+            msg.useImageUrl = false;
         }
         // if useImageUrl is true, then validate 'imageFullsizeUrl' and 'imageThumbnailUrl'
         if (msg.useImageUrl) {
@@ -89,11 +86,8 @@ module.exports = function (RED) {
                 result.message = RED._("node-line-notify.errors.useImageFileInvalid");
             }
         } else {
-            result.isError = true;
-            result.message = RED._("node-line-notify.errors.useImageFileRequired");
-        }
-        if (result.isError) {
-            return result;
+            // v0.6.0 -> not force to send but default to false
+            msg.useImageFile = false;
         }
         // if useImageFile is true, then validate 'imageFile'
         if (msg.useImageFile) {
@@ -121,11 +115,8 @@ module.exports = function (RED) {
                 result.message = RED._("node-line-notify.errors.useStickerInvalid");
             }
         } else {
-            result.isError = true;
-            result.message = RED._("node-line-notify.errors.useStickerRequired");
-        }
-        if (result.isError) {
-            return result;
+            // v0.6.0 -> not force to send but default to false
+            msg.useSticker = false;
         }
         // if useSticker is true, then validate 'stickerPackageId' and 'stickerId'
         if (msg.useSticker) {
@@ -197,7 +188,7 @@ module.exports = function (RED) {
                         setError(node, msg);
                         return;
                     } else {    // if external data does not has error -> map data
-                        formLineNotify.append("message", msg.message);
+                        formLineNotify.append("message", msg.payload);
                         if (msg.useImageUrl) {
                             formLineNotify.append("imageFullsize", msg.imageFullsizeUrl);
                             formLineNotify.append("imageThumbnail", msg.imageThumbnailUrl);
@@ -210,13 +201,13 @@ module.exports = function (RED) {
                                 msg.status = -1;
                                 setError(node, msg);
                                 return;
-                            }                            
+                            }
                         }
                         if (msg.useSticker) {
                             formLineNotify.append("stickerPackageId", msg.stickerPackageId);
                             formLineNotify.append("stickerId", msg.stickerId);
                         }
-                        resultMessage = msg.message;
+                        resultMessage = msg.payload;
                     }
                 } else {    // use internal data
                     formLineNotify.append("message", node.message);
@@ -259,13 +250,12 @@ module.exports = function (RED) {
                     msg.payload = RED._("node-line-notify.send-result.success") + resultMessage;
                     node.send(msg);
                     node.status({ fill: "green", shape: "dot", text: "success" });
-                })
-                    .catch((error) => {
-                        console.log(error);
-                        msg.status = error.response.data.status;
-                        msg.payload = error.response.data.message;
-                        setError(node, msg);
-                    });
+                }).catch((error) => {
+                    console.log(error);
+                    msg.status = error.response.data.status;
+                    msg.payload = error.response.data.message;
+                    setError(node, msg);
+                });
             }
         });
     }

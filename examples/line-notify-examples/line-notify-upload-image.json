@@ -39,26 +39,13 @@
         "name": "send msg",
         "props": [
             {
-                "p": "payload"
-            },
-            {
-                "p": "message",
+                "p": "payload",
                 "v": "LINE Notify with upload image. 😊",
                 "vt": "str"
             },
             {
-                "p": "useImageUrl",
-                "v": "false",
-                "vt": "bool"
-            },
-            {
                 "p": "useImageFile",
                 "v": "true",
-                "vt": "bool"
-            },
-            {
-                "p": "useSticker",
-                "v": "false",
                 "vt": "bool"
             },
             {

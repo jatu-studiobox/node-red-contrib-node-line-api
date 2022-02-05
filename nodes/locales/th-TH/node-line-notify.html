@@ -36,9 +36,10 @@
     <p>2. ใช้ข้อมูลการส่งที่มาจากภายนอก Node โดยผ่าน <font color="blue"><i>msg</i></font> object.</p>
     <p>อินพุต</p>
     <dl class="message-properties">
-        <dt>message <span class="property-type">string</span></dt>
+        <dt>payload <span class="property-type">string</span></dt>
         <dd>ข้อความความยาวไม่เกิน 1000 ตัวอักษร</dd>
-        <dt>useImageUrl <span class="property-type">boolean</span></dt>
+        <dt class="optional">useImageUrl <span class="property-type">boolean</span></dt>
+        <dd><font color="blue"><i>ถ้าไม่ส่งมาจะมีค่าเป็น false อัตโนมัติ</i></font></dd>
         <dd>true: ใช้งาน URL รูปภาพกับ LINE Notify ต้องระบุ <font color="blue"><i>imageFullsizeUrl</i></font> และ <font color="blue"><i>imageThumbnailUrl</i></font> เพิ่มเติม</dd>
         <dd>false: ไม่ใช้งาน URL รูปภาพกับ LINE Notify.</dd>
         <dt class="optional">imageFullsizeUrl <span class="property-type">URL string</span></dt>
@@ -47,14 +48,16 @@
         <dt class="optional">imageThumbnailUrl <span class="property-type">URL string</span></dt>
         <dd>ขนาดไม่เกิน 240×240px JPEG</dd>
         <dd><font color="blue"><i>Required</i> กรณี useImageUrl เป็น true</font></dd>
-        <dt>useImageFile <span class="property-type">boolean</span></dt>
+        <dt class="optional">useImageFile <span class="property-type">boolean</span></dt>
+        <dd><font color="blue"><i>ถ้าไม่ส่งมาจะมีค่าเป็น false อัตโนมัติ</i></font></dd>
         <dd>true: ใช้งานอัพโหลดรูปภาพไปยัง LINE Server ต้องระบุ <font color="blue"><i>imageFile</i></font> เพิ่มเติม</dd>
         <dd>false: ไม่ใช้งานอัพโหลดรูปภาพไปยัง LINE Server</dd>
         <dt class="optional">imageFile <span class="property-type">string</span></dt>
         <dd>เส้นทางไปยังไฟล์ที่ต้องการอัพโหลดแบบเต็มรูป เช่น C:\folder\image.jpg (รองรับเฉพาะ .png และ .jpg)</dd>
         <dd><font color="blue"><i>Required</i> กรณี useImageFile เป็น true</font></dd>
         <dd>กรณีระบุต้องการใช้การอัพโหลดรูปภาพพร้อมกับใช้งาน URL รูปภาพ การอัพโหลดรูปภาพจะถูกเลือกทำเพียงอันเดียว และจะไม่ทำงานในส่วนของ URL รูปภาพ ดูรายละเอียดเพิ่มเติมได้ที่ LINE Notify API Document</dd>
-        <dt>useSticker <span class="property-type">boolean</span></dt>
+        <dt class="optional">useSticker <span class="property-type">boolean</span></dt>
+        <dd><font color="blue"><i>ถ้าไม่ส่งมาจะมีค่าเป็น false อัตโนมัติ</i></font></dd>
         <dd>true: ใช้ sticker กับ LINE Notify ต้องระบุ <font color="blue"><i>stickerPackageId</i></font> และ <font color="blue"><i>stickerId</i></font> เพิ่มเติม</dd>
         <dd>false: ไม่ใช้ sticker กับ LINE Notify</dd>
         <dt class="optional">stickerId <span class="property-type">number</span></dt>

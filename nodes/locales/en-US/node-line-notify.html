@@ -36,9 +36,10 @@
     <p>2. Use data from external node by using <font color="blue"><i>msg</i></font> object.</p>
     <p>Inputs</p>
     <dl class="message-properties">
-        <dt>message <span class="property-type">string</span></dt>
+        <dt>payload <span class="property-type">string</span></dt>
         <dd>1000 characters max</dd>
-        <dt>useImageUrl <span class="property-type">boolean</span></dt>
+        <dt class="optional">useImageUrl <span class="property-type">boolean</span></dt>
+        <dd><font color="blue"><i>If not send, automated set to false</i></font></dd>
         <dd>true: Use image URL with LINE Notify. Additional <font color="blue"><i>imageFullsizeUrl</i></font> and <font color="blue"><i>imageThumbnailUrl</i></font> must be specified.</dd>
         <dd>false: Not use image URL with LINE Notify.</dd>
         <dt class="optional">imageFullsizeUrl <span class="property-type">URL string</span></dt>
@@ -47,14 +48,16 @@
         <dt class="optional">imageThumbnailUrl <span class="property-type">URL string</span></dt>
         <dd>Maximum size of 240×240px JPEG</dd>
         <dd><font color="blue"><i>Required</i> if useImageUrl is true.</font></dd>
-        <dt>useImageFile <span class="property-type">boolean</span></dt>
+        <dt class="optional">useImageFile <span class="property-type">boolean</span></dt>
+        <dd><font color="blue"><i>If not send, automated set to false</i></font></dd>
         <dd>true: Upload a image file to the LINE server. Additional <font color="blue"><i>imageFile</i></font> must be specified.</dd>
         <dd>false: Not upload a image file to the LINE server.</dd>
         <dt class="optional">imageFile <span class="property-type">string</span></dt>
         <dd>Should be an absolute path to upload image file, e.g. C:\folder\image.jpg (Support .png and .jpg)</dd>
         <dd><font color="blue"><i>Required</i> if useImageFile is true.</font></dd>
         <dd>If you specified imageFullsizeUrl ,imageThumbnailUrl and imageFile, imageFile takes precedence. See more detail at LINE Notify API Document</dd>
-        <dt>useSticker <span class="property-type">boolean</span></dt>
+        <dt class="optional">useSticker <span class="property-type">boolean</span></dt>
+        <dd><font color="blue"><i>If not send, automated set to false</i></font></dd>
         <dd>true: Use sticker with LINE Notify. Additional <font color="blue"><i>stickerPackageId</i></font> and <font color="blue"><i>stickerId</i></font> must be specified.</dd>
         <dd>false: Not use sticker with LINE Notify.</dd>
         <dt class="optional">stickerId <span class="property-type">number</span></dt>

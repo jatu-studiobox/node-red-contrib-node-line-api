@@ -39,10 +39,7 @@
         "name": "send msg",
         "props": [
             {
-                "p": "payload"
-            },
-            {
-                "p": "message",
+                "p": "payload",
                 "v": "LINE Notify with Image URL. 😊 https://www.pinterest.com/pin/826480969106803951/",
                 "vt": "str"
             },
@@ -60,16 +57,6 @@
                 "p": "imageThumbnailUrl",
                 "v": "https://i.pinimg.com/236x/8d/d3/e7/8dd3e787ab5b950db32633fe7de9aeb4.jpg",
                 "vt": "str"
-            },
-            {
-                "p": "useImageFile",
-                "v": "false",
-                "vt": "bool"
-            },
-            {
-                "p": "useSticker",
-                "v": "false",
-                "vt": "bool"
             }
         ],
         "repeat": "",

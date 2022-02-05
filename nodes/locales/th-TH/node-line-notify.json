@@ -26,9 +26,9 @@
         "errors": {
             "notFoundToken": "ไม่พบ Access Token",
             "imgFileNotFound": "ไม่พบรูปภาพ",
-            "messageRequired": "ต้องการค่า message",
-            "messageInvalid": "message ไม่ถูกต้อง",
-            "messageEmpty": "message ไม่สามารถว่างได้",
+            "messageRequired": "ต้องการค่า payload",
+            "messageInvalid": "payload ไม่ถูกต้อง",
+            "messageEmpty": "payload ไม่สามารถว่างได้",
             "useImageUrlRequired": "ต้องการค่า useImageUrl",
             "useImageUrlInvalid": "useImageUrl ไม่ถูกต้อง",
             "imageFullsizeUrlRequired": "ต้องการค่า imageFullsizeUrl",

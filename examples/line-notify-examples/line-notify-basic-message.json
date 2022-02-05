@@ -14,27 +14,9 @@
         "name": "send msg",
         "props": [
             {
-                "p": "payload"
-            },
-            {
-                "p": "message",
+                "p": "payload",
                 "v": "Hi, this message is from LINE Notify. 😊",
                 "vt": "str"
-            },
-            {
-                "p": "useImageUrl",
-                "v": "false",
-                "vt": "bool"
-            },
-            {
-                "p": "useImageFile",
-                "v": "false",
-                "vt": "bool"
-            },
-            {
-                "p": "useSticker",
-                "v": "false",
-                "vt": "bool"
             }
         ],
         "repeat": "",
