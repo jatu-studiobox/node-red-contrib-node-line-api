@@ -1,0 +1,55 @@
+<script type="text/html" data-help-name="node-line-bot-push-message">
+    <p>LINE Messaging API Push Message (1-1). Push message to LINE BOT at specific destination ID.</p>
+    <h3>Input Settings</h3>
+    <dl class="message-properties">
+        <dt>Channel Access Token <span class="property-type">string</span></dt>
+        <dd>LINE Messaging API Channel Access Token for using LINE Messaging API.</dd>
+        <dt>Desitnation ID <span class="property-type">string</span></dt>
+        <dd>Specified destination ID for push message to.</dd>
+        <dt>Use ID data from wired node <span class="property-type">boolean</span></dt>
+        <dd>Use destinatin ID from wired node or node self. If 'checked', then use ID data from wired node. See Node API section for details.</dd>
+        <dt>Message <span class="property-type">string</span></dt>
+        <dd>Specified message for push message.</dd>
+        <dt>Input Message Type <span class="property-type">int</span></dt>
+        <dd><i>Normal Text</i> : for input normal text message for push message.</dd>
+        <dd><i>Custom Message Format</i> : for input custom message format for push message.</dd>
+        <dt>Use Message data from wired node <span class="property-type">boolean</span></dt>
+        <dd>Use message from wired node or node self. If 'checked', then use message and message type data from wired node. See Node API section for details.</dd>
+        <dt>Disabled user push Notification <span class="property-type">boolean</span></dt>
+        <dd><i>check</i> : The user doesn't receive Push Notification when the message is sent.</dd>
+        <dd><i>uncheck</i> : The user receives Push Notification when the message is sent.</dd>
+    </dl>
+    <h3>Node API</h3>
+    <p>Using <i>msg</i> object.</p>
+    <dl class="message-properties">
+        <dt class="optional">destinationId <span class="property-type">string</span></dt>
+        <dd>Specified destination ID for push message to.</dd>
+        <dd><font color="blue"><i>Required</i> if input 'select' Use ID data from wired node.</font></dd>
+        <dt class="optional">messageType <span class="property-type">int</span></dt>
+        <dd><i>0</i> : for normal text message for push message.</dd>
+        <dd><i>1</i> : for custom message format for push message. </dd>
+        <dd><font color="blue"><i>Required</i> if input 'select' Use Message data from wired node.</font></dd>
+        <dt class="optional">payload <span class="property-type">string or JSON</span></dt>
+        <dd>Message data for push messaging</dd>
+        <dd><i>string</i> : for normal text message</dd>
+        <dd><i>JSON</i> : for custom message format</dd>
+        <dd><font color="blue"><i>Required</i> if input 'select' Use Message data from wired node.</font></dd>
+        <dd><font color="blue"><i>Node push message check payload type at runtime</i></font></dd>
+    </dl>
+    <h3>Output Section</h3>
+    <p>Output success - status = 0, payload = Push message success: {"x-line-request-id":"xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxx"}</p>
+    <p>Output Fail - status = <i>&lt;Error Number&gt;</i>, payload = <i>&lt;Error message&gt;</i></p>
+    <dl class="message-properties">
+        <dt>msg.status <span class="property-type">number</span></dt>
+        <dd>result status code</dd>
+        <dt>msg.payload <span class="property-type">string</span></dt>
+        <dd>result status message</dd>
+    </dl>
+    <h3>Examples Section</h3>
+    <p>See usage examples at Node-RED Import menu. Examples at 'node-red-contrib-node-line-api', then 'line-push-message-examples'</p>
+    <h3>Additional details</h3>
+    <p>Obtain LINE Messaging API Channel Access Token at your LINE Messaging API Channel.</p>
+    <p>See more details at <a target="_blank" href="https://developers.line.biz/en/reference/messaging-api/#send-push-message">LINE Messaging API (Push Message) Document</a>.</p>
+    <p>Custom message format can see more details at <a target="_blank" href="https://developers.line.biz/en/docs/messaging-api/message-types/">LINE Message Types</a>.</p>
+    <p>Node has paste function data from clipboard, so allow paste permmision in browser to able to work paste function.</p>
+</script>

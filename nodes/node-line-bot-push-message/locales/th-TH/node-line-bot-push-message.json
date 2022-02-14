@@ -1,0 +1,36 @@
+{
+    "node-line-bot-push-message": {
+        "line-bot-push-message": "LINE Messaging API Push Message",
+        "label": {
+            "name": "Name",
+            "token": "Channel Access Token",
+            "destinationId": "ID ปลายทาง",
+            "message": "ข้อความ",
+            "extMessage": "ใช้ข้อความการส่งจากโหนดอื่น",
+            "extDestinationId": "ใช้ข้อมูล ID ที่ส่งมาจากโหนดอื่น",
+            "disabledNotify": "ปิดป๊อบอัพแจ้งเตือนผู้ใช้งาน",
+            "gotoMessageTypes": "กำหนดรูปแบบข้อความสามารถดูรายละเอียดที่ LINE Message Types"
+        },
+        "button": {
+            "messageType": {
+                "normalText": "ข้อความปกติ",
+                "customFormat": "กำหนดรูปแบบข้อความ"
+            }
+        },
+        "errors": {
+            "notFoundToken": "ไม่พบ Channel Access Token",
+            "notFoundDestinationId": "ไม่พบ To ID",
+            "messageRequired": "ต้องการค่า payload",
+            "messageInvalid": "payload ไม่ถูกต้อง",
+            "messageEmpty": "payload ไม่สามารถว่างได้",
+            "messageTypeRequired": "ต้องการค่า messageType",
+            "messageTypeInvalid": "messageType ไม่ถูกต้อง",
+            "destinationIdRequired": "ต้องการค่า destinationId",
+            "destinationIdInvalid": "destinationId ไม่ถูกต้อง",
+            "destinationIdEmpty": "destinationId ไม่สามารถว่างได้"            
+        },
+        "send-result": {
+            "success": "Push ข้อความสำเร็จ: "
+        }
+    }
+}

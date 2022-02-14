@@ -11,6 +11,10 @@ npm install node-red-contrib-node-line-api
 ---
 ## Release Notes
 
+### Version 0.7.0
+* Add new LINE Messaging API, Node Push Message
+* Re-structures project folder
+
 ### Version 0.6.0
 * Fix LINE Notify node. Change to use 'payload' property instead of 'message'. See [help](#Help) for more detail.
 * Fix LINE Notify node. Properties 'useImageUrl', 'useImageFile' and 'useSticker' change to 'no mandatory'. See [help](#Help) for more detail.

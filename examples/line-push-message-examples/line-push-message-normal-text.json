@@ -1,0 +1,78 @@
+[
+    {
+        "id": "25ca50c6e4b9ecc0",
+        "type": "tab",
+        "label": "Example Push Message Normal Text",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "87e27d6ad7f03bfb",
+        "type": "node-line-bot-push-message",
+        "z": "25ca50c6e4b9ecc0",
+        "name": "",
+        "useExternalMessage": true,
+        "useExternalDestinationId": false,
+        "hasToken": true,
+        "hasDestinationId": true,
+        "hasMessage": true,
+        "message": "Hi, I am push message node 😊",
+        "messageType": 0,
+        "disabledNotification": false,
+        "credentials": {},
+        "x": 400,
+        "y": 80,
+        "wires": [
+            [
+                "23381717c650f568"
+            ]
+        ]
+    },
+    {
+        "id": "684a2de13e48cc43",
+        "type": "inject",
+        "z": "25ca50c6e4b9ecc0",
+        "name": "Send msg",
+        "props": [
+            {
+                "p": "messageType",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "Normal Text Example 😊",
+        "payloadType": "str",
+        "x": 160,
+        "y": 80,
+        "wires": [
+            [
+                "87e27d6ad7f03bfb"
+            ]
+        ]
+    },
+    {
+        "id": "23381717c650f568",
+        "type": "debug",
+        "z": "25ca50c6e4b9ecc0",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 650,
+        "y": 80,
+        "wires": []
+    }
+]

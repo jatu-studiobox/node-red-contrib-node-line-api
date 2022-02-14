@@ -1,0 +1,36 @@
+{
+    "node-line-bot-push-message": {
+        "line-bot-push-message": "LINE Messaging API Push Message",
+        "label": {
+            "name": "Name",
+            "token": "Channel Access Token",
+            "destinationId": "Destination ID",
+            "message": "Message",
+            "extMessage": "Use Message data from wired node",
+            "extDestinationId": "Use ID data from wired node",
+            "disabledNotify": "Disabled push Notification",
+            "gotoMessageTypes": "Custom message format can go to LINE Message Types for details"
+        },
+        "button": {
+            "messageType": {
+                "normalText": "Normal Text",
+                "customFormat": "Custom Message Format"
+            }
+        },
+        "errors": {
+            "notFoundToken": "Channel Access Token not found",
+            "notFoundDestinationId": "To ID not found",
+            "messageRequired": "payload is required",
+            "messageInvalid": "payload is invalid",
+            "messageEmpty": "payload cannot be empty",
+            "messageTypeRequired": "messageType is required",
+            "messageTypeInvalid": "messageType is invalid",
+            "destinationIdRequired": "destinationId is required",
+            "destinationIdInvalid": "destinationId is invalid",
+            "destinationIdEmpty": "destinationId cannot be empty"
+        },
+        "send-result": {
+            "success": "Push message success: "
+        }
+    }
+}

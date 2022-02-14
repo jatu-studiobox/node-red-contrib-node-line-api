@@ -1,6 +1,6 @@
 const should = require("should");
 const helper = require("node-red-node-test-helper");
-const nodeLineNotify = require("../nodes/node-line-notify.js");
+const nodeLineNotify = require("../nodes/node-line-notify/node-line-notify.js");
 
 helper.init(require.resolve('node-red'));
 
