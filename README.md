@@ -2,8 +2,8 @@
 LINE API nodes for NODE-RED. Include LINE Notify, LINE Messaging API
 
 ## Node LINE API in package
-* LINE Notify API node
-* LINE Messaging API Push Message
+* LINE Notify API node [Detail](#line-notify-api-node)
+* LINE Messaging API Push Message [Detail](#line-message-api---push-message-node)
 
 ---
 ## Installation
@@ -76,6 +76,7 @@ Using *msg* object.
 
 #### More details
 See more details at <a href="https://notify-bot.line.me/doc/en/" target="_blank">LINE Notify API Document</a>.
+
 See more details about Sticker ID and Package ID at <a href="https://developers.line.biz/en/docs/messaging-api/sticker-list/" target="_blank">LINE List of available stickers</a>.
 
 
@@ -104,10 +105,12 @@ Using *msg* object.
 | destinationId     | No (*Yes, if select 'Use ID data from wired node'*)       | boolean     | Specified destination ID for push message to |
 | messageType       | No (*Yes, if select 'Use Message data from wired node'*)  | int         | *0* : for normal text message for push message.<br />*1* : for custom message format for push message. |
 | payload           | No (*Yes, if select 'Use Message data from wired node'*)  | string or JSON | Type *string* for normal text message<br/>Type *JSON* for custom message format<br/>Node push message check payload type at runtime |
+
 #### Output
 Using *msg* object.
 
 Output success - status = 0, payload = Push message success: {"x-line-request-id":"xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxx"}
+
 Output Fail - status = *&lt;Error Number&gt;*, payload = *&lt;Error message&gt;*
 
 | Property          | Type        | Description |
@@ -117,6 +120,9 @@ Output Fail - status = *&lt;Error Number&gt;*, payload = *&lt;Error message&gt;*
 
 #### More details
 Obtain LINE Messaging API Channel Access Token at your LINE Messaging API Channel.
+
 See more details at <a target="_blank" href="https://developers.line.biz/en/reference/messaging-api/#send-push-message">LINE Messaging API (Push Message) Document</a>.
+
 Custom message format can see more details at <a target="_blank" href="https://developers.line.biz/en/docs/messaging-api/message-types/">LINE Message Types</a>.
+
 Node has paste function data from clipboard, so allow paste permmision in browser to able to work paste function.
