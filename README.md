@@ -1,8 +1,10 @@
 # node-red-contrib-node-line-api
-LINE API nodes for NODE-RED. Such as LINE notify.
+LINE API nodes for NODE-RED. Include LINE Notify, LINE Messaging API
 
 ## Node LINE API in package
 * LINE Notify API node
+* LINE Messaging API Push Message
+
 ---
 ## Installation
 ```
@@ -26,7 +28,7 @@ npm install node-red-contrib-node-line-api
 * Add example flows for LINE Notify API
 * Add bugs URL supplied
 * Add something in package.json
-* Fix README
+* Fix README 
 * Remove none use packages
 
 ### Version 0.5.2
@@ -49,10 +51,7 @@ NODE-RED node for sending message notification to LINE Notify. You can use LINE 
 4. Run workflow
 5. Check result.
 
-#### Node API
-You can send your information, which you want to notify at LINE Notify, through *LINE Notify API Node*.
-
-##### Input
+#### Input
 Using *msg* object.
 
 | Property          | Mandatory                                   | Type        | Description |
@@ -67,7 +66,7 @@ Using *msg* object.
 | stickerId         | No (*Yes, if useSticker is true*)   | number      | LINE Sticker Id. See more details at [LINE List of available stickers](https://developers.line.biz/en/docs/messaging-api/sticker-list/) |
 | stickerPackageId  | No (*Yes, if useSticker is true*)   | number      | LINE Package Id of sticker Id. See more details at <a href="https://developers.line.biz/en/docs/messaging-api/sticker-list/" target="_blank">LINE List of available stickers</a> |
 
-##### Output
+#### Output
 Using *msg* object.
 
 | Property          | Type        | Description |
@@ -77,5 +76,47 @@ Using *msg* object.
 
 #### More details
 See more details at <a href="https://notify-bot.line.me/doc/en/" target="_blank">LINE Notify API Document</a>.
-
 See more details about Sticker ID and Package ID at <a href="https://developers.line.biz/en/docs/messaging-api/sticker-list/" target="_blank">LINE List of available stickers</a>.
+
+
+### LINE Message API - Push Message Node
+
+NODE-RED node for pushing message to LINE Messaging API channel. You can use LINE Messaging API, push message, through this Node.
+
+#### Usage
+
+1. Create LINE Messaging API Channel in LINE Developer console.
+2. Obtain a Channel Access Token from your created LINE Messaging API Channel.
+3. Add Messaging API Channel to LINE application.
+4. Find destination ID for push message to.
+5. Setup Node mode
+* Use/Don't use message data from wired node.
+* Use/Don't use destination ID data from wired node.
+6. Setup other notify options
+7. Run workflow
+8. Check result.
+
+#### Input
+Using *msg* object.
+
+| Property          | Mandatory                                                 | Type        | Description |
+| ----------------- |:---------------------------------------------------------:|:-----------:| ----------- |
+| destinationId     | No (*Yes, if select 'Use ID data from wired node'*)       | boolean     | Specified destination ID for push message to |
+| messageType       | No (*Yes, if select 'Use Message data from wired node'*)  | int         | *0* : for normal text message for push message.<br />*1* : for custom message format for push message. |
+| payload           | No (*Yes, if select 'Use Message data from wired node'*)  | string or JSON | Type *string* for normal text message<br/>Type *JSON* for custom message format<br/>Node push message check payload type at runtime |
+#### Output
+Using *msg* object.
+
+Output success - status = 0, payload = Push message success: {"x-line-request-id":"xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxx"}
+Output Fail - status = *&lt;Error Number&gt;*, payload = *&lt;Error message&gt;*
+
+| Property          | Type        | Description |
+| ----------------- |:-----------:| ----------- |
+| status            | number      | Result status code |
+| payload           | string      | Result status message |
+
+#### More details
+Obtain LINE Messaging API Channel Access Token at your LINE Messaging API Channel.
+See more details at <a target="_blank" href="https://developers.line.biz/en/reference/messaging-api/#send-push-message">LINE Messaging API (Push Message) Document</a>.
+Custom message format can see more details at <a target="_blank" href="https://developers.line.biz/en/docs/messaging-api/message-types/">LINE Message Types</a>.
+Node has paste function data from clipboard, so allow paste permmision in browser to able to work paste function.
