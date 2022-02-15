@@ -19,7 +19,9 @@
     "node-red",
     "line",
     "line-api",
-    "line-notify"
+    "line-notify",
+    "line-messageing-api",
+    "line push message"
   ],
   "main": "node.js",
   "node-red": {
