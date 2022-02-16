@@ -13,6 +13,10 @@ npm install node-red-contrib-node-line-api
 ---
 ## Release Notes
 
+### Version 0.7.1
+* Edit display nodes in palette
+* Edit node desciption in help
+
 ### Version 0.7.0
 * Add new LINE Messaging API, Node Push Message
 * Re-structures project folder

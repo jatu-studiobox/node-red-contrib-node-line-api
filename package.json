@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-node-line-api",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "Node-RED with LINE API, include Notify API, Messaging API (now only push message).",
   "author": "jatu-studiobox",
   "license": "Apache-2.0",

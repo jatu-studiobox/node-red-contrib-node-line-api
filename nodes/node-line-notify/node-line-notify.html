@@ -254,9 +254,13 @@
                 required: true
             }
         },
-        paletteLabel: "LINE Notify",
+        paletteLabel: "notify",
+        align: 'right',
         label: function () {
             return this.name || "LINE Notify";
+        },
+        labelStyle: function () {
+            return this.name ? "node_label_italic" : "";
         },
         inputs: 1,
         outputs: 1,
