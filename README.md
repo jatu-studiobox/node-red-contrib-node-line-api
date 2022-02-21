@@ -4,6 +4,7 @@ LINE API nodes for NODE-RED. Include LINE Notify, LINE Messaging API
 ## Node LINE API in package
 * LINE Notify API node [Detail](#line-notify-api-node)
 * LINE Messaging API Push Message [Detail](#line-message-api---push-message-node)
+* LINE Messaging API Multicast Message [Detail](#line-message-api---multicast-message-node)
 
 ---
 ## Installation
