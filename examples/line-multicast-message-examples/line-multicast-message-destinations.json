@@ -1,0 +1,91 @@
+[
+    {
+        "id": "df8cb036812a5659",
+        "type": "tab",
+        "label": "Example Multicast Message Send Destination ID List",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "2ed0949248c0242b",
+        "type": "debug",
+        "z": "df8cb036812a5659",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 630,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "5f2ec0ab16fe8fb2",
+        "type": "node-line-bot-multicast-message",
+        "z": "df8cb036812a5659",
+        "name": "",
+        "useExternalMessage": false,
+        "useExternalDestinationId": true,
+        "hasToken": true,
+        "hasDestinationId": true,
+        "hasMessage": true,
+        "message": "Hi, I am multicast message node 😊",
+        "messageType": 0,
+        "disabledNotification": false,
+        "x": 410,
+        "y": 200,
+        "wires": [
+            [
+                "2ed0949248c0242b"
+            ]
+        ]
+    },
+    {
+        "id": "e62649cd85282f33",
+        "type": "function",
+        "z": "df8cb036812a5659",
+        "name": "send msg",
+        "func": "msg.destinations = [\"Input destination ID\",\"Input destination ID\"];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 180,
+        "y": 200,
+        "wires": [
+            [
+                "5f2ec0ab16fe8fb2"
+            ]
+        ]
+    },
+    {
+        "id": "33ee180b1f2fc16b",
+        "type": "inject",
+        "z": "df8cb036812a5659",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 120,
+        "wires": [
+            [
+                "e62649cd85282f33"
+            ]
+        ]
+    }
+]

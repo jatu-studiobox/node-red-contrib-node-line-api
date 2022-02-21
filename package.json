@@ -1,7 +1,7 @@
 {
   "name": "node-red-contrib-node-line-api",
-  "version": "0.7.1",
-  "description": "Node-RED with LINE API, include Notify API, Messaging API (now only push message).",
+  "version": "0.7.2",
+  "description": "Node-RED with LINE API, include Notify API, Messaging API (now push message and multicast message).",
   "author": "jatu-studiobox",
   "license": "Apache-2.0",
   "bugs": {
@@ -21,14 +21,16 @@
     "line-api",
     "line-notify",
     "line-messageing-api",
-    "line push message"
+    "line-push-message",
+    "line-multicast-message"
   ],
   "main": "node.js",
   "node-red": {
     "version": ">=2.0.0",
     "nodes": {
       "node-line-notify": "nodes/node-line-notify/node-line-notify.js",
-      "node-line-bot-push-message": "nodes/node-line-bot-push-message/node-line-bot-push-message.js"
+      "node-line-bot-push-message": "nodes/node-line-bot-push-message/node-line-bot-push-message.js",
+      "node-line-bot-multicast-message": "nodes/node-line-bot-multicast-message/node-line-bot-multicast-message.js"
     }
   },
   "devDependencies": {

@@ -13,6 +13,9 @@ npm install node-red-contrib-node-line-api
 ---
 ## Release Notes
 
+### Version 0.7.2
+* Add new LINE Messaging API, Node Multicast Message
+
 ### Version 0.7.1
 * Edit display nodes in palette
 * Edit node desciption in help
@@ -34,9 +37,6 @@ npm install node-red-contrib-node-line-api
 * Add something in package.json
 * Fix README 
 * Remove none use packages
-
-### Version 0.5.2
-* Fix Help and README
 
 ---
 ## Help
@@ -106,7 +106,7 @@ Using *msg* object.
 
 | Property          | Mandatory                                                 | Type        | Description |
 | ----------------- |:---------------------------------------------------------:|:-----------:| ----------- |
-| destinationId     | No (*Yes, if select 'Use ID data from wired node'*)       | boolean     | Specified destination ID for push message to |
+| destinationId     | No (*Yes, if select 'Use ID data from wired node'*)       | string      | Specified destination ID for push message to |
 | messageType       | No (*Yes, if select 'Use Message data from wired node'*)  | int         | *0* : for normal text message for push message.<br />*1* : for custom message format for push message. |
 | payload           | No (*Yes, if select 'Use Message data from wired node'*)  | string or JSON | Type *string* for normal text message<br/>Type *JSON* for custom message format<br/>Node push message check payload type at runtime |
 
@@ -126,6 +126,53 @@ Output Fail - status = *&lt;Error Number&gt;*, payload = *&lt;Error message&gt;*
 Obtain LINE Messaging API Channel Access Token at your LINE Messaging API Channel.
 
 See more details at <a target="_blank" href="https://developers.line.biz/en/reference/messaging-api/#send-push-message">LINE Messaging API (Push Message) Document</a>.
+
+Custom message format can see more details at <a target="_blank" href="https://developers.line.biz/en/docs/messaging-api/message-types/">LINE Message Types</a>.
+
+Node has paste function data from clipboard, so allow paste permmision in browser to able to work paste function.
+
+### LINE Message API - Multicast Message Node
+
+NODE-RED node for multicast message to LINE Messaging API channel. You can use LINE Messaging API, multicast message, through this Node.
+
+#### Usage
+
+1. Create LINE Messaging API Channel in LINE Developer console.
+2. Obtain a Channel Access Token from your created LINE Messaging API Channel.
+3. Add Messaging API Channel to LINE application.
+4. Find destination ID list for multicast message to.
+5. Setup Node mode
+* Use/Don't use message data from wired node.
+* Use/Don't use destination ID list from wired node.
+6. Setup other notify options
+7. Run workflow
+8. Check result.
+
+#### Input
+Using *msg* object.
+
+| Property          | Mandatory                                                 | Type        | Description |
+| ----------------- |:---------------------------------------------------------:|:-----------:| ----------- |
+| destinations      | No (*Yes, if select 'Use ID list from wired node'*)       | boolean     | Specified destination ID list for multicast message to |
+| messageType       | No (*Yes, if select 'Use Message data from wired node'*)  | int         | *0* : for normal text message for multicast message.<br />*1* : for custom message format for multicast message. |
+| payload           | No (*Yes, if select 'Use Message data from wired node'*)  | string or JSON | Type *string* for normal text message<br/>Type *JSON* for custom message format<br/>Node multicast message check payload type at runtime |
+
+#### Output
+Using *msg* object.
+
+Output success - status = 0, payload = Multicast message success: {"x-line-request-id":"xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxx"}
+
+Output Fail - status = *&lt;Error Number&gt;*, payload = *&lt;Error message&gt;*
+
+| Property          | Type        | Description |
+| ----------------- |:-----------:| ----------- |
+| status            | number      | Result status code |
+| payload           | string      | Result status message |
+
+#### More details
+Obtain LINE Messaging API Channel Access Token at your LINE Messaging API Channel.
+
+See more details at <a target="_blank" href="https://developers.line.biz/en/reference/messaging-api/#send-multicast-message">LINE Messaging API (Multicast Message) Document</a>.
 
 Custom message format can see more details at <a target="_blank" href="https://developers.line.biz/en/docs/messaging-api/message-types/">LINE Message Types</a>.
 

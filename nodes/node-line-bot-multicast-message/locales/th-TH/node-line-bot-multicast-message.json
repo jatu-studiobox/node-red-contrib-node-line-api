@@ -1,13 +1,13 @@
 {
-    "node-line-bot-push-message": {
-        "line-bot-push-message": "LINE Messaging API Push Message",
+    "node-line-bot-multicast-message": {
+        "line-bot-multicast-message": "LINE Messaging API Multicast Message",
         "label": {
             "name": "Name",
             "token": "Channel Access Token",
-            "destinationId": "ID ปลายทาง",
+            "destinationId": "IDs ปลายทาง",
             "message": "ข้อความ",
             "extMessage": "ใช้ข้อความการส่งจากโหนดอื่น",
-            "extDestinationId": "ใช้ข้อมูล ID ที่ส่งมาจากโหนดอื่น",
+            "extDestinationId": "ใช้ข้อมูลรายการ ID ที่ส่งมาจากโหนดอื่น",
             "disabledNotify": "ปิดป๊อบอัพแจ้งเตือนผู้ใช้งาน",
             "gotoMessageTypes": "กำหนดรูปแบบข้อความสามารถดูรายละเอียดที่ LINE Message Types"
         },
@@ -24,12 +24,13 @@
             "messageEmpty": "payload ไม่สามารถว่างได้",
             "messageTypeRequired": "ต้องการค่า messageType",
             "messageTypeInvalid": "messageType ไม่ถูกต้อง",
-            "destinationIdRequired": "ต้องการค่า destinationId",
-            "destinationIdInvalid": "destinationId ไม่ถูกต้อง",
-            "destinationIdEmpty": "destinationId ไม่สามารถว่างได้"            
+            "destinationsRequired": "ต้องการค่า destinations",
+            "destinationsInvalid": "destinations ไม่ถูกต้อง",
+            "destinationsEmpty": "destinations ไม่สามารถว่างได้",
+            "destinationsItemEmpty": "destinations item ไม่สามารถว่างได้"           
         },
         "send-result": {
-            "success": "Push ข้อความสำเร็จ: "
+            "success": "Multicast ข้อความสำเร็จ: "
         }
     }
 }
