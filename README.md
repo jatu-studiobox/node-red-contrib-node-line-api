@@ -105,10 +105,10 @@ NODE-RED node for pushing message to LINE Messaging API channel. You can use LIN
 #### Input
 Using *msg* object.
 
-| Property          | Mandatory                                                 | Type        | Description |
-| ----------------- |:---------------------------------------------------------:|:-----------:| ----------- |
-| destinationId     | No (*Yes, if select 'Use ID data from wired node'*)       | string      | Specified destination ID for push message to |
-| messageType       | No (*Yes, if select 'Use Message data from wired node'*)  | int         | *0* : for normal text message for push message.<br />*1* : for custom message format for push message. |
+| Property          | Mandatory                                                 | Type           | Description |
+| ----------------- |:---------------------------------------------------------:|:--------------:| ----------- |
+| destinationId     | No (*Yes, if select 'Use ID data from wired node'*)       | string         | Specified destination ID for push message to |
+| messageType       | No (*Yes, if select 'Use Message data from wired node'*)  | int            | *0* : for normal text message for push message.<br />*1* : for custom message format for push message. |
 | payload           | No (*Yes, if select 'Use Message data from wired node'*)  | string or JSON | Type *string* for normal text message<br/>Type *JSON* for custom message format<br/>Node push message check payload type at runtime |
 
 #### Output
@@ -152,10 +152,10 @@ NODE-RED node for multicast message to LINE Messaging API channel. You can use L
 #### Input
 Using *msg* object.
 
-| Property          | Mandatory                                                 | Type        | Description |
-| ----------------- |:---------------------------------------------------------:|:-----------:| ----------- |
-| destinations      | No (*Yes, if select 'Use ID list from wired node'*)       | boolean     | Specified destination ID list for multicast message to |
-| messageType       | No (*Yes, if select 'Use Message data from wired node'*)  | int         | *0* : for normal text message for multicast message.<br />*1* : for custom message format for multicast message. |
+| Property          | Mandatory                                                 | Type           | Description |
+| ----------------- |:---------------------------------------------------------:|:--------------:| ----------- |
+| destinations      | No (*Yes, if select 'Use ID list from wired node'*)       | String []      | Specified destination ID list for multicast message to |
+| messageType       | No (*Yes, if select 'Use Message data from wired node'*)  | int            | *0* : for normal text message for multicast message.<br />*1* : for custom message format for multicast message. |
 | payload           | No (*Yes, if select 'Use Message data from wired node'*)  | string or JSON | Type *string* for normal text message<br/>Type *JSON* for custom message format<br/>Node multicast message check payload type at runtime |
 
 #### Output
