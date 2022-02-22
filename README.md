@@ -14,7 +14,7 @@ npm install node-red-contrib-node-line-api
 ---
 ## Release Notes
 
-### Version 0.7.2
+### Version 0.7.3
 * Add new LINE Messaging API, Node Multicast Message
 
 ### Version 0.7.1
