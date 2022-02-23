@@ -1,0 +1,75 @@
+[
+    {
+        "id": "df8cb036812a5659",
+        "type": "tab",
+        "label": "Example broadcast Message Custom Message Format",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "2ed0949248c0242b",
+        "type": "debug",
+        "z": "df8cb036812a5659",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 630,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "33ee180b1f2fc16b",
+        "type": "inject",
+        "z": "df8cb036812a5659",
+        "name": "Send msg",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "messageType",
+                "v": "1",
+                "vt": "num"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"type\":\"text\",\"text\":\"This is broadcast message with emoji $$\",\"emojis\":[{\"index\":37,\"productId\":\"5ac1bfd5040ab15980c9b435\",\"emojiId\":\"009\"},{\"index\":38,\"productId\":\"5ac1bfd5040ab15980c9b435\",\"emojiId\":\"231\"}]}",
+        "payloadType": "json",
+        "x": 160,
+        "y": 200,
+        "wires": [
+            [
+                "37adbc809cf245d3"
+            ]
+        ]
+    },
+    {
+        "id": "37adbc809cf245d3",
+        "type": "node-line-bot-broadcast-message",
+        "z": "df8cb036812a5659",
+        "name": "",
+        "useExternalMessage": true,
+        "hasToken": true,
+        "hasMessage": true,
+        "message": "Hi, I am broadcast message node 😊",
+        "messageType": 0,
+        "disabledNotification": false,
+        "x": 390,
+        "y": 200,
+        "wires": [
+            [
+                "2ed0949248c0242b"
+            ]
+        ]
+    }
+]

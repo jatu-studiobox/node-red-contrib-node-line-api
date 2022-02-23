@@ -1,0 +1,75 @@
+[
+    {
+        "id": "df8cb036812a5659",
+        "type": "tab",
+        "label": "Example broadcast Message Normal Text",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "2ed0949248c0242b",
+        "type": "debug",
+        "z": "df8cb036812a5659",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 630,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "33ee180b1f2fc16b",
+        "type": "inject",
+        "z": "df8cb036812a5659",
+        "name": "Send msg",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "messageType",
+                "v": "0",
+                "vt": "num"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "🕹️ This is broadcast message normal text 😊 👌",
+        "payloadType": "str",
+        "x": 160,
+        "y": 200,
+        "wires": [
+            [
+                "37adbc809cf245d3"
+            ]
+        ]
+    },
+    {
+        "id": "37adbc809cf245d3",
+        "type": "node-line-bot-broadcast-message",
+        "z": "df8cb036812a5659",
+        "name": "",
+        "useExternalMessage": true,
+        "hasToken": true,
+        "hasMessage": true,
+        "message": "Hi, I am broadcast message node 😊",
+        "messageType": 0,
+        "disabledNotification": false,
+        "x": 390,
+        "y": 200,
+        "wires": [
+            [
+                "2ed0949248c0242b"
+            ]
+        ]
+    }
+]

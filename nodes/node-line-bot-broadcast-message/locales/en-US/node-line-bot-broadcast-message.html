@@ -1,18 +1,14 @@
-<script type="text/html" data-help-name="node-line-bot-multicast-message">
-    <p>LINE Multicast Message Node. Multicast message to LINE BOT at specific destination ID list.</p>
+<script type="text/html" data-help-name="node-line-bot-broadcast-message">
+    <p>LINE Broadcast Message Node. Broadcast message to LINE BOT.</p>
     <h3>Input Settings</h3>
     <dl class="message-properties">
         <dt>Channel Access Token <span class="property-type">string</span></dt>
         <dd>LINE Messaging API Channel Access Token for using LINE Messaging API.</dd>
-        <dt>Desitnation IDs <span class="property-type">string</span></dt>
-        <dd>Specified destination ID list for multicast message to.</dd>
-        <dt>Use ID list from wired node <span class="property-type">boolean</span></dt>
-        <dd>Use destinatin ID list from wired node or node self. If 'checked', then use ID list from wired node. See Node API section for details.</dd>
         <dt>Message <span class="property-type">string</span></dt>
-        <dd>Specified message for multicast message.</dd>
+        <dd>Specified message for broadcast message.</dd>
         <dt>Input Message Type <span class="property-type">int</span></dt>
-        <dd><i>Normal Text</i> : for input normal text message for multicast message.</dd>
-        <dd><i>Custom Message Format</i> : for input custom message format for multicast message.</dd>
+        <dd><i>Normal Text</i> : for input normal text message for broadcast message.</dd>
+        <dd><i>Custom Message Format</i> : for input custom message format for broadcast message.</dd>
         <dt>Use Message data from wired node <span class="property-type">boolean</span></dt>
         <dd>Use message from wired node or node self. If 'checked', then use message and message type data from wired node. See Node API section for details.</dd>
         <dt>Disabled user push notification <span class="property-type">boolean</span></dt>
@@ -22,22 +18,19 @@
     <h3>Node API</h3>
     <p>Using <i>msg</i> object.</p>
     <dl class="message-properties">
-        <dt class="optional">destinations <span class="property-type">array string</span></dt>
-        <dd>Specified destination IDs list for multicast message to.</dd>
-        <dd><font color="blue"><i>Required</i> if input 'select' Use ID data from wired node.</font></dd>
         <dt class="optional">messageType <span class="property-type">int</span></dt>
-        <dd><i>0</i> : for normal text message for multicast message.</dd>
-        <dd><i>1</i> : for custom message format for multicast message.</dd>
+        <dd><i>0</i> : for normal text message for broadcast message.</dd>
+        <dd><i>1</i> : for custom message format for broadcast message.</dd>
         <dd><font color="blue"><i>Required</i> if input 'select' Use Message data from wired node.</font></dd>
         <dt class="optional">payload <span class="property-type">string or JSON</span></dt>
-        <dd>Message data for multicast message</dd>
+        <dd>Message data for broadcast message</dd>
         <dd><i>string</i> : for normal text message</dd>
         <dd><i>JSON</i> : for custom message format</dd>
         <dd><font color="blue"><i>Required</i> if input 'select' Use Message data from wired node.</font></dd>
-        <dd><font color="blue"><i>Node multicast message check payload type at runtime</i></font></dd>
+        <dd><font color="blue"><i>Node broadcast message check payload type at runtime</i></font></dd>
     </dl>
     <h3>Output Section</h3>
-    <p>Output success - status = 0, payload = Multicast message success: {"x-line-request-id":"xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxx"}</p>
+    <p>Output success - status = 0, payload = Broadcast message success: {"x-line-request-id":"xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxx"}</p>
     <p>Output Fail - status = <i>&lt;Error Number&gt;</i>, payload = <i>&lt;Error message&gt;</i></p>
     <dl class="message-properties">
         <dt>msg.status <span class="property-type">number</span></dt>
@@ -46,10 +39,10 @@
         <dd>result status message</dd>
     </dl>
     <h3>Examples Section</h3>
-    <p>See usage examples at Node-RED Import menu. Examples at 'node-red-contrib-node-line-api', then 'line-multicast-message-examples'</p>
+    <p>See usage examples at Node-RED Import menu. Examples at 'node-red-contrib-node-line-api', then 'line-broadcast-message-examples'</p>
     <h3>Additional details</h3>
     <p>Obtain LINE Messaging API Channel Access Token at your LINE Messaging API Channel.</p>
-    <p>See more details at <a target="_blank" href="https://developers.line.biz/en/reference/messaging-api/#send-multicast-message">LINE Messaging API (Multicast Message) Document</a>.</p>
+    <p>See more details at <a target="_blank" href="https://developers.line.biz/en/reference/messaging-api/#send-broadcast-message">LINE Messaging API (Broadcast Message) Document</a>.</p>
     <p>Custom message format can see more details at <a target="_blank" href="https://developers.line.biz/en/docs/messaging-api/message-types/">LINE Message Types</a>.</p>
     <p>For more information, see <a target="_blank" href="https://developers.line.biz/en/docs/messaging-api/emoji-list/">List of available LINE emojis.</a></p>
     <p>Node has paste function data from clipboard, so allow paste permmision in browser to able to work paste function.</p>

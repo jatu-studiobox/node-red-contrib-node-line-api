@@ -1,0 +1,206 @@
+<style>
+    .labelDisabled {
+        color: darkgray;
+        cursor: not-allowed !important;
+    }
+
+    .containerBox {
+        width: 100%;
+        padding: 5px;
+        border: 1px solid #bbb;
+        border-radius: 5px;
+        padding-bottom: 8px;
+        margin-bottom: 10px;
+    }
+
+    .hasError {
+        border-color: #d6615f !important
+    }
+</style>
+<script type="text/html" data-template-name="node-line-bot-broadcast-message">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="node-line-bot-broadcast-message.label.name" /></label>
+        <input type="text" id="node-input-name" placeholder="Name" />
+    </div>
+    <div class="containerBox">
+        <div style="color: #555;">
+            <label for="node-input-token"><i class="fa fa-key"></i> <span data-i18n="node-line-bot-broadcast-message.label.token" /></label>
+        </div>
+        <div style="display: flex; flex-direction: row; align-items: flex-start; justify-content: space-between; gap: 5px;">
+            <div style="flex-grow: 90;">
+                <textarea rows="4" style="width:100%;resize: none;" id="node-input-token" placeholder="Channel Access Token"></textarea>
+                <input type="checkbox" id="node-input-hasToken" style="display:none" />
+            </div>
+            <div style="flex-grow: 1;">
+                <button type="button" class="red-ui-button" id="node-button-pasteToken" data-i18n="[title]patse from copied"><i id="label-button" class="fa fa-clipboard"></i></button>
+            </div>
+        </div>
+    </div>
+    <div class="containerBox">
+        <div style="color: #555; display: flex; flex-direction: row; gap: 10px;">
+            <div style="flex-grow: 1">
+                <label for="node-input-message"><i class="fa fa-commenting"></i> <span data-i18n="node-line-bot-broadcast-message.label.message" /></label>
+            </div>
+            <div style="flex-grow: 1; display: flex; flex-direction: row; justify-content: flex-end; gap: 5px;">
+                <input type="checkbox" id="node-input-useExternalMessage" />
+                <label for="node-input-useExternalMessage"><span data-i18n="node-line-bot-broadcast-message.label.extMessage" /></label>
+            </div>
+        </div>
+        <div style="margin-bottom: 5px">
+            <span class="button-group">
+                <button type="button" class="red-ui-button toggle selected my-button-messageType" value="0"><span data-i18n="node-line-bot-broadcast-message.button.messageType.normalText" /></button><button type="button" class="red-ui-button toggle my-button-messageType" value="1"><span data-i18n="node-line-bot-broadcast-message.button.messageType.customFormat" /></button>
+            </span>
+            <input type="hidden" id="node-input-messageType" />
+        </div>
+        <div style="display: flex; flex-direction: row; align-items: flex-start; justify-content: space-between; gap: 5px;">
+            <div style="flex-grow: 90;">
+                <textarea rows="10" style="width:100%;resize: none;" id="node-input-message" placeholder="Please enter message"></textarea>
+                <input type="checkbox" id="node-input-hasMessage" style="display:none" />
+            </div>
+            <div style="flex-grow: 1;">
+                <button type="button" class="red-ui-button" id="node-button-pasteMessage" data-i18n="[title]patse from copied"><i id="label-button" class="fa fa-clipboard"></i></button>
+            </div>
+        </div>
+        <div style="margin-top: 3px; font-size: 0.9em;">
+            <a target="_blank" href="https://developers.line.biz/en/docs/messaging-api/message-types/"><i class="fa fa-external-link"></i> <span data-i18n="node-line-bot-broadcast-message.label.gotoMessageTypes" /></a>
+        </div>
+    </div>
+    <div style="clear: both; color: #555; display: flex; flex-direction: row; gap: 10px;">
+        <label for="node-input-disabledNotification"><i class="fa fa-bell-slash"></i> <span data-i18n="node-line-bot-broadcast-message.label.disabledNotify" /></label>
+        <input type="checkbox" id="node-input-disabledNotification" />
+    </div>
+</script>
+<script type="text/javascript">
+    RED.nodes.registerType('node-line-bot-broadcast-message', {
+        category: "LINE API",
+        color: "#00b900",
+        icon: "icons/broadcast.svg",
+        defaults: {
+            name: {
+                value: ""
+            },
+            useExternalMessage: {
+                value: false
+            },
+            hasToken: {
+                value: false,
+                validate: function (v) {
+                    return v;
+                }
+            },
+            hasMessage: {
+                value: false,
+                validate: function (v) {
+                    if (this.useExternalMessage) {
+                        return true;
+                    } else {
+                        return v;
+                    }
+                }
+            },
+            message: {
+                value: "Hi, I am broadcast message node 😊",
+                require: false,
+                validate: function (v) {
+                    if (this.useExternalMessage) {
+                        return true;
+                    } else {
+                        return (v.length) > 0 && !v.match(/^\s*$/);
+                    }
+                }
+            },
+            messageType: {
+                value: 0
+            },
+            disabledNotification: {
+                value: false
+            }
+        },
+        credentials: {
+            token: {
+                type: "text",
+                required: true,
+                validate: function (v) {
+                    return (v.length) > 0 && !v.match(/^\s*$/);
+                }
+            }
+        },
+        paletteLabel: "broadcast",
+        align: 'right',
+        label: function () {
+            return this.name || "LINE Broadcast Message";
+        },
+        labelStyle: function () {
+            return this.name ? "node_label_italic" : "";
+        },
+        inputs: 1,
+        outputs: 1,
+        oneditprepare: function () {
+            // set message type button group
+            $(".my-button-messageType").on("click", function () {
+                $(".my-button-messageType").removeClass("selected");
+                $(this).addClass("selected");
+                $("#node-input-messageType").val($(this).attr("value"));
+            });
+            // set paste action to paste button
+            $("#node-button-pasteToken").mousedown(function () {
+                navigator.clipboard
+                    .readText()
+                    .then(
+                        cliptext => ($("#node-input-token").val(cliptext)), err => console.log(err)
+                    );
+            });
+            $("#node-button-pasteMessage").mousedown(function () {
+                navigator.clipboard
+                    .readText()
+                    .then(
+                        cliptext => ($("#node-input-message").val(cliptext)), err => console.log(err)
+                    );
+            });
+            $("#node-input-useExternalMessage").change(function () {
+                let checkedValue = $(this).is(':checked');
+                // enabled/disabled input message
+                $("#node-input-message").prop("disabled", checkedValue);
+                // enabled/disabled paste message button
+                $("#node-button-pasteMessage").prop("disabled", checkedValue);
+                // enabled/disabled message type button group
+                $(".my-button-messageType").each(function (i, btn) {
+                    $(btn).prop("disabled", checkedValue);
+                });
+                // set display enabled/disabled label message
+                if (checkedValue) {
+                    $("label[for='node-input-message']").addClass('labelDisabled');
+                } else {
+                    $("label[for='node-input-message']").removeClass('labelDisabled');
+                }
+            });
+            // set message type clicked button follow property
+            $(".my-button-messageType").removeClass("selected");
+            $(".my-button-messageType").each(function (i, obj) {
+                if ($(obj).attr("value") === $("#node-input-messageType").val()) {
+                    $(obj).addClass("selected");
+                }
+            });
+        },
+        oneditsave: function () {
+            if (/^\s*$/.test($("#node-input-token").val())) {
+                if ($("#node-input-hasToken").is(":checked")) {
+                    $("#node-input-hasToken").trigger('click');
+                }
+            } else {
+                if (!$("#node-input-hasToken").is(":checked")) {
+                    $("#node-input-hasToken").trigger('click');
+                }
+            }
+            if (/^\s*$/.test($("#node-input-message").val())) {
+                if ($("#node-input-hasMessage").is(":checked")) {
+                    $("#node-input-hasMessage").trigger('click');
+                }
+            } else {
+                if (!$("#node-input-hasMessage").is(":checked")) {
+                    $("#node-input-hasMessage").trigger('click');
+                }
+            }
+        }
+    });
+</script>

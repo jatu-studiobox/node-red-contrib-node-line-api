@@ -17,17 +17,17 @@ module.exports = function (RED) {
         if (typeof msg.messageType !== 'undefined') {
             if (typeof msg.messageType !== 'number') {
                 result.isError = true;
-                result.message = RED._("node-line-bot-push-message.errors.messageTypeInvalid");
+                result.message = RED._("node-line-bot-broadcast-message.errors.messageTypeInvalid");
             } else if (!Number.isInteger(msg.messageType)) {
                 result.isError = true;
-                result.message = RED._("node-line-bot-push-message.errors.messageTypeInvalid");
+                result.message = RED._("node-line-bot-broadcast-message.errors.messageTypeInvalid");
             } else if (!(msg.messageType === 0 || msg.messageType === 1)) {  // 0 = normal message, 1 = custom whole message JSON format
                 result.isError = true;
-                result.message = RED._("node-line-bot-push-message.errors.messageTypeInvalid");
+                result.message = RED._("node-line-bot-broadcast-message.errors.messageTypeInvalid");
             }
         } else {
             result.isError = true;
-            result.message = RED._("node-line-bot-push-message.errors.messageTypeRequired");
+            result.message = RED._("node-line-bot-broadcast-message.errors.messageTypeRequired");
         }
         if (result.isError) {
             return result;
@@ -37,54 +37,28 @@ module.exports = function (RED) {
             if (msg.messageType === 0) {
                 if (typeof msg.payload !== 'string') {
                     result.isError = true;
-                    result.message = RED._("node-line-bot-push-message.errors.messageInvalid");
+                    result.message = RED._("node-line-bot-broadcast-message.errors.messageInvalid");
                 } else if (msg.payload.match(/^\s*$/)) {
                     result.isError = true;
-                    result.message = RED._("node-line-bot-push-message.errors.messageEmpty");
+                    result.message = RED._("node-line-bot-broadcast-message.errors.messageEmpty");
                 }
             } else if (msg.messageType === 1) {
                 if (typeof msg.payload !== 'object') {
                     result.isError = true;
-                    result.message = RED._("node-line-bot-push-message.errors.messageInvalid");
+                    result.message = RED._("node-line-bot-broadcast-message.errors.messageInvalid");
                 }
             }
         } else {
             result.isError = true;
-            result.message = RED._("node-line-bot-push-message.errors.messageRequired");
+            result.message = RED._("node-line-bot-broadcast-message.errors.messageRequired");
         }
-        
-        
+
         return result;
     }
-    // Validate External Destination Id function
-    function validateExternalDestinationId(msg) {
-        let result = {
-            isError: false,
-            message: ""
-        };
-        // validate message
-        if (typeof msg.destinationId !== 'undefined') {
-            if (typeof msg.destinationId !== 'string') {
-                result.isError = true;
-                result.message = RED._("node-line-bot-push-message.errors.destinationIdInvalid");
-
-            } else if (msg.destinationId.match(/^\s*$/)) {
-                result.isError = true;
-                result.message = RED._("node-line-bot-push-message.errors.destinationIdEmpty");
-            }
-        } else {
-            result.isError = true;
-            result.message = RED._("node-line-bot-push-message.errors.destinationIdRequired");
-        }
-        return result;
-    }
-
-    function NodeLineBotPushMessage(config) {
+    function NodeLineBotBroadcastMessage(config) {
         RED.nodes.createNode(this, config);
         this.channelAccessToken = this.credentials.token;
         this.useExternalMessage = config.useExternalMessage;
-        this.useExternalDestinationId = config.useExternalDestinationId;
-        this.destinationId = this.credentials.destinationId;
         this.messageType = parseInt(config.messageType);  // 0 = normal message, 1 = custom whole message JSON format
         this.message = config.message;
         this.disabledNotification = config.disabledNotification;
@@ -93,31 +67,11 @@ module.exports = function (RED) {
 
         node.on('input', async (msg) => {
             if (!node.channelAccessToken) {
-                msg.payload = RED._("node-line-bot-push-message.errors.notFoundToken");
+                msg.payload = RED._("node-line-bot-broadcast-message.errors.notFoundToken");
                 msg.status = -1;
                 setError(node, msg);
                 return;
             } else {
-                if (node.useExternalDestinationId) {    // if use external destination ID
-                    // validate external destinatin id data
-                    const result = validateExternalDestinationId(msg);
-                    if (result.isError) {   // if external data has error
-                        msg.payload = result.message;
-                        msg.status = -1;
-                        setError(node, msg);
-                        return;
-                    } else {    // if external destination Id does not has error -> map data
-                        node.destinationId = msg.destinationId;
-                    }
-                } else {    // use internal destination ID
-                    // check Destination ID
-                    if (node.destinationId.match(/^\s*$/)) {
-                        msg.payload = RED._("node-line-bot-push-message.errors.destinationIdEmpty");
-                        msg.status = -1;
-                        setError(node, msg);
-                        return;
-                    }
-                }
                 if (node.useExternalMessage) {  // if use external message
                     // validate external message data
                     let result = validateExternalMessage(msg);
@@ -147,16 +101,16 @@ module.exports = function (RED) {
                 try {
                     let res;
                     if (node.messageType === 0) {   // 0 = normal text message
-                        res = await client.pushMessage(node.destinationId, {
+                        res = await client.broadcast({
                             type: 'text',
                             text: node.message,
                             notificationDisabled: node.disabledNotification
                         });
                     } else if (node.messageType === 1) {    // 1 = custom whole message JSON format
-                        res = await client.pushMessage(node.destinationId, node.jsonMsg, node.disabledNotification);
+                        res = await client.broadcast(node.jsonMsg, node.disabledNotification);
                     }
                     msg.status = 0;
-                    msg.payload = RED._("node-line-bot-push-message.send-result.success") + JSON.stringify(res);
+                    msg.payload = RED._("node-line-bot-broadcast-message.send-result.success") + JSON.stringify(res);
                     node.send(msg);
                     node.status({ fill: "green", shape: "dot", text: "success" });
                 } catch (error) {
@@ -168,13 +122,9 @@ module.exports = function (RED) {
         });
     }
 
-    RED.nodes.registerType("node-line-bot-push-message", NodeLineBotPushMessage, {
+    RED.nodes.registerType("node-line-bot-broadcast-message", NodeLineBotBroadcastMessage, {
         credentials: {
             token: {
-                type: "text",
-                required: true
-            },
-            destinationId: {
                 type: "text",
                 required: true
             }

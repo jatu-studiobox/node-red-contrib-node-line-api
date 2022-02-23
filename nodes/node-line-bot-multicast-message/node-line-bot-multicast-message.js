@@ -183,14 +183,13 @@ module.exports = function (RED) {
                             notificationDisabled: node.disabledNotification
                         });
                     } else if (node.messageType === 1) {    // 1 = custom whole message JSON format
-                        res = await client.multicast(node.arrDestinationId, node.jsonMsg);
+                        res = await client.multicast(node.arrDestinationId, node.jsonMsg, node.disabledNotification);
                     }
                     msg.status = 0;
                     msg.payload = RED._("node-line-bot-multicast-message.send-result.success") + JSON.stringify(res);
                     node.send(msg);
                     node.status({ fill: "green", shape: "dot", text: "success" });
                 } catch (error) {
-                    console.log(error);
                     msg.status = error.statusCode;
                     msg.payload = error.statusMessage;
                     setError(node, msg);

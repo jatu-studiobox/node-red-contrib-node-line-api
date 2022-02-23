@@ -1,0 +1,30 @@
+{
+    "node-line-bot-broadcast-message": {
+        "line-bot-broadcast-message": "LINE Messaging API Broadcast Message",
+        "label": {
+            "name": "Name",
+            "token": "Channel Access Token",
+            "message": "Message",
+            "extMessage": "Use Message data from wired node",
+            "disabledNotify": "Disabled push notification",
+            "gotoMessageTypes": "Custom message format can go to LINE Message Types for details"
+        },
+        "button": {
+            "messageType": {
+                "normalText": "Normal Text",
+                "customFormat": "Custom Message Format"
+            }
+        },
+        "errors": {
+            "notFoundToken": "Channel Access Token not found",
+            "messageRequired": "payload is required",
+            "messageInvalid": "payload is invalid",
+            "messageEmpty": "payload cannot be empty",
+            "messageTypeRequired": "messageType is required",
+            "messageTypeInvalid": "messageType is invalid"
+        },
+        "send-result": {
+            "success": "Broadcast message success: "
+        }
+    }
+}

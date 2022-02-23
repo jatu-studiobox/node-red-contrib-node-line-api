@@ -1,5 +1,5 @@
 <script type="text/html" data-help-name="node-line-bot-multicast-message">
-    <p>โหนด LINE Push Message. Multicast ข้อความ ไปยัง LINE BOT ที่รายการ ID ปลายทางตามที่กำหนด</p>
+    <p>โหนด LINE Multicast Message. Multicast ข้อความ ไปยัง LINE BOT ที่รายการ ID ปลายทางตามที่กำหนด</p>
     <h3>การตั้งค่า Input</h3>
     <dl class="message-properties">
         <dt>Channel Access Token <span class="property-type">string</span></dt>
@@ -16,8 +16,8 @@
         <dt>ใช้ข้อความการส่งจากโหนดอื่น <span class="property-type">boolean</span></dt>
         <dd>ใช้ข้อมูลข้อความจากโหนดที่เชื่อมต่อด้วยหรือจากค่าที่กำหนดเองจากการใส่ข้อมูล ถ้า 'เลือก' จะใช้ข้อมูลข้อความและประเภทข้อความจากโหนดที่เชื่อมต่อด้วย ดูเพิ่มเติมได้ที่หัวข้อ Node API</dd>
         <dt>ปิดป๊อบอัพแจ้งเตือนผู้ใช้งาน <span class="property-type">boolean</span></dt>
-        <dd><i>check</i> : ผู้ใช้จะไม่ได้รับ Push Notification เมื่อข้อความถูกส่ง</dd>
-        <dd><i>uncheck</i> : ผู้ใช้จะได้รับ Push Notification เมื่อข้อความถูกส่ง</dd>
+        <dd><i>check</i> : ผู้ใช้จะไม่ได้รับป๊อบอัพแจ้งเตือน เมื่อข้อความถูกส่ง</dd>
+        <dd><i>uncheck</i> : ผู้ใช้จะได้รับป๊อบอัพแจ้งเตือน เมื่อข้อความถูกส่ง</dd>
     </dl>
     <h3>Node API</h3>
     <p>ใช้งานผ่าน object <i>msg</i></p>
@@ -51,5 +51,6 @@
     <p>สร้าง LINE Messaging API Channel Access Token ที่ LINE Messaging API Channel</p>
     <p>ดูรายละเอียดเพิ่มเติมได้ที่ <a target="_blank" href="https://developers.line.biz/en/reference/messaging-api/#send-multicast-message">LINE Messaging API (Multicast Message) Document</a></p>
     <p>สำหรับกำหนดรูปแบบข้อความเอง สามารถไปดูรายละเอียดได้ที่ <a target="_blank" href="https://developers.line.biz/en/docs/messaging-api/message-types/">LINE Message Types</a></p>
+    <p>ดูข้อมูล LINE emoji เพิ่มเติมได้ที่ <a target="_blank" href="https://developers.line.biz/en/docs/messaging-api/emoji-list/">List of available LINE emojis.</a></p>
     <p>โหนดมีฟังก์ชั่นการทำงาน paste ข้อมูลจาก clipboard ดังนั้นจะต้อง allow paste permmision ใน browser เพื่อที่ให้สามารถใช้งาน paste ได้</p>
 </script>

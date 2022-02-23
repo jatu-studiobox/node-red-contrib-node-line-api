@@ -5,6 +5,7 @@ LINE API nodes for NODE-RED. Include LINE Notify, LINE Messaging API
 * LINE Notify API node [Detail](#line-notify-api-node)
 * LINE Messaging API Push Message [Detail](#line-message-api---push-message-node)
 * LINE Messaging API Multicast Message [Detail](#line-message-api---multicast-message-node)
+* LINE Messaging API Broadcast Message [Detail](#line-message-api---broadcast-message-node)
 
 ---
 ## Installation
@@ -13,6 +14,11 @@ npm install node-red-contrib-node-line-api
 ```
 ---
 ## Release Notes
+
+### Version 0.7.4
+* Add new LINE Messaging API, Node Broadcast Message
+* Fix node help usage
+* Fix bug not send parameter disable notifaction in multicast and push node
 
 ### Version 0.7.3
 * Add new LINE Messaging API, Node Multicast Message
@@ -130,6 +136,8 @@ See more details at <a target="_blank" href="https://developers.line.biz/en/refe
 
 Custom message format can see more details at <a target="_blank" href="https://developers.line.biz/en/docs/messaging-api/message-types/">LINE Message Types</a>.
 
+For more information, see <a target="_blank" href="https://developers.line.biz/en/docs/messaging-api/emoji-list/">List of available LINE emojis.</a>
+
 Node has paste function data from clipboard, so allow paste permmision in browser to able to work paste function.
 
 ### LINE Message API - Multicast Message Node
@@ -176,5 +184,53 @@ Obtain LINE Messaging API Channel Access Token at your LINE Messaging API Channe
 See more details at <a target="_blank" href="https://developers.line.biz/en/reference/messaging-api/#send-multicast-message">LINE Messaging API (Multicast Message) Document</a>.
 
 Custom message format can see more details at <a target="_blank" href="https://developers.line.biz/en/docs/messaging-api/message-types/">LINE Message Types</a>.
+
+For more information, see <a target="_blank" href="https://developers.line.biz/en/docs/messaging-api/emoji-list/">List of available LINE emojis.</a>
+
+Node has paste function data from clipboard, so allow paste permmision in browser to able to work paste function.
+
+### LINE Message API - Broadcast Message Node
+
+NODE-RED node for broadcast message to LINE Messaging API channel. You can use LINE Messaging API, broadcast message, through this Node.
+
+#### Usage
+
+1. Create LINE Messaging API Channel in LINE Developer console.
+2. Obtain a Channel Access Token from your created LINE Messaging API Channel.
+3. Add Messaging API Channel to LINE application.
+4. Setup Node mode
+* Use/Don't use message data from wired node.
+5. Setup other notify options
+6. Run workflow
+7. Check result.
+
+#### Input
+Using *msg* object.
+
+| Property          | Mandatory                                                 | Type           | Description |
+| ----------------- |:---------------------------------------------------------:|:--------------:| ----------- |
+| messageType       | No (*Yes, if select 'Use Message data from wired node'*)  | int            | *0* : for normal text message for broadcast message.<br />*1* : for custom message format for broadcast message. |
+| payload           | No (*Yes, if select 'Use Message data from wired node'*)  | string or JSON | Type *string* for normal text message<br/>Type *JSON* for custom message format<br/>Node broadcast message check payload type at runtime |
+
+#### Output
+Using *msg* object.
+
+Output success - status = 0, payload = Broadcast message success: {"x-line-request-id":"xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxx"}
+
+Output Fail - status = *&lt;Error Number&gt;*, payload = *&lt;Error message&gt;*
+
+| Property          | Type        | Description |
+| ----------------- |:-----------:| ----------- |
+| status            | number      | Result status code |
+| payload           | string      | Result status message |
+
+#### More details
+Obtain LINE Messaging API Channel Access Token at your LINE Messaging API Channel.
+
+See more details at <a target="_blank" href="https://developers.line.biz/en/reference/messaging-api/#send-broadcast-message">LINE Messaging API (Broadcast Message) Document</a>.
+
+Custom message format can see more details at <a target="_blank" href="https://developers.line.biz/en/docs/messaging-api/message-types/">LINE Message Types</a>.
+
+For more information, see <a target="_blank" href="https://developers.line.biz/en/docs/messaging-api/emoji-list/">List of available LINE emojis.</a>
 
 Node has paste function data from clipboard, so allow paste permmision in browser to able to work paste function.
