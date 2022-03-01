@@ -251,7 +251,7 @@ LINE Webhook Node. Webhook node, endpoint for LINE Messaging API channel.
 4. Initiate webhook node at Node-RED flow.
 5. Run workflow.
 5. Bind webhook URL at LINE Messaging API Channel in LINE Developer console by using URL LINE Webhook node URL (full URL).
-6. Send message from LINE app (LINE BOT).
+6. Send message from added Messaging API Channel (LINE BOT).
 7. Check result.
 
 #### Input Settings
