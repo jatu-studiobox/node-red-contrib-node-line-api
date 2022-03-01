@@ -1,0 +1,123 @@
+<!--
+    This project is in compliance under the Apache License, Version 2.0
+    Reference to base code
+    https://github.com/node-red/node-red/blob/master/packages/node_modules/%40node-red/nodes/core/network/21-httpin.html
+-->
+<style>
+    .containerBox {
+        width: 100%;
+        padding: 5px;
+        border: 1px solid #bbb;
+        border-radius: 5px;
+        padding-bottom: 8px;
+        margin-bottom: 10px;
+    }
+</style>
+<script type="text/html" data-template-name="node-line-bot-webhook">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="node-line-bot-webhook.label.name"></span></label>
+        <input type="text" id="node-input-name" data-i18n="[placeholder]node-line-bot-webhook.label.name">
+    </div>
+    <div class="containerBox">
+        <div style="color: #555;">
+            <label for="node-input-webhookUrl"><i class="fa fa-globe"></i> <span data-i18n="node-line-bot-webhook.label.webhookUrl" /></label>
+        </div>
+        <div style="display: flex; flex-direction: row; align-items: flex-start; justify-content: space-between; gap: 5px;">
+            <input style="width:100%;" id="node-input-webhookUrl" type="text" placeholder="/UrlPath">
+        </div>
+    </div>
+    <div class="containerBox">
+        <div style="color: #555;">
+            <label for="node-input-secret"><i class="fa fa-key"></i> <span data-i18n="node-line-bot-webhook.label.secret" /></label>
+        </div>
+        <div style="display: flex; flex-direction: row; align-items: flex-start; justify-content: space-between; gap: 5px;">
+            <div style="flex-grow: 90;">
+                <input type="text" style="width:100%;" id="node-input-secret" placeholder="Channel Secret" />
+                <input type="checkbox" id="node-input-hasSecret" style="display:none" />
+            </div>
+            <div style="flex-grow: 1;">
+                <button type="button" class="red-ui-button" id="node-button-pasteSecret" data-i18n="[title]patse from copied"><i id="label-button" class="fa fa-clipboard"></i></button>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/javascript">
+    (function () {
+        RED.nodes.registerType('node-line-bot-webhook', {
+            category: "LINE API",
+            color: "#00b900",
+            icon: "icons/webhook.svg",
+            defaults: {
+                name: {
+                    value: ""
+                },
+                webhookUrl: {
+                    value: "",
+                    required: true
+                },
+                hasSecret: {
+                    value: false,
+                    validate: function (v) {
+                        return v;
+                    }
+                }
+            },
+            credentials: {
+                secret: {
+                    type: "text",
+                    required: true
+                }
+            },
+            paletteLabel: "webhook",
+            inputs: 0,
+            outputs: 1,
+            label: function () {
+                if (this.name) {
+                    return this.name;
+                } else if (this.webhookUrl) {
+                    var root = RED.settings.httpNodeRoot;
+                    if (root.slice(-1) != "/") {
+                        root = root + "/";
+                    }
+                    if (this.webhookUrl.charAt(0) == "/") {
+                        root += this.webhookUrl.slice(1);
+                    } else {
+                        root += this.webhookUrl;
+                    }
+                    return root;
+                } else {
+                    return "LINE Webhook";
+                }
+            },
+            labelStyle: function () {
+                return this.name ? "node_label_italic" : "";
+            },
+            oneditprepare: function () {
+                var root = RED.settings.httpNodeRoot;
+                if (root.slice(-1) == "/") {
+                    root = root.slice(0, -1);
+                }
+                // set paste action to paste button
+                $("#node-button-pasteSecret").mousedown(function () {
+                    navigator.clipboard
+                        .readText()
+                        .then(
+                            cliptext => ($("#node-input-secret").val(cliptext)), err => console.log(err)
+                        );
+                });
+            },
+            oneditsave: function () {
+                if (/^\s*$/.test($("#node-input-secret").val())) {
+                    if ($("#node-input-hasSecret").is(":checked")) {
+                        $("#node-input-hasSecret").trigger('click');
+                    }
+                } else {
+                    if (!$("#node-input-hasSecret").is(":checked")) {
+                        $("#node-input-hasSecret").trigger('click');
+                    }
+                }
+            }
+        });
+    })();
+</script>

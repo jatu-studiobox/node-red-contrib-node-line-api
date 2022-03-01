@@ -6,6 +6,7 @@ LINE API nodes for NODE-RED. Include LINE Notify, LINE Messaging API
 * LINE Messaging API Push Message [Detail](#line-message-api---push-message-node)
 * LINE Messaging API Multicast Message [Detail](#line-message-api---multicast-message-node)
 * LINE Messaging API Broadcast Message [Detail](#line-message-api---broadcast-message-node)
+* LINE Webhook [Detail](#line-webhook)
 
 ---
 ## Installation
@@ -14,6 +15,9 @@ npm install node-red-contrib-node-line-api
 ```
 ---
 ## Release Notes
+
+### Version 0.7.5
+* Add new LINE Webhook Node
 
 ### Version 0.7.4
 * Add new LINE Messaging API, Node Broadcast Message
@@ -232,5 +236,53 @@ See more details at <a target="_blank" href="https://developers.line.biz/en/refe
 Custom message format can see more details at <a target="_blank" href="https://developers.line.biz/en/docs/messaging-api/message-types/">LINE Message Types</a>.
 
 For more information, see <a target="_blank" href="https://developers.line.biz/en/docs/messaging-api/emoji-list/">List of available LINE emojis.</a>
+
+Node has paste function data from clipboard, so allow paste permmision in browser to able to work paste function.
+
+### LINE Webhook
+
+LINE Webhook Node. Webhook node, endpoint for LINE Messaging API channel.
+
+#### Usage
+
+1. Create LINE Messaging API Channel in LINE Developer console.
+2. Obtain a Channel Secret from your created LINE Messaging API Channel.
+3. Add Messaging API Channel to LINE application.
+4. Initiate webhook node at Node-RED flow.
+5. Run workflow.
+5. Bind webhook URL at LINE Messaging API Channel in LINE Developer console by using URL LINE Webhook node URL (full URL).
+6. Send message from LINE app (LINE BOT).
+7. Check result.
+
+#### Input Settings
+setup LINE webhook node through UI Node editor.
+
+| Property          | Mandatory | Description |
+| ----------------- |:---------:| ----------- |
+| Webhook URL       | Yes       | The URL of an endpoint on your server that can process webhook events sent by the LINE Platform.<br />e.g. /TestWebhook |
+| Channel Secret    | Yes       | A unique secret key you can use to grant an app access to your LINE Messaging API channel. |
+
+#### LINE Webhook Settings
+The webhook URL is configured for each channel in the <a target="_blank" href="https://developers.line.biz/console/">LINE Developers Console</a>.
+
+In your Messaging API channel, to go 'Messaging API' tab, then 'Webhook settings' section.
+
+*Webhook URL must use https protocol*. e.g. Webhook URL "https://Server/TestWebhook"
+
+#### Output
+Using *msg* object.
+
+| Property          | Type        | Description |
+| ----------------- |:-----------:| ----------- |
+| payload           | JSON object | Webhook events and an array of webhook event objects. |
+
+#### More details
+This LINE Webhook Node use Channel Secret for accessing security.
+
+Obtain LINE Messaging API Channel Secret at your LINE Messaging API Channel.
+
+See more details at <a target="_blank" href="https://developers.line.biz/en/reference/messaging-api/#webhooks">LINE Messaging API (Webhooks) Document</a>.
+
+See more details at <a target="_blank" href="https://developers.line.biz/en/reference/messaging-api/#webhook-event-objects">Webhook Event Objects</a>.
 
 Node has paste function data from clipboard, so allow paste permmision in browser to able to work paste function.

@@ -1,0 +1,15 @@
+{
+    "node-line-bot-webhook": {
+        "line-bot-webhook": "LINE Messaging API Webhook",
+        "label": {
+            "name": "Name",
+            "secret": "Channel secret",
+            "webhookUrl": "Webhook URL"
+        },
+        "errors": {
+            "missing-path": "Missing Url Path",
+            "no-response": "No Response",
+            "deprecated-call": "deprecated-call"
+        }
+    }
+}

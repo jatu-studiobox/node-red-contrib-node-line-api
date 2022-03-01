@@ -1,0 +1,30 @@
+<script type="text/html" data-help-name="node-line-bot-webhook">
+    <p>LINE Webhook Node. Webhook node, endpoint for LINE Messaging API channel.</p>
+    <h3>Input Settings</h3>
+    <dl class="message-properties">
+        <dt>Webhook URL <span class="property-type">string</span></dt>
+        <dd>The URL of an endpoint on your server that can process webhook events sent by the LINE Platform.</dd>
+        <dd>e.g. /TestWebhook</dd>
+        <dt>Channel Secret <span class="property-type">string</span></dt>
+        <dd>A unique secret key you can use to grant an app access to your LINE Messaging API channel.</dd>
+    </dl>
+    <h3>LINE Webhook Settings</h3>
+    <p>The webhook URL is configured for each channel in the <a target="_blank" href="https://developers.line.biz/console/">LINE Developers Console</a>.</p>
+    <p>In your Messaging API channel, to go 'Messaging API' tab, then 'Webhook settings' section.</p>
+    <p>Webhook URL must use https protocol.</p>
+    <p>e.g. Webhook URL "https://Server/TestWebhook"</p>
+    <h3>Output Section</h3>
+    <p>Use <i>msg</i> object</p>
+    <dl class="message-properties">
+        <dt>msg.paylod <span class="property-type">JSON object</span></dt>
+        <dd>Webhook events and an array of webhook event objects.</dd>
+    </dl>
+    <h3>Examples Section</h3>
+    <p>See usage examples at Node-RED Import menu. Examples at 'node-red-contrib-node-line-api', then 'line-webhook-examples'</p>
+    <h3>Additional details</h3>
+    <p>This LINE Webhook Node use Channel Secret for accessing security.</p>
+    <p>Obtain LINE Messaging API Channel Secret at your LINE Messaging API Channel.</p>
+    <p>See more details at <a target="_blank" href="https://developers.line.biz/en/reference/messaging-api/#webhooks">LINE Messaging API (Webhooks) Document</a>.</p>
+    <p>See more details at <a target="_blank" href="https://developers.line.biz/en/reference/messaging-api/#webhook-event-objects">Webhook Event Objects</a>.</p>
+    <p>Node has paste function data from clipboard, so allow paste permmision in browser to able to work paste function.</p>
+</script>
