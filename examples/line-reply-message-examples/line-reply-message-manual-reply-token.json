@@ -1,0 +1,77 @@
+[
+    {
+        "id": "375e7dc883017668",
+        "type": "tab",
+        "label": "Example Reply Message Manual Reply Token",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "5fd3f6f872f75a9e",
+        "type": "debug",
+        "z": "375e7dc883017668",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 590,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "c2a617fd68af5f8e",
+        "type": "inject",
+        "z": "375e7dc883017668",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 160,
+        "y": 80,
+        "wires": [
+            [
+                "f033972f5b7d3547"
+            ]
+        ]
+    },
+    {
+        "id": "f033972f5b7d3547",
+        "type": "node-line-bot-reply-message",
+        "z": "375e7dc883017668",
+        "name": "",
+        "useExternalMessage": false,
+        "useExternalReplyToken": false,
+        "hasToken": true,
+        "hasReplyToken": true,
+        "hasMessage": true,
+        "message": "{\n  \"type\": \"sticker\",\n  \"packageId\": \"446\",\n  \"stickerId\": \"1988\"\n}",
+        "messageType": "1",
+        "disabledNotification": true,
+        "credentials": {},
+        "x": 380,
+        "y": 80,
+        "wires": [
+            [
+                "5fd3f6f872f75a9e"
+            ]
+        ]
+    }
+]

@@ -1,0 +1,35 @@
+{
+    "node-line-bot-reply-message": {
+        "line-bot-reply-message": "LINE Messaging API Push Message",
+        "label": {
+            "name": "Name",
+            "token": "Channel Access Token",
+            "replyToken": "Reply Token",
+            "message": "Message",
+            "extMessage": "Use Message data from wired node",
+            "extReplyToken": "Use Reply Token from wired node",
+            "disabledNotify": "Disabled push Notification",
+            "gotoMessageTypes": "Custom message format can go to LINE Message Types for details"
+        },
+        "button": {
+            "messageType": {
+                "normalText": "Normal Text",
+                "customFormat": "Custom Message Format"
+            }
+        },
+        "errors": {
+            "notFoundToken": "Channel Access Token not found",
+            "messageRequired": "payload is required",
+            "messageInvalid": "payload is invalid",
+            "messageEmpty": "payload cannot be empty",
+            "messageTypeRequired": "messageType is required",
+            "messageTypeInvalid": "messageType is invalid",
+            "replyTokenRequired": "replyToken is required",
+            "replyTokenInvalid": "replyToken is invalid",
+            "replyTokenEmpty": "replyToken cannot be empty"
+        },
+        "send-result": {
+            "success": "Reply message success: "
+        }
+    }
+}

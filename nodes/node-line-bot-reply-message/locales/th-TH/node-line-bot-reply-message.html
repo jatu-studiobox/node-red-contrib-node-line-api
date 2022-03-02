@@ -1,0 +1,55 @@
+<script type="text/html" data-help-name="node-line-bot-reply-message">
+    <p>โหนด LINE Reply Message. ตอบกลับข้อความไปยัง LINE BOT</p>
+    <h3>การตั้งค่า Input</h3>
+    <dl class="message-properties">
+        <dt>Channel Access Token <span class="property-type">string</span></dt>
+        <dd>LINE Messaging API Channel Access Token สำหรับใช้งาน LINE Messaging API.</dd>
+        <dt>Reply Token <span class="property-type">string</span></dt>
+        <dd>กำหนดค่า Reply Token ที่ต้องการตอบกลับถึง สามารถหาค่านี้ได้จาก request ที่ LINE Webhook โหนด (ที่เชื่อมต่อกับ LINE Messaging API Channel)</dd>
+        <dt>ใช้ค่า Reply Token ที่ส่งมาจากโหนดอื่น <span class="property-type">boolean</span></dt>
+        <dd>ใช้ค่า Reply Token จากโหนดที่เชื่อมต่อด้วยหรือจากค่าที่กำหนดเองจากการใส่ข้อมูล ถ้า 'เลือก' จะใช้ค่า Reply Token จากโหนดที่เชื่อมต่อด้วย ดูเพิ่มเติมได้ที่หัวข้อ Node API</dd>
+        <dt>ข้อความ <span class="property-type">string</span></dt>
+        <dd>กำหนดข้อความที่ต้องการตอบกลับ</dd>
+        <dt>กำหนดประเภทของการ input ข้อความ <span class="property-type">int</span></dt>
+        <dd><i>ข้อความปกติ</i> : เพื่อต้องการใส่ข้อมูลข้อความแบบปกติ</dd>
+        <dd><i>กำหนดรูปแบบข้อความ</i> : เพื่อต้องการใส่ข้อมูลแบบกำหนดรูปแบบข้อความเอง</dd>
+        <dt>ใช้ข้อความการส่งจากโหนดอื่น <span class="property-type">boolean</span></dt>
+        <dd>ใช้ข้อมูลข้อความจากโหนดที่เชื่อมต่อด้วยหรือจากค่าที่กำหนดเองจากการใส่ข้อมูล ถ้า 'เลือก' จะใช้ข้อมูลข้อความและประเภทข้อความจากโหนดที่เชื่อมต่อด้วย ดูเพิ่มเติมได้ที่หัวข้อ Node API</dd>
+        <dt>ปิดป๊อบอัพแจ้งเตือนผู้ใช้งาน <span class="property-type">boolean</span></dt>
+        <dd><i>check</i> : ผู้ใช้จะไม่ได้รับป๊อบอัพแจ้งเตือน เมื่อข้อความถูกส่ง</dd>
+        <dd><i>uncheck</i> : ผู้ใช้จะได้รับป๊อบอัพแจ้งเตือน เมื่อข้อความถูกส่ง</dd>
+    </dl>
+    <h3>Node API</h3>
+    <p>ใช้งานผ่าน object <i>msg</i></p>
+    <dl class="message-properties">
+        <dt class="optional">replyToken <span class="property-type">string</span></dt>
+        <dd>กำหนดค่า Reply Token ที่ต้องการตอบกลับถึง</dd>
+        <dd><font color="blue"><i>Required</i> ถ้า 'เลือก' ใช้ค่า Reply Token ที่ส่งมาจากโหนดอื่น</font></dd>
+        <dt class="optional">messageType <span class="property-type">int</span></dt>
+        <dd><i>0</i> : เพื่อต้องการใส่ข้อมูลข้อความแบบปกติ</dd>
+        <dd><i>1</i> : เพื่อต้องการใส่ข้อมูลแบบกำหนดรูปแบบข้อความเอง</dd>
+        <dd><font color="blue"><i>Required</i> ถ้า 'เลือก' ใช้ข้อความการส่งจากโหนดอื่น</font></dd>
+        <dt class="optional">payload <span class="property-type">string or JSON</span></dt>
+        <dd>ข้อความที่ต้องการตอบกลับ</dd>
+        <dd><i>string</i> : สำหรับข้อความแบบปกติ</dd>
+        <dd><i>JSON</i> : สำหรับกำหนดรูปแบบข้อความเอง</dd>
+        <dd><font color="blue"><i>Required</i> ถ้า 'เลือก' ใช้ข้อความการส่งจากโหนดอื่น</font></dd>
+        <dd><font color="blue"><i>โหนด push message จะตรวจสอบประเภท payload ตอนเวลาทำงาน</i></font></dd>
+    </dl>
+    <h3>Output Section</h3>
+    <p>Output สำเร็จ - status = 0, payload = Push message success: {"x-line-request-id":"xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxx"}</p>
+    <p>Output ไม่ผ่าน - status = <i>&lt;Error Number&gt;</i>, payload = <i>&lt;Error message&gt;</i></p>
+    <dl class="message-properties">
+        <dt>msg.status <span class="property-type">number</span></dt>
+        <dd>code แสดงสถานะผลลัพธ์การส่ง</dd>
+        <dt>msg.payload <span class="property-type">string</span></dt>
+        <dd>ข้อความแสดงผลลัพธ์การส่ง</dd>
+    </dl>
+    <h3>ตัวอย่าง</h3>
+    <p>ดูตัวอย่างการใช้งานได้ที่เมนู Import ของ Node-RED ที่หัวข้อ 'node-red-contrib-node-line-api' และกลุ่มย่อย 'line-reply-message-examples' มีตัวอย่างการใช้งาน function โหนด ในการจัดการ event message ที่มาจาก LINE Webhook โหนดด้วย</p>
+    <h3>รายละเอียดเพิ่มเติม</h3>
+    <p>สร้าง LINE Messaging API Channel Access Token ที่ LINE Messaging API Channel</p>
+    <p>ดูรายละเอียดเพิ่มเติมได้ที่ <a target="_blank" href="https://developers.line.biz/en/reference/messaging-api/#send-reply-message">LINE Messaging API (Send reply message) Document</a></p>
+    <p>สำหรับกำหนดรูปแบบข้อความเอง สามารถไปดูรายละเอียดได้ที่ <a target="_blank" href="https://developers.line.biz/en/docs/messaging-api/message-types/">LINE Message Types</a></p>
+    <p>โหนดมีฟังก์ชั่นการทำงาน paste ข้อมูลจาก clipboard ดังนั้นจะต้อง allow paste permmision ใน browser เพื่อที่ให้สามารถใช้งาน paste ได้</p>
+</script>

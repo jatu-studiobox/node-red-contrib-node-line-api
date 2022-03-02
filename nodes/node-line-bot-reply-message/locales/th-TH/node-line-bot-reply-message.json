@@ -1,0 +1,35 @@
+{
+    "node-line-bot-reply-message": {
+        "line-bot-reply-message": "LINE Messaging API Push Message",
+        "label": {
+            "name": "Name",
+            "token": "Channel Access Token",
+            "replyToken": "Reply Token",
+            "message": "ข้อความ",
+            "extMessage": "ใช้ข้อความการส่งจากโหนดอื่น",
+            "extReplyToken": "ใช้ค่า Reply Token ที่ส่งมาจากโหนดอื่น",
+            "disabledNotify": "ปิดป๊อบอัพแจ้งเตือนผู้ใช้งาน",
+            "gotoMessageTypes": "กำหนดรูปแบบข้อความสามารถดูรายละเอียดที่ LINE Message Types"
+        },
+        "button": {
+            "messageType": {
+                "normalText": "ข้อความปกติ",
+                "customFormat": "กำหนดรูปแบบข้อความ"
+            }
+        },
+        "errors": {
+            "notFoundToken": "ไม่พบ Channel Access Token",
+            "messageRequired": "ต้องการค่า payload",
+            "messageInvalid": "payload ไม่ถูกต้อง",
+            "messageEmpty": "payload ไม่สามารถว่างได้",
+            "messageTypeRequired": "ต้องการค่า messageType",
+            "messageTypeInvalid": "messageType ไม่ถูกต้อง",
+            "replyTokenRequired": "ต้องการค่า replyToken",
+            "replyTokenInvalid": "replyToken ไม่ถูกต้อง",
+            "replyTokenEmpty": "replyToken ไม่สามารถว่างได้"            
+        },
+        "send-result": {
+            "success": "Reply ข้อความสำเร็จ: "
+        }
+    }
+}

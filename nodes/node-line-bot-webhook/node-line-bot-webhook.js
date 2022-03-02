@@ -166,13 +166,11 @@ module.exports = function (RED) {
     
     function checkSecure(channelSecret, req) {
         const secretHeader = req.headers['x-line-signature'];
-        console.log('secretHeader: ', secretHeader);
         const body = req.body; // Request body string
         const signature = crypto
             .createHmac('SHA256', channelSecret)
             .update(JSON.stringify(body)).digest('base64');
         // Compare x-line-signature request header and the signature
-        console.log('signature: ', signature);
         return secretHeader === signature;
     }
 
@@ -204,7 +202,6 @@ module.exports = function (RED) {
                 let resWraper = createResponseWrapper(node, res);
                 // check Signature Security
                 if (checkSecure(node.channelSecret, req)) {
-                    console.log("secure pass");
                     var msgid = RED.util.generateId();
                     res._msgid = msgid;
                     node.send({
@@ -215,7 +212,6 @@ module.exports = function (RED) {
                     resWraper._res.set('content-length', 0);
                     resWraper._res.status(200).send('');
                 } else {
-                    console.log("secure fail");
                     resWraper._res.set('content-length', 0);
                     resWraper._res.status(401).send('');
                 }

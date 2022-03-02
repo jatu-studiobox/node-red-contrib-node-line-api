@@ -7,6 +7,7 @@ LINE API nodes for NODE-RED. Include LINE Notify, LINE Messaging API
 * LINE Messaging API Multicast Message [Detail](#line-message-api---multicast-message-node)
 * LINE Messaging API Broadcast Message [Detail](#line-message-api---broadcast-message-node)
 * LINE Webhook [Detail](#line-webhook)
+* LINE Messaging API Reply Message [Detail](#line-message-api---reply-message-node)
 
 ---
 ## Installation
@@ -15,6 +16,9 @@ npm install node-red-contrib-node-line-api
 ```
 ---
 ## Release Notes
+
+### Version 0.7.6
+* Add new LINE Messaging API, Node Reply Message
 
 ### Version 0.7.5
 * Add new LINE Webhook Node
@@ -284,5 +288,56 @@ Obtain LINE Messaging API Channel Secret at your LINE Messaging API Channel.
 See more details at <a target="_blank" href="https://developers.line.biz/en/reference/messaging-api/#webhooks">LINE Messaging API (Webhooks) Document</a>.
 
 See more details at <a target="_blank" href="https://developers.line.biz/en/reference/messaging-api/#webhook-event-objects">Webhook Event Objects</a>.
+
+Node has paste function data from clipboard, so allow paste permmision in browser to able to work paste function.
+
+### LINE Message API - Reply Message Node
+
+NODE-RED node for reply message to LINE Messaging API channel. You can use LINE Messaging API, reply message, through this Node.
+
+#### Usage
+
+1. Create LINE Messaging API Channel in LINE Developer console.
+2. Obtain a Channel Access Token and Channel Secret from your created LINE Messaging API Channel.
+3. Add Messaging API Channel to LINE application.
+4. Initiate webhook node at Node-RED flow.
+5. Run workflow.
+6. Bind webhook URL at LINE Messaging API Channel in LINE Developer console by using URL LINE Webhook node URL (full URL).
+7. Send message from added Messaging API Channel (LINE BOT).
+8. Found Reply Token from request at message events object.
+9. Node mode
+* Use/Don't use messeage data from wired node.
+* Use/Don't use destination ID data from wired node.
+10. Setup other notify options
+11. Run workflow
+12. Check result.
+
+#### Input
+Using *msg* object.
+
+| Property       | Mandatory                                                 | Type           | Description |
+| -------------- |:---------------------------------------------------------:|:--------------:| ----------- |
+| replyToken     | No (*Yes, if select 'Use Reply Token from wired node'*)   | string         | Specified Reply Token value for reply message to. |
+| messageType    | No (*Yes, if select 'Use Message data from wired node'*)  | int            | *0* : for normal text message for push message.<br />*1* : for custom message format for push message. |
+| payload        | No (*Yes, if select 'Use Message data from wired node'*)  | string or JSON | Type *string* for normal text message<br/>Type *JSON* for custom message format<br/>Node push message check payload type at runtime |
+
+#### Output
+Using *msg* object.
+
+Output success - status = 0, payload = Push message success: {"x-line-request-id":"xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxx"}
+
+Output Fail - status = *&lt;Error Number&gt;*, payload = *&lt;Error message&gt;*
+
+| Property          | Type        | Description |
+| ----------------- |:-----------:| ----------- |
+| status            | number      | Result status code |
+| payload           | string      | Result status message |
+
+#### More details
+Obtain LINE Messaging API Channel Access Token at your LINE Messaging API Channel.
+
+See more details at <a target="_blank" href="https://developers.line.biz/en/reference/messaging-api/#send-reply-message">LINE Messaging API (Send reply message) Document</a>.
+
+Custom message format can see more details at <a target="_blank" href="https://developers.line.biz/en/docs/messaging-api/message-types/">LINE Message Types</a>.
 
 Node has paste function data from clipboard, so allow paste permmision in browser to able to work paste function.

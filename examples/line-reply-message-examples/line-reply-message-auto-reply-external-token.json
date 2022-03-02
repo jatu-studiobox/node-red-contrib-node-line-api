@@ -1,0 +1,81 @@
+[
+    {
+        "id": "375e7dc883017668",
+        "type": "tab",
+        "label": "Example Auto Reply Message external replyToken",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "5fd3f6f872f75a9e",
+        "type": "debug",
+        "z": "375e7dc883017668",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 630,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "b40d86887dab0809",
+        "type": "node-line-bot-webhook",
+        "z": "375e7dc883017668",
+        "name": "",
+        "webhookUrl": "/testwebhook",
+        "hasSecret": true,
+        "x": 170,
+        "y": 140,
+        "wires": [
+            [
+                "27777f3abf87361a"
+            ]
+        ]
+    },
+    {
+        "id": "27777f3abf87361a",
+        "type": "function",
+        "z": "375e7dc883017668",
+        "name": "",
+        "func": "const lineMessage = msg.payload;\nif (lineMessage.events && lineMessage.events.length > 0) {\n    lineMessage.events.forEach(event => {\n        const msgid = RED.util.generateId();\n        node.send({\n            _msgid: msgid,\n            replyToken: event.replyToken,\n            payload: event\n        });\n    });\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 140,
+        "wires": [
+            [
+                "fe36d5ba21d5ef8e"
+            ]
+        ]
+    },
+    {
+        "id": "fe36d5ba21d5ef8e",
+        "type": "node-line-bot-reply-message",
+        "z": "375e7dc883017668",
+        "name": "",
+        "useExternalMessage": false,
+        "useExternalReplyToken": true,
+        "hasToken": true,
+        "hasReplyToken": false,
+        "hasMessage": true,
+        "message": "{\n  \"type\": \"sticker\",\n  \"packageId\": \"6325\",\n  \"stickerId\": \"10979924\"\n}",
+        "messageType": "1",
+        "disabledNotification": false,
+        "x": 380,
+        "y": 220,
+        "wires": [
+            [
+                "5fd3f6f872f75a9e"
+            ]
+        ]
+    }
+]
