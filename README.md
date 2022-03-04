@@ -8,6 +8,7 @@ LINE API nodes for NODE-RED. Include LINE Notify, LINE Messaging API
 * LINE Messaging API Broadcast Message [Detail](#line-message-api---broadcast-message-node)
 * LINE Webhook [Detail](#line-webhook)
 * LINE Messaging API Reply Message [Detail](#line-message-api---reply-message-node)
+* LINE Messaging API Configuration [Detail](#line-message-api-configuration-node)
 
 ---
 ## Installation
@@ -16,6 +17,11 @@ npm install node-red-contrib-node-line-api
 ```
 ---
 ## Release Notes
+
+### Version 0.8.0
+* Add new LINE Messaging API Configuration Node for sharing configuration.
+* Modify all LINE Messaging API Nodes to use Messaging API Configuration Node instead of input Channel Access Token and Channel Secret each node.
+* Fix all LINE Messaging API Nodes examples to support using Messaging API Configuration Node
 
 ### Version 0.7.6
 * Add new LINE Messaging API, Node Reply Message
@@ -99,6 +105,18 @@ See more details at <a href="https://notify-bot.line.me/doc/en/" target="_blank"
 See more details about Sticker ID and Package ID at <a href="https://developers.line.biz/en/docs/messaging-api/sticker-list/" target="_blank">LINE List of available stickers</a>.
 
 
+### LINE Messaging API Configuration Node
+
+This configuration node is for sharing LINE Messaging API configuration values to each LINE Messaging API Nodes, while configure values once time. It had be integrated with each LINE Messaging API Nodes.
+
+#### Usage
+1. Created LINE Messaging API Channel in LINE Developer console.
+2. Obtain a Channel Access Token and Channel Secret from your created LINE Messaging API Channel.
+3. In Node-RED, add a LINE Messaging API Channel Node in workspace.
+4. In each LINE Messaging API Channel Node, there is an integrated LINE Messaging API Configuration Node.
+5. Input LINE Messaging API configuration values.
+6. If you add more LINE Messaging API Channel Nodes in your workspace, you can suddenly select from configuration list.
+
 ### LINE Message API - Push Message Node
 
 NODE-RED node for pushing message to LINE Messaging API channel. You can use LINE Messaging API, push message, through this Node.
@@ -109,12 +127,13 @@ NODE-RED node for pushing message to LINE Messaging API channel. You can use LIN
 2. Obtain a Channel Access Token from your created LINE Messaging API Channel.
 3. Add Messaging API Channel to LINE application.
 4. Find destination ID for push message to.
-5. Setup Node mode
+5. Configure LINE Messaging API Channel Access Token and Channel Secret in Push Message Node.
+6. Setup Node mode
 * Use/Don't use message data from wired node.
 * Use/Don't use destination ID data from wired node.
-6. Setup other notify options
-7. Run workflow
-8. Check result.
+7. Setup other notify options
+8. Run workflow
+9. Check result.
 
 #### Input
 Using *msg* object.
@@ -158,12 +177,13 @@ NODE-RED node for multicast message to LINE Messaging API channel. You can use L
 2. Obtain a Channel Access Token from your created LINE Messaging API Channel.
 3. Add Messaging API Channel to LINE application.
 4. Find destination ID list for multicast message to.
-5. Setup Node mode
+5. Configure LINE Messaging API Channel Access Token and Channel Secret in Multicast Message Node.
+6. Setup Node mode
 * Use/Don't use message data from wired node.
 * Use/Don't use destination ID list from wired node.
-6. Setup other notify options
-7. Run workflow
-8. Check result.
+7. Setup other notify options
+8. Run workflow
+9. Check result.
 
 #### Input
 Using *msg* object.
@@ -206,11 +226,12 @@ NODE-RED node for broadcast message to LINE Messaging API channel. You can use L
 1. Create LINE Messaging API Channel in LINE Developer console.
 2. Obtain a Channel Access Token from your created LINE Messaging API Channel.
 3. Add Messaging API Channel to LINE application.
-4. Setup Node mode
+4. Configure LINE Messaging API Channel Access Token and Channel Secret in Broadcast Message Node.
+5. Setup Node mode
 * Use/Don't use message data from wired node.
-5. Setup other notify options
-6. Run workflow
-7. Check result.
+6. Setup other notify options
+7. Run workflow
+8. Check result.
 
 #### Input
 Using *msg* object.
@@ -252,19 +273,20 @@ LINE Webhook Node. Webhook node, endpoint for LINE Messaging API channel.
 1. Create LINE Messaging API Channel in LINE Developer console.
 2. Obtain a Channel Secret from your created LINE Messaging API Channel.
 3. Add Messaging API Channel to LINE application.
-4. Initiate webhook node at Node-RED flow.
-5. Run workflow.
-5. Bind webhook URL at LINE Messaging API Channel in LINE Developer console by using URL LINE Webhook node URL (full URL).
-6. Send message from added Messaging API Channel (LINE BOT).
-7. Check result.
+4. Initiate Webhook Node at Node-RED flow.
+5. Configure LINE Messaging API Channel Access Token and Channel Secret in Webhook Node.
+6. Run workflow.
+7. Bind webhook URL at LINE Messaging API Channel in LINE Developer console by using URL LINE Webhook node URL (full URL).
+8. Send message from added Messaging API Channel (LINE BOT).
+9. Check result.
 
 #### Input Settings
 setup LINE webhook node through UI Node editor.
 
-| Property          | Mandatory | Description |
-| ----------------- |:---------:| ----------- |
-| Webhook URL       | Yes       | The URL of an endpoint on your server that can process webhook events sent by the LINE Platform.<br />e.g. /TestWebhook |
-| Channel Secret    | Yes       | A unique secret key you can use to grant an app access to your LINE Messaging API channel. |
+| Property                         | Mandatory | Description |
+| -------------------------------- |:---------:| ----------- |
+| LINE Messaging API configuration | Yes       | Configure LINE Messaging API configuration values. |
+| Webhook URL                      | Yes       | The URL of an endpoint on your server that can process webhook events sent by the LINE Platform.<br />e.g. /TestWebhook |
 
 #### LINE Webhook Settings
 The webhook URL is configured for each channel in the <a target="_blank" href="https://developers.line.biz/console/">LINE Developers Console</a>.
@@ -301,16 +323,18 @@ NODE-RED node for reply message to LINE Messaging API channel. You can use LINE 
 2. Obtain a Channel Access Token and Channel Secret from your created LINE Messaging API Channel.
 3. Add Messaging API Channel to LINE application.
 4. Initiate webhook node at Node-RED flow.
-5. Run workflow.
-6. Bind webhook URL at LINE Messaging API Channel in LINE Developer console by using URL LINE Webhook node URL (full URL).
-7. Send message from added Messaging API Channel (LINE BOT).
-8. Found Reply Token from request at message events object.
-9. Node mode
+5. Configure LINE Messaging API Channel Access Token and Channel Secret in Webhook Node.
+6. Run workflow.
+7. Bind webhook URL at LINE Messaging API Channel in LINE Developer console by using URL LINE Webhook node URL (full URL).
+8. Send message from added Messaging API Channel (LINE BOT) at LINE App.
+9. Found Reply Token from request at message events object.
+10. Configure LINE Messaging API Channel Access Token and Channel Secret in Reply Message Node.
+11. Setup Node mode
 * Use/Don't use messeage data from wired node.
-* Use/Don't use destination ID data from wired node.
-10. Setup other notify options
-11. Run workflow
-12. Check result.
+* Use/Don't use Reply Token from wired node.
+12. Setup other notify options
+13. Run workflow
+14. Check result.
 
 #### Input
 Using *msg* object.

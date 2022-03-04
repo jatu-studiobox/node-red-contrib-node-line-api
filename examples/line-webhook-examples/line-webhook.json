@@ -1,6 +1,6 @@
 [
     {
-        "id": "01d2f4dd27aa2355",
+        "id": "94ed339359b6bf1f",
         "type": "tab",
         "label": "Example Webhook",
         "disabled": false,
@@ -8,36 +8,34 @@
         "env": []
     },
     {
-        "id": "524c4f45eb75e3f6",
+        "id": "96ba94c66d5c73df",
+        "type": "node-line-bot-webhook",
+        "z": "94ed339359b6bf1f",
+        "name": "",
+        "webhookUrl": "/testwebhook",
+        "apiConfig": "",
+        "x": 250,
+        "y": 140,
+        "wires": [
+            [
+                "44464da022ec667a"
+            ]
+        ]
+    },
+    {
+        "id": "44464da022ec667a",
         "type": "debug",
-        "z": "01d2f4dd27aa2355",
+        "z": "94ed339359b6bf1f",
         "name": "",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
+        "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 470,
-        "y": 120,
+        "x": 490,
+        "y": 140,
         "wires": []
-    },
-    {
-        "id": "39bd1afe6cf88d70",
-        "type": "node-line-bot-webhook",
-        "z": "01d2f4dd27aa2355",
-        "name": "",
-        "webhookUrl": "/testwebhook",
-        "hasSecret": true,
-        "credentials": {},
-        "x": 270,
-        "y": 120,
-        "wires": [
-            [
-                "524c4f45eb75e3f6"
-            ]
-        ]
     }
 ]

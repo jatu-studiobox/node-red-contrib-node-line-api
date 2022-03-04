@@ -3,7 +3,7 @@
         "line-bot-push-message": "LINE Messaging API Push Message",
         "label": {
             "name": "Name",
-            "token": "Channel Access Token",
+            "apiConfig": "LINE Messaging API configuration",
             "destinationId": "ID ปลายทาง",
             "message": "ข้อความ",
             "extMessage": "ใช้ข้อความการส่งจากโหนดอื่น",

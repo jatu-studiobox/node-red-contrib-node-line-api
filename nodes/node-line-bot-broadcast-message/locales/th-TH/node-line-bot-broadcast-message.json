@@ -3,7 +3,7 @@
         "line-bot-broadcast-message": "LINE Messaging API Broadcast Message",
         "label": {
             "name": "Name",
-            "token": "Channel Access Token",
+            "apiConfig": "LINE Messaging API configuration",
             "message": "ข้อความ",
             "extMessage": "ใช้ข้อความการส่งจากโหนดอื่น",
             "disabledNotify": "ปิดป๊อบอัพแจ้งเตือนผู้ใช้งาน",

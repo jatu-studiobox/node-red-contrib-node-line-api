@@ -20,24 +20,18 @@
     </div>
     <div class="containerBox">
         <div style="color: #555;">
-            <label for="node-input-webhookUrl"><i class="fa fa-globe"></i> <span data-i18n="node-line-bot-webhook.label.webhookUrl" /></label>
+            <label for="node-input-apiConfig"> <i class="fa fa-cogs"></i> <span data-i18n="node-line-bot-webhook.label.apiConfig"></span></label>
         </div>
-        <div style="display: flex; flex-direction: row; align-items: flex-start; justify-content: space-between; gap: 5px;">
-            <input style="width:100%;" id="node-input-webhookUrl" type="text" placeholder="/UrlPath">
+        <div>
+            <input style="width: 100%;" type="text" id="node-input-apiConfig" />
         </div>
     </div>
     <div class="containerBox">
         <div style="color: #555;">
-            <label for="node-input-secret"><i class="fa fa-key"></i> <span data-i18n="node-line-bot-webhook.label.secret" /></label>
+            <label for="node-input-webhookUrl"><i class="fa fa-globe"></i> <span data-i18n="node-line-bot-webhook.label.webhookUrl" /></label>
         </div>
         <div style="display: flex; flex-direction: row; align-items: flex-start; justify-content: space-between; gap: 5px;">
-            <div style="flex-grow: 90;">
-                <input type="text" style="width:100%;" id="node-input-secret" placeholder="Channel Secret" />
-                <input type="checkbox" id="node-input-hasSecret" style="display:none" />
-            </div>
-            <div style="flex-grow: 1;">
-                <button type="button" class="red-ui-button" id="node-button-pasteSecret" data-i18n="[title]patse from copied"><i id="label-button" class="fa fa-clipboard"></i></button>
-            </div>
+            <input style="width:100%;" id="node-input-webhookUrl" type="text" placeholder="/UrlPath">
         </div>
     </div>
 </script>
@@ -56,17 +50,9 @@
                     value: "",
                     required: true
                 },
-                hasSecret: {
-                    value: false,
-                    validate: function (v) {
-                        return v;
-                    }
-                }
-            },
-            credentials: {
-                secret: {
-                    type: "text",
-                    required: true
+                apiConfig: {
+                    value: "",
+                    type: "line-messaging-api-config"
                 }
             },
             paletteLabel: "webhook",
@@ -97,25 +83,6 @@
                 var root = RED.settings.httpNodeRoot;
                 if (root.slice(-1) == "/") {
                     root = root.slice(0, -1);
-                }
-                // set paste action to paste button
-                $("#node-button-pasteSecret").mousedown(function () {
-                    navigator.clipboard
-                        .readText()
-                        .then(
-                            cliptext => ($("#node-input-secret").val(cliptext)), err => console.log(err)
-                        );
-                });
-            },
-            oneditsave: function () {
-                if (/^\s*$/.test($("#node-input-secret").val())) {
-                    if ($("#node-input-hasSecret").is(":checked")) {
-                        $("#node-input-hasSecret").trigger('click');
-                    }
-                } else {
-                    if (!$("#node-input-hasSecret").is(":checked")) {
-                        $("#node-input-hasSecret").trigger('click');
-                    }
                 }
             }
         });

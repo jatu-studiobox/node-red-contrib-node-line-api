@@ -1,6 +1,6 @@
 [
     {
-        "id": "df8cb036812a5659",
+        "id": "92534b8af9ff5988",
         "type": "tab",
         "label": "Example broadcast Message Normal Text",
         "disabled": false,
@@ -8,25 +8,9 @@
         "env": []
     },
     {
-        "id": "2ed0949248c0242b",
-        "type": "debug",
-        "z": "df8cb036812a5659",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 630,
-        "y": 200,
-        "wires": []
-    },
-    {
-        "id": "33ee180b1f2fc16b",
+        "id": "1851377d71481756",
         "type": "inject",
-        "z": "df8cb036812a5659",
+        "z": "92534b8af9ff5988",
         "name": "Send msg",
         "props": [
             {
@@ -45,31 +29,47 @@
         "topic": "",
         "payload": "🕹️ This is broadcast message normal text 😊 👌",
         "payloadType": "str",
-        "x": 160,
-        "y": 200,
+        "x": 140,
+        "y": 120,
         "wires": [
             [
-                "37adbc809cf245d3"
+                "2c0030cf225fb1e9"
             ]
         ]
     },
     {
-        "id": "37adbc809cf245d3",
+        "id": "2c0030cf225fb1e9",
         "type": "node-line-bot-broadcast-message",
-        "z": "df8cb036812a5659",
+        "z": "92534b8af9ff5988",
         "name": "",
         "useExternalMessage": true,
-        "hasToken": true,
         "hasMessage": true,
         "message": "Hi, I am broadcast message node 😊",
         "messageType": 0,
         "disabledNotification": false,
+        "apiConfig": "",
         "x": 390,
-        "y": 200,
+        "y": 120,
         "wires": [
             [
-                "2ed0949248c0242b"
+                "8c712b788a4a7574"
             ]
         ]
+    },
+    {
+        "id": "8c712b788a4a7574",
+        "type": "debug",
+        "z": "92534b8af9ff5988",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 630,
+        "y": 120,
+        "wires": []
     }
 ]

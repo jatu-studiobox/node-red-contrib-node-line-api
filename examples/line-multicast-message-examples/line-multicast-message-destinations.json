@@ -1,6 +1,6 @@
 [
     {
-        "id": "df8cb036812a5659",
+        "id": "420e0e3e959c2347",
         "type": "tab",
         "label": "Example Multicast Message Send Destination ID List",
         "disabled": false,
@@ -8,69 +8,17 @@
         "env": []
     },
     {
-        "id": "2ed0949248c0242b",
-        "type": "debug",
-        "z": "df8cb036812a5659",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 630,
-        "y": 200,
-        "wires": []
-    },
-    {
-        "id": "5f2ec0ab16fe8fb2",
-        "type": "node-line-bot-multicast-message",
-        "z": "df8cb036812a5659",
-        "name": "",
-        "useExternalMessage": false,
-        "useExternalDestinationId": true,
-        "hasToken": true,
-        "hasDestinationId": true,
-        "hasMessage": true,
-        "message": "Hi, I am multicast message node 😊",
-        "messageType": 0,
-        "disabledNotification": false,
-        "x": 410,
-        "y": 200,
-        "wires": [
-            [
-                "2ed0949248c0242b"
-            ]
-        ]
-    },
-    {
-        "id": "e62649cd85282f33",
-        "type": "function",
-        "z": "df8cb036812a5659",
-        "name": "send msg",
-        "func": "msg.destinations = [\"Input destination ID\",\"Input destination ID\"];\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 180,
-        "y": 200,
-        "wires": [
-            [
-                "5f2ec0ab16fe8fb2"
-            ]
-        ]
-    },
-    {
-        "id": "33ee180b1f2fc16b",
+        "id": "9d81fdfef9ab8ff7",
         "type": "inject",
-        "z": "df8cb036812a5659",
-        "name": "",
+        "z": "420e0e3e959c2347",
+        "name": "Func Trigger",
         "props": [
             {
                 "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
             }
         ],
         "repeat": "",
@@ -80,12 +28,68 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 180,
+        "x": 220,
         "y": 120,
         "wires": [
             [
-                "e62649cd85282f33"
+                "480606a0d72de593"
             ]
         ]
+    },
+    {
+        "id": "480606a0d72de593",
+        "type": "function",
+        "z": "420e0e3e959c2347",
+        "name": "send msg",
+        "func": "msg.destinations = [\"Specific destination ID here\",\"Specific destination ID here\"];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 120,
+        "wires": [
+            [
+                "b74edb3a639bef0f"
+            ]
+        ]
+    },
+    {
+        "id": "b74edb3a639bef0f",
+        "type": "node-line-bot-multicast-message",
+        "z": "420e0e3e959c2347",
+        "name": "",
+        "useExternalMessage": false,
+        "useExternalDestinationId": true,
+        "hasDestinationId": false,
+        "hasMessage": true,
+        "message": "Hi, I am multicast message node 😊",
+        "messageType": 0,
+        "disabledNotification": false,
+        "apiConfig": "",
+        "x": 330,
+        "y": 200,
+        "wires": [
+            [
+                "bfb5692c34507b43"
+            ]
+        ]
+    },
+    {
+        "id": "bfb5692c34507b43",
+        "type": "debug",
+        "z": "420e0e3e959c2347",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 610,
+        "y": 200,
+        "wires": []
     }
 ]

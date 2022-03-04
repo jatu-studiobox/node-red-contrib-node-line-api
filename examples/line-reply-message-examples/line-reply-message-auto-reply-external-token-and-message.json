@@ -1,6 +1,6 @@
 [
     {
-        "id": "375e7dc883017668",
+        "id": "f3bf2955e40ee33c",
         "type": "tab",
         "label": "Example Auto Reply Message external replyToken and message",
         "disabled": false,
@@ -8,9 +8,64 @@
         "env": []
     },
     {
-        "id": "5fd3f6f872f75a9e",
+        "id": "accb65ab2c413a04",
+        "type": "node-line-bot-webhook",
+        "z": "f3bf2955e40ee33c",
+        "name": "",
+        "webhookUrl": "/testwebhook",
+        "apiConfig": "",
+        "x": 170,
+        "y": 120,
+        "wires": [
+            [
+                "2b6a61fe7a86dfc8"
+            ]
+        ]
+    },
+    {
+        "id": "2b6a61fe7a86dfc8",
+        "type": "function",
+        "z": "f3bf2955e40ee33c",
+        "name": "fn Loop Message Events",
+        "func": "const lineMessage = msg.payload;\nif (lineMessage.events && lineMessage.events.length > 0) {\n    lineMessage.events.forEach(event => {\n        const msgid = RED.util.generateId();\n        node.send({\n            _msgid: msgid,\n            replyToken: event.replyToken,\n            messageType: 1,\n            payload: {\"type\": \"sticker\", \"packageId\": \"6325\",\"stickerId\": \"10979914\"},\n        });\n    });\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 120,
+        "wires": [
+            [
+                "20eff60f1b78f746"
+            ]
+        ]
+    },
+    {
+        "id": "20eff60f1b78f746",
+        "type": "node-line-bot-reply-message",
+        "z": "f3bf2955e40ee33c",
+        "name": "",
+        "useExternalMessage": true,
+        "useExternalReplyToken": true,
+        "hasReplyToken": false,
+        "hasMessage": true,
+        "message": "Hi, this is reply message 👌",
+        "messageType": 0,
+        "disabledNotification": false,
+        "apiConfig": "",
+        "x": 380,
+        "y": 200,
+        "wires": [
+            [
+                "67bc9c6a6370e8bb"
+            ]
+        ]
+    },
+    {
+        "id": "67bc9c6a6370e8bb",
         "type": "debug",
-        "z": "375e7dc883017668",
+        "z": "f3bf2955e40ee33c",
         "name": "",
         "active": true,
         "tosidebar": true,
@@ -19,63 +74,8 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 630,
-        "y": 220,
+        "x": 610,
+        "y": 200,
         "wires": []
-    },
-    {
-        "id": "b40d86887dab0809",
-        "type": "node-line-bot-webhook",
-        "z": "375e7dc883017668",
-        "name": "",
-        "webhookUrl": "/testwebhook",
-        "hasSecret": true,
-        "x": 170,
-        "y": 140,
-        "wires": [
-            [
-                "27777f3abf87361a"
-            ]
-        ]
-    },
-    {
-        "id": "27777f3abf87361a",
-        "type": "function",
-        "z": "375e7dc883017668",
-        "name": "",
-        "func": "const lineMessage = msg.payload;\nif (lineMessage.events && lineMessage.events.length > 0) {\n    lineMessage.events.forEach(event => {\n        const msgid = RED.util.generateId();\n        node.send({\n            _msgid: msgid,\n            replyToken: event.replyToken,\n            messageType: 1,\n            payload: {\"type\": \"sticker\", \"packageId\": \"6325\",\"stickerId\": \"10979914\"},\n        });\n    });\n}",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 380,
-        "y": 140,
-        "wires": [
-            [
-                "fe36d5ba21d5ef8e"
-            ]
-        ]
-    },
-    {
-        "id": "fe36d5ba21d5ef8e",
-        "type": "node-line-bot-reply-message",
-        "z": "375e7dc883017668",
-        "name": "",
-        "useExternalMessage": true,
-        "useExternalReplyToken": true,
-        "hasToken": true,
-        "hasReplyToken": false,
-        "hasMessage": true,
-        "message": "{\n  \"type\": \"sticker\",\n  \"packageId\": \"6325\",\n  \"stickerId\": \"10979924\"\n}",
-        "messageType": "1",
-        "disabledNotification": false,
-        "x": 380,
-        "y": 220,
-        "wires": [
-            [
-                "5fd3f6f872f75a9e"
-            ]
-        ]
     }
 ]

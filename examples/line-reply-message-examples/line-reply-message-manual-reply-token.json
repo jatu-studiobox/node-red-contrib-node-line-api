@@ -1,6 +1,6 @@
 [
     {
-        "id": "375e7dc883017668",
+        "id": "ef23cbdf656286e9",
         "type": "tab",
         "label": "Example Reply Message Manual Reply Token",
         "disabled": false,
@@ -8,26 +8,10 @@
         "env": []
     },
     {
-        "id": "5fd3f6f872f75a9e",
-        "type": "debug",
-        "z": "375e7dc883017668",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 590,
-        "y": 80,
-        "wires": []
-    },
-    {
-        "id": "c2a617fd68af5f8e",
+        "id": "4d91c2eec0e157cf",
         "type": "inject",
-        "z": "375e7dc883017668",
-        "name": "",
+        "z": "ef23cbdf656286e9",
+        "name": "Trigger",
         "props": [
             {
                 "p": "payload"
@@ -44,34 +28,49 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 160,
-        "y": 80,
+        "x": 180,
+        "y": 160,
         "wires": [
             [
-                "f033972f5b7d3547"
+                "f7316359c3a583f2"
             ]
         ]
     },
     {
-        "id": "f033972f5b7d3547",
+        "id": "f7316359c3a583f2",
         "type": "node-line-bot-reply-message",
-        "z": "375e7dc883017668",
+        "z": "ef23cbdf656286e9",
         "name": "",
         "useExternalMessage": false,
         "useExternalReplyToken": false,
-        "hasToken": true,
         "hasReplyToken": true,
         "hasMessage": true,
-        "message": "{\n  \"type\": \"sticker\",\n  \"packageId\": \"446\",\n  \"stickerId\": \"1988\"\n}",
+        "message": "{\n    \"type\": \"sticker\",\n    \"packageId\": \"446\",\n    \"stickerId\": \"1988\"\n}",
         "messageType": "1",
-        "disabledNotification": true,
-        "credentials": {},
-        "x": 380,
-        "y": 80,
+        "disabledNotification": false,
+        "apiConfig": "",
+        "x": 400,
+        "y": 160,
         "wires": [
             [
-                "5fd3f6f872f75a9e"
+                "cbfc4e10b9560dc8"
             ]
         ]
+    },
+    {
+        "id": "cbfc4e10b9560dc8",
+        "type": "debug",
+        "z": "ef23cbdf656286e9",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 630,
+        "y": 160,
+        "wires": []
     }
 ]

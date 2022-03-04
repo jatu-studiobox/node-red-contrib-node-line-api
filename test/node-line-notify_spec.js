@@ -18,7 +18,7 @@ describe('Line Notify Node', function () {
     it('should be loaded', (done) => {
         const flow = [{ id: "n1", type: "node-line-notify", name: "node-line-notify", useExternalData: true }];
         helper.load(nodeLineNotify, flow, () => {
-            var n1 = helper.getNode("n1");
+            const n1 = helper.getNode("n1");
             try {
                 n1.should.have.property("name", "node-line-notify");
                 done();

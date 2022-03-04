@@ -3,7 +3,7 @@
         "line-bot-reply-message": "LINE Messaging API Push Message",
         "label": {
             "name": "Name",
-            "token": "Channel Access Token",
+            "apiConfig": "LINE Messaging API configuration",
             "replyToken": "Reply Token",
             "message": "ข้อความ",
             "extMessage": "ใช้ข้อความการส่งจากโหนดอื่น",

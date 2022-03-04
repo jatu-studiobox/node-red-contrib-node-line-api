@@ -1,0 +1,11 @@
+{
+    "line-messaging-api-config": {
+        "line-messaging-api-config": "LINE Messaging API Configuration",
+        "label": {
+            "name": "Channel Name (BOT Name)",
+            "token": "Channel Access Token",
+            "secret": "Channel Secret",
+            "unknown-name": "Unknown Name"
+        }
+    }
+}

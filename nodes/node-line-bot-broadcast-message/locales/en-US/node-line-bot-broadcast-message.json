@@ -3,7 +3,7 @@
         "line-bot-broadcast-message": "LINE Messaging API Broadcast Message",
         "label": {
             "name": "Name",
-            "token": "Channel Access Token",
+            "apiConfig": "LINE Messaging API configuration",
             "message": "Message",
             "extMessage": "Use Message data from wired node",
             "disabledNotify": "Disabled push notification",

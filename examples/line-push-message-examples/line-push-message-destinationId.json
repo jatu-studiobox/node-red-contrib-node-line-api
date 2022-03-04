@@ -1,6 +1,6 @@
 [
     {
-        "id": "25ca50c6e4b9ecc0",
+        "id": "4ec41c6fc1b96927",
         "type": "tab",
         "label": "Example Push Message Destination ID",
         "disabled": false,
@@ -8,44 +8,22 @@
         "env": []
     },
     {
-        "id": "87e27d6ad7f03bfb",
-        "type": "node-line-bot-push-message",
-        "z": "25ca50c6e4b9ecc0",
-        "name": "",
-        "useExternalMessage": true,
-        "useExternalDestinationId": true,
-        "hasToken": true,
-        "hasDestinationId": true,
-        "hasMessage": true,
-        "message": "Hi, I am push message node 😊",
-        "messageType": 0,
-        "disabledNotification": false,
-        "credentials": {},
-        "x": 400,
-        "y": 80,
-        "wires": [
-            [
-                "23381717c650f568"
-            ]
-        ]
-    },
-    {
-        "id": "684a2de13e48cc43",
+        "id": "a3bb04cfe06187a7",
         "type": "inject",
-        "z": "25ca50c6e4b9ecc0",
+        "z": "4ec41c6fc1b96927",
         "name": "Send msg",
         "props": [
+            {
+                "p": "payload"
+            },
             {
                 "p": "messageType",
                 "v": "0",
                 "vt": "num"
             },
             {
-                "p": "payload"
-            },
-            {
                 "p": "destinationId",
-                "v": "Input destination ID",
+                "v": "Input destination ID Here",
                 "vt": "str"
             }
         ],
@@ -57,17 +35,38 @@
         "payload": "Push Message with destinationId",
         "payloadType": "str",
         "x": 160,
-        "y": 80,
+        "y": 100,
         "wires": [
             [
-                "87e27d6ad7f03bfb"
+                "8d6c4ccd1a68c587"
             ]
         ]
     },
     {
-        "id": "23381717c650f568",
+        "id": "8d6c4ccd1a68c587",
+        "type": "node-line-bot-push-message",
+        "z": "4ec41c6fc1b96927",
+        "name": "",
+        "useExternalMessage": true,
+        "useExternalDestinationId": true,
+        "hasDestinationId": false,
+        "hasMessage": true,
+        "message": "Hi, I am push message node 😊",
+        "messageType": 0,
+        "disabledNotification": false,
+        "apiConfig": "",
+        "x": 400,
+        "y": 100,
+        "wires": [
+            [
+                "763ee9ac5f737275"
+            ]
+        ]
+    },
+    {
+        "id": "763ee9ac5f737275",
         "type": "debug",
-        "z": "25ca50c6e4b9ecc0",
+        "z": "4ec41c6fc1b96927",
         "name": "",
         "active": true,
         "tosidebar": true,
@@ -76,8 +75,8 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 650,
-        "y": 80,
+        "x": 630,
+        "y": 100,
         "wires": []
     }
 ]

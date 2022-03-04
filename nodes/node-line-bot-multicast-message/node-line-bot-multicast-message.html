@@ -24,16 +24,10 @@
     </div>
     <div class="containerBox">
         <div style="color: #555;">
-            <label for="node-input-token"><i class="fa fa-key"></i> <span data-i18n="node-line-bot-multicast-message.label.token" /></label>
+            <label for="node-input-apiConfig"> <i class="fa fa-cogs"></i> <span data-i18n="node-line-bot-multicast-message.label.apiConfig"></span></label>
         </div>
-        <div style="display: flex; flex-direction: row; align-items: flex-start; justify-content: space-between; gap: 5px;">
-            <div style="flex-grow: 90;">
-                <textarea rows="4" style="width:100%;resize: none;" id="node-input-token" placeholder="Channel Access Token"></textarea>
-                <input type="checkbox" id="node-input-hasToken" style="display:none" />
-            </div>
-            <div style="flex-grow: 1;">
-                <button type="button" class="red-ui-button" id="node-button-pasteToken" data-i18n="[title]patse from copied"><i id="label-button" class="fa fa-clipboard"></i></button>
-            </div>
+        <div>
+            <input style="width: 100%;" type="text" id="node-input-apiConfig" />
         </div>
     </div>
     <div class="containerBox">
@@ -101,12 +95,6 @@
             useExternalDestinationId: {
                 value: false
             },
-            hasToken: {
-                value: false,
-                validate: function (v) {
-                    return v;
-                }
-            },
             hasDestinationId: {
                 value: false,
                 validate: function (v) {
@@ -147,16 +135,13 @@
             },
             disabledNotification: {
                 value: false
+            },
+            apiConfig: {
+                value: "",
+                type: "line-messaging-api-config"
             }
         },
         credentials: {
-            token: {
-                type: "text",
-                required: true,
-                validate: function (v) {
-                    return (v.length) > 0 && !v.match(/^\s*$/);
-                }
-            },
             destIdList: {
                 type: "text",
                 require: false,
@@ -247,13 +232,6 @@
                 $("#node-input-messageType").val($(this).attr("value"));
             });
             // set paste action to paste button
-            $("#node-button-pasteToken").mousedown(function () {
-                navigator.clipboard
-                    .readText()
-                    .then(
-                        cliptext => ($("#node-input-token").val(cliptext)), err => console.log(err)
-                    );
-            });
             $("#node-button-pasteMessage").mousedown(function () {
                 navigator.clipboard
                     .readText()
@@ -334,15 +312,6 @@
             }
         },
         oneditsave: function () {
-            if (/^\s*$/.test($("#node-input-token").val())) {
-                if ($("#node-input-hasToken").is(":checked")) {
-                    $("#node-input-hasToken").trigger('click');
-                }
-            } else {
-                if (!$("#node-input-hasToken").is(":checked")) {
-                    $("#node-input-hasToken").trigger('click');
-                }
-            }
             // Gathering each destination ID -> concat
             const length = $("ol.list").editableList('length');
             if (length > 0) {

@@ -1,6 +1,6 @@
 [
     {
-        "id": "25ca50c6e4b9ecc0",
+        "id": "489370b47f6bc024",
         "type": "tab",
         "label": "Example Push Message Custom Message Format",
         "disabled": false,
@@ -8,39 +8,39 @@
         "env": []
     },
     {
-        "id": "87e27d6ad7f03bfb",
+        "id": "b1e514c2120e5a87",
         "type": "node-line-bot-push-message",
-        "z": "25ca50c6e4b9ecc0",
+        "z": "489370b47f6bc024",
         "name": "",
         "useExternalMessage": true,
         "useExternalDestinationId": false,
-        "hasToken": true,
         "hasDestinationId": true,
         "hasMessage": true,
         "message": "Hi, I am push message node 😊",
         "messageType": 0,
         "disabledNotification": false,
-        "x": 400,
-        "y": 80,
+        "apiConfig": "",
+        "x": 420,
+        "y": 140,
         "wires": [
             [
-                "23381717c650f568"
+                "cc579c4dbd974359"
             ]
         ]
     },
     {
-        "id": "684a2de13e48cc43",
+        "id": "c1f00e8eaab68c77",
         "type": "inject",
-        "z": "25ca50c6e4b9ecc0",
+        "z": "489370b47f6bc024",
         "name": "Send msg",
         "props": [
+            {
+                "p": "payload"
+            },
             {
                 "p": "messageType",
                 "v": "1",
                 "vt": "num"
-            },
-            {
-                "p": "payload"
             }
         ],
         "repeat": "",
@@ -50,18 +50,18 @@
         "topic": "",
         "payload": "{\"type\":\"flex\",\"altText\":\"This is Custom Message Text example\",\"contents\":{\"type\":\"bubble\",\"size\":\"mega\",\"header\":{\"type\":\"box\",\"layout\":\"vertical\",\"contents\":[{\"type\":\"box\",\"layout\":\"vertical\",\"contents\":[{\"type\":\"text\",\"text\":\"FROM\",\"color\":\"#ffffff66\",\"size\":\"sm\"},{\"type\":\"text\",\"text\":\"Akihabara\",\"color\":\"#ffffff\",\"size\":\"xl\",\"flex\":4,\"weight\":\"bold\"}]},{\"type\":\"box\",\"layout\":\"vertical\",\"contents\":[{\"type\":\"text\",\"text\":\"TO\",\"color\":\"#ffffff66\",\"size\":\"sm\"},{\"type\":\"text\",\"text\":\"Shinjuku\",\"color\":\"#ffffff\",\"size\":\"xl\",\"flex\":4,\"weight\":\"bold\"}]}],\"paddingAll\":\"20px\",\"backgroundColor\":\"#0367D3\",\"spacing\":\"md\",\"height\":\"154px\",\"paddingTop\":\"22px\"},\"body\":{\"type\":\"box\",\"layout\":\"vertical\",\"contents\":[{\"type\":\"text\",\"text\":\"Total: 1 hour\",\"color\":\"#b7b7b7\",\"size\":\"xs\"},{\"type\":\"box\",\"layout\":\"horizontal\",\"contents\":[{\"type\":\"text\",\"text\":\"20:30\",\"size\":\"sm\",\"gravity\":\"center\"},{\"type\":\"box\",\"layout\":\"vertical\",\"contents\":[{\"type\":\"filler\"},{\"type\":\"box\",\"layout\":\"vertical\",\"contents\":[],\"cornerRadius\":\"30px\",\"height\":\"12px\",\"width\":\"12px\",\"borderColor\":\"#EF454D\",\"borderWidth\":\"2px\"},{\"type\":\"filler\"}],\"flex\":0},{\"type\":\"text\",\"text\":\"Akihabara\",\"gravity\":\"center\",\"flex\":4,\"size\":\"sm\"}],\"spacing\":\"lg\",\"cornerRadius\":\"30px\",\"margin\":\"xl\"},{\"type\":\"box\",\"layout\":\"horizontal\",\"contents\":[{\"type\":\"box\",\"layout\":\"baseline\",\"contents\":[{\"type\":\"filler\"}],\"flex\":1},{\"type\":\"box\",\"layout\":\"vertical\",\"contents\":[{\"type\":\"box\",\"layout\":\"horizontal\",\"contents\":[{\"type\":\"filler\"},{\"type\":\"box\",\"layout\":\"vertical\",\"contents\":[],\"width\":\"2px\",\"backgroundColor\":\"#B7B7B7\"},{\"type\":\"filler\"}],\"flex\":1}],\"width\":\"12px\"},{\"type\":\"text\",\"text\":\"Walk 4min\",\"gravity\":\"center\",\"flex\":4,\"size\":\"xs\",\"color\":\"#8c8c8c\"}],\"spacing\":\"lg\",\"height\":\"64px\"},{\"type\":\"box\",\"layout\":\"horizontal\",\"contents\":[{\"type\":\"box\",\"layout\":\"horizontal\",\"contents\":[{\"type\":\"text\",\"text\":\"20:34\",\"gravity\":\"center\",\"size\":\"sm\"}],\"flex\":1},{\"type\":\"box\",\"layout\":\"vertical\",\"contents\":[{\"type\":\"filler\"},{\"type\":\"box\",\"layout\":\"vertical\",\"contents\":[],\"cornerRadius\":\"30px\",\"width\":\"12px\",\"height\":\"12px\",\"borderWidth\":\"2px\",\"borderColor\":\"#6486E3\"},{\"type\":\"filler\"}],\"flex\":0},{\"type\":\"text\",\"text\":\"Ochanomizu\",\"gravity\":\"center\",\"flex\":4,\"size\":\"sm\"}],\"spacing\":\"lg\",\"cornerRadius\":\"30px\"},{\"type\":\"box\",\"layout\":\"horizontal\",\"contents\":[{\"type\":\"box\",\"layout\":\"baseline\",\"contents\":[{\"type\":\"filler\"}],\"flex\":1},{\"type\":\"box\",\"layout\":\"vertical\",\"contents\":[{\"type\":\"box\",\"layout\":\"horizontal\",\"contents\":[{\"type\":\"filler\"},{\"type\":\"box\",\"layout\":\"vertical\",\"contents\":[],\"width\":\"2px\",\"backgroundColor\":\"#6486E3\"},{\"type\":\"filler\"}],\"flex\":1}],\"width\":\"12px\"},{\"type\":\"text\",\"text\":\"Metro 1hr\",\"gravity\":\"center\",\"flex\":4,\"size\":\"xs\",\"color\":\"#8c8c8c\"}],\"spacing\":\"lg\",\"height\":\"64px\"},{\"type\":\"box\",\"layout\":\"horizontal\",\"contents\":[{\"type\":\"text\",\"text\":\"20:40\",\"gravity\":\"center\",\"size\":\"sm\"},{\"type\":\"box\",\"layout\":\"vertical\",\"contents\":[{\"type\":\"filler\"},{\"type\":\"box\",\"layout\":\"vertical\",\"contents\":[],\"cornerRadius\":\"30px\",\"width\":\"12px\",\"height\":\"12px\",\"borderColor\":\"#6486E3\",\"borderWidth\":\"2px\"},{\"type\":\"filler\"}],\"flex\":0},{\"type\":\"text\",\"text\":\"Shinjuku\",\"gravity\":\"center\",\"flex\":4,\"size\":\"sm\"}],\"spacing\":\"lg\",\"cornerRadius\":\"30px\"}]}}}",
         "payloadType": "json",
-        "x": 160,
-        "y": 80,
+        "x": 180,
+        "y": 140,
         "wires": [
             [
-                "87e27d6ad7f03bfb"
+                "b1e514c2120e5a87"
             ]
         ]
     },
     {
-        "id": "23381717c650f568",
+        "id": "cc579c4dbd974359",
         "type": "debug",
-        "z": "25ca50c6e4b9ecc0",
+        "z": "489370b47f6bc024",
         "name": "",
         "active": true,
         "tosidebar": true,
@@ -71,7 +71,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 650,
-        "y": 80,
+        "y": 140,
         "wires": []
     }
 ]

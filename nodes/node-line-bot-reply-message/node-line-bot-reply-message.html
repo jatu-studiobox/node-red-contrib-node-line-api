@@ -3,6 +3,7 @@
         color: darkgray;
         cursor: not-allowed !important;
     }
+
     .containerBox {
         width: 100%;
         padding: 5px;
@@ -19,16 +20,10 @@
     </div>
     <div class="containerBox">
         <div style="color: #555;">
-            <label for="node-input-token"><i class="fa fa-key"></i> <span data-i18n="node-line-bot-reply-message.label.token" /></label>
+            <label for="node-input-apiConfig"> <i class="fa fa-cogs"></i> <span data-i18n="node-line-bot-reply-message.label.apiConfig"></span></label>
         </div>
-        <div style="display: flex; flex-direction: row; align-items: flex-start; justify-content: space-between; gap: 5px;">
-            <div style="flex-grow: 90;">
-                <textarea rows="4" style="width:100%;resize: none;" id="node-input-token" placeholder="Channel Access Token"></textarea>
-                <input type="checkbox" id="node-input-hasToken" style="display:none" />
-            </div>
-            <div style="flex-grow: 1;">
-                <button type="button" class="red-ui-button" id="node-button-pasteToken" data-i18n="[title]patse from copied"><i id="label-button" class="fa fa-clipboard"></i></button>
-            </div>
+        <div>
+            <input style="width: 100%;" type="text" id="node-input-apiConfig" />
         </div>
     </div>
     <div class="containerBox">
@@ -47,7 +42,7 @@
                 <input type="checkbox" id="node-input-hasReplyToken" style="display:none" />
             </div>
             <div style="flex-grow: 1;">
-                <button type="button" class="red-ui-button" id="node-button-pasteDestinationId" data-i18n="[title]Patse from copied"><i id="label-button" class="fa fa-clipboard"></i></button>
+                <button type="button" class="red-ui-button" id="node-button-pasteReplyToken" data-i18n="[title]Patse from copied"><i id="label-button" class="fa fa-clipboard"></i></button>
             </div>
         </div>
     </div>
@@ -100,12 +95,6 @@
             useExternalReplyToken: {
                 value: false
             },
-            hasToken: {
-                value: false,
-                validate: function (v) {
-                    return v;
-                }
-            },
             hasReplyToken: {
                 value: false,
                 validate: function (v) {
@@ -146,16 +135,13 @@
             },
             disabledNotification: {
                 value: false
+            },
+            apiConfig: {
+                value: "",
+                type: "line-messaging-api-config"
             }
         },
         credentials: {
-            token: {
-                type: "text",
-                required: true,
-                validate: function (v) {
-                    return (v.length) > 0 && !v.match(/^\s*$/);
-                }
-            },
             replyToken: {
                 type: "text",
                 require: false,
@@ -186,14 +172,7 @@
                 $("#node-input-messageType").val($(this).attr("value"));
             });
             // set paste action to paste button
-            $("#node-button-pasteToken").mousedown(function () {
-                navigator.clipboard
-                    .readText()
-                    .then(
-                        cliptext => ($("#node-input-token").val(cliptext)), err => console.log(err)
-                    );
-            });
-            $("#node-button-pasteDestinationId").mousedown(function () {
+            $("#node-button-pasteReplyToken").mousedown(function () {
                 navigator.clipboard
                     .readText()
                     .then(
@@ -229,7 +208,7 @@
                 // enabled/disabled input destination ID
                 $("#node-input-replyToken").prop("disabled", checkedValue);
                 // enabled/disabled paste destination ID button
-                $("#node-button-pasteDestinationId").prop("disabled", checkedValue);
+                $("#node-button-pasteReplyToken").prop("disabled", checkedValue);
                 // set display enabled/disabled label destination ID
                 if (checkedValue) {
                     $("label[for='node-input-replyToken']").addClass('labelDisabled');
@@ -246,15 +225,6 @@
             });
         },
         oneditsave: function () {
-            if (/^\s*$/.test($("#node-input-token").val())) {
-                if ($("#node-input-hasToken").is(":checked")) {
-                    $("#node-input-hasToken").trigger('click');
-                }
-            } else {
-                if (!$("#node-input-hasToken").is(":checked")) {
-                    $("#node-input-hasToken").trigger('click');
-                }
-            }
             if (/^\s*$/.test($("#node-input-replyToken").val())) {
                 if ($("#node-input-hasReplyToken").is(":checked")) {
                     $("#node-input-hasReplyToken").trigger('click');

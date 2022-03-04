@@ -1,0 +1,143 @@
+<style>
+    .containerBox {
+        width: 100%;
+        padding: 5px;
+        border: 1px solid #bbb;
+        border-radius: 5px;
+        padding-bottom: 8px;
+        margin-bottom: 10px;
+    }
+</style>
+<script type="text/html" data-template-name="line-messaging-api-config">
+    <div class="containerBox">
+        <div style="color: #555;">
+            <label for="node-config-input-channelName"><i class="fa fa-tag"></i> <span data-i18n="line-messaging-api-config.label.name" /></label>
+        </div>
+        <div style="display: flex; flex-direction: row; align-items: flex-start; justify-content: space-between; gap: 5px;">
+            <div style="flex-grow: 90;">
+                <input style="width: 100%" type="text" id="node-config-input-channelName" placeholder="Name">
+            </div>
+            <div style="flex-grow: 1;">
+                <button type="button" class="red-ui-button" id="node-button-pasteChannelName" data-i18n="[title]Patse from copied"><i id="label-button" class="fa fa-clipboard"></i></button>
+            </div>
+        </div>
+    </div>
+    <div class="containerBox">
+        <div style="color: #555;">
+            <label for="node-config-input-token"><i class="fa fa-key"></i> <span data-i18n="line-messaging-api-config.label.token" /></label>
+        </div>
+        <div style="display: flex; flex-direction: row; align-items: flex-start; justify-content: space-between; gap: 5px;">
+            <div style="flex-grow: 90;">
+                <textarea rows="4" style="width:100%;resize: none;" id="node-config-input-token" placeholder="Channel Access Token"></textarea>
+                <input type="checkbox" id="node-config-input-hasToken" style="display:none" />
+            </div>
+            <div style="flex-grow: 1;">
+                <button type="button" class="red-ui-button" id="node-button-pasteToken" data-i18n="[title]patse from copied"><i id="label-button" class="fa fa-clipboard"></i></button>
+            </div>
+        </div>
+    </div>
+    <div class="containerBox">
+        <div style="color: #555;">
+            <label for="node-config-input-secret"><i class="fa fa-key"></i> <span data-i18n="line-messaging-api-config.label.secret" /></label>
+        </div>
+        <div style="display: flex; flex-direction: row; align-items: flex-start; justify-content: space-between; gap: 5px;">
+            <div style="flex-grow: 90;">
+                <input style="width: 100%" type="text" id="node-config-input-secret" placeholder="Secret" />
+                <input type="checkbox" id="node-config-input-hasSecret" style="display:none" />
+            </div>
+            <div style="flex-grow: 1;">
+                <button type="button" class="red-ui-button" id="node-button-pasteSecret" data-i18n="[title]patse from copied"><i id="label-button" class="fa fa-clipboard"></i></button>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/javascript">
+    RED.nodes.registerType('line-messaging-api-config', {
+        category: 'config',
+        defaults: {
+            channelName: {
+                value: "",
+                required: true
+            },
+            hasToken: {
+                value: false,
+                validate: function (v) {
+                    return v;
+                }
+            },
+            hasSecret: {
+                value: false,
+                validate: function (v) {
+                    return v;
+                }
+            }
+        },
+        credentials: {
+            token: {
+                type: "text",
+                required: true,
+                validate: function (v) {
+                    return (v.length) > 0 && !v.match(/^\s*$/);
+                }
+            },
+            secret: {
+                type: "text",
+                require: true,
+                validate: function (v) {
+                    return (v.length) > 0 && !v.match(/^\s*$/);
+                }
+            }
+        },
+        label: function() {
+            let label = this.channelName;
+            if (!label) {
+                label = this._("line-messaging-api-config.label.unknown-name"); 
+            }
+            return label;
+        },
+        oneditprepare: function () {
+            $("#node-button-pasteChannelName").mousedown(function () {
+                navigator.clipboard
+                    .readText()
+                    .then(
+                        cliptext => ($("#node-config-input-channelName").val(cliptext)), err => console.log(err)
+                    );
+            });
+            $("#node-button-pasteToken").mousedown(function () {
+                navigator.clipboard
+                    .readText()
+                    .then(
+                        cliptext => ($("#node-config-input-token").val(cliptext)), err => console.log(err)
+                    );
+            });
+            $("#node-button-pasteSecret").mousedown(function () {
+                navigator.clipboard
+                    .readText()
+                    .then(
+                        cliptext => ($("#node-config-input-secret").val(cliptext)), err => console.log(err)
+                    );
+            });
+        },
+        oneditsave: function () {
+            if (/^\s*$/.test($("#node-config-input-token").val())) {
+                if ($("#node-config-input-hasToken").is(":checked")) {
+                    $("#node-config-input-hasToken").trigger('click');
+                }
+            } else {
+                if (!$("#node-config-input-hasToken").is(":checked")) {
+                    $("#node-config-input-hasToken").trigger('click');
+                }
+            }
+            if (/^\s*$/.test($("#node-config-input-secret").val())) {
+                if ($("#node-config-input-hasSecret").is(":checked")) {
+                    $("#node-config-input-hasSecret").trigger('click');
+                }
+            } else {
+                if (!$("#node-config-input-hasSecret").is(":checked")) {
+                    $("#node-config-input-hasSecret").trigger('click');
+                }
+            }
+        }
+    });
+</script>
+

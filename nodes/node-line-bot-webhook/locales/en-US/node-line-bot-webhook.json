@@ -3,7 +3,7 @@
         "line-bot-webhook": "LINE Messaging API Webhook",
         "label": {
             "name": "Name",
-            "secret": "Channel secret",
+            "apiConfig": "LINE Messaging API configuration",
             "webhookUrl": "Webhook URL"
         },
         "errors": {

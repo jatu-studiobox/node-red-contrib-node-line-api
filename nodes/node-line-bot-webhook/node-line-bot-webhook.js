@@ -177,7 +177,9 @@ module.exports = function (RED) {
     function NodeLineBotWebhook(n) {
         RED.nodes.createNode(this, n);
         if (RED.settings.httpNodeRoot !== false) {
-            this.channelSecret = this.credentials.secret;
+            // Retrieve the config node
+            this.apiConfig = RED.nodes.getNode(n.apiConfig);
+            this.channelSecret = this.apiConfig.credentials.secret;
             if (!n.webhookUrl) {
                 this.warn(RED._("node-line-bot-webhook.errors.missing-path"));
                 return;
@@ -274,12 +276,5 @@ module.exports = function (RED) {
             this.warn(RED._("node-line-bot-webhook.errors.not-created"));
         }
     }
-    RED.nodes.registerType("node-line-bot-webhook", NodeLineBotWebhook, {
-        credentials: {
-            secret: {
-                type: "text",
-                required: true
-            }
-        }
-    });
+    RED.nodes.registerType("node-line-bot-webhook", NodeLineBotWebhook);
 }

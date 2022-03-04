@@ -1,47 +1,46 @@
 [
     {
-        "id": "25ca50c6e4b9ecc0",
+        "id": "4ec41c6fc1b96927",
         "type": "tab",
-        "label": "Example Push Message Normal Text",
+        "label": "Example Push Message Normal Tex",
         "disabled": false,
         "info": "",
         "env": []
     },
     {
-        "id": "87e27d6ad7f03bfb",
+        "id": "bea0f5d89d45ee76",
         "type": "node-line-bot-push-message",
-        "z": "25ca50c6e4b9ecc0",
+        "z": "4ec41c6fc1b96927",
         "name": "",
         "useExternalMessage": true,
         "useExternalDestinationId": false,
-        "hasToken": true,
         "hasDestinationId": true,
         "hasMessage": true,
         "message": "Hi, I am push message node 😊",
         "messageType": 0,
         "disabledNotification": false,
-        "credentials": {},
-        "x": 400,
-        "y": 80,
+        "apiConfig": "",
+        "x": 340,
+        "y": 120,
         "wires": [
             [
-                "23381717c650f568"
+                "425b0052dcd8bc11"
             ]
         ]
     },
     {
-        "id": "684a2de13e48cc43",
+        "id": "c639657092b5a37c",
         "type": "inject",
-        "z": "25ca50c6e4b9ecc0",
+        "z": "4ec41c6fc1b96927",
         "name": "Send msg",
         "props": [
+            {
+                "p": "payload"
+            },
             {
                 "p": "messageType",
                 "v": "0",
                 "vt": "num"
-            },
-            {
-                "p": "payload"
             }
         ],
         "repeat": "",
@@ -51,18 +50,18 @@
         "topic": "",
         "payload": "Normal Text Example 😊",
         "payloadType": "str",
-        "x": 160,
-        "y": 80,
+        "x": 120,
+        "y": 120,
         "wires": [
             [
-                "87e27d6ad7f03bfb"
+                "bea0f5d89d45ee76"
             ]
         ]
     },
     {
-        "id": "23381717c650f568",
+        "id": "425b0052dcd8bc11",
         "type": "debug",
-        "z": "25ca50c6e4b9ecc0",
+        "z": "4ec41c6fc1b96927",
         "name": "",
         "active": true,
         "tosidebar": true,
@@ -71,8 +70,8 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 650,
-        "y": 80,
+        "x": 570,
+        "y": 120,
         "wires": []
     }
 ]
