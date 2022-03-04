@@ -8,7 +8,7 @@ LINE API nodes for NODE-RED. Include LINE Notify, LINE Messaging API
 * LINE Messaging API Broadcast Message [Detail](#line-message-api---broadcast-message-node)
 * LINE Webhook [Detail](#line-webhook)
 * LINE Messaging API Reply Message [Detail](#line-message-api---reply-message-node)
-* LINE Messaging API Configuration [Detail](#line-message-api-configuration-node)
+* LINE Messaging API Configuration [Detail](#line-messaging-api-configuration-node)
 
 ---
 ## Installation
