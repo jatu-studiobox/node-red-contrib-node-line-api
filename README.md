@@ -19,7 +19,7 @@ npm install node-red-contrib-node-line-api
 ## Release Notes
 
 ### Version 0.8.0
-* Add new LINE Messaging API Configuration Node for sharing configuration.
+* Add new LINE Messaging API Configuration Node for sharing configuration between nodes.
 * Modify all LINE Messaging API Nodes to use Messaging API Configuration Node instead of input Channel Access Token and Channel Secret each node.
 * Fix all LINE Messaging API Nodes examples to support using Messaging API Configuration Node
 
