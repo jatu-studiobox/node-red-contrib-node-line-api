@@ -1,0 +1,11 @@
+{
+    "node-line-bot-replyToken-provider": {
+        "line-bot-replyToken-provider": "LINE replyToken provider",
+        "label": {
+            "name": "Name"
+        },
+        "error": {
+            "notHasEvents": "ไม่พบ events"
+        }
+    }
+}

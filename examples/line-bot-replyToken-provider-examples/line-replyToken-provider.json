@@ -1,0 +1,83 @@
+[
+    {
+        "id": "d77b9aa38fc0a486",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "1e780a0be58152d2",
+        "type": "node-line-bot-webhook",
+        "z": "d77b9aa38fc0a486",
+        "name": "",
+        "webhookUrl": "/testwebhook",
+        "apiConfig": "3252372774dfec6a",
+        "x": 150,
+        "y": 160,
+        "wires": [
+            [
+                "0c37a9dcefbdd97b"
+            ]
+        ]
+    },
+    {
+        "id": "0c37a9dcefbdd97b",
+        "type": "node-line-bot-replyToken-provider",
+        "z": "d77b9aa38fc0a486",
+        "name": "",
+        "filterMsgType": "",
+        "x": 380,
+        "y": 160,
+        "wires": [
+            [
+                "8ca7edfe0b9b7afc"
+            ]
+        ]
+    },
+    {
+        "id": "8ca7edfe0b9b7afc",
+        "type": "node-line-bot-reply-message",
+        "z": "d77b9aa38fc0a486",
+        "name": "",
+        "useExternalMessage": false,
+        "useExternalReplyToken": true,
+        "hasReplyToken": false,
+        "hasMessage": true,
+        "message": "Hi, this is reply message 👌",
+        "messageType": 0,
+        "disabledNotification": false,
+        "apiConfig": "3252372774dfec6a",
+        "x": 360,
+        "y": 260,
+        "wires": [
+            [
+                "4cdedfe9150ca652"
+            ]
+        ]
+    },
+    {
+        "id": "4cdedfe9150ca652",
+        "type": "debug",
+        "z": "d77b9aa38fc0a486",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 590,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "3252372774dfec6a",
+        "type": "line-messaging-api-config",
+        "channelName": "BOT-Name",
+        "hasToken": true,
+        "hasSecret": true
+    }
+]

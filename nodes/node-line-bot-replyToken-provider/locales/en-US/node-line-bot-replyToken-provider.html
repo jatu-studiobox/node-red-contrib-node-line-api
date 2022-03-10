@@ -1,0 +1,23 @@
+<script type="text/html" data-help-name="node-line-bot-reply-message">
+    <p>LINE replyToken Provider Node. Provide replyToken for reply message.</p>
+    <p>LINE replyToken Provider Node is optional function node (easy to reply). This node is used to connect with LINE Webhook node. In order to take entry Message Events object, and then extract replyToken and pass the replyToken to LINE Reply Message node for continue working.</p>
+    <p>** If there are Message Events object more than one, it is loop for each Message Event.</p>
+    <h3>API Input</h3>
+    <p>Using <i>msg</i> object.</p>
+    <dl class="message-properties">
+        <dt>payload <span class="property-type">JSON</span></dt>
+        <dd>Using entry Message Events object in LINE Webhook node's result payload.</dd>
+    </dl>
+    <h3>API Output</h3>
+    <p>Using <i>msg</i> object.</p>
+    <dl class="message-properties">
+        <dt>payload <span class="property-type">JSON</span></dt>
+        <dd>A Message Event object</dd>
+        <dt>replyToken <span class="property-type">string</span></dt>
+        <dd>replyToken for using reply message</dd>
+    </dl>
+    <h3>Examples Section</h3>
+    <p>See usage examples at Node-RED Import menu. Examples at 'node-red-contrib-node-line-api', then 'line-bot-replyToken-provider-examples'. It will be used in conjunction with LINE Webhook Node and LINE Reply Message Node as well.</p>
+    <h3>Additional details</h3>
+    <p>See more details at <a target="_blank" href="https://developers.line.biz/en/reference/messaging-api/#send-reply-message">LINE Messaging API (Send reply message) Document</a>.</p>
+</script>

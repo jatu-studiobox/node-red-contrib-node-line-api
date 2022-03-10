@@ -9,6 +9,7 @@ LINE API nodes for NODE-RED. Include LINE Notify, LINE Messaging API
 * LINE Webhook [Detail](#line-webhook)
 * LINE Messaging API Reply Message [Detail](#line-message-api---reply-message-node)
 * LINE Messaging API Configuration [Detail](#line-messaging-api-configuration-node)
+* LINE replyToken Provider [Detail](#line-replytoken-provider-node)
 
 ---
 ## Installation
@@ -365,3 +366,33 @@ See more details at <a target="_blank" href="https://developers.line.biz/en/refe
 Custom message format can see more details at <a target="_blank" href="https://developers.line.biz/en/docs/messaging-api/message-types/">LINE Message Types</a>.
 
 Node has paste function data from clipboard, so allow paste permmision in browser to able to work paste function.
+
+### LINE replyToken Provider Node
+
+NODE-RED node for using to connect with LINE Webhook node. In order to take entry Message Events object, and then extract replyToken and pass the replyToken to LINE Reply Message node for continue working.
+
+LINE replyToken Provider Node is optional function node (easy to reply).
+
+*Note: If there are Message Events object more than one, it is loop for each Message Event.*
+
+#### Usage
+1. Connected between LINE Webhook node and LINE Reply Message node.
+
+#### API Input
+Using *msg* object.
+
+| Property   | Type     | Description |
+| ---------- |:--------:| ----------- |
+| payload    | JSON     | Using entry Message Events object in LINE Webhook node's result payload |
+
+#### API Output
+Using *msg* object.
+
+| Property    | Type    | Description |
+| ----------- |:-------:| ----------- |
+| payload     | JSON    | A Message Event object |
+| replyToken  | string  | replyToken for using reply message |
+
+#### More details
+
+See more details at <a target="_blank" href="https://developers.line.biz/en/reference/messaging-api/#send-reply-message">LINE Messaging API (Send reply message) Document</a>.

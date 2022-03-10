@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-node-line-api",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "Node-RED with LINE API, include Notify API and Messaging API.",
   "author": "jatu-studiobox",
   "license": "Apache-2.0",
@@ -37,7 +37,8 @@
       "node-line-bot-broadcast-message": "nodes/node-line-bot-broadcast-message/node-line-bot-broadcast-message.js",
       "node-line-bot-reply-message": "nodes/node-line-bot-reply-message/node-line-bot-reply-message.js",
       "node-line-bot-webhook": "nodes/node-line-bot-webhook/node-line-bot-webhook.js",
-      "line-messaging-api-config": "nodes/line-messaging-api-config/line-messaging-api-config.js"
+      "line-messaging-api-config": "nodes/line-messaging-api-config/line-messaging-api-config.js",
+      "node-line-bot-reply-provider": "nodes/node-line-bot-replyToken-provider/node-line-bot-replyToken-provider.js"
     }
   },
   "devDependencies": {
