@@ -7,6 +7,7 @@
   "bugs": {
     "url": "https://github.com/jatu-studiobox/node-red-contrib-node-line-api/issues"
   },
+  "homepage": "https://github.com/jatu-studiobox/node-red-contrib-node-line-api#readme",
   "repository": {
     "type": "git",
     "url": "https://github.com/jatu-studiobox/node-red-contrib-node-line-api.git"
@@ -31,7 +32,6 @@
     "line-reply-message",
     "line-webhook"
   ],
-  "main": "node.js",
   "node-red": {
     "version": ">=2.0.0",
     "nodes": {
@@ -45,6 +45,12 @@
       "node-line-bot-reply-provider": "nodes/node-line-bot-replyToken-provider/node-line-bot-replyToken-provider.js"
     }
   },
+  "maintainers": [
+    {
+      "name": "Jatu StudioBox",
+      "email": "inno.studiobox@gmail.com"
+    }
+  ],
   "devDependencies": {
     "mocha": "^9.2.0",
     "node-red": "^2.2.0",
