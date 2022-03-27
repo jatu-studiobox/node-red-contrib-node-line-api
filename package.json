@@ -1,11 +1,15 @@
 {
   "name": "node-red-contrib-node-line-api",
-  "version": "0.8.1",
-  "description": "Node-RED with LINE API, include Notify API and Messaging API.",
-  "author": "jatu-studiobox",
+  "version": "0.8.2",
+  "description": "LINE API nodes for Node-RED, include LINE Notify and LINE Messaging API, for easy to interact with LINE application.",
+  "author": "Jatu StudioBox <inno.studiobox@gmail.com>",
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/jatu-studiobox/node-red-contrib-node-line-api/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jatu-studiobox/node-red-contrib-node-line-api.git"
   },
   "engines": {
     "node": "^12.0.0 || ^14.19.0 || >=16.0.0"

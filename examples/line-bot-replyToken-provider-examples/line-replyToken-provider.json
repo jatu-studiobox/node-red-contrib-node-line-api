@@ -2,7 +2,7 @@
     {
         "id": "d77b9aa38fc0a486",
         "type": "tab",
-        "label": "Flow 2",
+        "label": "Example auto reply message",
         "disabled": false,
         "info": "",
         "env": []
@@ -13,7 +13,7 @@
         "z": "d77b9aa38fc0a486",
         "name": "",
         "webhookUrl": "/testwebhook",
-        "apiConfig": "3252372774dfec6a",
+        "apiConfig": "",
         "x": 150,
         "y": 160,
         "wires": [
@@ -48,7 +48,7 @@
         "message": "Hi, this is reply message 👌",
         "messageType": 0,
         "disabledNotification": false,
-        "apiConfig": "3252372774dfec6a",
+        "apiConfig": "",
         "x": 360,
         "y": 260,
         "wires": [
@@ -72,12 +72,5 @@
         "x": 590,
         "y": 260,
         "wires": []
-    },
-    {
-        "id": "3252372774dfec6a",
-        "type": "line-messaging-api-config",
-        "channelName": "BOT-Name",
-        "hasToken": true,
-        "hasSecret": true
     }
 ]
