@@ -14,8 +14,6 @@
 npm install node-red-contrib-node-line-api
 ```
 
-or by "Manage palette" menu in Node-RED.
-
 3. Start Node-RED 
 
 ```
