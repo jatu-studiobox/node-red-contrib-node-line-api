@@ -6,15 +6,17 @@
 ![node-red-contrib-node-line-api](https://user-images.githubusercontent.com/43282496/160281686-72ffa329-4a92-4e39-9f86-2ca02e32479b.png)
 
 ## Getting Started
-First, install <a href="https://nodered.org/docs/getting-started/local" target="_blank">Node-RED</a> by follow Node-RED installation guideline.
+1. First, install <a href="https://nodered.org/docs/getting-started/local" target="_blank">Node-RED</a> by follow Node-RED installation guideline.
 
-Install this package at user data directory `~/.node-red`
+2. Install this package at user data directory `~/.node-red`
 
 ```
 npm install node-red-contrib-node-line-api
 ```
 
-And then start Node-RED 
+or by "Manage palette" menu in Node-RED.
+
+3. Start Node-RED 
 
 ```
 node-red
