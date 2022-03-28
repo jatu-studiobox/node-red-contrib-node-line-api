@@ -34,5 +34,11 @@ node-red
 * [LINE Webhook Node](https://github.com/jatu-studiobox/node-red-contrib-node-line-api/wiki/LINE-Webhook-Node)
 * [LINE ReplyToken Provider Node](https://github.com/jatu-studiobox/node-red-contrib-node-line-api/wiki/LINE-ReplyToken-Provider-Node)
 
+## Create LINE Notify
+Create LINE Notify at <a href="https://notify-bot.line.me/" target="_blank">LINE Notify</a> official website.
+
+## How do you to start LINE Messaging API?
+Use this official document <a href="https://developers.line.biz/en/docs/messaging-api/getting-started/" target="_blank">Getting started with the Messaging API</a> to create your own LINE Messaging API.
+
 ## Change Logs
 [See change logs detail](https://github.com/jatu-studiobox/node-red-contrib-node-line-api/wiki/Change-Logs)
