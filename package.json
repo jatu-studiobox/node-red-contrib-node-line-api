@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-node-line-api",
-  "version": "0.8.3",
+  "version": "0.8.4",
   "description": "LINE API nodes for Node-RED, include LINE Notify and LINE Messaging API, for easy to interact with LINE application.",
   "author": "Jatu StudioBox <inno.studiobox@gmail.com>",
   "license": "Apache-2.0",
