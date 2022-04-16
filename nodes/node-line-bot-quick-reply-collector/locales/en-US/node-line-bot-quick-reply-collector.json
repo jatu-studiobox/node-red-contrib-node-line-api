@@ -1,0 +1,11 @@
+{
+    "node-line-bot-quick-reply-collector": {
+        "line-bot-quick-reply-collector": "LINE Messaging API Quick Reply Collector",
+        "label": {
+            "name": "Name",
+            "count": "Number of items",
+            "maxCount": "Maximum is 13 and minimum is 1",
+            "concertCount": "Number of items must equal to connected Quick Reply Item nodes."
+        }
+    }
+}

@@ -1,0 +1,48 @@
+<style>
+    .labelHighlight {
+        color: #476582;
+        padding: .25rem .5rem;
+        margin: 0;
+        font-size: .85em;
+        background-color: rgba(27,31,35,.05);
+        border-radius: 3px;
+    }
+</style>
+<script type="text/html" data-help-name="node-line-bot-quick-reply-collector">
+    <p>โหนด LINE Quick Reply Collector Node ไม่ต้อง Code ง่ายในการรวบรวมผลจากโหนด Quick Reply Item ในการสร้างรายการ Quick Reply สำหรับให้ผู้ใช้งานแตะปุ่มหรือรูปภาพในการส่งข้อความได้รวดเร็วขึ้น</p>
+    <p>โหนดนี้ใช้งานกับโหนด LINE Quick Reply Item หลายอัน <span class="labelHighlight">node-line-bot-quick-reply-item</span>.</p>
+    <h3>Input Settings</h3>
+    <dl class="message-properties">
+        <dt>Number items <span class="property-type">Integer</span></dt>
+        <dd>จำนวนไอเท็มที่มาเชื่อมต่อเพื่อรวบรวม สูงสุดที่ 13 ไอเท็ม</dd>
+    </dl>
+    <h3>Usage</h3>
+    <p>เชื่อมต่อกับรายการโหนด LINE Quick Reply Item เพื่อรวบรวมผลลัพธ์ทั้งหมดรวม list รายการ Quick Reply ที่ใช้งาน</p>
+    <h3>Output Section</h3>
+    <dl class="message-properties">
+        <dt>msg.quickReplyItems <span class="property-type">object[]</span></dt>
+        <dd>Array ของ object Quick Reply Item (เฉพาะไอเท็มที่มีค่า 'Use Quick Reply Item' เป็น true.)</dd>
+    </dl>
+    <p>ตัวอย่าง output</p>
+    <pre>[
+    {
+        "type": "action",
+        "action": {
+            "type": "location",
+            "label": "Current location"
+        }
+    },
+    {
+        "type": "action",
+        "action": {
+            "type":"cameraRoll",
+            "label":"Camera Roll"
+        }
+    }
+]</pre>
+    <h3>ตัวอย่าง</h3>
+    <p>ดูตัวอย่างการใช้งานได้ที่เมนู Import ของ Node-RED ที่หัวข้อ <span class="labelHighlight">node-red-contrib-node-line-api</span> และกลุ่มย่อย <span class="labelHighlight">line-quick-reply-examples</span></p>
+    <h3>รายละเอียดเพิ่มเติม</h3>
+    <p>ดูรายละเอียดเพิ่มเติมได้ที่ <a href="https://developers.line.biz/en/docs/messaging-api/using-quick-reply/" target="_blannk">Using quick replies</a></p>
+    <p>ดูรายละเอียดเพิ่มเติมได้ที่ <a target="_blank" href="https://developers.line.biz/en/reference/messaging-api/#action-objects">LINE Messaging API: Action Objects</a></p>
+</script>

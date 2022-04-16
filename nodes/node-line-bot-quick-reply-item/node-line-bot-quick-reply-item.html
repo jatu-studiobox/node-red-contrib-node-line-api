@@ -1,0 +1,538 @@
+<style>
+    .labelDisabled {
+        color: darkgray;
+        cursor: not-allowed !important;
+    }
+
+    .containerBox {
+        width: 100%;
+        padding: 5px;
+        border: 1px solid #bbb;
+        border-radius: 5px;
+        padding-bottom: 8px;
+        margin-bottom: 10px;
+    }
+
+    .mandatory {
+        color: #d6615f;
+    }
+</style>
+<script type="text/html" data-template-name="node-line-bot-quick-reply-item">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="node-line-bot-quick-reply-item.label.name"></span></label>
+        <input type="text" id="node-input-name" placeholder="Name" />
+    </div>
+    <div class="containerBox" style="color: #555;">
+        <div style="color: #555; display: flex; flex-direction: row; gap: 10px;">
+            <div style="flex-grow: 1">
+                <i class="fa fa-cogs"></i> <span data-i18n="node-line-bot-quick-reply-item.label.configQuickReply"></span></label>
+            </div>
+            <div style="flex-grow: 1; display: flex; flex-direction: row; justify-content: flex-end; gap: 5px;">
+                <input type="checkbox" id="node-input-useQuickReplyItem" />
+                <label for="node-input-useQuickReplyItem"><span data-i18n="node-line-bot-quick-reply-item.label.useQuickReplyItem"></span></label>
+            </div>
+        </div>
+        <div>
+            <div class="form-row">
+                <label for="node-input-action"><span data-i18n="node-line-bot-quick-reply-item.label.actionQuickReply"></span> <span class="mandatory">*</span></label>
+                <input type="text" id="node-input-action" />
+            </div>
+            <div class="form-row">
+                <label for="node-input-imageUrl"><span data-i18n="node-line-bot-quick-reply-item.label.imageUrl"></span></label>
+                <input type="text" id="node-input-imageUrl" />
+                <div style="margin-top: 3px; font-size: 0.9em;">
+                    <span data-i18n="node-line-bot-quick-reply-item.label.concernImageUrl"></span>
+                </div>
+            </div>
+            <div class="form-row">
+                <label for="node-input-replyLabel"><span data-i18n="node-line-bot-quick-reply-item.label.replyLabel"></span> <span class="mandatory">*</span></label>
+                <input type="text" id="node-input-replyLabel" />
+            </div>
+            <div class="form-row postback">
+                <label for="node-input-postbackData"><span data-i18n="node-line-bot-quick-reply-item.label.postbackData"></span> <span class="mandatory">*</span></label>
+                <input type="text" id="node-input-postbackData" placeholder="storeId=12345" />
+            </div>
+            <div class="form-row postback">
+                <label for="node-input-postbackDisplayText"><span data-i18n="node-line-bot-quick-reply-item.label.postbackDisplayText"></span> <span class="mandatory">*</span></label>
+                <input type="text" id="node-input-postbackDisplayText" />
+            </div>
+            <div class="form-row message">
+                <label for="node-input-messageText"><span data-i18n="node-line-bot-quick-reply-item.label.messageText"></span> <span class="mandatory">*</span></label>
+                <input type="text" id="node-input-messageText" />
+            </div>
+            <div class="form-row uri">
+                <label for="node-input-uri"><span data-i18n="node-line-bot-quick-reply-item.label.uri"></span> <span class="mandatory">*</span></label>
+                <input type="text" id="node-input-uri" />
+            </div>
+            <div class="form-row uri">
+                <label for="node-input-altUriDesktop"><span data-i18n="node-line-bot-quick-reply-item.label.altUriDesktop"></span></label>
+                <input type="text" id="node-input-altUriDesktop" />
+            </div>
+            <div class="form-row uri">
+                <div style="margin-top: 3px; font-size: 0.9em;">
+                    <span data-i18n="node-line-bot-quick-reply-item.label.concernUrl"></span><br />
+                    <a target="_blank" href="https://developers.line.biz/en/docs/messaging-api/using-line-url-scheme/"><i class="fa fa-external-link"></i>  <span data-i18n="node-line-bot-quick-reply-item.label.concertUrlLink"></span></a><br />
+                    <span data-i18n="node-line-bot-quick-reply-item.label.consertUrlExample1"></span><br />
+                    <span data-i18n="node-line-bot-quick-reply-item.label.consertUrlExample2"></span><br />
+                    <span data-i18n="node-line-bot-quick-reply-item.label.consertUrlExample3"></span>
+                </div>
+            </div>
+            <div class="form-row datetimepicker">
+                <label for="node-input-datetimeData"><span data-i18n="node-line-bot-quick-reply-item.label.datetimeData"></span> <span class="mandatory">*</span></label>
+                <input type="text" id="node-input-datetimeData" placeholder="storeId=12345" />
+            </div>
+            <div class="form-row datetimepicker">
+                <label for="node-input-datetimeMode"><span data-i18n="node-line-bot-quick-reply-item.label.datetimeMode"></span> <span class="mandatory">*</span></label>
+                <input type="text" id="node-input-datetimeMode" />
+            </div>
+            <div class="form-row datetimepicker">
+                <label for="node-input-datetimeInitialDate"><span data-i18n="node-line-bot-quick-reply-item.label.datetimeInitial"></span></label>
+                <input style="width: 100px" type="text" id="node-input-datetimeInitialDate" placeholder="dd/mm/yyyy" />
+                <input style="width: 85px;margin-left: 10px;" type="time" id="node-input-datetimeInitialTime" placeholder="00:00" /> 24h Time
+            </div>
+            <div class="form-row datetimepicker">
+                <label for="node-input-datetimeMinDate"><span data-i18n="node-line-bot-quick-reply-item.label.datetimeMin"></span></label>
+                <input style="width: 100px" type="text" id="node-input-datetimeMinDate" placeholder="dd/mm/yyyy" />
+                <input style="width: 85px;margin-left: 10px;" type="time" id="node-input-datetimeMinTime" placeholder="00:00" /> 24h Time
+            </div>
+            <div class="form-row datetimepicker">
+                <label for="node-input-datetimeMaxDate"><span data-i18n="node-line-bot-quick-reply-item.label.datetimeMax"></span></label>
+                <input style="width: 100px" type="text" id="node-input-datetimeMaxDate" placeholder="dd/mm/yyyy" />
+                <input style="width: 85px;margin-left: 10px;" type="time" id="node-input-datetimeMaxTime" placeholder="00:00" /> 24h Time
+            </div>
+        </div>
+        <div style="margin-top: 3px; font-size: 0.9em;">
+            <a target="_blank" href="https://developers.line.biz/en/reference/messaging-api/#action-objects"><i class="fa fa-external-link"></i> <span data-i18n="node-line-bot-quick-reply-item.label.gotoActionObjects"></span></a>
+        </div>
+    </div>
+</script>
+<script type="text/javascript">
+    const MESSAGE = 'message';
+    const POSTBACK = 'postback';
+    const URI = 'uri';
+    const DATETIMEPICKER = 'datetimepicker';
+
+    function setDisplay(action) {
+        if (action === "postback") {
+            $('.postback').show();
+            $('.message').hide();
+            $('.uri').hide();
+            $('.datetimepicker').hide();
+        } else if (action === "message") {
+            $('.postback').hide();
+            $('.message').show();
+            $('.uri').hide();
+            $('.datetimepicker').hide();
+        } else if (action === "uri") {
+            $('.postback').hide();
+            $('.message').hide();
+            $('.uri').show();
+            $('.datetimepicker').hide();
+        } else if (action === "datetimepicker") {
+            $('.postback').hide();
+            $('.message').hide();
+            $('.uri').hide();
+            $('.datetimepicker').show();
+        } else {
+            $('.postback').hide();
+            $('.message').hide();
+            $('.uri').hide();
+            $('.datetimepicker').hide();
+        }
+    }
+
+    function compareDate(date1, date2) {
+
+    }
+
+    function clearPostback() {
+        $('#node-input-postbackData').val("");
+        $('#node-input-postbackDisplayText').val("");
+    }
+
+    function clearMessage() {
+        $('#node-input-messageText').val("");
+    }
+
+    function clearUri() {
+        $('#node-input-uri').val("");
+        $('#node-input-altUriDesktop').val("");
+    }
+
+    function clearDatetime() {
+        $('#node-input-datetimeData').val("");
+        $('#node-input-datetimeMode').val("");
+        $('#node-input-datetimeInitialDate').val("");
+        $('#node-input-datetimeInitialTime').val("");
+        $('#node-input-datetimeMinDate').val("");
+        $('#node-input-datetimeMinTime').val("");
+        $('#node-input-datetimeMaxDate').val("");
+        $('#node-input-datetimeMaxTime').val("");
+    }
+
+    function clearNotUseData(action) {
+        if (action === "postback") {
+            clearMessage();
+            clearUri();
+            clearDatetime();
+        } else if (action === "message") {
+            clearPostback();
+            clearUri();
+            clearDatetime();
+        } else if (action === "uri") {
+            clearPostback();
+            clearMessage();
+            clearDatetime();
+        } else if (action === "datetimepicker") {
+            clearPostback();
+            clearMessage();
+            clearUri();
+        } else {
+            clearPostback();
+            clearMessage();
+            clearUri();
+            clearDatetime();
+        }
+    }
+
+    function isValidUrl(value) {
+        const result = value.match(/^(http|https):\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
+        return (result !== null);
+    };
+
+    function isValidTel(value) {
+        const result = value.match(/^(tel:)[0-9]{9,10}$/);
+        return (result !== null);
+    }
+
+    // Validates that the input string is a valid date formatted as "mm/dd/yyyy"
+    function isValidDate(dateString) {
+        // First check for the pattern
+        if (!/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(dateString))
+            return false;
+
+        // Parse the date parts to integers
+        const parts = dateString.split("/");
+        const day = parseInt(parts[0], 10);
+        const month = parseInt(parts[1], 10);
+        const year = parseInt(parts[2], 10);
+
+        // Check the ranges of month and year
+        if (year < 1900 || year > 2100 || month == 0 || month > 12)
+            return false;
+
+        const monthLength = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+        // Adjust for leap years
+        if (year % 400 == 0 || (year % 100 != 0 && year % 4 == 0))
+            monthLength[1] = 29;
+
+        // Check the range of the day
+        return day > 0 && day <= monthLength[month - 1];
+    };
+
+    // Validates that the input string is a valid date formatted as "mm/dd/yyyy"
+    function isValidTime(timeString) {
+        // First check for the pattern
+        if (!/^\d{2}\:\d{2}$/.test(timeString))
+            return false;
+
+        // Parse the date parts to integers
+        var parts = timeString.split(":");
+        var hour = parseInt(parts[0], 10);
+        var minute = parseInt(parts[1], 10);
+
+        // Check the ranges of month and year
+        if (hour > 23 || minute > 59)
+            return false;
+
+        return true;
+    };
+
+    RED.nodes.registerType('node-line-bot-quick-reply-item', {
+        category: "LINE API",
+        color: "#00b900",
+        icon: "icons/quick.svg",
+        defaults: {
+            name: {
+                value: ""
+            },
+            action: {
+                value: "",
+                required: true
+            },
+            imageUrl: {
+                value: ""
+            },
+            replyLabel: {   // required, Max character limit: 20
+                value: "",
+                required: true,
+                validate: function (v) {
+                    return v.length <= 20 && v.length > 0 && !v.match(/^\s*$/);
+                }
+            },
+            postbackData: { // required, Max character limit: 300
+                value: "",
+                validate: function (v) {
+                    if ($("#node-input-action").typedInput('value') === POSTBACK) {
+                        return v.length <= 300 && v.length > 0 && !v.match(/^\s*$/);
+                    } else {
+                        return true;
+                    }
+                }
+            },
+            postbackDisplayText: {  // required, Max character limit: 300
+                value: "",
+                validate: function (v) {
+                    if ($("#node-input-action").typedInput('value') === POSTBACK) {
+                        return v.length <= 300 && v.length > 0 && !v.match(/^\s*$/);
+                    } else {
+                        return true;
+                    }
+                }
+            },
+            messageText: {  // required, Max character limit: 300
+                value: "",
+                validate: function (v) {
+                    if ($("#node-input-action").typedInput('value') === MESSAGE) {
+                        return v.length <= 300 && v.length > 0 && !v.match(/^\s*$/);
+                    } else {
+                        return true;
+                    }
+                }
+            },
+            uri: {  // required
+                value: "",
+                validate: function (v) {
+                    if ($("#node-input-action").typedInput('value') === URI) {
+                        if (!v.match(/^\s*$/)) {
+                            if (v.length <= 300 && v.length > 0) {
+                                return isValidTel(v) || isValidUrl(v);
+                            } else {
+                                return false;
+                            }
+                        } else {
+                            return false;
+                        }
+                    } else {
+                        return true;
+                    }
+                }
+            },
+            altUriDesktop: {
+                value: "",
+                validate: function (v) {
+                    if ($("#node-input-action").typedInput('value') === URI) {
+                        if (!v.match(/^\s*$/)) {
+                            if (v.length <= 1000 && v.length > 0) {
+                                return isValidTel(v) || isValidUrl(v);
+                            } else if (v.length > 1000) {
+                                return false;
+                            }
+                        } else {
+                            return true;
+                        }
+                    } else {
+                        return true;
+                    }
+                }
+            },
+            datetimeData: { // required, Max character limit: 300
+                value: "",
+                validate: function (v) {
+                    if ($("#node-input-action").typedInput('value') === DATETIMEPICKER) {
+                        return v.length <= 300 && v.length > 0 && !v.match(/^\s*$/);
+                    } else {
+                        return true;
+                    }
+                }
+            },
+            datetimeMode: { // required, include: date, time, datetime
+                value: "",
+                validate: function (v) {
+                    if ($("#node-input-action").typedInput('value') === DATETIMEPICKER) {
+                        return !v.match(/^\s*$/);
+                    } else {
+                        return true;
+                    }
+                }
+            },
+            datetimeInitialDate: {  // optional
+                value: "",
+                validate: function (v) {
+                    if ($("#node-input-action").typedInput('value') === DATETIMEPICKER) {
+                        if (!v.match(/^\s*$/)) {
+                            const result = isValidDate(v);
+                            return result;
+                        } else {
+                            return true;
+                        }
+                    } else {
+                        return true;
+                    }
+                }
+            },
+            datetimeInitialTime: {  // optional
+                value: "",
+                validate: function (v) {
+                    if ($("#node-input-action").typedInput('value') === DATETIMEPICKER) {
+                        if (!v.match(/^\s*$/)) {
+                            const result = isValidTime(v);
+                            return result;
+                        } else {
+                            return true;
+                        }
+                    } else {
+                        return true;
+                    }
+                }
+            },
+            datetimeMaxDate: {  // max must more than min
+                value: "",
+                validate: function (v) {
+                    if ($("#node-input-action").typedInput('value') === DATETIMEPICKER) {
+                        if (!v.match(/^\s*$/)) {
+                            // validate date
+                            const resultValidDate = isValidDate(v);
+                            let resultCompare = true;
+                            // TODO: Compare min and max
+                            
+                            return resultValidDate && resultCompare;
+                        } else {
+                            return true;
+                        }
+                    } else {
+                        return true;
+                    }
+                }
+            },
+            datetimeMaxTime: {  // optional
+                value: "",
+                validate: function (v) {
+                    if ($("#node-input-action").typedInput('value') === DATETIMEPICKER) {
+                        if (!v.match(/^\s*$/)) {
+                            const resultValidTime = isValidTime(v);
+                            let resultCompare = true;
+                            // TODO: Compare min and max
+
+                            return resultValidTime && resultCompare;
+                        } else {
+                            return true;
+                        }
+                    } else {
+                        return true;
+                    }
+                }
+            },
+            datetimeMinDate: {  // min must less than max
+                value: "",
+                validate: function (v) {
+                    if ($("#node-input-action").typedInput('value') === DATETIMEPICKER) {
+                        if (!v.match(/^\s*$/)) {
+                            // validate date
+                            const resultValidDate = isValidDate(v);
+                            let resultCompare = true;
+                            // TODO: Compare min and max
+                            
+                            return resultValidDate && resultCompare;
+                        } else {
+                            return true;
+                        }
+                    } else {
+                        return true;
+                    }
+                }
+            },
+            datetimeMinTime: {  // optional
+                value: "",
+                validate: function (v) {
+                    if ($("#node-input-action").typedInput('value') === DATETIMEPICKER) {
+                        if (!v.match(/^\s*$/)) {
+                            const resultValidTime = isValidTime(v);
+                            let resultCompare = true;
+                            // TODO: Compare min and max
+
+                            return resultValidTime && resultCompare;;
+                        } else {
+                            return true;
+                        }
+                    } else {
+                        return true;
+                    }
+                }
+            },
+            useQuickReplyItem: {
+                value: true
+            }
+        },
+        paletteLabel: "quick reply item",
+        align: 'right',
+        label: function () {
+            return this.name || "Quick Reply Item";
+        },
+        labelStyle: function () {
+            return this.name ? "node_label_italic" : "";
+        },
+        inputs: 1,
+        outputs: 1,
+        oneditprepare: function () {
+            // initial input 'action'
+            $("#node-input-action").typedInput({
+                types: [
+                    {
+                        value: "action",
+                        options: [
+                            { value: "", label: "--Choose One--" },
+                            { value: "message", label: "Message" },
+                            { value: "uri", label: "URI" },
+                            { value: "cameraRoll", label: "Camera Roll" },
+                            { value: "camera", label: "Camera" },
+                            { value: "location", label: "Location" },
+                            { value: "postback", label: "Postback" },
+                            { value: "datetimepicker", label: "Datetime Picker" }
+                        ]
+                    }
+                ]
+            });
+            // initial input 'datetime mode'
+            $("#node-input-datetimeMode").typedInput({
+                types: [
+                    {
+                        value: "mode",
+                        options: [
+                            { value: "", label: "--Choose One--" },
+                            { value: "date", label: "Date" },
+                            { value: "time", label: "Time" },
+                            { value: "datetime", label: "Datetime" }
+                        ]
+                    }
+                ]
+            });
+            $("#node-input-action").on("change", (event, type, value) => {
+                // set appropriate input for each action
+                setDisplay(value);
+            });
+            $("#node-input-datetimeInitialDate").datepicker({   // set properties
+                dateFormat: "dd/mm/yy",
+                minDate: new Date(1900, 0, 1),
+                maxDate: new Date(2100, 11, 31)
+            });
+            $("#node-input-datetimeMaxDate").datepicker({   // set properties
+                dateFormat: "dd/mm/yy",
+                minDate: new Date(1900, 0, 1),
+                maxDate: new Date(2100, 11, 31)
+            });
+            $("#node-input-datetimeMinDate").datepicker({   // set properties
+                dateFormat: "dd/mm/yy",
+                minDate: new Date(1900, 0, 1),
+                maxDate: new Date(2100, 11, 31)
+            });
+            // set display input by action type
+            setDisplay($("#node-input-action").typedInput('value'));
+        },
+        oneditsave: function () {
+            // Clear not use data before save
+            clearNotUseData($("#node-input-action").typedInput('value'));
+        }
+    });
+</script>

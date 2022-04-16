@@ -1,0 +1,11 @@
+{
+    "node-line-bot-quick-reply-collector": {
+        "line-bot-quick-reply-collector": "LINE Messaging API Quick Reply Collector",
+        "label": {
+            "name": "Name",
+            "count": "จำนวนไอเท็ม",
+            "maxCount": "สูงสุดที่ 13 ไอเท็มและต่ำสุดคือ 1 ไอเท็ม",
+            "concertCount": "จำนวนไอเท็มที่ระบุต้องเท่ากับโหนด Quick Reply Item ที่มาเชื่อมต่อ"
+        }
+    }
+}

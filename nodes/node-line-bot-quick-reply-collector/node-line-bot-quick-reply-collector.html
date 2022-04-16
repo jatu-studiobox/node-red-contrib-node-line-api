@@ -1,0 +1,56 @@
+<script type="text/html" data-template-name="node-line-bot-quick-reply-collector">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="node-line-bot-quick-reply-collector.label.name"></span></label>
+        <input type="text" id="node-input-name" data-i18n="[placeholder]node-line-bot-quick-reply-collector.label.name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-count"><i class="fa fa-list-ol"></i> <span data-i18n="node-line-bot-quick-reply-collector.label.count"></span></label>
+        <input id="node-input-count" type="number" style="width:60px;" placeholder="0" max="13" min="1" /> <span data-i18n="node-line-bot-quick-reply-collector.label.maxCount"></span>
+        <div style="margin-top: 3px; font-size: 0.9em;" data-i18n="node-line-bot-quick-reply-collector.label.concertCount"></div>
+    </div>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('node-line-bot-quick-reply-collector', {
+        category: "LINE API",
+        color: "#00b900",
+        icon: "icons/quick-reply.svg",
+        defaults: {
+            name: {
+                value: ""
+            },
+            count: {
+                value: 0,
+                validate: function (v) {    // 
+                    if (!v.match(/^\d+$/)) {
+                        return false;
+                    } else {
+                        if (parseInt(v) > 13 || parseInt(v) < 1) {
+                            return false;
+                        } else {
+                            return true;
+                        }
+                    }
+                }
+            }
+        },
+        inputs: 1,
+        outputs: 1,
+        align: 'right',
+        paletteLabel: "quick reply collector",
+        label: function () {
+            return this.name || "Quick Reply Collector";
+        },
+        labelStyle: function () {
+            return this.name ? "node_label_italic" : "";
+        },
+        oneditprepare: function () {
+            $("#node-input-count").blur(function () {
+                $(this).val($(this).val().replace(/^0+(?=\d)/, ''));
+            });
+        },
+        oneditsave: function () {
+
+        }
+    });
+</script>

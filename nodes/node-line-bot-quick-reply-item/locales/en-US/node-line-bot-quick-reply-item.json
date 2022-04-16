@@ -1,0 +1,50 @@
+{
+    "node-line-bot-quick-reply-item": {
+        "line-bot-quick-reply-item": "LINE Messaging API Quick Reply",
+        "label": {
+            "name": "Name",
+            "configQuickReply": "Quick Reply Item Configuration",
+            "actionQuickReply": "Action",
+            "imageUrl": "Image URL",
+            "concernImageUrl": "Icon URL must use https, file type PNG and aspectRatio 1:1 (or rectangle)",
+            "replyLabel": "Label",
+            "postbackData": "Data",
+            "postbackDisplayText": "Display Text",
+            "messageText": "Text",
+            "uri": "URL",
+            "altUriDesktop": "URL Desktop",
+            "datetimeData": "Data",
+            "datetimeMode": "Mode",
+            "datetimeInitial": "Initial",
+            "datetimeMax": "Max",
+            "datetimeMin": "Min",
+            "gotoActionObjects": "See more details at LINE Messaging API: Action Objects",
+            "useQuickReplyItem": "Use Quick Reply Item",
+            "concernUrl": "The available schemes are http, https and tel for URI.",
+            "concertUrlLink": "See Using LINE features with the LINE URL scheme",
+            "consertUrlExample1": "Ex1. http://www.domainname.com",
+            "consertUrlExample2": "Ex2. https://www.domainname.com",
+            "consertUrlExample3": "Ex3. tel:0909990099 [9-10 digits]"
+        },
+        "button": {
+            "messageType": {
+                "normalText": "Normal Text",
+                "customFormat": "Custom Message Format"
+            }
+        },
+        "errors": {
+            "notFoundToken": "Channel Access Token not found",
+            "messageRequired": "payload is required",
+            "messageInvalid": "payload is invalid",
+            "messageEmpty": "payload cannot be empty",
+            "messageTypeRequired": "messageType is required",
+            "messageTypeInvalid": "messageType is invalid",
+            "destinationIdRequired": "destinationId is required",
+            "destinationIdInvalid": "destinationId is invalid",
+            "destinationIdEmpty": "destinationId cannot be empty"
+        },
+        "send-result": {
+            "success": "Push message success: "
+        }
+    }
+}

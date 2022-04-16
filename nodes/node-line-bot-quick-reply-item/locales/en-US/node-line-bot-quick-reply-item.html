@@ -1,0 +1,99 @@
+<style>
+    .labelHighlight {
+        color: #476582;
+        padding: .25rem .5rem;
+        margin: 0;
+        font-size: .85em;
+        background-color: rgba(27,31,35,.05);
+        border-radius: 3px;
+    }
+</style>
+<script type="text/html" data-help-name="node-line-bot-quick-reply-item">
+    <p>LINE Quick Reply Item Node. No need to code. Easy to create Quick Reply item for quick reply by user taps a button or an image in a message.</p>
+    <p>This node uses with LINE Quick Reply Collector Node <span class="labelHighlight">node-line-bot-quick-reply-collector</span>.</p>
+    <h3>Shared Input Settings</h3>
+    <dl class="message-properties">
+        <dt>Use Quick Reply Item <span class="property-type">boolean</span></dt>
+        <dd>Use/Not use this Quick Reply Item.</dd>
+        <dt>Action <span class="property-type">string</span></dt>
+        <dd>Types of actions for bot to take when a user taps a button or an image in a message.</dd>
+        <dd>There are <span class="labelHighlight">Postback</span>, <span class="labelHighlight">Message</span>, <span class="labelHighlight">URI</span>, <span class="labelHighlight">Datetime picker</span>, <span class="labelHighlight">Camera</span>, <span class="labelHighlight">Camera roll</span> and <span class="labelHighlight">Location</span></dd>
+        <dt class="optional">Image URL <span class="property-type">URL string</span></dt>
+        <dd>Icon URL must use https, file type PNG and aspectRatio 1:1 (or rectangle)</dd>
+        <dt>Label <span class="property-type">string</span></dt>
+        <dd>Label on quick reply buttons. Max character limit: 20</dd>
+    </dl>
+    <h3>More Input Settings of <i>Message</i></h3>
+    <dl class="message-properties">
+        <dt>Text <span class="property-type">string</span></dt>
+        <dd>Text sent when the action is performed. Max character limit: 300</dd>
+    </dl>
+    <h3>More Input Settings of <i>URI</i></h3>
+    <dl class="message-properties">
+        <dt>URI <span class="property-type">URL string</span></dt>
+        <dd>URI opened when the action is performed. Max character limit: 1000</dd>
+        <dt>URI Desktop<span class="property-type">URL string</span></dt>
+        <dd>URI opened on LINE for macOS and Windows when the action is performed. Max character limit: 1000</dd>
+    </dl>
+    <p>
+        The available schemes are <span class="labelHighlight">http</span>, <span class="labelHighlight">https</span> and <span class="labelHighlight">tel</span>.
+        <br/>Ex1. http://www.domainname.com
+        <br/>Ex2. https://www.domainname.com
+        <br/>Ex3. tel:0909990099 [9-10 digits]
+        <br/><a href="https://developers.line.biz/en/docs/messaging-api/using-line-url-scheme/" target="_black">See Using LINE features with the LINE URL scheme</a>
+    </p>
+    <h3>More Input Settings of <i>Postback</i></h3>
+    <dl class="message-properties">
+        <dt>Data <span class="property-type">string</span></dt>
+        <dd>String returned via webhook in the <span class="labelHighlight">postback.data</span> property of the <a href="https://developers.line.biz/en/reference/messaging-api/#postback-event" target="_blank">postback event</a>. Max character limit: 300</dd>
+        <dt>Display Text <span class="property-type">string</span></dt>
+        <dd>Text displayed in the chat as a message sent by the user when the action is performed. Max character limit: 300</dd>
+    </dl>
+    <h3>More Input Settings of <i>Datetime picker</i></h3>
+    <dl class="message-properties">
+        <dt>Data <span class="property-type">string</span></dt>
+        <dd>String returned via webhook in the <span class="labelHighlight">postback.data</span> property of the <a href="https://developers.line.biz/en/reference/messaging-api/#postback-event" target="_blank">postback event</a>. Max character limit: 300</dd>
+        <dt>Mode <span class="property-type">string</span></dt>
+        <dd>Action mode. 
+            <br/><span class="labelHighlight">Date</span> : Pick date
+            <br/><span class="labelHighlight">Time</span> : Pick time
+            <br/><span class="labelHighlight">Datetime</span> : Pick date and time
+        </dd>
+        <dt class="optional">Initial <span class="property-type">string</span></dt>
+        <dd>Initial value of date or time</dd>
+        <dt class="optional">Min <span class="property-type">string</span></dt>
+        <dd>Smallest date or time value that can be selected. Must be less than the <span class="labelHighlight">max</span> value.</dd>
+        <dt class="optional">Max <span class="property-type">string</span></dt>
+        <dd>Largest date or time value that can be selected. Must be greater than the <span class="labelHighlight">min</span> value.</dd>
+    </dl>
+    <p>
+        Date format is <span class="labelHighlight">dd/mm/yyyy</span>.<br/>Time format is <span class="labelHighlight">hh:mm</span>. Use 24h time.
+    </p>
+    <h3>Node API</h3>
+    <p>Using <code>msg</code> object.</p>
+    <dl class="message-properties">
+        <dt class="optional">useQuickReplyItem <span class="property-type">boolean</span></dt>
+        <dd>Use/Not use QuickReply Item.</dd>
+        <dd>Remark: Send value takes precedence node setting.</dd>
+    </dl>
+    <h3>Output Section</h3>
+    <dl class="message-properties">
+        <dt>msg.quickReplyItem <span class="property-type">object</span></dt>
+        <dd>Quick Reply Item object</dd>
+    </dl>
+    <p>Example output</p>
+    <pre>{ 
+    "item": { 
+        "type": "action", 
+        "action": { 
+            "type": "camera", 
+            "label":"test" 
+        }
+    },
+    "useQuickReplyItem": true
+}</pre>
+    <h3>Examples Section</h3>
+    <p>See usage examples at Node-RED Import menu. Examples at <span class="labelHighlight">node-red-contrib-node-line-api</span>, then <span class="labelHighlight">line-quick-reply-examples</span></p>
+    <h3>Additional details</h3>
+    <p>See more details at <a target="_blank" href="https://developers.line.biz/en/reference/messaging-api/#action-objects">LINE Messaging API: Action Objects</a></p>
+</script>

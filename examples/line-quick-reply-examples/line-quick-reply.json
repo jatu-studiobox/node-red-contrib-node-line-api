@@ -1,0 +1,162 @@
+[
+    {
+        "id": "539ddc620e70a50d",
+        "type": "tab",
+        "label": "Example Quick Reply Items",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "c8af07a4bc565513",
+        "type": "debug",
+        "z": "539ddc620e70a50d",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "quickReplyItems",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 600,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "b3faa84bb09e024f",
+        "type": "node-line-bot-quick-reply-collector",
+        "z": "539ddc620e70a50d",
+        "name": "",
+        "count": "3",
+        "x": 540,
+        "y": 180,
+        "wires": [
+            [
+                "c8af07a4bc565513"
+            ]
+        ]
+    },
+    {
+        "id": "9935ae99c957e4c6",
+        "type": "node-line-bot-quick-reply-item",
+        "z": "539ddc620e70a50d",
+        "name": "Current location",
+        "action": "location",
+        "imageUrl": "",
+        "replyLabel": "Current location",
+        "postbackData": "",
+        "postbackDisplayText": "",
+        "messageText": "",
+        "uri": "",
+        "altUriDesktop": "",
+        "datetimeData": "",
+        "datetimeMode": "",
+        "datetimeInitialDate": "",
+        "datetimeInitialTime": "",
+        "datetimeMaxDate": "",
+        "datetimeMaxTime": "",
+        "datetimeMinDate": "",
+        "datetimeMinTime": "",
+        "useQuickReplyItem": true,
+        "x": 300,
+        "y": 100,
+        "wires": [
+            [
+                "b3faa84bb09e024f"
+            ]
+        ]
+    },
+    {
+        "id": "3f71c1a2ce19ff2a",
+        "type": "node-line-bot-quick-reply-item",
+        "z": "539ddc620e70a50d",
+        "name": "Pickup Date",
+        "action": "datetimepicker",
+        "imageUrl": "",
+        "replyLabel": "Pickup Date",
+        "postbackData": "",
+        "postbackDisplayText": "",
+        "messageText": "",
+        "uri": "",
+        "altUriDesktop": "",
+        "datetimeData": "test=1233",
+        "datetimeMode": "datetime",
+        "datetimeInitialDate": "14/04/2022",
+        "datetimeInitialTime": "01:00",
+        "datetimeMaxDate": "30/04/2022",
+        "datetimeMaxTime": "08:00",
+        "datetimeMinDate": "06/04/2022",
+        "datetimeMinTime": "00:00",
+        "useQuickReplyItem": false,
+        "x": 290,
+        "y": 180,
+        "wires": [
+            [
+                "b3faa84bb09e024f"
+            ]
+        ]
+    },
+    {
+        "id": "5e929c888907b961",
+        "type": "inject",
+        "z": "539ddc620e70a50d",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 100,
+        "y": 180,
+        "wires": [
+            [
+                "9935ae99c957e4c6",
+                "3f71c1a2ce19ff2a",
+                "6e1bf1c7623f7c25"
+            ]
+        ]
+    },
+    {
+        "id": "6e1bf1c7623f7c25",
+        "type": "node-line-bot-quick-reply-item",
+        "z": "539ddc620e70a50d",
+        "name": "Camera Roll",
+        "action": "cameraRoll",
+        "imageUrl": "",
+        "replyLabel": "Camera Roll",
+        "postbackData": "",
+        "postbackDisplayText": "",
+        "messageText": "",
+        "uri": "",
+        "altUriDesktop": "",
+        "datetimeData": "",
+        "datetimeMode": "",
+        "datetimeInitialDate": "",
+        "datetimeInitialTime": "",
+        "datetimeMaxDate": "",
+        "datetimeMaxTime": "",
+        "datetimeMinDate": "",
+        "datetimeMinTime": "",
+        "useQuickReplyItem": true,
+        "x": 290,
+        "y": 260,
+        "wires": [
+            [
+                "b3faa84bb09e024f"
+            ]
+        ]
+    }
+]
