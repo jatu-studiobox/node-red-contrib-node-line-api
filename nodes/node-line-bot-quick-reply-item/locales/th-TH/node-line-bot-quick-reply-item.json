@@ -24,27 +24,19 @@
             "concertUrlLink": "ดูเพิ่มเติมได้ที่ Using LINE features with the LINE URL scheme",
             "consertUrlExample1": "Ex1. http://www.domainname.com",
             "consertUrlExample2": "Ex2. https://www.domainname.com",
-            "consertUrlExample3": "Ex3. tel:0909990099 [9-10 ตัวเลข]"
-        },
-        "button": {
-            "messageType": {
-                "normalText": "ข้อความปกติ",
-                "customFormat": "กำหนดรูปแบบข้อความ"
-            }
+            "consertUrlExample3": "Ex3. tel:0909990099 [9-10 ตัวเลข]",
+            "concernDatetime": "รูปแบบเวลาเป็นดังนี้"
         },
         "errors": {
-            "notFoundToken": "ไม่พบ Channel Access Token",
-            "messageRequired": "ต้องการค่า payload",
-            "messageInvalid": "payload ไม่ถูกต้อง",
-            "messageEmpty": "payload ไม่สามารถว่างได้",
-            "messageTypeRequired": "ต้องการค่า messageType",
-            "messageTypeInvalid": "messageType ไม่ถูกต้อง",
-            "destinationIdRequired": "ต้องการค่า destinationId",
-            "destinationIdInvalid": "destinationId ไม่ถูกต้อง",
-            "destinationIdEmpty": "destinationId ไม่สามารถว่างได้"            
-        },
-        "send-result": {
-            "success": "Push ข้อความสำเร็จ: "
+            "errorMapInitialDatetime": "ไม่สามารถ map initial วันที่และเวลา",
+            "errorMapMaxDatetime": "ไม่สามารถ map max วันที่และเวลา",
+            "errorMapMinDatetime": "ไม่สามารถ map min วันที่และเวลา",
+            "initialDateAndTimeMustSame": "Initial วันที่และเวลา ต้องมีหรือไม่มีค่าเหมือนกัน",
+            "minDateAndTimeMustSame": "Min วันที่และเวลา ต้องมีหรือไม่มีค่าเหมือนกัน",
+            "maxDateAndTimeMustSame": "Max วันที่และเวลา ต้องมีหรือไม่มีค่าเหมือนกัน",
+            "minMustLessThanOrEqualInitial": "Min ต้องน้อยกว่าหรือเท่ากับ Initial",
+            "maxMustMoreThanOrEqualInitial": "Max ต้องมากกว่าหรือเท่ากับ Initial",
+            "maxMustMoreThanOrEqualMin": "Max ต้องมากกว่าหรือเท่ากับ Min"
         }
     }
 }

@@ -140,19 +140,52 @@ module.exports = function (RED) {
                     node.jsonMsg = JSON.parse(node.message);
                 }
             }
+            // Add Quick Reply feature
+            let quickReplyItems = [];
+            try {
+                if (msg.quickReplyItems) {
+                    if (msg.quickReplyItems.length > 0) {
+                        quickReplyItems = msg.quickReplyItems;
+                        console.log("quickReplyItems: ", quickReplyItems);
+                    }
+                }
+            } catch (error) {
+                msg.status = -1;
+                msg.payload = "Error using Quick Reply";
+                setError(node, msg);
+                return;
+            }
+
             // Initiate client object
             const client = new lineBot.Client({
                 channelAccessToken: node.channelAccessToken
             });
             try {
                 let res;
-                if (node.messageType === 0) {   // 0 = normal text message
-                    res = await client.pushMessage(node.destinationId, {
+                if (node.messageType === 0) {   // 0 = normal text 
+                    // Prepare payload message
+                    let payloadMessage = {
                         type: 'text',
-                        text: node.message,
-                        notificationDisabled: node.disabledNotification
-                    });
+                        text: node.message
+                    };
+                    // If has any quick reply items, then map quick reply to payload message
+                    if (quickReplyItems.length > 0) {
+                        let quickReply = {
+                            items: []
+                        }
+                        quickReply.items = quickReplyItems;
+                        payloadMessage.quickReply = quickReply;
+                    }
+                    res = await client.pushMessage(node.destinationId, payloadMessage, node.disabledNotification);
                 } else if (node.messageType === 1) {    // 1 = custom whole message JSON format
+                    // If has any quick reply items, then map quick reply to payload message
+                    if (quickReplyItems.length > 0) {
+                        let quickReply = {
+                            items: []
+                        }
+                        quickReply.items = quickReplyItems;
+                        node.jsonMsg.quickReply = quickReply;
+                    }
                     res = await client.pushMessage(node.destinationId, node.jsonMsg, node.disabledNotification);
                 }
                 msg.status = 0;

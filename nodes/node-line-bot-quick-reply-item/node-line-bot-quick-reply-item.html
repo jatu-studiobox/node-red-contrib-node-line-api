@@ -16,6 +16,20 @@
     .mandatory {
         color: #d6615f;
     }
+
+    .lblTime {
+        margin-left: 10px;
+    }
+
+    .error-box {
+        border: solid 1px #d6615f !important;
+    }
+
+    .errorInvalidInitialDatetime,
+    .errorInvalidMinDatetime,
+    .errorInvalidMaxDatetime {
+        color: #d6615f;
+    }
 </style>
 <script type="text/html" data-template-name="node-line-bot-quick-reply-item">
     <div class="form-row">
@@ -84,21 +98,33 @@
             <div class="form-row datetimepicker">
                 <label for="node-input-datetimeMode"><span data-i18n="node-line-bot-quick-reply-item.label.datetimeMode"></span> <span class="mandatory">*</span></label>
                 <input type="text" id="node-input-datetimeMode" />
+                <input type="hidden" id="node-input-selectedDatetimeMode" />
             </div>
             <div class="form-row datetimepicker">
                 <label for="node-input-datetimeInitialDate"><span data-i18n="node-line-bot-quick-reply-item.label.datetimeInitial"></span></label>
-                <input style="width: 100px" type="text" id="node-input-datetimeInitialDate" placeholder="dd/mm/yyyy" />
-                <input style="width: 85px;margin-left: 10px;" type="time" id="node-input-datetimeInitialTime" placeholder="00:00" /> 24h Time
+                <input style="width: 100px; margin-right: 10px;" type="text" id="node-input-datetimeInitialDate" placeholder="dd/mm/yyyy" />
+                <input style="width: 85px;" type="time" id="node-input-datetimeInitialTime" placeholder="00:00" /><span class="lblTime">24h Time</span>
+                <input type="hidden" id="node-input-InvalidInitialDatetime" />
+                <div class="errorInvalidInitialDatetime"></div>
             </div>
             <div class="form-row datetimepicker">
                 <label for="node-input-datetimeMinDate"><span data-i18n="node-line-bot-quick-reply-item.label.datetimeMin"></span></label>
-                <input style="width: 100px" type="text" id="node-input-datetimeMinDate" placeholder="dd/mm/yyyy" />
-                <input style="width: 85px;margin-left: 10px;" type="time" id="node-input-datetimeMinTime" placeholder="00:00" /> 24h Time
+                <input style="width: 100px; margin-right: 10px;" type="text" id="node-input-datetimeMinDate" placeholder="dd/mm/yyyy" />
+                <input style="width: 85px;" type="time" id="node-input-datetimeMinTime" placeholder="00:00" /><span class="lblTime">24h Time</span>
+                <input type="hidden" id="node-input-InvalidMinDatetime" />
+                <div class="errorInvalidMinDatetime"></div>
             </div>
             <div class="form-row datetimepicker">
                 <label for="node-input-datetimeMaxDate"><span data-i18n="node-line-bot-quick-reply-item.label.datetimeMax"></span></label>
-                <input style="width: 100px" type="text" id="node-input-datetimeMaxDate" placeholder="dd/mm/yyyy" />
-                <input style="width: 85px;margin-left: 10px;" type="time" id="node-input-datetimeMaxTime" placeholder="00:00" /> 24h Time
+                <input style="width: 100px; margin-right: 10px;" type="text" id="node-input-datetimeMaxDate" placeholder="dd/mm/yyyy" />
+                <input style="width: 85px;" type="time" id="node-input-datetimeMaxTime" placeholder="00:00" /><span class="lblTime">24h Time</span>
+                <input type="hidden" id="node-input-InvalidMaxDatetime" />
+                <div class="errorInvalidMaxDatetime"></div>
+            </div>
+            <div class="form-row datetimepicker">
+                <div style="margin-top: 3px; font-size: 0.9em;">
+                    <span data-i18n="node-line-bot-quick-reply-item.label.concernDatetime"></span> Min &le; Initial &le; Max
+                </div>
             </div>
         </div>
         <div style="margin-top: 3px; font-size: 0.9em;">
@@ -107,10 +133,13 @@
     </div>
 </script>
 <script type="text/javascript">
-    const MESSAGE = 'message';
-    const POSTBACK = 'postback';
-    const URI = 'uri';
-    const DATETIMEPICKER = 'datetimepicker';
+    const ACTION_MESSAGE = "message";
+    const ACTION_POSTBACK = "postback";
+    const ACTION_URI = "uri";
+    const ACTION_DATETIMEPICKER = "datetimepicker";
+    const DATETIME_MODE_DATETIME = "datetime";
+    const DATETIME_MODE_DATE = "date";
+    const DATETIME_MODE_TIME = "time";
 
     function setDisplay(action) {
         if (action === "postback") {
@@ -141,25 +170,117 @@
         }
     }
 
-    function compareDate(date1, date2) {
-
+    function setDisplay4Datetime(mode) {
+        // gathering error
+        const InvalidInitialDatetime = $("#node-input-InvalidInitialDatetime").val();
+        const InvalidMinDatetime = $("#node-input-InvalidMinDatetime").val();
+        const InvalidMaxDatetime = $("#node-input-InvalidMaxDatetime").val();
+        // default hide invalid message
+        $('.errorInvalidInitialDatetime').hide();
+        $('.errorInvalidMinDatetime').hide();
+        $('.errorInvalidMaxDatetime').hide();
+        if (mode === DATETIME_MODE_DATETIME) {  // Mode 'Datetime'
+            $('#node-input-datetimeInitialDate').show();
+            $('#node-input-datetimeInitialTime').show();
+            $('#node-input-datetimeMinDate').show();
+            $('#node-input-datetimeMinTime').show();
+            $('#node-input-datetimeMaxDate').show();
+            $('#node-input-datetimeMaxTime').show();
+            $('.lblTime').show();
+            if (InvalidInitialDatetime !== "") {
+                $('#node-input-datetimeInitialDate').addClass("error-box");
+                $('#node-input-datetimeInitialTime').addClass("error-box");
+                $('.errorInvalidInitialDatetime').show();
+                $('.errorInvalidInitialDatetime').text(InvalidInitialDatetime);
+            }
+            if (InvalidMinDatetime !== "") {
+                $('#node-input-datetimeMinDate').addClass("error-box");
+                $('#node-input-datetimeMinTime').addClass("error-box");
+                $('.errorInvalidMinDatetime').show();
+                $('.errorInvalidMinDatetime').text(InvalidMinDatetime);
+            }
+            if (InvalidMaxDatetime !== "") {
+                $('#node-input-datetimeMaxDate').addClass("error-box");
+                $('#node-input-datetimeMaxTime').addClass("error-box");
+                $('.errorInvalidMaxDatetime').show();
+                $('.errorInvalidMaxDatetime').text(InvalidMaxDatetime);
+            }
+        } else if (mode === DATETIME_MODE_DATE) {  // Mode 'Date'
+            $('#node-input-datetimeInitialDate').show();
+            $('#node-input-datetimeInitialTime').hide();
+            $('#node-input-datetimeMinDate').show();
+            $('#node-input-datetimeMinTime').hide();
+            $('#node-input-datetimeMaxDate').show();
+            $('#node-input-datetimeMaxTime').hide();
+            $('.lblTime').hide();
+            if (InvalidInitialDatetime !== "") {
+                $('#node-input-datetimeInitialDate').addClass("error-box");
+                $('.errorInvalidInitialDatetime').show();
+                $('.errorInvalidInitialDatetime').text(InvalidInitialDatetime);
+            }
+            if (InvalidMinDatetime !== "") {
+                $('#node-input-datetimeMinDate').addClass("error-box");
+                $('.errorInvalidMinDatetime').show();
+                $('.errorInvalidMinDatetime').text(InvalidMinDatetime);
+            }
+            if (InvalidMaxDatetime !== "") {
+                $('#node-input-datetimeMaxDate').addClass("error-box");
+                $('.errorInvalidMaxDatetime').show();
+                $('.errorInvalidMaxDatetime').text(InvalidMaxDatetime);
+            }
+        } else if (mode === DATETIME_MODE_TIME) {  // Mode 'Time'
+            $('#node-input-datetimeInitialDate').hide();
+            $('#node-input-datetimeInitialTime').show();
+            $('#node-input-datetimeMinDate').hide();
+            $('#node-input-datetimeMinTime').show();
+            $('#node-input-datetimeMaxDate').hide();
+            $('#node-input-datetimeMaxTime').show();
+            $('.lblTime').show();
+            if (InvalidInitialDatetime !== "") {
+                $('#node-input-datetimeInitialTime').addClass("error-box");
+                $('.errorInvalidInitialDatetime').show();
+                $('.errorInvalidInitialDatetime').text(InvalidInitialDatetime);
+            }
+            if (InvalidMinDatetime !== "") {
+                $('#node-input-datetimeMinTime').addClass("error-box");
+                $('.errorInvalidMinDatetime').show();
+                $('.errorInvalidMinDatetime').text(InvalidMinDatetime);
+            }
+            if (InvalidMaxDatetime !== "") {
+                $('#node-input-datetimeMaxTime').addClass("error-box");
+                $('.errorInvalidMaxDatetime').show();
+                $('.errorInvalidMaxDatetime').text(InvalidMaxDatetime);
+            }
+        } else {      // Other Mode -> not have mode
+            $('#node-input-datetimeInitialDate').show();
+            $('#node-input-datetimeInitialTime').show();
+            $('#node-input-datetimeMinDate').show();
+            $('#node-input-datetimeMinTime').show();
+            $('#node-input-datetimeMaxDate').show();
+            $('#node-input-datetimeMaxTime').show();
+            $('.lblTime').show();
+        }
     }
 
+    // clear postback action values
     function clearPostback() {
         $('#node-input-postbackData').val("");
         $('#node-input-postbackDisplayText').val("");
     }
 
+    // clear message action values
     function clearMessage() {
         $('#node-input-messageText').val("");
     }
 
+    // clear uri action values
     function clearUri() {
         $('#node-input-uri').val("");
         $('#node-input-altUriDesktop').val("");
     }
 
-    function clearDatetime() {
+    // clear datetimepicker action all values
+    function clearAllDatetime() {
         $('#node-input-datetimeData').val("");
         $('#node-input-datetimeMode').val("");
         $('#node-input-datetimeInitialDate').val("");
@@ -170,29 +291,73 @@
         $('#node-input-datetimeMaxTime').val("");
     }
 
+    // clear datetimepicker action only date values
+    function clearDate() {
+        $('#node-input-datetimeInitialDate').val("");
+        $('#node-input-datetimeMinDate').val("");
+        $('#node-input-datetimeMaxDate').val("");
+    }
+
+    // clear datetimepicker action only time values
+    function clearTime() {
+        $('#node-input-datetimeInitialTime').val("");
+        $('#node-input-datetimeMinTime').val("");
+        $('#node-input-datetimeMaxTime').val("");
+    }
+
+    // func clear data by specific date or time
+    function clearSpecifyDatetime(mode) {
+        if (mode === DATETIME_MODE_DATE) {
+            clearTime();
+        } else if (mode === DATETIME_MODE_TIME) {
+            clearDate();
+        }
+    }
+
+    // func clear not use data before save
     function clearNotUseData(action) {
-        if (action === "postback") {
+        if (action === ACTION_POSTBACK) {
             clearMessage();
             clearUri();
-            clearDatetime();
-        } else if (action === "message") {
+            clearAllDatetime();
+        } else if (action === ACTION_MESSAGE) {
             clearPostback();
             clearUri();
-            clearDatetime();
-        } else if (action === "uri") {
+            clearAllDatetime();
+        } else if (action === ACTION_URI) {
             clearPostback();
             clearMessage();
-            clearDatetime();
-        } else if (action === "datetimepicker") {
+            clearAllDatetime();
+        } else if (action === ACTION_DATETIMEPICKER) {
             clearPostback();
             clearMessage();
             clearUri();
+            clearSpecifyDatetime($("#node-input-datetimeMode").typedInput('value'));
         } else {
             clearPostback();
             clearMessage();
             clearUri();
-            clearDatetime();
+            clearAllDatetime();
         }
+    }
+
+    function convertDate(strDate) {
+        const parts = strDate.split("/");
+        return parts[2] + "-" + parts[1] + "-" + parts[0];
+    }
+
+    function createDate(strDate, strTime) {
+        const dateParts = strDate.split("/");
+        const timeParts = strTime.split(":");
+        const objDate = new Date(
+            parseInt(dateParts[2]),
+            parseInt(dateParts[1]) - 1,
+            parseInt(dateParts[0]),
+            parseInt(timeParts[0]),
+            parseInt(timeParts[1]),
+            0,
+            0);
+        return objDate;
     }
 
     function isValidUrl(value) {
@@ -249,6 +414,16 @@
         return true;
     };
 
+    function setInvalidDatetimeValues(type, strError) {
+        if (type === "initial") {   // initial
+            $("#node-input-InvalidInitialDatetime").val(strError);
+        } else if (type === "max") {    // max
+            $("#node-input-InvalidMaxDatetime").val(strError);
+        } else {    // min
+            $("#node-input-InvalidMinDatetime").val(strError);
+        }
+    }
+
     RED.nodes.registerType('node-line-bot-quick-reply-item', {
         category: "LINE API",
         color: "#00b900",
@@ -274,7 +449,7 @@
             postbackData: { // required, Max character limit: 300
                 value: "",
                 validate: function (v) {
-                    if ($("#node-input-action").typedInput('value') === POSTBACK) {
+                    if ($("#node-input-action").typedInput('value') === ACTION_POSTBACK) {
                         return v.length <= 300 && v.length > 0 && !v.match(/^\s*$/);
                     } else {
                         return true;
@@ -284,7 +459,7 @@
             postbackDisplayText: {  // required, Max character limit: 300
                 value: "",
                 validate: function (v) {
-                    if ($("#node-input-action").typedInput('value') === POSTBACK) {
+                    if ($("#node-input-action").typedInput('value') === ACTION_POSTBACK) {
                         return v.length <= 300 && v.length > 0 && !v.match(/^\s*$/);
                     } else {
                         return true;
@@ -294,7 +469,7 @@
             messageText: {  // required, Max character limit: 300
                 value: "",
                 validate: function (v) {
-                    if ($("#node-input-action").typedInput('value') === MESSAGE) {
+                    if ($("#node-input-action").typedInput('value') === ACTION_MESSAGE) {
                         return v.length <= 300 && v.length > 0 && !v.match(/^\s*$/);
                     } else {
                         return true;
@@ -304,7 +479,7 @@
             uri: {  // required
                 value: "",
                 validate: function (v) {
-                    if ($("#node-input-action").typedInput('value') === URI) {
+                    if ($("#node-input-action").typedInput('value') === ACTION_URI) {
                         if (!v.match(/^\s*$/)) {
                             if (v.length <= 300 && v.length > 0) {
                                 return isValidTel(v) || isValidUrl(v);
@@ -322,7 +497,7 @@
             altUriDesktop: {
                 value: "",
                 validate: function (v) {
-                    if ($("#node-input-action").typedInput('value') === URI) {
+                    if ($("#node-input-action").typedInput('value') === ACTION_URI) {
                         if (!v.match(/^\s*$/)) {
                             if (v.length <= 1000 && v.length > 0) {
                                 return isValidTel(v) || isValidUrl(v);
@@ -340,7 +515,7 @@
             datetimeData: { // required, Max character limit: 300
                 value: "",
                 validate: function (v) {
-                    if ($("#node-input-action").typedInput('value') === DATETIMEPICKER) {
+                    if ($("#node-input-action").typedInput('value') === ACTION_DATETIMEPICKER) {
                         return v.length <= 300 && v.length > 0 && !v.match(/^\s*$/);
                     } else {
                         return true;
@@ -350,21 +525,27 @@
             datetimeMode: { // required, include: date, time, datetime
                 value: "",
                 validate: function (v) {
-                    if ($("#node-input-action").typedInput('value') === DATETIMEPICKER) {
+                    if ($("#node-input-action").typedInput('value') === ACTION_DATETIMEPICKER) {
                         return !v.match(/^\s*$/);
                     } else {
                         return true;
                     }
                 }
             },
+            selectedDatetimeMode: {
+                value: ""
+            },
             datetimeInitialDate: {  // optional
                 value: "",
                 validate: function (v) {
-                    if ($("#node-input-action").typedInput('value') === DATETIMEPICKER) {
-                        if (!v.match(/^\s*$/)) {
-                            const result = isValidDate(v);
-                            return result;
-                        } else {
+                    if ($("#node-input-action").typedInput('value') === ACTION_DATETIMEPICKER) {
+                        if ($("#node-input-selectedDatetimeMode").val() === DATETIME_MODE_DATETIME || $("#node-input-selectedDatetimeMode").val() === DATETIME_MODE_DATE) {   // Mode 'Datetime' and 'Date'
+                            if (!v.match(/^\s*$/)) {  // if there is date, no interest time -> validate date
+                                return isValidDate(v);
+                            } else {
+                                return true;
+                            }
+                        } else {    // Mode 'Time'
                             return true;
                         }
                     } else {
@@ -375,11 +556,14 @@
             datetimeInitialTime: {  // optional
                 value: "",
                 validate: function (v) {
-                    if ($("#node-input-action").typedInput('value') === DATETIMEPICKER) {
-                        if (!v.match(/^\s*$/)) {
-                            const result = isValidTime(v);
-                            return result;
-                        } else {
+                    if ($("#node-input-action").typedInput('value') === ACTION_DATETIMEPICKER) {
+                        if ($("#node-input-selectedDatetimeMode").val() === DATETIME_MODE_DATETIME || $("#node-input-selectedDatetimeMode").val() === DATETIME_MODE_TIME) {   // Mode 'Datetime' and 'Time'
+                            if (!v.match(/^\s*$/)) {
+                                return isValidTime(v);
+                            } else {
+                                return true;
+                            }
+                        } else {    // Mode 'Date'
                             return true;
                         }
                     } else {
@@ -390,15 +574,14 @@
             datetimeMaxDate: {  // max must more than min
                 value: "",
                 validate: function (v) {
-                    if ($("#node-input-action").typedInput('value') === DATETIMEPICKER) {
-                        if (!v.match(/^\s*$/)) {
-                            // validate date
-                            const resultValidDate = isValidDate(v);
-                            let resultCompare = true;
-                            // TODO: Compare min and max
-                            
-                            return resultValidDate && resultCompare;
-                        } else {
+                    if ($("#node-input-action").typedInput('value') === ACTION_DATETIMEPICKER) {
+                        if ($("#node-input-selectedDatetimeMode").val() === DATETIME_MODE_DATETIME || $("#node-input-selectedDatetimeMode").val() === DATETIME_MODE_DATE) {   // Mode 'Datetime' and 'Date'
+                            if (!v.match(/^\s*$/)) {
+                                return isValidDate(v);
+                            } else {
+                                return true;
+                            }
+                        } else {    // Mode 'Time'
                             return true;
                         }
                     } else {
@@ -409,14 +592,14 @@
             datetimeMaxTime: {  // optional
                 value: "",
                 validate: function (v) {
-                    if ($("#node-input-action").typedInput('value') === DATETIMEPICKER) {
-                        if (!v.match(/^\s*$/)) {
-                            const resultValidTime = isValidTime(v);
-                            let resultCompare = true;
-                            // TODO: Compare min and max
-
-                            return resultValidTime && resultCompare;
-                        } else {
+                    if ($("#node-input-action").typedInput('value') === ACTION_DATETIMEPICKER) {
+                        if ($("#node-input-selectedDatetimeMode").val() === DATETIME_MODE_DATETIME || $("#node-input-selectedDatetimeMode").val() === DATETIME_MODE_TIME) {   // Mode 'Datetime' and 'Time'
+                            if (!v.match(/^\s*$/)) {
+                                return isValidTime(v);;
+                            } else {
+                                return true;
+                            }
+                        } else {    // Mode 'Date'
                             return true;
                         }
                     } else {
@@ -427,15 +610,14 @@
             datetimeMinDate: {  // min must less than max
                 value: "",
                 validate: function (v) {
-                    if ($("#node-input-action").typedInput('value') === DATETIMEPICKER) {
-                        if (!v.match(/^\s*$/)) {
-                            // validate date
-                            const resultValidDate = isValidDate(v);
-                            let resultCompare = true;
-                            // TODO: Compare min and max
-                            
-                            return resultValidDate && resultCompare;
-                        } else {
+                    if ($("#node-input-action").typedInput('value') === ACTION_DATETIMEPICKER) {
+                        if ($("#node-input-selectedDatetimeMode").val() === DATETIME_MODE_DATETIME || $("#node-input-selectedDatetimeMode").val() === DATETIME_MODE_DATE) {   // Mode 'Datetime' and 'Date'
+                            if (!v.match(/^\s*$/)) {
+                                return isValidDate(v);
+                            } else {
+                                return true;
+                            }
+                        } else {    // Mode 'Time'
                             return true;
                         }
                     } else {
@@ -446,14 +628,14 @@
             datetimeMinTime: {  // optional
                 value: "",
                 validate: function (v) {
-                    if ($("#node-input-action").typedInput('value') === DATETIMEPICKER) {
-                        if (!v.match(/^\s*$/)) {
-                            const resultValidTime = isValidTime(v);
-                            let resultCompare = true;
-                            // TODO: Compare min and max
-
-                            return resultValidTime && resultCompare;;
-                        } else {
+                    if ($("#node-input-action").typedInput('value') === ACTION_DATETIMEPICKER) {
+                        if ($("#node-input-selectedDatetimeMode").val() === DATETIME_MODE_DATETIME || $("#node-input-selectedDatetimeMode").val() === DATETIME_MODE_TIME) {   // Mode 'Datetime' and 'Time'
+                            if (!v.match(/^\s*$/)) {
+                                return isValidTime(v);;
+                            } else {
+                                return true;
+                            }
+                        } else {    // Mode 'Date'
                             return true;
                         }
                     } else {
@@ -463,6 +645,24 @@
             },
             useQuickReplyItem: {
                 value: true
+            },
+            InvalidInitialDatetime: {
+                value: "",
+                validate: function (v) {
+                    return v === "";
+                }
+            },
+            InvalidMinDatetime: {
+                value: "",
+                validate: function (v) {
+                    return v === "";
+                }
+            },
+            InvalidMaxDatetime: {
+                value: "",
+                validate: function (v) {
+                    return v === "";
+                }
             }
         },
         paletteLabel: "quick reply item",
@@ -512,6 +712,12 @@
                 // set appropriate input for each action
                 setDisplay(value);
             });
+            $("#node-input-datetimeMode").on("change", (event, type, value) => {
+                // Keep selected Datetime Mode
+                $("#node-input-selectedDatetimeMode").val(value);
+                // set appropriate input for each action
+                setDisplay4Datetime(value);
+            });
             $("#node-input-datetimeInitialDate").datepicker({   // set properties
                 dateFormat: "dd/mm/yy",
                 minDate: new Date(1900, 0, 1),
@@ -529,10 +735,203 @@
             });
             // set display input by action type
             setDisplay($("#node-input-action").typedInput('value'));
+            // set display input datetime section by datetime picker mode
+            setDisplay4Datetime($("#node-input-datetimeMode").typedInput('value'));
         },
         oneditsave: function () {
             // Clear not use data before save
             clearNotUseData($("#node-input-action").typedInput('value'));
+            // if action = datetimepicker then validate date & time
+            if ($("#node-input-action").typedInput('value') === ACTION_DATETIMEPICKER) {
+                const mode = $("#node-input-selectedDatetimeMode").val();
+                const initialDate = $("#node-input-datetimeInitialDate").val();
+                const initialTime = $("#node-input-datetimeInitialTime").val();
+                const minDate = $("#node-input-datetimeMinDate").val();
+                const minTime = $("#node-input-datetimeMinTime").val();
+                const maxDate = $("#node-input-datetimeMaxDate").val();
+                const maxTime = $("#node-input-datetimeMaxTime").val();
+
+                if (mode === DATETIME_MODE_DATETIME) {  // === Validate mode 'Datetime' ===
+                    // if every pair Date&Time are empty, or each pair Date&Time has only one value, then validate pass
+                    if ((initialDate.match(/^\s*$/) && initialTime.match(/^\s*$/) && minDate.match(/^\s*$/) && minTime.match(/^\s*$/) && maxDate.match(/^\s*$/) && maxTime.match(/^\s*$/)) ||
+                        (!initialDate.match(/^\s*$/) && !initialTime.match(/^\s*$/) && minDate.match(/^\s*$/) && minTime.match(/^\s*$/) && maxDate.match(/^\s*$/) && maxTime.match(/^\s*$/)) ||
+                        (initialDate.match(/^\s*$/) && initialTime.match(/^\s*$/) && !minDate.match(/^\s*$/) && !minTime.match(/^\s*$/) && maxDate.match(/^\s*$/) && maxTime.match(/^\s*$/)) ||
+                        (initialDate.match(/^\s*$/) && initialTime.match(/^\s*$/) && minDate.match(/^\s*$/) && minTime.match(/^\s*$/) && !maxDate.match(/^\s*$/) && !maxTime.match(/^\s*$/))) {
+                        setInvalidDatetimeValues("initial", "");
+                        setInvalidDatetimeValues("min", "");
+                        setInvalidDatetimeValues("max", "");
+                    } else {
+                        let passValidate = true;
+                        // Validate have/not have both 'Date' & 'Time' value 
+                        if ((initialDate.match(/^\s*$/) && !initialTime.match(/^\s*$/)) || (!initialDate.match(/^\s*$/) && initialTime.match(/^\s*$/))) {
+                            setInvalidDatetimeValues("initial", this._("node-line-bot-quick-reply-item.errors.initialDateAndTimeMustSame"));
+                            passValidate = false;
+                        } else {
+                            setInvalidDatetimeValues("initial", "");
+                        }
+                        if ((minDate.match(/^\s*$/) && !minTime.match(/^\s*$/)) || (!minDate.match(/^\s*$/) && minTime.match(/^\s*$/))) {
+                            setInvalidDatetimeValues("min", this._("node-line-bot-quick-reply-item.errors.minDateAndTimeMustSame"));
+                            passValidate = false;
+                        } else {
+                            setInvalidDatetimeValues("min", "");
+                        }
+                        if ((maxDate.match(/^\s*$/) && !maxTime.match(/^\s*$/)) || (!maxDate.match(/^\s*$/) && maxTime.match(/^\s*$/))) {
+                            setInvalidDatetimeValues("max", this._("node-line-bot-quick-reply-item.errors.maxDateAndTimeMustSame"));
+                            passValidate = false;
+                        } else {
+                            setInvalidDatetimeValues("max", "");
+                        }
+                        // if validation has pass, then compare date and time
+                        if (passValidate) {
+                            // Compare between 'initial' and 'min'
+                            if (!initialDate.match(/^\s*$/) && !initialTime.match(/^\s*$/) && !minDate.match(/^\s*$/) && !minTime.match(/^\s*$/)) {
+                                if (createDate(minDate, minTime) > createDate(initialDate, initialTime)) {
+                                    setInvalidDatetimeValues("initial", this._("node-line-bot-quick-reply-item.errors.minMustLessThanOrEqualInitial"));
+                                    setInvalidDatetimeValues("min", this._("node-line-bot-quick-reply-item.errors.minMustLessThanOrEqualInitial"));
+                                    passValidate = false;
+                                } else {
+                                    setInvalidDatetimeValues("initial", "");
+                                    setInvalidDatetimeValues("min", "");
+                                    passValidate = true;
+                                }
+                                setInvalidDatetimeValues("max", "");
+                            }
+                            // Compare between 'initial' and 'max'
+                            if (passValidate && !initialDate.match(/^\s*$/) && !initialTime.match(/^\s*$/) && !maxDate.match(/^\s*$/) && !maxTime.match(/^\s*$/)) {
+                                if (createDate(initialDate, initialTime) > createDate(maxDate, maxTime)) {
+                                    setInvalidDatetimeValues("initial", this._("node-line-bot-quick-reply-item.errors.maxMustMoreThanOrEqualInitial"));
+                                    setInvalidDatetimeValues("max", this._("node-line-bot-quick-reply-item.errors.maxMustMoreThanOrEqualInitial"));
+                                    passValidate = false;
+                                } else {
+                                    setInvalidDatetimeValues("initial", "");
+                                    setInvalidDatetimeValues("max", "");
+                                    passValidate = true;
+                                }
+                                setInvalidDatetimeValues("min", "");
+                            }
+                            // Compare between 'min' and 'max'
+                            if (passValidate && !minDate.match(/^\s*$/) && !minTime.match(/^\s*$/) && !maxDate.match(/^\s*$/) && !maxTime.match(/^\s*$/)) {
+                                if (createDate(minDate, minTime) > createDate(maxDate, maxTime)) {
+                                    setInvalidDatetimeValues("min", this._("node-line-bot-quick-reply-item.errors.maxMustMoreThanOrEqualMin"));
+                                    setInvalidDatetimeValues("max", this._("node-line-bot-quick-reply-item.errors.maxMustMoreThanOrEqualMin"));
+                                    passValidate = false;
+                                } else {
+                                    setInvalidDatetimeValues("min", "");
+                                    setInvalidDatetimeValues("max", "");
+                                    passValidate = true;
+                                }
+                                setInvalidDatetimeValues("initial", "");
+                            }
+                        }
+                    }
+                } else if (mode === DATETIME_MODE_DATE) {   // === Validate mode 'Date' ===
+                    let passValidate = true;
+                    // if every Date are empty, or each time has only one value, then validate pass
+                    if ((initialDate.match(/^\s*$/) && minDate.match(/^\s*$/) && maxDate.match(/^\s*$/)) ||
+                        (!initialDate.match(/^\s*$/) && minDate.match(/^\s*$/) && maxDate.match(/^\s*$/)) ||
+                        (initialDate.match(/^\s*$/) && !minDate.match(/^\s*$/) && maxDate.match(/^\s*$/)) ||
+                        (initialDate.match(/^\s*$/) && minDate.match(/^\s*$/) && !maxDate.match(/^\s*$/))) {
+                        setInvalidDatetimeValues("initial", "");
+                        setInvalidDatetimeValues("min", "");
+                        setInvalidDatetimeValues("max", "");
+                        passValidate = true;
+                    }
+                    // Compare between 'initial' and 'min'
+                    if (passValidate && !initialDate.match(/^\s*$/) && !minDate.match(/^\s*$/)) {
+                        if (new Date(convertDate(minDate)) > new Date(convertDate(initialDate))) {
+                            setInvalidDatetimeValues("initial", this._("node-line-bot-quick-reply-item.errors.minMustLessThanOrEqualInitial"));
+                            setInvalidDatetimeValues("min", this._("node-line-bot-quick-reply-item.errors.minMustLessThanOrEqualInitial"));
+                            passValidate = false;
+                        } else {
+                            setInvalidDatetimeValues("initial", "");
+                            setInvalidDatetimeValues("min", "");
+                            passValidate = true;
+                        }
+                        setInvalidDatetimeValues("max", "");
+                    }
+                    // Compare between 'initial' and 'max'
+                    if (passValidate && !initialDate.match(/^\s*$/) && !maxDate.match(/^\s*$/)) {
+                        if (new Date(convertDate(initialDate)) > new Date(convertDate(maxDate))) {
+                            setInvalidDatetimeValues("initial", this._("node-line-bot-quick-reply-item.errors.maxMustMoreThanOrEqualInitial"));
+                            setInvalidDatetimeValues("max", this._("node-line-bot-quick-reply-item.errors.maxMustMoreThanOrEqualInitial"));
+                            passValidate = false;
+                        } else {
+                            setInvalidDatetimeValues("initial", "");
+                            setInvalidDatetimeValues("max", "");
+                            passValidate = true;
+                        }
+                        setInvalidDatetimeValues("min", "");
+                    }
+                    // Compare between 'min' and 'max'
+                    if (passValidate && !minDate.match(/^\s*$/) && !maxDate.match(/^\s*$/)) {
+                        if (new Date(convertDate(minDate)) > new Date(convertDate(maxDate))) {
+                            setInvalidDatetimeValues("min", this._("node-line-bot-quick-reply-item.errors.maxMustMoreThanOrEqualMin"));
+                            setInvalidDatetimeValues("max", this._("node-line-bot-quick-reply-item.errors.maxMustMoreThanOrEqualMin"));
+                            passValidate = false;
+                        } else {
+                            setInvalidDatetimeValues("min", "");
+                            setInvalidDatetimeValues("max", "");
+                            passValidate = true;
+                        }
+                        setInvalidDatetimeValues("initial", "");
+                    }
+                } else {   // === Validate mode 'Time' ===
+                    let passValidate = true;
+                    // if every time are empty, or each time has only one value, then validate pass
+                    if ((initialTime.match(/^\s*$/) && minTime.match(/^\s*$/) && maxTime.match(/^\s*$/)) ||
+                        (!initialTime.match(/^\s*$/) && minTime.match(/^\s*$/) && maxTime.match(/^\s*$/)) ||
+                        (initialTime.match(/^\s*$/) && !minTime.match(/^\s*$/) && maxTime.match(/^\s*$/)) ||
+                        (initialTime.match(/^\s*$/) && minTime.match(/^\s*$/) && !maxTime.match(/^\s*$/))) {
+                        setInvalidDatetimeValues("initial", "");
+                        setInvalidDatetimeValues("min", "");
+                        setInvalidDatetimeValues("max", "");
+                        passValidate = true;
+                    }
+                    // Compare between 'initial' and 'min'
+                    if (passValidate && !initialTime.match(/^\s*$/) && !minTime.match(/^\s*$/)) {
+                        if (Date.parse("01/01/2011 " + minTime + ":00") > Date.parse("01/01/2011 " + initialTime + ":00")) {
+                            setInvalidDatetimeValues("initial", this._("node-line-bot-quick-reply-item.errors.minMustLessThanOrEqualInitial"));
+                            setInvalidDatetimeValues("min", this._("node-line-bot-quick-reply-item.errors.minMustLessThanOrEqualInitial"));
+                            passValidate = false;
+                        } else {
+                            setInvalidDatetimeValues("initial", "");
+                            setInvalidDatetimeValues("min", "");
+                            passValidate = true;
+                        }
+                        setInvalidDatetimeValues("max", "");
+                    }
+                    // Compare between 'initial' and 'max'
+                    if (passValidate && !initialTime.match(/^\s*$/) && !maxTime.match(/^\s*$/)) {
+                        if (Date.parse("01/01/2011 " + initialTime + ":00") > Date.parse("01/01/2011 " + maxTime + ":00")) {
+                            setInvalidDatetimeValues("initial", this._("node-line-bot-quick-reply-item.errors.maxMustMoreThanOrEqualInitial"));
+                            setInvalidDatetimeValues("max", this._("node-line-bot-quick-reply-item.errors.maxMustMoreThanOrEqualInitial"));
+                            passValidate = false;
+                        } else {
+                            setInvalidDatetimeValues("initial", "");
+                            setInvalidDatetimeValues("max", "");
+                            passValidate = true;
+                        }
+                        setInvalidDatetimeValues("min", "");
+                    }
+                    // Compare between 'min' and 'max'
+                    if (passValidate && !minTime.match(/^\s*$/) && !maxTime.match(/^\s*$/)) {
+                        if (Date.parse("01/01/2011 " + minTime + ":00") > Date.parse("01/01/2011 " + maxTime + ":00")) {
+                            setInvalidDatetimeValues("min", this._("node-line-bot-quick-reply-item.errors.maxMustMoreThanOrEqualMin"));
+                            setInvalidDatetimeValues("max", this._("node-line-bot-quick-reply-item.errors.maxMustMoreThanOrEqualMin"));
+                            passValidate = false;
+                        } else {
+                            setInvalidDatetimeValues("min", "");
+                            setInvalidDatetimeValues("max", "");
+                            passValidate = true;
+                        }
+                        setInvalidDatetimeValues("initial", "");
+                    }
+                }
+            } else {    // Other action -> not check datetime, and pass validate datetime
+                setInvalidDatetimeValues("initial", "");
+                setInvalidDatetimeValues("min", "");
+                setInvalidDatetimeValues("max", "");
+            }
         }
     });
 </script>

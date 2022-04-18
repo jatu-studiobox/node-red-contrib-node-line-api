@@ -24,27 +24,19 @@
             "concertUrlLink": "See Using LINE features with the LINE URL scheme",
             "consertUrlExample1": "Ex1. http://www.domainname.com",
             "consertUrlExample2": "Ex2. https://www.domainname.com",
-            "consertUrlExample3": "Ex3. tel:0909990099 [9-10 digits]"
-        },
-        "button": {
-            "messageType": {
-                "normalText": "Normal Text",
-                "customFormat": "Custom Message Format"
-            }
+            "consertUrlExample3": "Ex3. tel:0909990099 [9-10 digits]",
+            "concernDatetime": "The available schemes are"
         },
         "errors": {
-            "notFoundToken": "Channel Access Token not found",
-            "messageRequired": "payload is required",
-            "messageInvalid": "payload is invalid",
-            "messageEmpty": "payload cannot be empty",
-            "messageTypeRequired": "messageType is required",
-            "messageTypeInvalid": "messageType is invalid",
-            "destinationIdRequired": "destinationId is required",
-            "destinationIdInvalid": "destinationId is invalid",
-            "destinationIdEmpty": "destinationId cannot be empty"
-        },
-        "send-result": {
-            "success": "Push message success: "
+            "errorMapInitialDatetime": "Cannot map initial date and time",
+            "errorMapMaxDatetime": "Cannot map max date and time",
+            "errorMapMinDatetime": "Cannot map min date and time",
+            "initialDateAndTimeMustSame": "Initial Date & Time must have/not have the same value",
+            "minDateAndTimeMustSame": "Min Date & Time must have/not have the same value",
+            "maxDateAndTimeMustSame": "Max Date & Time must have/not have the same value",
+            "minMustLessThanOrEqualInitial": "Min must less than Initial",
+            "maxMustMoreThanOrEqualInitial": "Max must more than Initial",
+            "maxMustMoreThanOrEqualMin": "Max must more than Min"
         }
     }
 }
