@@ -12,19 +12,23 @@ module.exports = function (RED) {
         let node = this;
         node.on('input', async (msg) => {
             try {
-                console.log("msg.payload: ", msg.payload);
                 if (msg.payload.events.length > 0) {
                     msg.payload.events.forEach(event => {
-                        node.send({
+                        let payloadSend = {
                             payload: event,
                             replyToken: event.replyToken
-                        });
+                        };
+                        if (msg.quickReplyItems) {
+                            payloadSend.quickReplyItems = msg.quickReplyItems;
+                        }
+                        node.send(payloadSend);
                     });
+                    node.status({});
                 } else {
                     msg.status = -1;
                     msg.payload = RED._("node-line-bot-replyToken-provider.error.notHasEvents");
                     setError(node, msg);
-                }         
+                }
             } catch (error) {
                 msg.status = -1;
                 msg.payload = error;

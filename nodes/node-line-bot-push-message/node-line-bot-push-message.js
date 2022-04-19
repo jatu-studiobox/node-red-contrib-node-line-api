@@ -146,7 +146,6 @@ module.exports = function (RED) {
                 if (msg.quickReplyItems) {
                     if (msg.quickReplyItems.length > 0) {
                         quickReplyItems = msg.quickReplyItems;
-                        console.log("quickReplyItems: ", quickReplyItems);
                     }
                 }
             } catch (error) {

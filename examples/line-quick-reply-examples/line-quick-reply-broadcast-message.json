@@ -1,0 +1,211 @@
+[
+    {
+        "id": "539ddc620e70a50d",
+        "type": "tab",
+        "label": "Example Quick Reply Items",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "c8af07a4bc565513",
+        "type": "debug",
+        "z": "539ddc620e70a50d",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "quickReplyItems",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 900,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "b3faa84bb09e024f",
+        "type": "node-line-bot-quick-reply-collector",
+        "z": "539ddc620e70a50d",
+        "name": "",
+        "count": "3",
+        "x": 500,
+        "y": 220,
+        "wires": [
+            [
+                "939c625cde9d5f06"
+            ]
+        ]
+    },
+    {
+        "id": "5e929c888907b961",
+        "type": "inject",
+        "z": "539ddc620e70a50d",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 100,
+        "y": 220,
+        "wires": [
+            [
+                "451092ecf65fa98e",
+                "697f89d3a9328d1e",
+                "751b48d659e9924d"
+            ]
+        ]
+    },
+    {
+        "id": "c8affb9ecec6f697",
+        "type": "debug",
+        "z": "539ddc620e70a50d",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 870,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "451092ecf65fa98e",
+        "type": "node-line-bot-quick-reply-item",
+        "z": "539ddc620e70a50d",
+        "name": "Go to Google",
+        "action": "uri",
+        "imageUrl": "",
+        "replyLabel": "Google",
+        "postbackData": "",
+        "postbackDisplayText": "",
+        "messageText": "",
+        "uri": "https://www.google.com",
+        "altUriDesktop": "",
+        "datetimeData": "",
+        "datetimeMode": "",
+        "selectedDatetimeMode": "",
+        "datetimeInitialDate": "",
+        "datetimeInitialTime": "",
+        "datetimeMaxDate": "",
+        "datetimeMaxTime": "",
+        "datetimeMinDate": "",
+        "datetimeMinTime": "",
+        "useQuickReplyItem": true,
+        "InvalidInitialDatetime": "",
+        "InvalidMinDatetime": "",
+        "InvalidMaxDatetime": "",
+        "x": 270,
+        "y": 140,
+        "wires": [
+            [
+                "b3faa84bb09e024f"
+            ]
+        ]
+    },
+    {
+        "id": "697f89d3a9328d1e",
+        "type": "node-line-bot-quick-reply-item",
+        "z": "539ddc620e70a50d",
+        "name": "Tokyo Text",
+        "action": "message",
+        "imageUrl": "",
+        "replyLabel": "Tokyo",
+        "postbackData": "",
+        "postbackDisplayText": "",
+        "messageText": "Tokyo",
+        "uri": "",
+        "altUriDesktop": "",
+        "datetimeData": "",
+        "datetimeMode": "",
+        "selectedDatetimeMode": "",
+        "datetimeInitialDate": "",
+        "datetimeInitialTime": "",
+        "datetimeMaxDate": "",
+        "datetimeMaxTime": "",
+        "datetimeMinDate": "",
+        "datetimeMinTime": "",
+        "useQuickReplyItem": true,
+        "InvalidInitialDatetime": "",
+        "InvalidMinDatetime": "",
+        "InvalidMaxDatetime": "",
+        "x": 270,
+        "y": 220,
+        "wires": [
+            [
+                "b3faa84bb09e024f"
+            ]
+        ]
+    },
+    {
+        "id": "939c625cde9d5f06",
+        "type": "node-line-bot-broadcast-message",
+        "z": "539ddc620e70a50d",
+        "name": "",
+        "useExternalMessage": false,
+        "hasMessage": true,
+        "message": "Hi, I am broadcast message node 😊 with quick reply",
+        "messageType": 0,
+        "disabledNotification": false,
+        "apiConfig": "",
+        "x": 610,
+        "y": 300,
+        "wires": [
+            [
+                "c8af07a4bc565513",
+                "c8affb9ecec6f697"
+            ]
+        ]
+    },
+    {
+        "id": "751b48d659e9924d",
+        "type": "node-line-bot-quick-reply-item",
+        "z": "539ddc620e70a50d",
+        "name": "Camera",
+        "action": "camera",
+        "imageUrl": "",
+        "replyLabel": "Open Camera",
+        "postbackData": "",
+        "postbackDisplayText": "",
+        "messageText": "",
+        "uri": "",
+        "altUriDesktop": "",
+        "datetimeData": "",
+        "datetimeMode": "",
+        "selectedDatetimeMode": "",
+        "datetimeInitialDate": "",
+        "datetimeInitialTime": "",
+        "datetimeMaxDate": "",
+        "datetimeMaxTime": "",
+        "datetimeMinDate": "",
+        "datetimeMinTime": "",
+        "useQuickReplyItem": true,
+        "InvalidInitialDatetime": "",
+        "InvalidMinDatetime": "",
+        "InvalidMaxDatetime": "",
+        "x": 280,
+        "y": 300,
+        "wires": [
+            [
+                "b3faa84bb09e024f"
+            ]
+        ]
+    }
+]

@@ -1,0 +1,178 @@
+[
+    {
+        "id": "539ddc620e70a50d",
+        "type": "tab",
+        "label": "Example Quick Reply Push Message",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "c8af07a4bc565513",
+        "type": "debug",
+        "z": "539ddc620e70a50d",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "quickReplyItems",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 940,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "b3faa84bb09e024f",
+        "type": "node-line-bot-quick-reply-collector",
+        "z": "539ddc620e70a50d",
+        "name": "",
+        "count": "2",
+        "x": 540,
+        "y": 180,
+        "wires": [
+            [
+                "384d10d56a5c71e5"
+            ]
+        ]
+    },
+    {
+        "id": "5e929c888907b961",
+        "type": "inject",
+        "z": "539ddc620e70a50d",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 100,
+        "y": 180,
+        "wires": [
+            [
+                "451092ecf65fa98e",
+                "697f89d3a9328d1e"
+            ]
+        ]
+    },
+    {
+        "id": "384d10d56a5c71e5",
+        "type": "node-line-bot-push-message",
+        "z": "539ddc620e70a50d",
+        "name": "",
+        "useExternalMessage": false,
+        "useExternalDestinationId": false,
+        "hasDestinationId": true,
+        "hasMessage": true,
+        "message": "{\n    \"type\": \"flex\",\n    \"altText\": \"This is Custom Message Text example\",\n    \"contents\": {\n        \"type\": \"bubble\",\n        \"size\": \"mega\",\n        \"header\": {\n            \"type\": \"box\",\n            \"layout\": \"vertical\",\n            \"contents\": [\n                {\n                    \"type\": \"box\",\n                    \"layout\": \"vertical\",\n                    \"contents\": [\n                        {\n                            \"type\": \"text\",\n                            \"text\": \"FROM\",\n                            \"color\": \"#ffffff66\",\n                            \"size\": \"sm\"\n                        },\n                        {\n                            \"type\": \"text\",\n                            \"text\": \"Akihabara\",\n                            \"color\": \"#ffffff\",\n                            \"size\": \"xl\",\n                            \"flex\": 4,\n                            \"weight\": \"bold\"\n                        }\n                    ]\n                },\n                {\n                    \"type\": \"box\",\n                    \"layout\": \"vertical\",\n                    \"contents\": [\n                        {\n                            \"type\": \"text\",\n                            \"text\": \"TO\",\n                            \"color\": \"#ffffff66\",\n                            \"size\": \"sm\"\n                        },\n                        {\n                            \"type\": \"text\",\n                            \"text\": \"Shinjuku\",\n                            \"color\": \"#ffffff\",\n                            \"size\": \"xl\",\n                            \"flex\": 4,\n                            \"weight\": \"bold\"\n                        }\n                    ]\n                }\n            ],\n            \"paddingAll\": \"20px\",\n            \"backgroundColor\": \"#0367D3\",\n            \"spacing\": \"md\",\n            \"height\": \"154px\",\n            \"paddingTop\": \"22px\"\n        },\n        \"body\": {\n            \"type\": \"box\",\n            \"layout\": \"vertical\",\n            \"contents\": [\n                {\n                    \"type\": \"text\",\n                    \"text\": \"Total: 1 hour\",\n                    \"color\": \"#b7b7b7\",\n                    \"size\": \"xs\"\n                },\n                {\n                    \"type\": \"box\",\n                    \"layout\": \"horizontal\",\n                    \"contents\": [\n                        {\n                            \"type\": \"text\",\n                            \"text\": \"20:30\",\n                            \"size\": \"sm\",\n                            \"gravity\": \"center\"\n                        },\n                        {\n                            \"type\": \"box\",\n                            \"layout\": \"vertical\",\n                            \"contents\": [\n                                {\n                                    \"type\": \"filler\"\n                                },\n                                {\n                                    \"type\": \"box\",\n                                    \"layout\": \"vertical\",\n                                    \"contents\": [],\n                                    \"cornerRadius\": \"30px\",\n                                    \"height\": \"12px\",\n                                    \"width\": \"12px\",\n                                    \"borderColor\": \"#EF454D\",\n                                    \"borderWidth\": \"2px\"\n                                },\n                                {\n                                    \"type\": \"filler\"\n                                }\n                            ],\n                            \"flex\": 0\n                        },\n                        {\n                            \"type\": \"text\",\n                            \"text\": \"Akihabara\",\n                            \"gravity\": \"center\",\n                            \"flex\": 4,\n                            \"size\": \"sm\"\n                        }\n                    ],\n                    \"spacing\": \"lg\",\n                    \"cornerRadius\": \"30px\",\n                    \"margin\": \"xl\"\n                },\n                {\n                    \"type\": \"box\",\n                    \"layout\": \"horizontal\",\n                    \"contents\": [\n                        {\n                            \"type\": \"box\",\n                            \"layout\": \"baseline\",\n                            \"contents\": [\n                                {\n                                    \"type\": \"filler\"\n                                }\n                            ],\n                            \"flex\": 1\n                        },\n                        {\n                            \"type\": \"box\",\n                            \"layout\": \"vertical\",\n                            \"contents\": [\n                                {\n                                    \"type\": \"box\",\n                                    \"layout\": \"horizontal\",\n                                    \"contents\": [\n                                        {\n                                            \"type\": \"filler\"\n                                        },\n                                        {\n                                            \"type\": \"box\",\n                                            \"layout\": \"vertical\",\n                                            \"contents\": [],\n                                            \"width\": \"2px\",\n                                            \"backgroundColor\": \"#B7B7B7\"\n                                        },\n                                        {\n                                            \"type\": \"filler\"\n                                        }\n                                    ],\n                                    \"flex\": 1\n                                }\n                            ],\n                            \"width\": \"12px\"\n                        },\n                        {\n                            \"type\": \"text\",\n                            \"text\": \"Walk 4min\",\n                            \"gravity\": \"center\",\n                            \"flex\": 4,\n                            \"size\": \"xs\",\n                            \"color\": \"#8c8c8c\"\n                        }\n                    ],\n                    \"spacing\": \"lg\",\n                    \"height\": \"64px\"\n                },\n                {\n                    \"type\": \"box\",\n                    \"layout\": \"horizontal\",\n                    \"contents\": [\n                        {\n                            \"type\": \"box\",\n                            \"layout\": \"horizontal\",\n                            \"contents\": [\n                                {\n                                    \"type\": \"text\",\n                                    \"text\": \"20:34\",\n                                    \"gravity\": \"center\",\n                                    \"size\": \"sm\"\n                                }\n                            ],\n                            \"flex\": 1\n                        },\n                        {\n                            \"type\": \"box\",\n                            \"layout\": \"vertical\",\n                            \"contents\": [\n                                {\n                                    \"type\": \"filler\"\n                                },\n                                {\n                                    \"type\": \"box\",\n                                    \"layout\": \"vertical\",\n                                    \"contents\": [],\n                                    \"cornerRadius\": \"30px\",\n                                    \"width\": \"12px\",\n                                    \"height\": \"12px\",\n                                    \"borderWidth\": \"2px\",\n                                    \"borderColor\": \"#6486E3\"\n                                },\n                                {\n                                    \"type\": \"filler\"\n                                }\n                            ],\n                            \"flex\": 0\n                        },\n                        {\n                            \"type\": \"text\",\n                            \"text\": \"Ochanomizu\",\n                            \"gravity\": \"center\",\n                            \"flex\": 4,\n                            \"size\": \"sm\"\n                        }\n                    ],\n                    \"spacing\": \"lg\",\n                    \"cornerRadius\": \"30px\"\n                },\n                {\n                    \"type\": \"box\",\n                    \"layout\": \"horizontal\",\n                    \"contents\": [\n                        {\n                            \"type\": \"box\",\n                            \"layout\": \"baseline\",\n                            \"contents\": [\n                                {\n                                    \"type\": \"filler\"\n                                }\n                            ],\n                            \"flex\": 1\n                        },\n                        {\n                            \"type\": \"box\",\n                            \"layout\": \"vertical\",\n                            \"contents\": [\n                                {\n                                    \"type\": \"box\",\n                                    \"layout\": \"horizontal\",\n                                    \"contents\": [\n                                        {\n                                            \"type\": \"filler\"\n                                        },\n                                        {\n                                            \"type\": \"box\",\n                                            \"layout\": \"vertical\",\n                                            \"contents\": [],\n                                            \"width\": \"2px\",\n                                            \"backgroundColor\": \"#6486E3\"\n                                        },\n                                        {\n                                            \"type\": \"filler\"\n                                        }\n                                    ],\n                                    \"flex\": 1\n                                }\n                            ],\n                            \"width\": \"12px\"\n                        },\n                        {\n                            \"type\": \"text\",\n                            \"text\": \"Metro 1hr\",\n                            \"gravity\": \"center\",\n                            \"flex\": 4,\n                            \"size\": \"xs\",\n                            \"color\": \"#8c8c8c\"\n                        }\n                    ],\n                    \"spacing\": \"lg\",\n                    \"height\": \"64px\"\n                },\n                {\n                    \"type\": \"box\",\n                    \"layout\": \"horizontal\",\n                    \"contents\": [\n                        {\n                            \"type\": \"text\",\n                            \"text\": \"20:40\",\n                            \"gravity\": \"center\",\n                            \"size\": \"sm\"\n                        },\n                        {\n                            \"type\": \"box\",\n                            \"layout\": \"vertical\",\n                            \"contents\": [\n                                {\n                                    \"type\": \"filler\"\n                                },\n                                {\n                                    \"type\": \"box\",\n                                    \"layout\": \"vertical\",\n                                    \"contents\": [],\n                                    \"cornerRadius\": \"30px\",\n                                    \"width\": \"12px\",\n                                    \"height\": \"12px\",\n                                    \"borderColor\": \"#6486E3\",\n                                    \"borderWidth\": \"2px\"\n                                },\n                                {\n                                    \"type\": \"filler\"\n                                }\n                            ],\n                            \"flex\": 0\n                        },\n                        {\n                            \"type\": \"text\",\n                            \"text\": \"Shinjuku\",\n                            \"gravity\": \"center\",\n                            \"flex\": 4,\n                            \"size\": \"sm\"\n                        }\n                    ],\n                    \"spacing\": \"lg\",\n                    \"cornerRadius\": \"30px\"\n                }\n            ]\n        }\n    }\n}",
+        "messageType": "1",
+        "disabledNotification": false,
+        "apiConfig": "",
+        "x": 680,
+        "y": 260,
+        "wires": [
+            [
+                "c8af07a4bc565513",
+                "c8affb9ecec6f697"
+            ]
+        ]
+    },
+    {
+        "id": "c8affb9ecec6f697",
+        "type": "debug",
+        "z": "539ddc620e70a50d",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 910,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "451092ecf65fa98e",
+        "type": "node-line-bot-quick-reply-item",
+        "z": "539ddc620e70a50d",
+        "name": "",
+        "action": "datetimepicker",
+        "imageUrl": "",
+        "replyLabel": "เลือกวัน",
+        "postbackData": "",
+        "postbackDisplayText": "",
+        "messageText": "",
+        "uri": "",
+        "altUriDesktop": "",
+        "datetimeData": "storedId=1234",
+        "datetimeMode": "datetime",
+        "selectedDatetimeMode": "datetime",
+        "datetimeInitialDate": "04/04/2022",
+        "datetimeInitialTime": "01:00",
+        "datetimeMaxDate": "30/04/2022",
+        "datetimeMaxTime": "11:23",
+        "datetimeMinDate": "01/04/2022",
+        "datetimeMinTime": "11:23",
+        "useQuickReplyItem": true,
+        "InvalidInitialDatetime": "",
+        "InvalidMinDatetime": "",
+        "InvalidMaxDatetime": "",
+        "x": 290,
+        "y": 140,
+        "wires": [
+            [
+                "b3faa84bb09e024f"
+            ]
+        ]
+    },
+    {
+        "id": "697f89d3a9328d1e",
+        "type": "node-line-bot-quick-reply-item",
+        "z": "539ddc620e70a50d",
+        "name": "",
+        "action": "location",
+        "imageUrl": "",
+        "replyLabel": "Shared Location",
+        "postbackData": "",
+        "postbackDisplayText": "",
+        "messageText": "",
+        "uri": "",
+        "altUriDesktop": "",
+        "datetimeData": "",
+        "datetimeMode": "",
+        "selectedDatetimeMode": "",
+        "datetimeInitialDate": "",
+        "datetimeInitialTime": "",
+        "datetimeMaxDate": "",
+        "datetimeMaxTime": "",
+        "datetimeMinDate": "",
+        "datetimeMinTime": "",
+        "useQuickReplyItem": true,
+        "InvalidInitialDatetime": "",
+        "InvalidMinDatetime": "",
+        "InvalidMaxDatetime": "",
+        "x": 290,
+        "y": 220,
+        "wires": [
+            [
+                "b3faa84bb09e024f"
+            ]
+        ]
+    }
+]

@@ -1,0 +1,231 @@
+[
+    {
+        "id": "d77b9aa38fc0a486",
+        "type": "tab",
+        "label": "Example auto reply message",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "1e780a0be58152d2",
+        "type": "node-line-bot-webhook",
+        "z": "d77b9aa38fc0a486",
+        "name": "",
+        "webhookUrl": "/testwebhook",
+        "apiConfig": "",
+        "x": 110,
+        "y": 100,
+        "wires": [
+            [
+                "0c37a9dcefbdd97b"
+            ]
+        ]
+    },
+    {
+        "id": "0c37a9dcefbdd97b",
+        "type": "node-line-bot-replyToken-provider",
+        "z": "d77b9aa38fc0a486",
+        "name": "",
+        "filterMsgType": "",
+        "x": 140,
+        "y": 200,
+        "wires": [
+            [
+                "7ae1bb3d0ce2315c",
+                "70a1af93a812b0fa",
+                "dcda5dfffa3ac5a3"
+            ]
+        ]
+    },
+    {
+        "id": "8ca7edfe0b9b7afc",
+        "type": "node-line-bot-reply-message",
+        "z": "d77b9aa38fc0a486",
+        "name": "",
+        "useExternalMessage": false,
+        "useExternalReplyToken": true,
+        "hasReplyToken": false,
+        "hasMessage": true,
+        "message": "Hi, this is reply message 👌",
+        "messageType": 0,
+        "disabledNotification": false,
+        "apiConfig": "",
+        "x": 740,
+        "y": 300,
+        "wires": [
+            [
+                "4cdedfe9150ca652",
+                "8cbca9e30aa72ad8"
+            ]
+        ]
+    },
+    {
+        "id": "4cdedfe9150ca652",
+        "type": "debug",
+        "z": "d77b9aa38fc0a486",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 970,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "cd1bcda18f29ab8b",
+        "type": "node-line-bot-quick-reply-collector",
+        "z": "d77b9aa38fc0a486",
+        "name": "",
+        "count": "3",
+        "x": 680,
+        "y": 200,
+        "wires": [
+            [
+                "8ca7edfe0b9b7afc"
+            ]
+        ]
+    },
+    {
+        "id": "7ae1bb3d0ce2315c",
+        "type": "node-line-bot-quick-reply-item",
+        "z": "d77b9aa38fc0a486",
+        "name": "",
+        "action": "cameraRoll",
+        "imageUrl": "",
+        "replyLabel": "Camera Roll",
+        "postbackData": "",
+        "postbackDisplayText": "",
+        "messageText": "",
+        "uri": "",
+        "altUriDesktop": "",
+        "datetimeData": "",
+        "datetimeMode": "",
+        "selectedDatetimeMode": "",
+        "datetimeInitialDate": "",
+        "datetimeInitialTime": "",
+        "datetimeMaxDate": "",
+        "datetimeMaxTime": "",
+        "datetimeMinDate": "",
+        "datetimeMinTime": "",
+        "useQuickReplyItem": true,
+        "InvalidInitialDatetime": "",
+        "InvalidMinDatetime": "",
+        "InvalidMaxDatetime": "",
+        "x": 410,
+        "y": 200,
+        "wires": [
+            [
+                "cd1bcda18f29ab8b"
+            ]
+        ]
+    },
+    {
+        "id": "70a1af93a812b0fa",
+        "type": "node-line-bot-quick-reply-item",
+        "z": "d77b9aa38fc0a486",
+        "name": "",
+        "action": "camera",
+        "imageUrl": "",
+        "replyLabel": "Camera",
+        "postbackData": "",
+        "postbackDisplayText": "",
+        "messageText": "",
+        "uri": "",
+        "altUriDesktop": "",
+        "datetimeData": "",
+        "datetimeMode": "",
+        "selectedDatetimeMode": "",
+        "datetimeInitialDate": "",
+        "datetimeInitialTime": "",
+        "datetimeMaxDate": "",
+        "datetimeMaxTime": "",
+        "datetimeMinDate": "",
+        "datetimeMinTime": "",
+        "useQuickReplyItem": true,
+        "InvalidInitialDatetime": "",
+        "InvalidMinDatetime": "",
+        "InvalidMaxDatetime": "",
+        "x": 390,
+        "y": 140,
+        "wires": [
+            [
+                "cd1bcda18f29ab8b"
+            ]
+        ]
+    },
+    {
+        "id": "d9cbc6d06a664884",
+        "type": "node-line-bot-quick-reply-item",
+        "z": "d77b9aa38fc0a486",
+        "name": "",
+        "action": "location",
+        "imageUrl": "",
+        "replyLabel": "Location",
+        "postbackData": "",
+        "postbackDisplayText": "",
+        "messageText": "",
+        "uri": "",
+        "altUriDesktop": "",
+        "datetimeData": "",
+        "datetimeMode": "",
+        "selectedDatetimeMode": "",
+        "datetimeInitialDate": "",
+        "datetimeInitialTime": "",
+        "datetimeMaxDate": "",
+        "datetimeMaxTime": "",
+        "datetimeMinDate": "",
+        "datetimeMinTime": "",
+        "useQuickReplyItem": true,
+        "InvalidInitialDatetime": "",
+        "InvalidMinDatetime": "",
+        "InvalidMaxDatetime": "",
+        "x": 470,
+        "y": 280,
+        "wires": [
+            [
+                "cd1bcda18f29ab8b"
+            ]
+        ]
+    },
+    {
+        "id": "8cbca9e30aa72ad8",
+        "type": "debug",
+        "z": "d77b9aa38fc0a486",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "quickReplyItems",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1000,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "dcda5dfffa3ac5a3",
+        "type": "function",
+        "z": "d77b9aa38fc0a486",
+        "name": "Condition not send location",
+        "func": "let event = msg.payload;\nlet textMsg = event.message.text;\nif (textMsg.toLowerCase() == 'camera') {\n    msg.useQuickReplyItem = false;\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 200,
+        "y": 280,
+        "wires": [
+            [
+                "d9cbc6d06a664884"
+            ]
+        ]
+    }
+]
