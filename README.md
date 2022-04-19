@@ -3,7 +3,7 @@
 
 **LINE API nodes** for <a href="https://nodered.org/" target="_blank">Node-RED</a>, includes LINE Notify Nodes and LINE Messaging API Nodes, for easy to interact with LINE application.
 
-![node-red-contrib-node-line-api](https://user-images.githubusercontent.com/43282496/160281686-72ffa329-4a92-4e39-9f86-2ca02e32479b.png)
+![node-red-contrib-node-line-api](https://user-images.githubusercontent.com/43282496/163944021-99bb0760-79a4-40af-ae0a-1498a2964169.png)
 
 ## Getting Started
 1. First, install <a href="https://nodered.org/docs/getting-started/local" target="_blank">Node-RED</a> by follow Node-RED installation guideline.
