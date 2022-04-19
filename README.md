@@ -33,8 +33,8 @@ node-red
 * [LINE Messaging API Configuration Noe](https://github.com/jatu-studiobox/node-red-contrib-node-line-api/wiki/LINE-Messaging-API-Configuration-Node)
 * [LINE Webhook Node](https://github.com/jatu-studiobox/node-red-contrib-node-line-api/wiki/LINE-Webhook-Node)
 * [LINE ReplyToken Provider Node](https://github.com/jatu-studiobox/node-red-contrib-node-line-api/wiki/LINE-ReplyToken-Provider-Node)
-* [LINE Quick Reply Item Node](https://github.com/jatu-studiobox/node-red-contrib-node-line-api/wiki/LINE-Message-API-Quick-Reply-Item-Node)
-* [LINE Quick Reply Collector Node](https://github.com/jatu-studiobox/node-red-contrib-node-line-api/wiki/LINE-Message-API-Quick-Reply-Collector-Node)
+* [LINE Messaging API Quick Reply Item Node](https://github.com/jatu-studiobox/node-red-contrib-node-line-api/wiki/LINE-Message-API-Quick-Reply-Item-Node)
+* [LINE Messaging API Quick Reply Collector Node](https://github.com/jatu-studiobox/node-red-contrib-node-line-api/wiki/LINE-Message-API-Quick-Reply-Collector-Node)
 
 ## Create LINE Notify
 Create LINE Notify at <a href="https://notify-bot.line.me/" target="_blank">LINE Notify</a> official website.
