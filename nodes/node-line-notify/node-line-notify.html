@@ -433,7 +433,7 @@
             $("#tabMessage").click();
             setSelectedImageButton();
 
-            $.getScript('node-line-notify/js/vanillaEmojiPicker.js')
+            $.getScript('node-line-notify/js/emoji-picker')
                 .done(function (data, textStatus, jqxhr) {
                     console.log("load emoji script done");
                     initEmojiPicker({

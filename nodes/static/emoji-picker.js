@@ -20,20 +20,20 @@ function initEmojiPicker(option) {
         const triangleWidth = 21;
         const moreDistanceY = 8;
         const moreDistanceX = 4;
-    
+
         this.lib = function (el = undefined) {
-    
+
             const isNodeList = (nodes) => {
                 var stringRepr = Object.prototype.toString.call(nodes);
-    
+
                 return typeof nodes === 'object' &&
                     /^\[object (HTMLCollection|NodeList|Object)\]$/.test(stringRepr) &&
                     (typeof nodes.length === 'number') &&
                     (nodes.length === 0 || (typeof nodes[0] === "object" && nodes[0].nodeType > 0));
             }
-    
+
             return {
-    
+
                 el: () => {
                     // Check if is node
                     if (!el) {
@@ -48,7 +48,7 @@ function initEmojiPicker(option) {
                         return undefined;
                     }
                 },
-    
+
                 on(event, callback, classList = undefined) {
                     if (!classList) {
                         this.el().forEach(item => {
@@ -58,9 +58,9 @@ function initEmojiPicker(option) {
                         this.el().forEach(item => {
                             item.addEventListener(event, (e) => {
                                 if (e.target.closest(classList)) {
-    
+
                                     let attr = undefined;
-    
+
                                     if (Array.isArray(classList)) {
                                         const stringifiedElem = e.target.outerHTML;
                                         const stringifiedParentElem = e.target.parentNode.outerHTML;
@@ -72,14 +72,14 @@ function initEmojiPicker(option) {
                                         }
                                         attr = classList[index];
                                     }
-    
+
                                     callback(e, attr)
                                 }
                             })
                         })
                     }
                 },
-    
+
                 css(params) {
                     for (const key in params) {
                         if (Object.hasOwnProperty.call(params, key)) {
@@ -88,27 +88,27 @@ function initEmojiPicker(option) {
                         }
                     }
                 },
-    
+
                 attr(param1, param2 = undefined) {
-    
+
                     if (!param2) {
                         return this.el()[0].getAttribute(param1)
                     }
                     this.el().forEach(el => el.setAttribute(param1, param2))
                 },
-    
+
                 removeAttr(param) {
                     this.el().forEach(el => el.removeAttribute(param))
                 },
-    
+
                 addClass(param) {
                     this.el().forEach(el => el.classList.add(param))
                 },
-    
+
                 removeClass(param) {
                     this.el().forEach(el => el.classList.remove(param))
                 },
-    
+
                 slug(str) {
                     return str
                         .toLowerCase()
@@ -116,14 +116,14 @@ function initEmojiPicker(option) {
                         .replace(/ +/g, '-')
                         ;
                 },
-    
+
                 remove(param) {
                     this.el().forEach(el => el.remove())
                 },
-    
+
                 val(param = undefined) {
                     let val;
-    
+
                     if (param === undefined) {
                         this.el().forEach(el => {
                             val = el.value;
@@ -133,10 +133,10 @@ function initEmojiPicker(option) {
                             el.value = param;
                         })
                     }
-    
+
                     return val;
                 },
-    
+
                 text(msg = undefined) {
                     if (msg === undefined) {
                         return el.innerText;
@@ -146,7 +146,7 @@ function initEmojiPicker(option) {
                         })
                     }
                 },
-    
+
                 html(data = undefined) {
                     if (data === undefined) {
                         return el.innerHTML;
@@ -158,7 +158,7 @@ function initEmojiPicker(option) {
                 }
             }
         };
-    
+
         const emojiObj = {
             'People': [
                 {
@@ -7505,7 +7505,7 @@ function initEmojiPicker(option) {
                 }
             ]
         };
-    
+
         const categoryFlags = {
             'People': '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve"> <g> <g> <path d="M437.02,74.98C388.667,26.629,324.38,0,256,0S123.333,26.629,74.98,74.98C26.629,123.333,0,187.62,0,256 s26.629,132.668,74.98,181.02C123.333,485.371,187.62,512,256,512s132.667-26.629,181.02-74.98 C485.371,388.668,512,324.38,512,256S485.371,123.333,437.02,74.98z M256,472c-119.103,0-216-96.897-216-216S136.897,40,256,40 s216,96.897,216,216S375.103,472,256,472z"/> </g> </g> <g> <g> <path d="M368.993,285.776c-0.072,0.214-7.298,21.626-25.02,42.393C321.419,354.599,292.628,368,258.4,368 c-34.475,0-64.195-13.561-88.333-40.303c-18.92-20.962-27.272-42.54-27.33-42.691l-37.475,13.99 c0.42,1.122,10.533,27.792,34.013,54.273C171.022,389.074,212.215,408,258.4,408c46.412,0,86.904-19.076,117.099-55.166 c22.318-26.675,31.165-53.55,31.531-54.681L368.993,285.776z"/> </g> </g> <g> <g> <circle cx="168" cy="180.12" r="32"/> </g> </g> <g> <g> <circle cx="344" cy="180.12" r="32"/> </g> </g> <g> </g> <g> </g> <g> </g> </svg>',
             'Nature': '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 354.968 354.968" style="enable-background:new 0 0 354.968 354.968;" xml:space="preserve"> <g> <g> <path d="M350.775,341.319c-9.6-28.4-20.8-55.2-34.4-80.8c0.4-0.4,0.8-1.2,1.6-1.6c30.8-34.8,44-83.6,20.4-131.6 c-20.4-41.6-65.6-76.4-124.8-98.8c-57.2-22-127.6-32.4-200.4-27.2c-5.6,0.4-10,5.2-9.6,10.8c0.4,2.8,1.6,5.6,4,7.2 c36.8,31.6,50,79.2,63.6,126.8c8,28,15.6,55.6,28.4,81.2c0,0.4,0.4,0.4,0.4,0.8c30.8,59.6,78,81.2,122.8,78.4 c18.4-1.2,36-6.4,52.4-14.4c9.2-4.8,18-10.4,26-16.8c11.6,23.2,22,47.2,30.4,72.8c1.6,5.2,7.6,8,12.8,6.4 C349.975,352.119,352.775,346.519,350.775,341.319z M271.175,189.319c-34.8-44.4-78-82.4-131.6-112.4c-4.8-2.8-11.2-1.2-13.6,4 c-2.8,4.8-1.2,11.2,4,13.6c50.8,28.8,92.4,64.8,125.6,107.2c13.2,17.2,25.2,35.2,36,54c-8,7.6-16.4,13.6-25.6,18 c-14,7.2-28.8,11.6-44.4,12.4c-37.6,2.4-77.2-16-104-67.6v-0.4c-11.6-24-19.2-50.8-26.8-78c-12.4-43.2-24.4-86.4-53.6-120.4 c61.6-1.6,120.4,8.4,169.2,27.2c54.4,20.8,96,52,114,88.8c18.8,38,9.2,76.8-14.4,105.2 C295.575,222.919,283.975,205.719,271.175,189.319z"/> </g> </g> <g> </g> <g> </g> <g> </g> </svg>',
@@ -7516,17 +7516,17 @@ function initEmojiPicker(option) {
             'Symbols': '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 30.487 30.486" style="enable-background:new 0 0 30.487 30.486;" xml:space="preserve"> <g> <path d="M28.866,17.477h-2.521V15.03h-2.56c0.005-2.8-0.304-5.204-0.315-5.308l-0.088-0.67L22.75,8.811 c-0.021-0.008-0.142-0.051-0.317-0.109l2.287-8.519L19,4.836L15.23,0.022V0l-0.009,0.01L15.215,0v0.021l-3.769,4.815L5.725,0.183 l2.299,8.561c-0.157,0.051-0.268,0.09-0.288,0.098L7.104,9.084l-0.088,0.67c-0.013,0.104-0.321,2.508-0.316,5.308h-2.56v2.446H1.62 l0.447,2.514L1.62,22.689h6.474c1.907,2.966,5.186,7.549,7.162,7.797v-0.037c1.979-0.283,5.237-4.838,7.137-7.79h6.474l-0.447-2.67 L28.866,17.477z M21.137,20.355c-0.422,1.375-4.346,6.949-5.907,7.758v0.015c-1.577-0.853-5.461-6.373-5.882-7.739 c-0.002-0.043-0.005-0.095-0.008-0.146l11.804-0.031C21.141,20.264,21.139,20.314,21.137,20.355z M8.972,15.062 c-0.003-1.769,0.129-3.403,0.219-4.298c0.98-0.271,3.072-0.723,6.065-0.78v-0.03c2.979,0.06,5.063,0.51,6.04,0.779 c0.09,0.895,0.223,2.529,0.219,4.298L8.972,15.062z"/> </g> <g> </g> <g> </g> <g> </g> </svg>',
             'Flags': '<svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g id="Page-1" fill-rule="evenodd"><g id="037---Waypoint-Flag" fill-rule="nonzero" transform="translate(0 -1)"><path id="Shape" d="m59.0752 28.5054c-3.7664123-1.873859-7.2507049-4.2678838-10.3506-7.1118 1.5923634-6.0211307 2.7737841-12.14349669 3.5361-18.3248.1788-1.44-.623-1.9047-.872-2.0126-.7016942-.26712004-1.4944908-.00419148-1.8975.6293-5.4726 6.5479-12.9687 5.8008-20.9053 5.0054-7.9985-.8-16.2506-1.6116-22.3684 5.4114-.85552122-1.067885-2.26533581-1.5228479-3.5837-1.1565l-.1377.0386c-1.81412367.5095218-2.87378593 2.391025-2.3691 4.2065l12.2089 43.6891c.3541969 1.2645215 1.5052141 2.1399137 2.8184 2.1435.2677318-.0003961.5341685-.0371657.792-.1093l1.0683-.2984h.001c.7485787-.2091577 1.3833789-.7071796 1.7646969-1.3844635.381318-.677284.4779045-1.478326.2685031-2.2268365l-3.7812-13.5327c5.5066-7.0807 13.18-6.3309 21.2988-5.52 8.1094.81 16.4863 1.646 22.64-5.7129l.0029-.0039c.6044387-.7534187.8533533-1.7315007.6826-2.6822-.0899994-.4592259-.3932698-.8481635-.8167-1.0474zm-42.0381 29.7446c-.1201754.2157725-.3219209.3742868-.56.44l-1.0684.2983c-.4949157.1376357-1.0078362-.1513714-1.1465-.646l-12.2095-43.6895c-.20840349-.7523825.23089143-1.5316224.9825-1.7428l.1367-.0381c.12366014-.0348192.25153137-.0524183.38-.0523.63429117.0010181 1.19083557.4229483 1.3631 1.0334l.1083.3876v.0021l6.2529 22.3755 5.8468 20.9238c.0669515.2380103.0360256.4929057-.0859.708zm40.6329-27.2925c-5.4736 6.5459-12.9707 5.7974-20.9043 5.0039-7.9033-.79-16.06-1.605-22.1552 5.1558l-5.463-19.548-2.0643-7.3873c5.5068-7.0794 13.1796-6.3119 21.3045-5.5007 7.7148.7695 15.6787 1.5664 21.7373-4.7095-.7467138 5.70010904-1.859683 11.3462228-3.332 16.9033-.1993066.7185155.0267229 1.4878686.583 1.9844 3.1786296 2.9100325 6.7366511 5.3762694 10.5771 7.3315-.0213812.2768572-.1194065.5422977-.2831.7666z"/></g></g></svg>'
         };
-    
+
         const icons = {
             search: '<svg style="fill: #646772;" version="1.1" width="17" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 487.95 487.95" style="enable-background:new 0 0 487.95 487.95;" xml:space="preserve"> <g> <g> <path d="M481.8,453l-140-140.1c27.6-33.1,44.2-75.4,44.2-121.6C386,85.9,299.5,0.2,193.1,0.2S0,86,0,191.4s86.5,191.1,192.9,191.1 c45.2,0,86.8-15.5,119.8-41.4l140.5,140.5c8.2,8.2,20.4,8.2,28.6,0C490,473.4,490,461.2,481.8,453z M41,191.4 c0-82.8,68.2-150.1,151.9-150.1s151.9,67.3,151.9,150.1s-68.2,150.1-151.9,150.1S41,274.1,41,191.4z"/> </g> </g> <g> </g> <g> </g> </svg>',
             close: '<svg style="height: 11px !important;" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg"><path d="M28.94,26,51.39,3.55A2.08,2.08,0,0,0,48.45.61L26,23.06,3.55.61A2.08,2.08,0,0,0,.61,3.55L23.06,26,.61,48.45A2.08,2.08,0,0,0,2.08,52a2.05,2.05,0,0,0,1.47-.61L26,28.94,48.45,51.39a2.08,2.08,0,0,0,2.94-2.94Z"/></svg>',
             move: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512.006 512.006" xml:space="preserve"> <g> <g> <path d="M508.247,246.756l-72.457-72.465c-5.009-5.009-13.107-5.009-18.116,0c-5.009,5.009-5.009,13.107,0,18.116l50.594,50.594 H268.811V43.748l50.594,50.594c5.009,5.009,13.107,5.009,18.116,0c5.009-5.009,5.009-13.107,0-18.116L265.056,3.761 c-5.001-5.009-13.107-5.009-18.116,0l-72.457,72.457c-5.009,5.009-5.009,13.107,0,18.116c5.001,5.009,13.107,5.009,18.116,0 l50.594-50.594v199.27H43.744l50.594-50.594c5.009-5.009,5.009-13.107,0-18.116c-5.009-5.009-13.107-5.009-18.116,0L3.757,246.756 c-5.009,5.001-5.009,13.107,0,18.116l72.465,72.457c5.009,5.009,13.107,5.009,18.116,0c5.009-5.001,5.009-13.107,0-18.116 l-50.594-50.594h199.458v199.646l-50.594-50.594c-5.009-5.001-13.107-5.001-18.116,0c-5.009,5.009-5.009,13.107,0,18.116 l72.457,72.465c5,5,13.107,5,18.116,0l72.465-72.457c5.009-5.009,5.009-13.107,0-18.116c-5.009-5-13.107-5-18.116,0 l-50.594,50.594V268.627h199.458l-50.594,50.594c-5.009,5.009-5.009,13.107,0,18.116s13.107,5.009,18.116,0l72.465-72.457 C513.257,259.872,513.257,251.765,508.247,246.756z"/> </g> </g> <g> </g> </svg>'
         }
-    
+
         const functions = {
-    
+
             styles: () => {
-    
+
                 const styles = `
                     <style>
                         .fg-emoji-container {
@@ -7538,7 +7538,7 @@ function initEmojiPicker(option) {
                             border-top-left-radius: 8px;
                             border-top-right-radius: 8px;
                             border-bottom-left-radius: 8px;
-                            box-shadow: 0px 3px 15px 0px rgba(0, 0, 0, 0.62);
+                            box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.62);
                             background-color: white;
                             overflow: hidden;
                             z-index: 9999;
@@ -7699,15 +7699,19 @@ function initEmojiPicker(option) {
                             fill: white;
                             transform: matrix(-1, 0, 0, 1, 0, 0);
                             z-index: 9999;
-                            filter: drop-shadow(0px 3px 15px rgba(0, 0, 0, 0.62));
+                            filter: drop-shadow(0px 2px 5px rgba(0, 0, 0, 0.72));
+                        }
+
+                        .colorShowState {
+                            color: var(--red-ui-text-color-code) !important;
                         }
                     </style>
                 `;
-    
+
                 document.head.insertAdjacentHTML('beforeend', styles);
             },
-    
-    
+
+
             position: () => {
                 // Gathering element width
                 const elementWidth = elementTarget.offsetWidth;
@@ -7728,14 +7732,14 @@ function initEmojiPicker(option) {
                     offset.x -= window.pageXOffset;
                     offset.y -= window.pageYOffset;
                 }
-    
+
                 const pickerLeft = offset.x - pickerWidth + (elementWidth / 2) + moreDistanceX;
                 const pickerTop = offset.y - pickerHeight - moreDistanceY;
                 const triangleLeft = pickerLeft + pickerWidth - triangleWidth;
                 const triangleTop = pickerTop + pickerHeight;
-                return { 
+                return {
                     picker: {
-                        left: pickerLeft, 
+                        left: pickerLeft,
                         top: pickerTop
                     },
                     triangle: {
@@ -7744,30 +7748,30 @@ function initEmojiPicker(option) {
                     }
                 };
             },
-    
+
             rePositioning: (picker) => {
                 picker.getBoundingClientRect().right > window.screen.availWidth ? picker.style.left = window.screen.availWidth - picker.offsetWidth + 'px' : false;
-    
+
                 if (window.innerHeight > pickerHeight) {
                     picker.getBoundingClientRect().bottom > window.innerHeight ? picker.style.top = window.innerHeight - picker.offsetHeight + 'px' : false;
                 }
             },
-    
+
             render: (e, attr) => {
-    
+
                 emojiList = undefined;
                 const index = this.options.trigger.findIndex(item => item.selector === attr);
                 this.insertInto = this.options.trigger[index].insertInto;
-    
+
                 const position = functions.position();
-    
+
                 if (!emojiesHTML.length) {
                     for (const key in emojiObj) {
                         if (emojiObj.hasOwnProperty.call(emojiObj, key)) {
                             const categoryObj = emojiObj[key];
-    
+
                             categoriesHTML += `<li><a title="${key}" href="#${key}">${categoryFlags[key]}</a></li>`;
-    
+
                             emojiesHTML += `<div class="fg-emoji-picker-category-wrapper" id="${key}">`;
                             emojiesHTML += `<p class="fg-emoji-picker-category-title">${key}</p>`;
                             categoryObj.forEach(ej => {
@@ -7777,14 +7781,12 @@ function initEmojiPicker(option) {
                         }
                     }
                 }
-    
-    
+
                 if (document.querySelector('.fg-emoji-container')) {
                     this.lib('.fg-emoji-container').remove();
                     this.lib('.bottom-triangle').remove();
                 }
-    
-    
+
                 const picker = `
                     <div class="fg-emoji-container" style="left: ${position.picker.left}px; top: ${position.picker.top}px;">
                         <div class="fg-emoji-picker-search">
@@ -7814,34 +7816,34 @@ function initEmojiPicker(option) {
                             </ul>
                         </nav>
                     </div>
-                    <svg height="12" viewBox="0 0 21 12"  width="21" class="bottom-triangle" style="transform: scale(-1, 1) translate(0px); left: ${position.triangle.left}px; top: ${position.triangle.top}px;""><path d="M20.685.12c-2.229.424-4.278 1.914-6.181 3.403L5.4 10.94c-2.026 2.291-5.434.62-5.4-2.648V.12h20.684z"></path></svg>
+                    <svg height="12" viewBox="0 0 21 12"  width="21" class="bottom-triangle" style="transform: scale(-1, 1) translate(0px); left: ${position.triangle.left}px; top: ${position.triangle.top}px;"><path d="M20.685.12c-2.229.424-4.278 1.914-6.181 3.403L5.4 10.94c-2.026 2.291-5.434.62-5.4-2.648V.12h20.684z"></path></svg>
                 `;
-    
+
                 document.body.insertAdjacentHTML('beforeend', picker);
-    
+
                 functions.rePositioning(document.querySelector('.fg-emoji-container'));
-    
+
                 setTimeout(() => {
                     document.querySelector('.fg-emoji-picker-search input').focus();
                 }, 500)
             },
-    
-    
+
+
             closePicker: (e) => {
                 e.preventDefault();
                 this.lib('.fg-emoji-container').remove();
-                this.lib('.bottom-triangle').remove();            
+                this.lib('.bottom-triangle').remove();
                 moseMove = false;
             },
-    
-    
+
+
             checkPickerExist(e) {
                 if (document.querySelector('.fg-emoji-container') && !e.target.closest('.fg-emoji-container') && !moseMove) {
                     functions.closePicker.call(this, e);
                 }
             },
-    
-    
+
+
             setCaretPosition: (field, caretPos) => {
                 var elem = field
                 if (elem != null) {
@@ -7859,18 +7861,18 @@ function initEmojiPicker(option) {
                     }
                 }
             },
-    
-    
+
+
             insert: e => {
                 e.preventDefault();
-    
+
                 const emoji = e.target.innerText.trim();
                 const myField = document.querySelectorAll(this.insertInto);
                 const myValue = emoji;
-    
+
                 // Check if selector is an array
                 myField.forEach(myField => {
-    
+
                     if (document.selection) {
                         myField.focus();
                         sel = document.selection.createRange();
@@ -7879,45 +7881,45 @@ function initEmojiPicker(option) {
                         const startPos = myField.selectionStart;
                         const endPos = myField.selectionEnd;
                         myField.value = myField.value.substring(0, startPos) + myValue + myField.value.substring(endPos, myField.value.length);
-    
+
                         functions.setCaretPosition(myField, startPos + 2)
-    
+
                     } else {
                         myField.value += myValue;
                         myField.focus()
                     }
-    
+
                 })
             },
-    
-    
+
+
             categoryNav: e => {
                 e.preventDefault();
-    
+
                 const link = e.target.closest('a');
-    
+
                 if (link.getAttribute('id') && link.getAttribute('id') === 'fg-emoji-picker-close-button') return false;
                 if (link.className.includes('fg-emoji-picker-move')) return false;
-    
+
                 const id = link.getAttribute('href');
                 const emojiBody = document.querySelector('.fg-emoji-list');
                 const destination = emojiBody.querySelector(`${id}`);
-    
+
                 this.lib('.fg-emoji-nav li').removeClass('emoji-picker-nav-active');
                 link.closest('li').classList.add('emoji-picker-nav-active');
-    
+
                 destination.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" })
             },
-    
-    
+
+
             search: e => {
-    
+
                 const val = e.target.value.trim();
-    
+
                 if (!emojiList) {
                     emojiList = Array.from(document.querySelectorAll('.fg-emoji-picker-category-wrapper li'));
                 }
-    
+
                 emojiList.filter(emoji => {
                     if (!emoji.getAttribute('data-title').match(val)) {
                         emoji.style.display = 'none'
@@ -7926,20 +7928,20 @@ function initEmojiPicker(option) {
                     }
                 })
             },
-    
-    
+
+
             mouseDown: e => {
                 e.preventDefault();
                 moseMove = true;
             },
-    
+
             mouseUp: e => {
                 e.preventDefault();
                 moseMove = false;
             },
-    
+
             mouseMove: e => {
-    
+
                 if (moseMove) {
                     e.preventDefault();
                     const el = document.querySelector('.fg-emoji-container');
@@ -7948,7 +7950,7 @@ function initEmojiPicker(option) {
                 }
             }
         };
-    
+
         const bindEvents = () => {
             this.lib(document.body).on('click', functions.closePicker, '#fg-emoji-picker-close-button');
             this.lib(document.body).on('click', functions.checkPickerExist);
@@ -7960,15 +7962,15 @@ function initEmojiPicker(option) {
             this.lib(document).on('mouseup', functions.mouseUp, '#fg-emoji-picker-move');
             this.lib(document).on('mousemove', functions.mouseMove);
         };
-    
+
         (() => {
-    
+
             // Start styles
             functions.styles();
-    
+
             // Event functions
             bindEvents.call(this);
-    
+
         })()
     };
 
