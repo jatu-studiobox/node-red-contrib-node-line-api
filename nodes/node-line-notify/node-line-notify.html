@@ -47,6 +47,10 @@
     .colorLightGray {
         color: #cccccc;
     }
+
+    .colorTextRed {
+        color: var(--red-ui-text-color-code) !important;
+    }
 </style>
 <script type="text/html" data-template-name="node-line-notify">
     <div class="form-row">
@@ -301,6 +305,14 @@
         inputs: 1,
         outputs: 1,
         oneditprepare: function () {
+            function setButtonState(bValue) {
+                if (bValue) {
+                    $("#btnEmoji").addClass('colorTextRed');
+                } else {
+                    $("#btnEmoji").removeClass('colorTextRed');
+                }
+            }
+
             function openTab(pageName, elmnt) {
                 // remove active class
                 $('.tabcontent').each(function (i, obj) {
@@ -446,7 +458,7 @@
                         closeButton: false,
                         moveButton: false,
                         //specialButtons: green
-                    });
+                    }, setButtonState);
                 })
                 .fail(function (jqxhr, settings, exception) {
                     console.log("fail load emoji script");

@@ -1,5 +1,5 @@
-function initEmojiPicker(option) {
-    const EmojiPicker = function (options) {
+function initEmojiPicker(option, callbackSetSelectorColor) {
+    const EmojiPicker = function (options, callbackSetSelectorColor) {
         this.options = options;
         this.trigger = this.options.trigger.map(item => item.selector);
         this.insertInto = undefined;
@@ -7702,9 +7702,6 @@ function initEmojiPicker(option) {
                             filter: drop-shadow(0px 2px 5px rgba(0, 0, 0, 0.72));
                         }
 
-                        .colorShowState {
-                            color: var(--red-ui-text-color-code) !important;
-                        }
                     </style>
                 `;
 
@@ -7762,6 +7759,7 @@ function initEmojiPicker(option) {
                 emojiList = undefined;
                 const index = this.options.trigger.findIndex(item => item.selector === attr);
                 this.insertInto = this.options.trigger[index].insertInto;
+                callbackSetSelectorColor(true);
 
                 const position = functions.position();
 
@@ -7783,6 +7781,7 @@ function initEmojiPicker(option) {
                 }
 
                 if (document.querySelector('.fg-emoji-container')) {
+                    // callbackSetSelectorColor(false);
                     this.lib('.fg-emoji-container').remove();
                     this.lib('.bottom-triangle').remove();
                 }
@@ -7831,6 +7830,7 @@ function initEmojiPicker(option) {
 
             closePicker: (e) => {
                 e.preventDefault();
+                callbackSetSelectorColor(false);
                 this.lib('.fg-emoji-container').remove();
                 this.lib('.bottom-triangle').remove();
                 moseMove = false;
@@ -7973,6 +7973,6 @@ function initEmojiPicker(option) {
 
         })()
     };
-
-    new EmojiPicker(option);
+    
+    new EmojiPicker(option, callbackSetSelectorColor);
 }
