@@ -9,12 +9,43 @@
         color: darkgray;
         cursor: not-allowed !important;
     }
+
     .tabcontent {
         display: none;
-        padding: 12px 10px;        
+        padding: 12px 10px;
         border-left: 1px solid #bbb;
         border-right: 1px solid #bbb;
         border-bottom: 1px solid #bbb;
+    }
+
+    .button-messsage-area {
+        display: flex;
+        justify-content: right;
+        padding: 4px;
+    }
+
+    .btnEmoji {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        font-size: 18px;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        color: #555;
+        cursor: pointer;
+    }
+
+    .btnEmoji:hover {
+        background-color: #dddddd;
+    }
+
+    .btnEmoji>i {
+        margin: auto;
+    }
+
+    .colorLightGray {
+        color: #cccccc;
     }
 </style>
 <script type="text/html" data-template-name="node-line-notify">
@@ -76,7 +107,12 @@
         <div id="bodyMessage" class="tabcontent">
             <div class="form-row">
                 <label for="node-input-message"><span data-i18n="node-line-notify.label.message" /></label>
-                <textarea id="node-input-message" rows="4" style="width: 100%;resize: none;"></textarea>
+                <textarea id="node-input-message" class="node-input-message" rows="4" style="width: 100%;resize: none;"></textarea>
+                <div class="button-messsage-area">
+                    <div class="btnEmoji" id="btnEmoji">
+                        <i class="fa fa-smile-o" aria-hidden="true"></i>
+                    </div>
+                </div>
             </div>
         </div>
         <div id="bodyImage" class="tabcontent">
@@ -130,9 +166,9 @@
 </script>
 <script type="text/javascript">
     // Restricts input for the set of matched elements to the given inputFilter function.
-    (function($) {
-        $.fn.inputFilter = function(inputFilter) {
-            return this.on("input keydown keyup mousedown mouseup select contextmenu drop", function() {
+    (function ($) {
+        $.fn.inputFilter = function (inputFilter) {
+            return this.on("input keydown keyup mousedown mouseup select contextmenu drop", function () {
                 if (inputFilter(this.value)) {
                     this.oldValue = this.value;
                     this.oldSelectionStart = this.selectionStart;
@@ -157,22 +193,22 @@
             message: {
                 value: "Hi, this message is from LINE Notify. 😊",
                 required: true,
-                validate: function(v) {
+                validate: function (v) {
                     return (v.length) > 0 && !v.match(/^\s*$/);
                 }
             },
-            useExternalData:{
+            useExternalData: {
                 value: false
             },
             useImageUrl: {
                 value: false
             },
-            imageFullsizeUrl:{
+            imageFullsizeUrl: {
                 value: "",
-                require: function() {
+                require: function () {
                     return this.useImageUrl;
                 },
-                validate: function(v) {
+                validate: function (v) {
                     if ($("#node-input-useImageUrl").is(':checked')) {
                         return (v.length) > 0 && (v.match(/(http[s]?:\/\/.*\.(?:jpg))/i));
                     } else {
@@ -182,10 +218,10 @@
             },
             imageThumbnailUrl: {
                 value: "",
-                require: function() {
+                require: function () {
                     return this.useImageUrl;
                 },
-                validate: function(v) {
+                validate: function (v) {
                     if ($("#node-input-useImageUrl").is(':checked')) {
                         return (v.length) > 0 && (v.match(/(http[s]?:\/\/.*\.(?:jpg))/i));
                     } else {
@@ -198,10 +234,10 @@
             },
             imageFile: {
                 value: "",
-                require: function() {
+                require: function () {
                     return this.useImageFile;
                 },
-                validate: function(v) {
+                validate: function (v) {
                     if ($("#node-input-useImageFile").is(':checked')) {
                         return (v.length) > 0 && (/^[a-z]:((\\|\/)[a-z0-9\s_@\-^!#$%&+={}\[\]]+)+\.(png|jpg)$/i.test(v));
                     } else {
@@ -214,10 +250,10 @@
             },
             lineStickerPackageId: {
                 value: 1,
-                require: function() {
+                require: function () {
                     return this.useSticker;
                 },
-                validate: function(v) {
+                validate: function (v) {
                     if ($("#node-input-useSticker").is(':checked')) {
                         return (v.length) > 0 && (v.match(/^\d*$/));
                     } else {
@@ -227,10 +263,10 @@
             },
             lineStickerId: {
                 value: 1,
-                require: function() {
+                require: function () {
                     return this.useSticker;
                 },
-                validate: function(v) {
+                validate: function (v) {
                     if ($("#node-input-useSticker").is(':checked')) {
                         return (v.length) > 0 && (v.match(/^\d*$/));
                     } else {
@@ -238,12 +274,12 @@
                     }
                 }
             },
-            disabledPushNotification:{
+            disabledPushNotification: {
                 value: false
             },
             hasToken: {
                 value: false,
-                validate: function(v) {
+                validate: function (v) {
                     return v;
                 }
             }
@@ -267,11 +303,11 @@
         oneditprepare: function () {
             function openTab(pageName, elmnt) {
                 // remove active class
-                $('.tabcontent').each(function(i, obj) {
+                $('.tabcontent').each(function (i, obj) {
                     $(this).css({ display: "none" });
                 });
                 // remove active class
-                $('.red-ui-tab').each(function(i, obj) {
+                $('.red-ui-tab').each(function (i, obj) {
                     $(this).removeClass("active");
                 });
                 // Show the specific tab content
@@ -302,8 +338,12 @@
                 if ($(this).is(':checked')) {
                     $("#tabMessage").click();
                     $("#node-ui-tabs").css({ "pointer-events": "none" });
+                    $("#btnEmoji").css({ "pointer-events": "none" });
+                    $("#btnEmoji").addClass('colorLightGray');
                 } else {
                     $("#node-ui-tabs").css({ "pointer-events": "" });
+                    $("#btnEmoji").css({ "pointer-events": "" });
+                    $("#btnEmoji").removeClass('colorLightGray');
                 }
                 // disable 'message' section
                 $("#node-input-message").prop("disabled", $(this).is(':checked'));
@@ -313,7 +353,7 @@
                     $("label[for='node-input-message']").removeClass('labelDisabled');
                 }
             });
-            $(".img-button-group").on("click", function() {
+            $(".img-button-group").on("click", function () {
                 $(".img-button-group").removeClass("selected");
                 $(this).addClass("selected");
                 if ($(this).attr('id').indexOf("notUseImage") !== -1) {
@@ -369,29 +409,50 @@
                     $("label[for='node-input-lineStickerId']").addClass('labelDisabled');
                 }
             });
-            $("#node-input-lineStickerPackageId").inputFilter(function(value) {
+            $("#node-input-lineStickerPackageId").inputFilter(function (value) {
                 return /^\d*$/.test(value);
             });
-            $("#node-input-lineStickerId").inputFilter(function(value) {
+            $("#node-input-lineStickerId").inputFilter(function (value) {
                 return /^\d*$/.test(value);
             });
-            $("#node-input-lineStickerPackageId").blur(function(){
+            $("#node-input-lineStickerPackageId").blur(function () {
                 $("#node-input-lineStickerPackageId").val($("#node-input-lineStickerPackageId").val().replace(/^0+/, ''));
             });
-            $("#node-input-lineStickerId").blur(function(){
+            $("#node-input-lineStickerId").blur(function () {
                 $("#node-input-lineStickerId").val($("#node-input-lineStickerId").val().replace(/^0+/, ''));
             });
-            $("#tabMessage").click(function() {
+            $("#tabMessage").click(function () {
                 openTab('bodyMessage', this);
             });
-            $("#tabImage").click(function() {
+            $("#tabImage").click(function () {
                 openTab('bodyImage', this);
             });
-            $("#tabSticker").click(function() {
+            $("#tabSticker").click(function () {
                 openTab('bodySticker', this);
             });
             $("#tabMessage").click();
             setSelectedImageButton();
+
+            $.getScript('node-line-notify/js/vanillaEmojiPicker.js')
+                .done(function (data, textStatus, jqxhr) {
+                    console.log("load emoji script done");
+                    initEmojiPicker({
+                        trigger: [
+                            {
+                                selector: '.btnEmoji',
+                                insertInto: '.node-input-message'
+                            }
+                        ],
+                        closeButton: false,
+                        moveButton: false,
+                        //specialButtons: green
+                    });
+                })
+                .fail(function (jqxhr, settings, exception) {
+                    console.log("fail load emoji script");
+                    console.log(exception);
+                    console.log(exception.stack);
+                });
         },
         oneditsave: function () {
             if (/^\s*$/.test($("#node-input-token").val())) {

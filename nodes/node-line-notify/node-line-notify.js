@@ -1,6 +1,7 @@
 'use strict';
 const axios = require("axios");
 const FormData = require("form-data");
+const path = require("path");
 const fs = require("fs");
 const BASE_URL = 'https://notify-api.line.me';
 const PATH = '/api/notify';
@@ -266,5 +267,19 @@ module.exports = function (RED) {
                 type: "text"
             }
         }
+    });
+
+    // Load files to client from Node.js (run at server)
+    RED.httpAdmin.get('/node-line-notify/js/*', function(req, res){
+        const parentPath = path.resolve(__dirname, '..');
+        const options = {
+            root: parentPath + '/static/',
+            dotfiles: 'deny'
+        };
+    
+        res.sendFile(req.params[0], options);
+    
+        // var filename = path.join(__dirname , 'static', req.params[0]);
+        // res.sendfile(filename);
     });
 }
