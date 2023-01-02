@@ -170,25 +170,25 @@
     </div>
 </script>
 <script type="text/javascript">
-    // Restricts input for the set of matched elements to the given inputFilter function.
-    (function ($) {
-        $.fn.inputFilter = function (inputFilter) {
-            return this.on("input keydown keyup mousedown mouseup select contextmenu drop", function () {
-                if (inputFilter(this.value)) {
-                    this.oldValue = this.value;
-                    this.oldSelectionStart = this.selectionStart;
-                    this.oldSelectionEnd = this.selectionEnd;
-                } else if (this.hasOwnProperty("oldValue")) {
-                    this.value = this.oldValue;
-                    this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
-                } else {
-                    this.value = "";
-                }
-            });
-        };
-    }(jQuery));
-
     (() => {
+        // Restricts input for the set of matched elements to the given inputFilter function.
+        (function ($) {
+            $.fn.inputFilter = function (inputFilter) {
+                return this.on("input keydown keyup mousedown mouseup select contextmenu drop", function () {
+                    if (inputFilter(this.value)) {
+                        this.oldValue = this.value;
+                        this.oldSelectionStart = this.selectionStart;
+                        this.oldSelectionEnd = this.selectionEnd;
+                    } else if (this.hasOwnProperty("oldValue")) {
+                        this.value = this.oldValue;
+                        this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+                    } else {
+                        this.value = "";
+                    }
+                });
+            };
+        }(jQuery));
+        
         function setButtonState(bValue) {
             if (bValue) {
                 $("#btnEmoji").addClass('colorTextRed');
@@ -208,273 +208,273 @@
             moveButton: false,
             //specialButtons: green
         }, setButtonState);
-    })();
 
-    RED.nodes.registerType('node-line-notify', {
-        category: "LINE API",
-        color: "#00b900",
-        icon: "font-awesome/fa-bell-o",
-        defaults: {
-            name: {
-                value: ""
-            },
-            message: {
-                value: "Hi, this message is from LINE Notify. 😊",
-                required: true,
-                validate: function (v) {
-                    return (v.length) > 0 && !v.match(/^\s*$/);
-                }
-            },
-            useExternalData: {
-                value: false
-            },
-            useImageUrl: {
-                value: false
-            },
-            imageFullsizeUrl: {
-                value: "",
-                require: function () {
-                    return this.useImageUrl;
+        RED.nodes.registerType('node-line-notify', {
+            category: "LINE API",
+            color: "#00b900",
+            icon: "font-awesome/fa-bell-o",
+            defaults: {
+                name: {
+                    value: ""
                 },
-                validate: function (v) {
-                    if ($("#node-input-useImageUrl").is(':checked')) {
-                        return (v.length) > 0 && (v.match(/(http[s]?:\/\/.*\.(?:jpg))/i));
-                    } else {
-                        return true;
+                message: {
+                    value: "Hi, this message is from LINE Notify. 😊",
+                    required: true,
+                    validate: function (v) {
+                        return (v.length) > 0 && !v.match(/^\s*$/);
+                    }
+                },
+                useExternalData: {
+                    value: false
+                },
+                useImageUrl: {
+                    value: false
+                },
+                imageFullsizeUrl: {
+                    value: "",
+                    require: function () {
+                        return this.useImageUrl;
+                    },
+                    validate: function (v) {
+                        if ($("#node-input-useImageUrl").is(':checked')) {
+                            return (v.length) > 0 && (v.match(/(http[s]?:\/\/.*\.(?:jpg))/i));
+                        } else {
+                            return true;
+                        }
+                    }
+                },
+                imageThumbnailUrl: {
+                    value: "",
+                    require: function () {
+                        return this.useImageUrl;
+                    },
+                    validate: function (v) {
+                        if ($("#node-input-useImageUrl").is(':checked')) {
+                            return (v.length) > 0 && (v.match(/(http[s]?:\/\/.*\.(?:jpg))/i));
+                        } else {
+                            return true;
+                        }
+                    }
+                },
+                useImageFile: {
+                    value: false
+                },
+                imageFile: {
+                    value: "",
+                    require: function () {
+                        return this.useImageFile;
+                    },
+                    validate: function (v) {
+                        if ($("#node-input-useImageFile").is(':checked')) {
+                            return (v.length) > 0 && (/^[a-z]:((\\|\/)[a-z0-9\s_@\-^!#$%&+={}\[\]]+)+\.(png|jpg)$/i.test(v));
+                        } else {
+                            return true;
+                        }
+                    }
+                },
+                useSticker: {
+                    value: false
+                },
+                lineStickerPackageId: {
+                    value: 1,
+                    require: function () {
+                        return this.useSticker;
+                    },
+                    validate: function (v) {
+                        if ($("#node-input-useSticker").is(':checked')) {
+                            return (v.length) > 0 && (v.match(/^\d*$/));
+                        } else {
+                            return true;
+                        }
+                    }
+                },
+                lineStickerId: {
+                    value: 1,
+                    require: function () {
+                        return this.useSticker;
+                    },
+                    validate: function (v) {
+                        if ($("#node-input-useSticker").is(':checked')) {
+                            return (v.length) > 0 && (v.match(/^\d*$/));
+                        } else {
+                            return true;
+                        }
+                    }
+                },
+                disabledPushNotification: {
+                    value: false
+                },
+                hasToken: {
+                    value: false,
+                    validate: function (v) {
+                        return v;
                     }
                 }
             },
-            imageThumbnailUrl: {
-                value: "",
-                require: function () {
-                    return this.useImageUrl;
-                },
-                validate: function (v) {
-                    if ($("#node-input-useImageUrl").is(':checked')) {
-                        return (v.length) > 0 && (v.match(/(http[s]?:\/\/.*\.(?:jpg))/i));
+            credentials: {
+                token: {
+                    type: "text",
+                    required: true
+                }
+            },
+            paletteLabel: "notify",
+            align: 'right',
+            label: function () {
+                return this.name || "LINE Notify";
+            },
+            labelStyle: function () {
+                return this.name ? "node_label_italic" : "";
+            },
+            inputs: 1,
+            outputs: 1,
+            oneditprepare: function () {
+                function openTab(pageName, elmnt) {
+                    // remove active class
+                    $('.tabcontent').each(function (i, obj) {
+                        $(this).css({ display: "none" });
+                    });
+                    // remove active class
+                    $('.red-ui-tab').each(function (i, obj) {
+                        $(this).removeClass("active");
+                    });
+                    // Show the specific tab content
+                    $("#" + pageName).css({ display: "block" });
+                    // Add current tab active
+                    $(elmnt).addClass("active");
+                }
+                function setSelectedImageButton() {
+                    $(".img-button-group").removeClass("selected");
+                    if ($("#node-input-useImageUrl").is(":checked") && !$("#node-input-useImageFile").is(":checked")) {
+                        $("#node-button-useImageUrl").addClass("selected");
+                    } else if (!$("#node-input-useImageUrl").is(":checked") && $("#node-input-useImageFile").is(":checked")) {
+                        $("#node-button-useUploadImage").addClass("selected");
                     } else {
-                        return true;
+                        $("#node-button-notUseImage").addClass("selected");
                     }
                 }
-            },
-            useImageFile: {
-                value: false
-            },
-            imageFile: {
-                value: "",
-                require: function () {
-                    return this.useImageFile;
-                },
-                validate: function (v) {
-                    if ($("#node-input-useImageFile").is(':checked')) {
-                        return (v.length) > 0 && (/^[a-z]:((\\|\/)[a-z0-9\s_@\-^!#$%&+={}\[\]]+)+\.(png|jpg)$/i.test(v));
-                    } else {
-                        return true;
-                    }
-                }
-            },
-            useSticker: {
-                value: false
-            },
-            lineStickerPackageId: {
-                value: 1,
-                require: function () {
-                    return this.useSticker;
-                },
-                validate: function (v) {
-                    if ($("#node-input-useSticker").is(':checked')) {
-                        return (v.length) > 0 && (v.match(/^\d*$/));
-                    } else {
-                        return true;
-                    }
-                }
-            },
-            lineStickerId: {
-                value: 1,
-                require: function () {
-                    return this.useSticker;
-                },
-                validate: function (v) {
-                    if ($("#node-input-useSticker").is(':checked')) {
-                        return (v.length) > 0 && (v.match(/^\d*$/));
-                    } else {
-                        return true;
-                    }
-                }
-            },
-            disabledPushNotification: {
-                value: false
-            },
-            hasToken: {
-                value: false,
-                validate: function (v) {
-                    return v;
-                }
-            }
-        },
-        credentials: {
-            token: {
-                type: "text",
-                required: true
-            }
-        },
-        paletteLabel: "notify",
-        align: 'right',
-        label: function () {
-            return this.name || "LINE Notify";
-        },
-        labelStyle: function () {
-            return this.name ? "node_label_italic" : "";
-        },
-        inputs: 1,
-        outputs: 1,
-        oneditprepare: function () {
-            function openTab(pageName, elmnt) {
-                // remove active class
-                $('.tabcontent').each(function (i, obj) {
-                    $(this).css({ display: "none" });
+                $("#node-button-displaytoken").mousedown(function () {
+                    document.getElementById("node-input-token").type = "text";
+                    $("#label-button").removeClass("fa fa-eye").addClass("fa fa-eye-slash");
                 });
-                // remove active class
-                $('.red-ui-tab').each(function (i, obj) {
-                    $(this).removeClass("active");
+                $("#node-button-displaytoken").mouseup(function () {
+                    document.getElementById("node-input-token").type = "password";
+                    $("#label-button").removeClass("fa fa-eye-slash").addClass("fa fa-eye");
                 });
-                // Show the specific tab content
-                $("#" + pageName).css({ display: "block" });
-                // Add current tab active
-                $(elmnt).addClass("active");
+                $("#node-input-useExternalData").change(function () {
+                    // disabled all Tabs 
+                    if ($(this).is(':checked')) {
+                        $("#tabMessage").click();
+                        $("#node-ui-tabs").css({ "pointer-events": "none" });
+                        $("#btnEmoji").css({ "pointer-events": "none" });
+                        $("#btnEmoji").addClass('colorLightGray');
+                    } else {
+                        $("#node-ui-tabs").css({ "pointer-events": "" });
+                        $("#btnEmoji").css({ "pointer-events": "" });
+                        $("#btnEmoji").removeClass('colorLightGray');
+                    }
+                    // disable 'message' section
+                    $("#node-input-message").prop("disabled", $(this).is(':checked'));
+                    if ($(this).is(':checked')) {
+                        $("label[for='node-input-message']").addClass('labelDisabled');
+                    } else {
+                        $("label[for='node-input-message']").removeClass('labelDisabled');
+                    }
+                });
+                $(".img-button-group").on("click", function () {
+                    $(".img-button-group").removeClass("selected");
+                    $(this).addClass("selected");
+                    if ($(this).attr('id').indexOf("notUseImage") !== -1) {
+                        if ($("#node-input-useImageUrl").is(":checked")) {
+                            $("#node-input-useImageUrl").trigger('click');
+                        }
+                        if ($("#node-input-useImageFile").is(":checked")) {
+                            $("#node-input-useImageFile").trigger('click');
+                        }
+                    } else if ($(this).attr('id').indexOf("useImageUrl") !== -1) {
+                        if (!$("#node-input-useImageUrl").is(":checked")) {
+                            $("#node-input-useImageUrl").trigger('click');
+                        }
+                        if ($("#node-input-useImageFile").is(":checked")) {
+                            $("#node-input-useImageFile").trigger('click');
+                        }
+                    } else if ($(this).attr('id').indexOf("useUploadImage") !== -1) {
+                        if ($("#node-input-useImageUrl").is(":checked")) {
+                            $("#node-input-useImageUrl").trigger('click');
+                        }
+                        if (!$("#node-input-useImageFile").is(":checked")) {
+                            $("#node-input-useImageFile").trigger('click');
+                        }
+                    }
+                });
+                $("#node-input-useImageUrl").change(function () {
+                    $("#node-input-imageFullsizeUrl").prop("disabled", !$(this).is(':checked'));
+                    $("#node-input-imageThumbnailUrl").prop("disabled", !$(this).is(':checked'));
+                    if ($(this).is(':checked')) {
+                        $("label[for='node-input-imageFullsizeUrl']").removeClass('labelDisabled');
+                        $("label[for='node-input-imageThumbnailUrl']").removeClass('labelDisabled');
+                    } else {
+                        $("label[for='node-input-imageFullsizeUrl']").addClass('labelDisabled');
+                        $("label[for='node-input-imageThumbnailUrl']").addClass('labelDisabled');
+                    }
+                });
+                $("#node-input-useImageFile").change(function () {
+                    $("#node-input-imageFile").prop("disabled", !$(this).is(':checked'));
+                    if ($(this).is(':checked')) {
+                        $("label[for='node-input-imageFile']").removeClass('labelDisabled');
+                    } else {
+                        $("label[for='node-input-imageFile']").addClass('labelDisabled');
+                    }
+                });
+                $("#node-input-useSticker").change(function () {
+                    $("#node-input-lineStickerPackageId").prop("disabled", !$(this).is(':checked'));
+                    $("#node-input-lineStickerId").prop("disabled", !$(this).is(':checked'));
+                    if ($(this).is(':checked')) {
+                        $("label[for='node-input-lineStickerPackageId']").removeClass('labelDisabled');
+                        $("label[for='node-input-lineStickerId']").removeClass('labelDisabled');
+                    } else {
+                        $("label[for='node-input-lineStickerPackageId']").addClass('labelDisabled');
+                        $("label[for='node-input-lineStickerId']").addClass('labelDisabled');
+                    }
+                });
+                $("#node-input-lineStickerPackageId").inputFilter(function (value) {
+                    return /^\d*$/.test(value);
+                });
+                $("#node-input-lineStickerId").inputFilter(function (value) {
+                    return /^\d*$/.test(value);
+                });
+                $("#node-input-lineStickerPackageId").blur(function () {
+                    $("#node-input-lineStickerPackageId").val($("#node-input-lineStickerPackageId").val().replace(/^0+/, ''));
+                });
+                $("#node-input-lineStickerId").blur(function () {
+                    $("#node-input-lineStickerId").val($("#node-input-lineStickerId").val().replace(/^0+/, ''));
+                });
+                $("#tabMessage").click(function () {
+                    openTab('bodyMessage', this);
+                });
+                $("#tabImage").click(function () {
+                    openTab('bodyImage', this);
+                });
+                $("#tabSticker").click(function () {
+                    openTab('bodySticker', this);
+                });
+                $("#tabMessage").click();
+                setSelectedImageButton();
+            },
+            oneditsave: function () {
+                if (/^\s*$/.test($("#node-input-token").val())) {
+                    if ($("#node-input-hasToken").is(":checked")) {
+                        $("#node-input-hasToken").trigger('click');
+                    }
+                } else {
+                    if (!$("#node-input-hasToken").is(":checked")) {
+                        $("#node-input-hasToken").trigger('click');
+                    }
+                }
+            },
+            oneditcancel: function () {
+                // myEditor.destroy();
+                // delete myEditor;
             }
-            function setSelectedImageButton() {
-                $(".img-button-group").removeClass("selected");
-                if ($("#node-input-useImageUrl").is(":checked") && !$("#node-input-useImageFile").is(":checked")) {
-                    $("#node-button-useImageUrl").addClass("selected");
-                } else if (!$("#node-input-useImageUrl").is(":checked") && $("#node-input-useImageFile").is(":checked")) {
-                    $("#node-button-useUploadImage").addClass("selected");
-                } else {
-                    $("#node-button-notUseImage").addClass("selected");
-                }
-            }
-            $("#node-button-displaytoken").mousedown(function () {
-                document.getElementById("node-input-token").type = "text";
-                $("#label-button").removeClass("fa fa-eye").addClass("fa fa-eye-slash");
-            });
-            $("#node-button-displaytoken").mouseup(function () {
-                document.getElementById("node-input-token").type = "password";
-                $("#label-button").removeClass("fa fa-eye-slash").addClass("fa fa-eye");
-            });
-            $("#node-input-useExternalData").change(function () {
-                // disabled all Tabs 
-                if ($(this).is(':checked')) {
-                    $("#tabMessage").click();
-                    $("#node-ui-tabs").css({ "pointer-events": "none" });
-                    $("#btnEmoji").css({ "pointer-events": "none" });
-                    $("#btnEmoji").addClass('colorLightGray');
-                } else {
-                    $("#node-ui-tabs").css({ "pointer-events": "" });
-                    $("#btnEmoji").css({ "pointer-events": "" });
-                    $("#btnEmoji").removeClass('colorLightGray');
-                }
-                // disable 'message' section
-                $("#node-input-message").prop("disabled", $(this).is(':checked'));
-                if ($(this).is(':checked')) {
-                    $("label[for='node-input-message']").addClass('labelDisabled');
-                } else {
-                    $("label[for='node-input-message']").removeClass('labelDisabled');
-                }
-            });
-            $(".img-button-group").on("click", function () {
-                $(".img-button-group").removeClass("selected");
-                $(this).addClass("selected");
-                if ($(this).attr('id').indexOf("notUseImage") !== -1) {
-                    if ($("#node-input-useImageUrl").is(":checked")) {
-                        $("#node-input-useImageUrl").trigger('click');
-                    }
-                    if ($("#node-input-useImageFile").is(":checked")) {
-                        $("#node-input-useImageFile").trigger('click');
-                    }
-                } else if ($(this).attr('id').indexOf("useImageUrl") !== -1) {
-                    if (!$("#node-input-useImageUrl").is(":checked")) {
-                        $("#node-input-useImageUrl").trigger('click');
-                    }
-                    if ($("#node-input-useImageFile").is(":checked")) {
-                        $("#node-input-useImageFile").trigger('click');
-                    }
-                } else if ($(this).attr('id').indexOf("useUploadImage") !== -1) {
-                    if ($("#node-input-useImageUrl").is(":checked")) {
-                        $("#node-input-useImageUrl").trigger('click');
-                    }
-                    if (!$("#node-input-useImageFile").is(":checked")) {
-                        $("#node-input-useImageFile").trigger('click');
-                    }
-                }
-            });
-            $("#node-input-useImageUrl").change(function () {
-                $("#node-input-imageFullsizeUrl").prop("disabled", !$(this).is(':checked'));
-                $("#node-input-imageThumbnailUrl").prop("disabled", !$(this).is(':checked'));
-                if ($(this).is(':checked')) {
-                    $("label[for='node-input-imageFullsizeUrl']").removeClass('labelDisabled');
-                    $("label[for='node-input-imageThumbnailUrl']").removeClass('labelDisabled');
-                } else {
-                    $("label[for='node-input-imageFullsizeUrl']").addClass('labelDisabled');
-                    $("label[for='node-input-imageThumbnailUrl']").addClass('labelDisabled');
-                }
-            });
-            $("#node-input-useImageFile").change(function () {
-                $("#node-input-imageFile").prop("disabled", !$(this).is(':checked'));
-                if ($(this).is(':checked')) {
-                    $("label[for='node-input-imageFile']").removeClass('labelDisabled');
-                } else {
-                    $("label[for='node-input-imageFile']").addClass('labelDisabled');
-                }
-            });
-            $("#node-input-useSticker").change(function () {
-                $("#node-input-lineStickerPackageId").prop("disabled", !$(this).is(':checked'));
-                $("#node-input-lineStickerId").prop("disabled", !$(this).is(':checked'));
-                if ($(this).is(':checked')) {
-                    $("label[for='node-input-lineStickerPackageId']").removeClass('labelDisabled');
-                    $("label[for='node-input-lineStickerId']").removeClass('labelDisabled');
-                } else {
-                    $("label[for='node-input-lineStickerPackageId']").addClass('labelDisabled');
-                    $("label[for='node-input-lineStickerId']").addClass('labelDisabled');
-                }
-            });
-            $("#node-input-lineStickerPackageId").inputFilter(function (value) {
-                return /^\d*$/.test(value);
-            });
-            $("#node-input-lineStickerId").inputFilter(function (value) {
-                return /^\d*$/.test(value);
-            });
-            $("#node-input-lineStickerPackageId").blur(function () {
-                $("#node-input-lineStickerPackageId").val($("#node-input-lineStickerPackageId").val().replace(/^0+/, ''));
-            });
-            $("#node-input-lineStickerId").blur(function () {
-                $("#node-input-lineStickerId").val($("#node-input-lineStickerId").val().replace(/^0+/, ''));
-            });
-            $("#tabMessage").click(function () {
-                openTab('bodyMessage', this);
-            });
-            $("#tabImage").click(function () {
-                openTab('bodyImage', this);
-            });
-            $("#tabSticker").click(function () {
-                openTab('bodySticker', this);
-            });
-            $("#tabMessage").click();
-            setSelectedImageButton();
-        },
-        oneditsave: function () {
-            if (/^\s*$/.test($("#node-input-token").val())) {
-                if ($("#node-input-hasToken").is(":checked")) {
-                    $("#node-input-hasToken").trigger('click');
-                }
-            } else {
-                if (!$("#node-input-hasToken").is(":checked")) {
-                    $("#node-input-hasToken").trigger('click');
-                }
-            }
-        },
-        oneditcancel: function () {
-            // myEditor.destroy();
-            // delete myEditor;
-        }
-    });
+        });
+    })();
 </script>

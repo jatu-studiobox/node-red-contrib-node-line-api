@@ -16,6 +16,7 @@ const EmojiPicker = function (options, callbackSetSelectorColor) {
     }
     const pickerHeight = 349;
     let elementTarget;
+    let targetClass = "";
     const triangleWidth = 21;
     const moreDistanceY = 8;
     const moreDistanceX = 4;
@@ -71,6 +72,7 @@ const EmojiPicker = function (options, callbackSetSelectorColor) {
                                         elementTarget = e.target.parentNode;
                                     }
                                     attr = classList[index];
+                                    targetClass = attr;
                                 }
 
                                 callback(e, attr)
@@ -7757,82 +7759,84 @@ const EmojiPicker = function (options, callbackSetSelectorColor) {
         render: (e, attr) => {
             if (!pickerState) {
                 pickerState = true;
-            } else {
-                pickerState = false;
-            }
-            console.log("pickerState: ", pickerState);
-            console.log("render");
-            emojiList = undefined;
-            const index = this.options.trigger.findIndex(item => item.selector === attr);
-            this.insertInto = this.options.trigger[index].insertInto;
-            callbackSetSelectorColor(true);
 
-            const position = functions.position();
+                emojiList = undefined;
+                const index = this.options.trigger.findIndex(item => item.selector === attr);
+                this.insertInto = this.options.trigger[index].insertInto;
+                callbackSetSelectorColor(true);
 
-            if (!emojiesHTML.length) {
-                for (const key in emojiObj) {
-                    if (emojiObj.hasOwnProperty.call(emojiObj, key)) {
-                        const categoryObj = emojiObj[key];
+                const position = functions.position();
 
-                        categoriesHTML += `<li><a title="${key}" href="#${key}">${categoryFlags[key]}</a></li>`;
+                if (!emojiesHTML.length) {
+                    for (const key in emojiObj) {
+                        if (emojiObj.hasOwnProperty.call(emojiObj, key)) {
+                            const categoryObj = emojiObj[key];
 
-                        emojiesHTML += `<div class="fg-emoji-picker-category-wrapper" id="${key}">`;
-                        emojiesHTML += `<p class="fg-emoji-picker-category-title">${key}</p>`;
-                        categoryObj.forEach(ej => {
-                            emojiesHTML += `<li data-title="${ej.title.toLowerCase()}"><a title="${ej.title}" href="#">${ej.emoji}</a></li>`;
-                        });
-                        emojiesHTML += '</div>';
+                            categoriesHTML += `<li><a title="${key}" href="#${key}">${categoryFlags[key]}</a></li>`;
+
+                            emojiesHTML += `<div class="fg-emoji-picker-category-wrapper" id="${key}">`;
+                            emojiesHTML += `<p class="fg-emoji-picker-category-title">${key}</p>`;
+                            categoryObj.forEach(ej => {
+                                emojiesHTML += `<li data-title="${ej.title.toLowerCase()}"><a title="${ej.title}" href="#">${ej.emoji}</a></li>`;
+                            });
+                            emojiesHTML += '</div>';
+                        }
                     }
                 }
-            }
 
-            if (document.querySelector('.fg-emoji-container')) {
-                // callbackSetSelectorColor(false);
-                this.lib('.fg-emoji-container').remove();
-                this.lib('.bottom-triangle').remove();
-            }
+                if (document.querySelector('.fg-emoji-container')) {
+                    // callbackSetSelectorColor(false);
+                    this.lib('.fg-emoji-container').remove();
+                    this.lib('.bottom-triangle').remove();
+                }
 
-            const picker = `
-                    <div class="fg-emoji-container" style="left: ${position.picker.left}px; top: ${position.picker.top}px;">
-                        <div class="fg-emoji-picker-search">
-                            <input type="text" placeholder="Search" />
-                            
-                            <span class="fg-emoji-picker-search-icon">${icons.search}</sapn>
+                const picker = `
+                        <div class="fg-emoji-container" style="left: ${position.picker.left}px; top: ${position.picker.top}px;">
+                            <div class="fg-emoji-picker-search">
+                                <input type="text" placeholder="Search" />
+                                
+                                <span class="fg-emoji-picker-search-icon">${icons.search}</sapn>
+                            </div>
+                            <div>
+                                <!--<div class="fg-emoji-picker-loader-animation">
+                                    <div class="spinner">
+                                        <div class="bounce1"></div>
+                                        <div class="bounce2"></div>
+                                        <div class="bounce3"></div>
+                                    </div>
+                                </div>-->
+    
+                                <ul class="fg-emoji-list">
+                                    ${emojiesHTML}
+                                </ul>
+                            </div>
+                            <nav class="fg-emoji-nav">
+                                <ul>
+                                    ${categoriesHTML}
+    
+                                    ${this.options.moveButton ? `<li class="fg-picker-special-buttons" id="fg-emoji-picker-move"><a class="fg-emoji-picker-move" href="#">` + icons.move + `</a></li>` : ''}
+                                    ${this.options.closeButton ? `<li class="fg-picker-special-buttons"><a id="fg-emoji-picker-close-button" href="#">` + icons.close + `</a></li>` : ''}
+                                </ul>
+                            </nav>
                         </div>
-                        <div>
-                            <!--<div class="fg-emoji-picker-loader-animation">
-                                <div class="spinner">
-                                    <div class="bounce1"></div>
-                                    <div class="bounce2"></div>
-                                    <div class="bounce3"></div>
-                                </div>
-                            </div>-->
+                        <svg height="12" viewBox="0 0 21 12"  width="21" class="bottom-triangle" style="transform: scale(-1, 1) translate(0px); left: ${position.triangle.left}px; top: ${position.triangle.top}px;"><path d="M20.685.12c-2.229.424-4.278 1.914-6.181 3.403L5.4 10.94c-2.026 2.291-5.434.62-5.4-2.648V.12h20.684z"></path></svg>
+                    `;
 
-                            <ul class="fg-emoji-list">
-                                ${emojiesHTML}
-                            </ul>
-                        </div>
-                        <nav class="fg-emoji-nav">
-                            <ul>
-                                ${categoriesHTML}
+                document.body.insertAdjacentHTML('beforeend', picker);
 
-                                ${this.options.moveButton ? `<li class="fg-picker-special-buttons" id="fg-emoji-picker-move"><a class="fg-emoji-picker-move" href="#">` + icons.move + `</a></li>` : ''}
-                                ${this.options.closeButton ? `<li class="fg-picker-special-buttons"><a id="fg-emoji-picker-close-button" href="#">` + icons.close + `</a></li>` : ''}
-                            </ul>
-                        </nav>
-                    </div>
-                    <svg height="12" viewBox="0 0 21 12"  width="21" class="bottom-triangle" style="transform: scale(-1, 1) translate(0px); left: ${position.triangle.left}px; top: ${position.triangle.top}px;"><path d="M20.685.12c-2.229.424-4.278 1.914-6.181 3.403L5.4 10.94c-2.026 2.291-5.434.62-5.4-2.648V.12h20.684z"></path></svg>
-                `;
+                functions.rePositioning(document.querySelector('.fg-emoji-container'));
 
-            document.body.insertAdjacentHTML('beforeend', picker);
-
-            functions.rePositioning(document.querySelector('.fg-emoji-container'));
-
-            setTimeout(() => {
-                document.querySelector('.fg-emoji-picker-search input').focus();
-            }, 500)
+                setTimeout(() => {
+                    if (document.querySelector('.fg-emoji-picker-search input') != null) {
+                        document.querySelector('.fg-emoji-picker-search input').focus();
+                    }
+                }, 500);
+            } else {
+                pickerState = false;
+                functions.closePicker.call(this, e);
+            }
+            // console.log("pickerState: ", pickerState);
         },
-
 
         closePicker: (e) => {
             e.preventDefault();
@@ -7840,22 +7844,20 @@ const EmojiPicker = function (options, callbackSetSelectorColor) {
             this.lib('.fg-emoji-container').remove();
             this.lib('.bottom-triangle').remove();
             moseMove = false;
+            pickerState = false;
         },
 
-
         checkPickerExist(e) {
-            if (document.querySelector('.fg-emoji-container') && !e.target.closest('.fg-emoji-container') && !moseMove) {
-                console.log("checkPickerExist");
+            if (document.querySelector('.fg-emoji-container') && !e.target.closest('.fg-emoji-container') && !e.target.closest(targetClass) && !moseMove) {
                 functions.closePicker.call(this, e);
             }
         },
 
-
         setCaretPosition: (field, caretPos) => {
-            var elem = field
+            let elem = field
             if (elem != null) {
                 if (elem.createTextRange) {
-                    var range = elem.createTextRange();
+                    let range = elem.createTextRange();
                     range.move('character', caretPos);
                     range.select();
                 } else {
@@ -7869,7 +7871,6 @@ const EmojiPicker = function (options, callbackSetSelectorColor) {
             }
         },
 
-
         insert: e => {
             e.preventDefault();
 
@@ -7879,7 +7880,6 @@ const EmojiPicker = function (options, callbackSetSelectorColor) {
 
             // Check if selector is an array
             myField.forEach(myField => {
-
                 if (document.selection) {
                     myField.focus();
                     sel = document.selection.createRange();
@@ -7899,7 +7899,6 @@ const EmojiPicker = function (options, callbackSetSelectorColor) {
             })
         },
 
-
         categoryNav: e => {
             e.preventDefault();
 
@@ -7918,9 +7917,7 @@ const EmojiPicker = function (options, callbackSetSelectorColor) {
             destination.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" })
         },
 
-
         search: e => {
-
             const val = e.target.value.trim();
 
             if (!emojiList) {
@@ -7936,7 +7933,6 @@ const EmojiPicker = function (options, callbackSetSelectorColor) {
             })
         },
 
-
         mouseDown: e => {
             e.preventDefault();
             moseMove = true;
@@ -7948,7 +7944,6 @@ const EmojiPicker = function (options, callbackSetSelectorColor) {
         },
 
         mouseMove: e => {
-
             if (moseMove) {
                 e.preventDefault();
                 const el = document.querySelector('.fg-emoji-container');
