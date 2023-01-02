@@ -52,6 +52,7 @@
         color: var(--red-ui-text-color-code) !important;
     }
 </style>
+<script src="resources/node-red-contrib-node-line-api/emoji-picker-new.js"></script>
 <script type="text/html" data-template-name="node-line-notify">
     <div class="form-row">
         <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="node-line-notify.label.name" /></label>
@@ -186,6 +187,29 @@
             });
         };
     }(jQuery));
+
+    (() => {
+        function setButtonState(bValue) {
+            if (bValue) {
+                $("#btnEmoji").addClass('colorTextRed');
+            } else {
+                $("#btnEmoji").removeClass('colorTextRed');
+            }
+        }
+
+        new EmojiPicker({
+            trigger: [
+                {
+                    selector: '.btnEmoji',
+                    insertInto: '.node-input-message'
+                }
+            ],
+            closeButton: false,
+            moveButton: false,
+            //specialButtons: green
+        }, setButtonState);
+    })();
+
     RED.nodes.registerType('node-line-notify', {
         category: "LINE API",
         color: "#00b900",
@@ -305,14 +329,6 @@
         inputs: 1,
         outputs: 1,
         oneditprepare: function () {
-            function setButtonState(bValue) {
-                if (bValue) {
-                    $("#btnEmoji").addClass('colorTextRed');
-                } else {
-                    $("#btnEmoji").removeClass('colorTextRed');
-                }
-            }
-
             function openTab(pageName, elmnt) {
                 // remove active class
                 $('.tabcontent').each(function (i, obj) {
@@ -444,27 +460,6 @@
             });
             $("#tabMessage").click();
             setSelectedImageButton();
-
-            $.getScript('node-line-notify/js/emoji-picker.js')
-                .done(function (data, textStatus, jqxhr) {
-                    console.log("load emoji script done");
-                    initEmojiPicker({
-                        trigger: [
-                            {
-                                selector: '.btnEmoji',
-                                insertInto: '.node-input-message'
-                            }
-                        ],
-                        closeButton: false,
-                        moveButton: false,
-                        //specialButtons: green
-                    }, setButtonState);
-                })
-                .fail(function (jqxhr, settings, exception) {
-                    console.log("fail load emoji script");
-                    console.log(exception);
-                    console.log(exception.stack);
-                });
         },
         oneditsave: function () {
             if (/^\s*$/.test($("#node-input-token").val())) {
