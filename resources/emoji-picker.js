@@ -20,7 +20,7 @@ const EmojiPicker = function (options, callbackSetSelectorColor) {
     const triangleWidth = 21;
     const moreDistanceY = 8;
     const moreDistanceX = 4;
-    let pickerState = false;
+    let pickerShowState = false;
 
     this.lib = function (el = undefined) {
 
@@ -34,7 +34,6 @@ const EmojiPicker = function (options, callbackSetSelectorColor) {
         }
 
         return {
-
             el: () => {
                 // Check if is node
                 if (!el) {
@@ -7757,8 +7756,8 @@ const EmojiPicker = function (options, callbackSetSelectorColor) {
         },
 
         render: (e, attr) => {
-            if (!pickerState) {
-                pickerState = true;
+            if (!pickerShowState) {
+                pickerShowState = true;
 
                 emojiList = undefined;
                 const index = this.options.trigger.findIndex(item => item.selector === attr);
@@ -7832,10 +7831,8 @@ const EmojiPicker = function (options, callbackSetSelectorColor) {
                     }
                 }, 500);
             } else {
-                pickerState = false;
                 functions.closePicker.call(this, e);
             }
-            // console.log("pickerState: ", pickerState);
         },
 
         closePicker: (e) => {
@@ -7844,7 +7841,7 @@ const EmojiPicker = function (options, callbackSetSelectorColor) {
             this.lib('.fg-emoji-container').remove();
             this.lib('.bottom-triangle').remove();
             moseMove = false;
-            pickerState = false;
+            pickerShowState = false;
         },
 
         checkPickerExist(e) {
