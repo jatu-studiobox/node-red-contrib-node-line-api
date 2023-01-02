@@ -5,15 +5,7 @@ const EmojiPicker = function (options, callbackSetSelectorColor) {
     let emojiesHTML = '';
     let categoriesHTML = '';
     let emojiList = undefined;
-    let moseMove = false;
-    // const pickerWidth = this.options.closeButton ? 370 : 350;
-    let pickerWidth = 370;
-    if (!this.options.closeButton) {
-        pickerWidth -= 20;
-    }
-    if (!this.options.moveButton) {
-        pickerWidth -= 20;
-    }
+    const pickerWidth = 330;
     const pickerHeight = 349;
     let elementTarget;
     let targetClass = "";
@@ -7520,8 +7512,6 @@ const EmojiPicker = function (options, callbackSetSelectorColor) {
 
     const icons = {
         search: '<svg style="fill: #646772;" version="1.1" width="17" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 487.95 487.95" style="enable-background:new 0 0 487.95 487.95;" xml:space="preserve"> <g> <g> <path d="M481.8,453l-140-140.1c27.6-33.1,44.2-75.4,44.2-121.6C386,85.9,299.5,0.2,193.1,0.2S0,86,0,191.4s86.5,191.1,192.9,191.1 c45.2,0,86.8-15.5,119.8-41.4l140.5,140.5c8.2,8.2,20.4,8.2,28.6,0C490,473.4,490,461.2,481.8,453z M41,191.4 c0-82.8,68.2-150.1,151.9-150.1s151.9,67.3,151.9,150.1s-68.2,150.1-151.9,150.1S41,274.1,41,191.4z"/> </g> </g> <g> </g> <g> </g> </svg>',
-        close: '<svg style="height: 11px !important;" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg"><path d="M28.94,26,51.39,3.55A2.08,2.08,0,0,0,48.45.61L26,23.06,3.55.61A2.08,2.08,0,0,0,.61,3.55L23.06,26,.61,48.45A2.08,2.08,0,0,0,2.08,52a2.05,2.05,0,0,0,1.47-.61L26,28.94,48.45,51.39a2.08,2.08,0,0,0,2.94-2.94Z"/></svg>',
-        move: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512.006 512.006" xml:space="preserve"> <g> <g> <path d="M508.247,246.756l-72.457-72.465c-5.009-5.009-13.107-5.009-18.116,0c-5.009,5.009-5.009,13.107,0,18.116l50.594,50.594 H268.811V43.748l50.594,50.594c5.009,5.009,13.107,5.009,18.116,0c5.009-5.009,5.009-13.107,0-18.116L265.056,3.761 c-5.001-5.009-13.107-5.009-18.116,0l-72.457,72.457c-5.009,5.009-5.009,13.107,0,18.116c5.001,5.009,13.107,5.009,18.116,0 l50.594-50.594v199.27H43.744l50.594-50.594c5.009-5.009,5.009-13.107,0-18.116c-5.009-5.009-13.107-5.009-18.116,0L3.757,246.756 c-5.009,5.001-5.009,13.107,0,18.116l72.465,72.457c5.009,5.009,13.107,5.009,18.116,0c5.009-5.001,5.009-13.107,0-18.116 l-50.594-50.594h199.458v199.646l-50.594-50.594c-5.009-5.001-13.107-5.001-18.116,0c-5.009,5.009-5.009,13.107,0,18.116 l72.457,72.465c5,5,13.107,5,18.116,0l72.465-72.457c5.009-5.009,5.009-13.107,0-18.116c-5.009-5-13.107-5-18.116,0 l-50.594,50.594V268.627h199.458l-50.594,50.594c-5.009,5.009-5.009,13.107,0,18.116s13.107,5.009,18.116,0l72.465-72.457 C513.257,259.872,513.257,251.765,508.247,246.756z"/> </g> </g> <g> </g> </svg>'
     }
 
     const functions = {
@@ -7611,11 +7601,6 @@ const EmojiPicker = function (options, callbackSetSelectorColor) {
 
                         .fg-emoji-nav ul li.emoji-picker-nav-active a svg {
                             fill: #646772;
-                        }
-
-                        .fg-emoji-picker-move {
-                            /* pointer-events: none; */
-                            cursor: move;
                         }
 
                         .fg-picker-special-buttons a {
@@ -7812,9 +7797,6 @@ const EmojiPicker = function (options, callbackSetSelectorColor) {
                             <nav class="fg-emoji-nav">
                                 <ul>
                                     ${categoriesHTML}
-    
-                                    ${this.options.moveButton ? `<li class="fg-picker-special-buttons" id="fg-emoji-picker-move"><a class="fg-emoji-picker-move" href="#">` + icons.move + `</a></li>` : ''}
-                                    ${this.options.closeButton ? `<li class="fg-picker-special-buttons"><a id="fg-emoji-picker-close-button" href="#">` + icons.close + `</a></li>` : ''}
                                 </ul>
                             </nav>
                         </div>
@@ -7840,12 +7822,11 @@ const EmojiPicker = function (options, callbackSetSelectorColor) {
             callbackSetSelectorColor(false);
             this.lib('.fg-emoji-container').remove();
             this.lib('.bottom-triangle').remove();
-            moseMove = false;
             pickerShowState = false;
         },
 
         checkPickerExist(e) {
-            if (document.querySelector('.fg-emoji-container') && !e.target.closest('.fg-emoji-container') && !e.target.closest(targetClass) && !moseMove) {
+            if (document.querySelector('.fg-emoji-container') && !e.target.closest('.fg-emoji-container') && !e.target.closest(targetClass)) {
                 functions.closePicker.call(this, e);
             }
         },
@@ -7902,7 +7883,6 @@ const EmojiPicker = function (options, callbackSetSelectorColor) {
             const link = e.target.closest('a');
 
             if (link.getAttribute('id') && link.getAttribute('id') === 'fg-emoji-picker-close-button') return false;
-            if (link.className.includes('fg-emoji-picker-move')) return false;
 
             const id = link.getAttribute('href');
             const emojiBody = document.querySelector('.fg-emoji-list');
@@ -7928,25 +7908,6 @@ const EmojiPicker = function (options, callbackSetSelectorColor) {
                     emoji.style.display = ''
                 }
             })
-        },
-
-        mouseDown: e => {
-            e.preventDefault();
-            moseMove = true;
-        },
-
-        mouseUp: e => {
-            e.preventDefault();
-            moseMove = false;
-        },
-
-        mouseMove: e => {
-            if (moseMove) {
-                e.preventDefault();
-                const el = document.querySelector('.fg-emoji-container');
-                el.style.left = e.clientX - 320 + 'px';
-                el.style.top = e.clientY - 10 + 'px';
-            }
         }
     };
 
@@ -7957,9 +7918,6 @@ const EmojiPicker = function (options, callbackSetSelectorColor) {
         this.lib(document.body).on('click', functions.insert, '.fg-emoji-list a');
         this.lib(document.body).on('click', functions.categoryNav, '.fg-emoji-nav a');
         this.lib(document.body).on('input', functions.search, '.fg-emoji-picker-search input');
-        this.lib(document).on('mousedown', functions.mouseDown, '#fg-emoji-picker-move');
-        this.lib(document).on('mouseup', functions.mouseUp, '#fg-emoji-picker-move');
-        this.lib(document).on('mousemove', functions.mouseMove);
     };
 
     (() => {
