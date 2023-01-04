@@ -7517,6 +7517,107 @@ const EmojiPicker = function (options, callbackSetSelectorColor) {
     const functions = {
 
         styles: () => {
+            // index 0 -> original
+            // index 1 -> design for node-red style
+            const indexActiveStyle = 1;
+            const navStyles = [{
+                fgEmojiNav: {
+                    backgroundColor: "#646772",
+                    li: {
+                        a: {
+                            svg: {
+                                fill: "white"
+                            }
+                        }
+                    },
+                    liHover: {
+                        a: {
+                            svg: {
+                                fill: "black"
+                            }
+                        }
+                    },
+                    ul: {
+                        li: {
+                            aHover: {
+                                backgroundColor: "#e9ebf1"
+                            }
+                        },
+                        liActive: {
+                            a: {
+                                backgroundColor: "#e9ebf1"
+                            }
+                        },
+                        liEmojiPickerNavActive: {
+                            a: {
+                                backgroundColor: "#e9ebf1",
+                                svg: {
+                                    fill: "#646772"
+                                }
+                            }
+                        }
+                    }
+                },
+                fgEmojiList: {
+                    li: {
+                        aHover: {
+                            backgroundColor: "#ebebeb"
+                        }
+                    }
+                },
+                bottomTriangle: {
+                    fill: "#646772"
+                }
+            }, {
+                fgEmojiNav: {
+                    backgroundColor: "var(--red-ui-workspace-button-background)",
+                    li: {
+                        a: {
+                            svg: {
+                                fill: "var(--red-ui-workspace-button-color)"
+                            }
+                        }
+                    },
+                    liHover: {
+                        a: {
+                            svg: {
+                                fill: "var(--red-ui-workspace-button-color-hover)"
+                            }
+                        }
+                    },
+                    ul: {
+                        li: {
+                            aHover: {
+                                // backgroundColor: "var(--red-ui-workspace-button-background-primary)"
+                                backgroundColor: "var(--red-ui-workspace-button-background-hover)"
+                            }
+                        },
+                        liActive: {
+                            a: {
+                                backgroundColor: "var(--red-ui-workspace-button-color-primary)"
+                            }
+                        },
+                        liEmojiPickerNavActive: {
+                            a: {
+                                backgroundColor: "var(--red-ui-workspace-button-background-primary)",
+                                svg: {
+                                    fill: "var(--red-ui-workspace-button-color-primary)"
+                                }
+                            }
+                        }
+                    }
+                },
+                fgEmojiList: {
+                    li: {
+                        aHover: {
+                            backgroundColor: "var(--red-ui-workspace-button-background-primary)"
+                        }
+                    }
+                },
+                bottomTriangle: {
+                    fill: "var(--red-ui-workspace-button-background)"
+                }
+            }];
 
             const styles = `
                     <style>
@@ -7526,10 +7627,10 @@ const EmojiPicker = function (options, callbackSetSelectorColor) {
                             left: 0;
                             width: ${pickerWidth}px;
                             height: ${pickerHeight}px;
-                            border-top-left-radius: 8px;
-                            border-top-right-radius: 8px;
-                            border-bottom-left-radius: 8px;
-                            box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.62);
+                            border-top-left-radius: 6px;
+                            border-top-right-radius: 6px;
+                            border-bottom-left-radius: 6px;
+                            box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px;
                             background-color: white;
                             overflow: hidden;
                             z-index: 9999;
@@ -7554,16 +7655,16 @@ const EmojiPicker = function (options, callbackSetSelectorColor) {
                         }
 
                         .fg-emoji-nav {
-                            background-color: #646772;
+                            background-color: ${navStyles[indexActiveStyle].fgEmojiNav.backgroundColor};
                         }
 
                         .fg-emoji-nav li a svg {
                             transition: all .2s ease;
-                            fill: white;
+                            fill: ${navStyles[indexActiveStyle].fgEmojiNav.li.a.svg.fill};
                         }
 
                         .fg-emoji-nav li:hover a svg {
-                            fill: black;
+                            fill: ${navStyles[indexActiveStyle].fgEmojiNav.liHover.a.svg.fill};
                         }
 
                         .fg-emoji-nav ul {
@@ -7572,7 +7673,6 @@ const EmojiPicker = function (options, callbackSetSelectorColor) {
                             list-style: none;
                             margin: 0;
                             padding: 0;
-                            /* border-bottom: 1px solid #dbdbdb; */
                         }
 
                         .fg-emoji-nav ul li {
@@ -7588,27 +7688,19 @@ const EmojiPicker = function (options, callbackSetSelectorColor) {
                         }
 
                         .fg-emoji-nav ul li a:hover {
-                            background-color: #e9ebf1;
+                            background-color: ${navStyles[indexActiveStyle].fgEmojiNav.ul.li.aHover.backgroundColor};
                         }
 
                         .fg-emoji-nav ul li.active a {
-                            background-color: #e9ebf1;
+                            background-color: ${navStyles[indexActiveStyle].fgEmojiNav.ul.liActive.a.backgroundColor};
                         }
 
                         .fg-emoji-nav ul li.emoji-picker-nav-active a {
-                            background-color: #e9ebf1;
+                            background-color: ${navStyles[indexActiveStyle].fgEmojiNav.ul.liEmojiPickerNavActive.a.backgroundColor};
                         }
 
                         .fg-emoji-nav ul li.emoji-picker-nav-active a svg {
-                            fill: #646772;
-                        }
-
-                        .fg-picker-special-buttons a {
-                            background-color: ${this.options.specialButtons ? this.options.specialButtons : '#ed5e28'};
-                        }
-
-                        .fg-picker-special-buttons:last-child a {
-                            box-shadow: inset 1px 0px 0px 0 rgba(0, 0, 0, 0.11);
+                            fill: ${navStyles[indexActiveStyle].fgEmojiNav.ul.liEmojiPickerNavActive.a.svg.fill};
                         }
 
                         .fg-emoji-list {
@@ -7652,7 +7744,7 @@ const EmojiPicker = function (options, callbackSetSelectorColor) {
                         }
                         
                         .fg-emoji-list li a:hover {
-                            background-color: #ebebeb;
+                            background-color: ${navStyles[indexActiveStyle].fgEmojiList.li.aHover.backgroundColor};
                         }
 
                         .fg-emoji-picker-search {
@@ -7682,10 +7774,10 @@ const EmojiPicker = function (options, callbackSetSelectorColor) {
 
                         .bottom-triangle {
                             position: absolute;
-                            fill: white;
+                            fill: ${navStyles[indexActiveStyle].bottomTriangle.fill};
                             transform: matrix(-1, 0, 0, 1, 0, 0);
                             z-index: 9999;
-                            filter: drop-shadow(0px 2px 5px rgba(0, 0, 0, 0.72));
+                            /* filter: drop-shadow(0px 2px 5px rgba(0, 0, 0, 0.72)); 
                         }
 
                     </style>
@@ -7800,7 +7892,7 @@ const EmojiPicker = function (options, callbackSetSelectorColor) {
                                 </ul>
                             </nav>
                         </div>
-                        <svg height="12" viewBox="0 0 21 12"  width="21" class="bottom-triangle" style="transform: scale(-1, 1) translate(0px); left: ${position.triangle.left}px; top: ${position.triangle.top}px;"><path d="M20.685.12c-2.229.424-4.278 1.914-6.181 3.403L5.4 10.94c-2.026 2.291-5.434.62-5.4-2.648V.12h20.684z"></path></svg>
+                        <svg height="12" viewBox="0 0 21 12" width="21" class="bottom-triangle" style="transform: scale(-1, 1) translate(0px); left: ${position.triangle.left}px; top: ${position.triangle.top}px;"><path d="M20.685.12c-2.229.424-4.278 1.914-6.181 3.403L5.4 10.94c-2.026 2.291-5.434.62-5.4-2.648V.12h20.684z"></path></svg>
                     `;
 
                 document.body.insertAdjacentHTML('beforeend', picker);
