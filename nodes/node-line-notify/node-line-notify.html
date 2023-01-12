@@ -188,7 +188,7 @@
                 });
             };
         }(jQuery));
-        
+
         function setButtonState(bValue) {
             if (bValue) {
                 $("#btnEmoji").addClass('colorTextRed');
@@ -197,25 +197,25 @@
             }
         }
 
-        let objEmojiLabel = null;
-        $.getJSON('emojiLabels', (data) => {
-            console.log("success load emoji labels");
-            objEmojiLabel = data;
-        })
-        .fail(function () {
-            console.log("error load emoji labels");
-        })
-        .always(function () {
-            console.log("complete load emoji labels");
-            new EmojiPicker({
-                trigger: [
-                    {
-                        selector: '.btnEmoji',
-                        insertInto: '.node-input-message'
-                    }
-                ]
-            }, setButtonState, objEmojiLabel);
-        });        
+        let objEmojiLabel = {
+            "smile-people": RED._("node-red-contrib-node-line-api/node-line-notify:node-line-notify.emoji-group-labels.smile-people"),
+            "animal-nature": RED._("node-red-contrib-node-line-api/node-line-notify:node-line-notify.emoji-group-labels.animal-nature"),
+            "food-drink": RED._("node-red-contrib-node-line-api/node-line-notify:node-line-notify.emoji-group-labels.food-drink"),
+            "activity": RED._("node-red-contrib-node-line-api/node-line-notify:node-line-notify.emoji-group-labels.activity"),
+            "travel-places": RED._("node-red-contrib-node-line-api/node-line-notify:node-line-notify.emoji-group-labels.travel-places"),
+            "objects": RED._("node-red-contrib-node-line-api/node-line-notify:node-line-notify.emoji-group-labels.objects"),
+            "symbols": RED._("node-red-contrib-node-line-api/node-line-notify:node-line-notify.emoji-group-labels.symbols"),
+            "flags": RED._("node-red-contrib-node-line-api/node-line-notify:node-line-notify.emoji-group-labels.flags")
+        };
+        
+        new EmojiPicker({
+            trigger: [
+                {
+                    selector: '.btnEmoji',
+                    insertInto: '.node-input-message'
+                }
+            ]
+        }, setButtonState, objEmojiLabel);
 
         RED.nodes.registerType('node-line-notify', {
             category: "LINE API",
