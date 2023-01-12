@@ -49,15 +49,18 @@
         "send-result": {
             "success": "Send message success: "
         },
-        "emoji-group-labels": {
-            "smile-people": "Smile and People",
-            "animal-nature": "Animal and Nature",
-            "food-drink": "Food and Drink",
-            "activity": "Activity",
-            "travel-places": "Travel and Places",
-            "objects": "Objects",
-            "symbols": "Symbols",
-            "flags": "Flags"
+        "emoji-picker": {
+            "emoji-group-labels": {
+                "smile-people": "Smile and People",
+                "animal-nature": "Animal and Nature",
+                "food-drink": "Food and Drink",
+                "activity": "Activity",
+                "travel-places": "Travel and Places",
+                "objects": "Objects",
+                "symbols": "Symbols",
+                "flags": "Flags"
+            },
+            "search-placeholder": "Search"
         }
     }
 }

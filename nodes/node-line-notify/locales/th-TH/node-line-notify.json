@@ -49,15 +49,18 @@
         "send-result": {
             "success": "ส่งข้อความสำเร็จ: "
         },
-        "emoji-group-labels": {
-            "smile-people": "หน้ายิ้มและผู้คน",
-            "animal-nature": "สัตว์และธรรมชาติ",
-            "food-drink": "อาหารและเครื่องดื่ม",
-            "activity": "กิจกรรม",
-            "travel-places": "ท่องเที่ยวและสถานที่",
-            "objects": "วัตถุ",
-            "symbols": "สัญลักษณ์",
-            "flags": "ธง"
+        "emoji-picker": {
+            "emoji-group-labels": {
+                "smile-people": "หน้ายิ้มและผู้คน",
+                "animal-nature": "สัตว์และธรรมชาติ",
+                "food-drink": "อาหารและเครื่องดื่ม",
+                "activity": "กิจกรรม",
+                "travel-places": "ท่องเที่ยวและสถานที่",
+                "objects": "วัตถุ",
+                "symbols": "สัญลักษณ์",
+                "flags": "ธง"
+            },
+            "search-placeholder": "ค้นหา"
         }
     }
 }

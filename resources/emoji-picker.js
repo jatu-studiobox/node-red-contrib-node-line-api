@@ -1,4 +1,4 @@
-const EmojiPicker = function (options, callbackSetSelectorColor, objEmojiLabel) {
+const EmojiPicker = function (options, callbackSetSelectorColor, emojiPickerLabels) {
     this.options = options;
     this.trigger = this.options.trigger.map(item => item.selector);
     this.insertInto = undefined;
@@ -2354,15 +2354,12 @@ const EmojiPicker = function (options, callbackSetSelectorColor, objEmojiLabel) 
                         if (emojiObj.hasOwnProperty.call(emojiObj, key)) {
                             const categoryObj = emojiObj[key];
 
-                            categoriesHTML += `<li><a title="${key}" href="#${key}">${categoryFlags[key]}</a></li>`;
+                            categoriesHTML += `<li><a title="${emojiPickerLabels["emoji-group-labels"][key]}" href="#${key}">${categoryFlags[key]}</a></li>`;
 
                             emojiesHTML += `<div class="fg-emoji-picker-category-wrapper" id="${key}">`;
                             
-                            if (objEmojiLabel != null) {
-                                emojiesHTML += `<p class="fg-emoji-picker-category-title">${objEmojiLabel[key]}</p>`;
-                            } else {
-                                emojiesHTML += `<p class="fg-emoji-picker-category-title">${key}</p>`;
-                            }
+                            emojiesHTML += `<p class="fg-emoji-picker-category-title">${emojiPickerLabels["emoji-group-labels"][key]}</p>`;
+
                             categoryObj.forEach(ej => {
                                 emojiesHTML += `<li data-title="${ej.title.toLowerCase()}"><a title="${ej.title}" href="#">${ej.emoji}</a></li>`;
                             });
@@ -2380,7 +2377,7 @@ const EmojiPicker = function (options, callbackSetSelectorColor, objEmojiLabel) 
                 const picker = `
                         <div class="fg-emoji-container" style="left: ${position.picker.left}px; top: ${position.picker.top}px;">
                             <div class="fg-emoji-picker-search">
-                                <input type="text" placeholder="Search" />
+                                <input type="text" placeholder="${emojiPickerLabels["search-placeholder"]}" />
                                 
                                 <span class="fg-emoji-picker-search-icon">${icons.search}</sapn>
                             </div>
