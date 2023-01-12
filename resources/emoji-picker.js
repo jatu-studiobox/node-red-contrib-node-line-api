@@ -1,4 +1,4 @@
-const EmojiPicker = function (options, callbackSetSelectorColor) {
+const EmojiPicker = function (options, callbackSetSelectorColor, objEmojiLabel) {
     this.options = options;
     this.trigger = this.options.trigger.map(item => item.selector);
     this.insertInto = undefined;
@@ -2002,7 +2002,7 @@ const EmojiPicker = function (options, callbackSetSelectorColor) {
         'flags': '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="512.000000pt" height="512.000000pt" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet"><g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"><path d="M4255 5006 c-204 -208 -399 -316 -686 -380 -261 -58 -568 -60 -1104 -7 -170 17 -404 36 -519 43 -593 32 -1000 -83 -1307 -370 l-72 -68 21 -64 c12 -36 175 -616 363 -1290 188 -674 343 -1227 344 -1228 2 -2 44 31 94 75 201 175 418 276 711 330 79 15 149 18 410 17 267 0 354 -4 575 -27 143 -15 318 -32 390 -37 192 -16 529 -14 666 4 349 47 616 174 843 400 95 95 124 139 132 198 11 83 7 88 -133 163 -250 133 -497 302 -731 501 -62 53 -115 106 -118 119 -3 12 17 114 45 226 97 396 173 780 227 1157 19 134 34 268 32 296 -3 51 -3 51 -38 53 -32 1 -44 -7 -145 -111z"/> <path d="M152 4245 c-97 -30 -151 -104 -152 -204 0 -42 126 -506 541 -1990 297 -1065 548 -1951 556 -1969 26 -54 77 -82 149 -82 159 0 274 80 274 191 0 35 -1083 3917 -1105 3959 -21 41 -81 87 -131 99 -54 14 -78 13 -132 -4z"/></g></svg>'
     };
 
-    
+
 
     const icons = {
         search: '<svg style="fill: #646772;" version="1.1" width="17" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 487.95 487.95" style="enable-background:new 0 0 487.95 487.95;" xml:space="preserve"> <g> <g> <path d="M481.8,453l-140-140.1c27.6-33.1,44.2-75.4,44.2-121.6C386,85.9,299.5,0.2,193.1,0.2S0,86,0,191.4s86.5,191.1,192.9,191.1 c45.2,0,86.8-15.5,119.8-41.4l140.5,140.5c8.2,8.2,20.4,8.2,28.6,0C490,473.4,490,461.2,481.8,453z M41,191.4 c0-82.8,68.2-150.1,151.9-150.1s151.9,67.3,151.9,150.1s-68.2,150.1-151.9,150.1S41,274.1,41,191.4z"/> </g> </g> <g> </g> <g> </g> </svg>',
@@ -2357,7 +2357,12 @@ const EmojiPicker = function (options, callbackSetSelectorColor) {
                             categoriesHTML += `<li><a title="${key}" href="#${key}">${categoryFlags[key]}</a></li>`;
 
                             emojiesHTML += `<div class="fg-emoji-picker-category-wrapper" id="${key}">`;
-                            emojiesHTML += `<p class="fg-emoji-picker-category-title">${key}</p>`;
+                            
+                            if (objEmojiLabel != null) {
+                                emojiesHTML += `<p class="fg-emoji-picker-category-title">${objEmojiLabel[key]}</p>`;
+                            } else {
+                                emojiesHTML += `<p class="fg-emoji-picker-category-title">${key}</p>`;
+                            }
                             categoryObj.forEach(ej => {
                                 emojiesHTML += `<li data-title="${ej.title.toLowerCase()}"><a title="${ej.title}" href="#">${ej.emoji}</a></li>`;
                             });

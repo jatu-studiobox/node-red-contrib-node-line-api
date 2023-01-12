@@ -268,4 +268,17 @@ module.exports = function (RED) {
             }
         }
     });
+
+    RED.httpAdmin.get('/emojiLabels', function(req, res) {
+        res.json({
+            "smile-people": RED._("node-line-notify.emoji-group-labels.smile-people"),
+            "animal-nature": RED._("node-line-notify.emoji-group-labels.animal-nature"),
+            "food-drink": RED._("node-line-notify.emoji-group-labels.food-drink"),
+            "activity": RED._("node-line-notify.emoji-group-labels.activity"),
+            "travel-places": RED._("node-line-notify.emoji-group-labels.travel-places"),
+            "objects": RED._("node-line-notify.emoji-group-labels.objects"),
+            "symbols": RED._("node-line-notify.emoji-group-labels.symbols"),
+            "flags": RED._("node-line-notify.emoji-group-labels.flags")
+        });
+    });
 }

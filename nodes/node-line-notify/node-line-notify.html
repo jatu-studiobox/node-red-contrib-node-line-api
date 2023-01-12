@@ -197,14 +197,25 @@
             }
         }
 
-        new EmojiPicker({
-            trigger: [
-                {
-                    selector: '.btnEmoji',
-                    insertInto: '.node-input-message'
-                }
-            ]
-        }, setButtonState);
+        let objEmojiLabel = null;
+        $.getJSON('emojiLabels', (data) => {
+            console.log("success load emoji labels");
+            objEmojiLabel = data;
+        })
+        .fail(function () {
+            console.log("error load emoji labels");
+        })
+        .always(function () {
+            console.log("complete load emoji labels");
+            new EmojiPicker({
+                trigger: [
+                    {
+                        selector: '.btnEmoji',
+                        insertInto: '.node-input-message'
+                    }
+                ]
+            }, setButtonState, objEmojiLabel);
+        });        
 
         RED.nodes.registerType('node-line-notify', {
             category: "LINE API",
