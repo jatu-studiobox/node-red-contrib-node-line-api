@@ -8,7 +8,7 @@
             "tabImage": "รูปภาพ",
             "tabSticker": "สติ๊กเกอร์",
             "message": "ข้อความ",
-            "extdata": "ใช้ข้อมูลการส่งจากภายนอก",
+            "extdata": "ใช้ข้อมูลการส่งมาจาก Flow",
             "notUseImage": "ไม่ใช้งาน",
             "useImageUrl": "ใช้ Url รูปภาพ",
             "useUploadImage": "ใช้อัพโหลดรูปภาพ",

@@ -1,83 +1,175 @@
+<style>
+    .help-label-header {
+        font-family: var(--red-ui-monospace-font);
+        font-weight: normal;
+        margin: 5px 3px 1px;
+        color: var(--red-ui-text-color-code);
+        white-space: nowrap;
+    }
+
+    .help-label-tab {
+        font-weight: bold;
+        margin: 5px 3px 1px;
+        white-space: nowrap;
+    }
+
+    .help-setting-value {
+        color: blue;
+        font-style: italic;
+    }
+</style>
 <script type="text/html" data-help-name="node-line-notify">
-    <p>ส่งข้อความไปยัง LINE Notify.</p>
-    <p>โหนด LINE Notify ส่งข้อความไปยัง LINE Notify.</p>
-    <h3>การตั้งค่า</h3>
-    <dl class="message-properties">
-        <dt>LINE Notify Access Token <span class="property-type">string</span></dt>
-        <dd>LINE Notify Access Token for using LINE Notify API</dd>
-        <dt>ใช้ข้อมูลการส่งจากภายนอก <span class="property-type">boolean</span></dt>
-        <dd>ใช้งานข้อมูลจากค่าที่ส่งมาจากภายนอก หรือค่าที่กำหนดเองภายใน ดูรายละเอียดเพิ่มเติมที่โหมดการทำงาน.</dd>
-        <dt>ปิดป๊อบอัพแจ้งเตือนผู้ใช้งาน <span class="property-type">boolean</span></dt>
-        <dd>check: ผู้ใช้จะไม่ได้รับ Push Notification เมื่อข้อความถูกส่ง</dd>
-        <dd>uncheck: ผู้ใช้จะได้รับ Push Notification เมื่อข้อความถูกส่ง</dd>
-    </dl>
-    <h3>โหมดการทำงาน</h3>
-    <p>1. ใช้งานข้อมูลการส่งมาจากการ input ภายใน Node เอง (โหมดเริ่มต้น)</p>
-    <dl class="message-properties">
-        <dt>ข้อความ <span class="property-type">string</span></dt>
-        <dd>ข้อความความยาวไม่เกิน 1000 ตัวอักษร</dd>
-        <dt>ใช้ Url รูปภาพ <span class="property-type">boolean</span></dt>
-        <dd>ใช้งาน URL รูปภาพกับ LINE Notify</dd>
-        <dt class="optional">Fullsize URL <span class="property-type">URL string</span></dt>
-        <dd>ขนาดไม่เกิน 2048×2048px JPEG</dd>
-        <dt class="optional">Thumbnail URL <span class="property-type">URL string</span></dt>
-        <dd>ขนาดไม่เกิน 240×240px JPEG</dd>
-        <dt>ใช้อัพโหลดรูปภาพ <span class="property-type">boolean</span></dt>
-        <dd>ใช้งานอัพโหลดรูปภาพไปยัง LINE Server</dd>
-        <dt class="optional">อัพโหลดรูปภาพ <span class="property-type">string</span></dt>
-        <dd>เส้นทางไปยังไฟล์ที่ต้องการอัพโหลดแบบเต็มรูป เช่น C:\folder\image.jpg (รองรับเฉพาะ .png และ .jpg)</dd>
-        <dt>ใช้งาน Sticker <span class="property-type">boolean</span></dt>
-        <dd>check: ใช้ sticker กับ LINE Notify</dd>
-        <dd>uncheck: ไม่ใช้ sticker กับ LINE Notify</dd>
-        <dt class="optional">Package ID <span class="property-type">number</span></dt>
-        <dd>LINE Package Id ของ sticker Id ที่ต้องการส่ง</dd>
-        <dt class="optional">Sticker Id <span class="property-type">number</span></dt>
-        <dd>LINE Sticker Id ที่ต้องการส่ง</dd>
-    </dl>
-    <p>2. ใช้ข้อมูลการส่งที่มาจากภายนอก Node โดยผ่าน <font color="blue"><i>msg</i></font> object.</p>
-    <p>อินพุต</p>
+    <p>โหนด LINE Notify สำหรับส่งข้อความไปยัง LINE Notify.</p>
+    <p>สามารถส่งข้อความได้ 3 ประเภท</p>
+    <ol>
+        <li>Text</li>
+        <li>Image</li>
+        <li>Sticker</li>
+    </ol>
+    <p>การใช้งานมีอยู่ 2 แบบ</p>
+    <ol>
+        <li>กำหนดค่า Input เองโดยตรง</li>
+        <li>ใช้ข้อมูลการส่งมาจาก Flow</li>
+    </ol>
+    <h3>กำหนดค่าโหนด</h3>
+    <p>ตั้งค่าให้กับโหนดก่อนการรใช้งาน</p>
+    <ul>
+        <li><span class="help-label-header">LINE Notify Access Token</span> - LINE Notify Access Token สำหรับใช้งาน LINE Notify API</li>
+        <li>
+            <span class="help-label-header">ปิดป๊อบอัพแจ้งเตือนผู้ใช้งาน</span> - กำหนดว่าผู้ใช้งาน LINE Notify จะไม่ได้รับ Push Notification เมื่อข้อความถูกส่ง<br>
+            <span class="help-setting-value">Check</span> : ผู้ใช้จะไม่ได้รับ Push Notification เมื่อข้อความถูกส่ง<br>
+            <span class="help-setting-value">Uncheck</span> : ผู้ใช้จะได้รับ Push Notification เมื่อข้อความถูกส่ง
+        </li>
+        <li>
+            <span class="help-label-header">ใช้ข้อมูลการส่งมาจาก Flow</span> - เลือกว่าจะใช้ข้อมูลการส่งมาจาก Flow หรือกำหนดค่า Input เองโดยตรง<br>
+            <span class="help-setting-value">Uncheck</span> : กำหนดค่า Input เองโดยตรง (default)<br>
+            <span class="help-setting-value">Check</span> : ใช้ข้อมูลการส่งมาจาก Flow
+        </li>
+    </ul>
+    <h3 id="mode1">[1] กำหนดค่า Input เองโดยตรง</h3>
+    <p>เป็นโหมด Default จะเป็นการ Input ข้อมูลสำหรับที่จะส่งไปยัง LINE Notify โดยตรงที่ตัวโหนดเอง</p>
+    <h4>Inputs</h4>
+    <p>
+        <span class="help-label-tab">Tab [ <i class="fa fa-comment fa-fw"></i> ข้อความ ]</span>
+        <dl class="message-properties">
+            <dt>ข้อความ <span class="property-type">string</span></dt>
+            <dd>ข้อความที่จะถูกส่ง มีความยาวไม่เกิน 1000 ตัวอักษร</dd>
+        </dl>
+    </p>
+    <p>
+        <span class="help-label-tab">Tab [ <i class="fa fa-picture-o"></i> รูปภาพ ]</span>
+        <dl class="message-properties">
+            <dt>ใช้ Url รูปภาพ <span class="property-type">boolean</span></dt>
+            <dd>ระบุ true/false เพื่อกำหนดว่าจะส่ง URL รูปภาพไปยัง LINE Notify หรือไม่</dd>
+            <dt class="optional">Fullsize URL <span class="property-type">URL string</span></dt>
+            <dd>URL รูปภาพขนาดขนาดจริงสำหรับส่ง ขนาดไม่เกิน 2048×2048px รูปแบบไฟล์ JPEG</dd>
+            <dt class="optional">Thumbnail URL <span class="property-type">URL string</span></dt>
+            <dd>URL รูปภาพขนาด thumbnail สำหรับส่ง ขนาดไม่เกิน 240×240px รูปแบบไฟล์ JPEG</dd>
+            <dt>ใช้อัพโหลดรูปภาพ <span class="property-type">boolean</span></dt>
+            <dd>ระบุ true/false เพื่อกำหนดว่าจะใช้งานอัพโหลดรูปภาพไปยัง LINE server หรือไม่</dd>
+            <dt class="optional">อัพโหลดรูปภาพ <span class="property-type">string</span></dt>
+            <dd>รูปภาพสำหรับอัพโหลด กำหนดเส้นทางไปยังไฟล์รูปภาพที่ต้องการอัพโหลดแบบเต็มรูป เช่น C:\folder\image.jpg (รองรับเฉพาะรูปแบบไฟล์ .png และ .jpg)</dd>
+        </dl>
+    </p>
+    <p>
+        <span class="help-label-tab">Tab [ <i class="fa fa-puzzle-piece"></i> สติ๊กเกอร์ ]</span>
+        <dl class="message-properties">
+            <dt>ใช้งาน Sticker <span class="property-type">boolean</span></dt>
+            <dd>ระบุ true/false เพื่อกำหนดว่าจะส่งสติ๊กเกอร์ไปยัง LINE Notify หรือไม่</dd>
+            <dt class="optional">Package ID <span class="property-type">number</span></dt>
+            <dd>LINE Package Id ของ sticker Id ที่ต้องการส่ง</dd>
+            <dt class="optional">Sticker Id <span class="property-type">number</span></dt>
+            <dd>LINE Sticker Id ที่ต้องการส่ง</dd>
+        </dl>
+    </p>
+    <h4>Outputs</h4>
+    <ol class="node-ports">
+        <li>output มาตรฐาน
+            <dl class="message-properties">
+                <dt>status <span class="property-type">number</span></dt>
+                <dd>code สถานะผลลัพธ์การส่ง</dd>
+                <dt>payload <span class="property-type">string</span></dt>
+                <dd>ข้อความผลลัพธ์การส่ง</dd>
+            </dl>
+        </li>
+        <li>error มาตรฐาน
+            <dl class="message-properties">
+                <dt>status <span class="property-type">number</span></dt>
+                <dd>error code ของการส่ง</dd>
+                <dt>payload <span class="property-type">string</span></dt>
+                <dd>ข้อความแจ้ง error ของการส่ง</dd>
+            </dl>
+        </li>
+    </ol>
+    <h4>รายละเอียด</h4>
+    <p>
+        output properties อยู่ภายใต้ <code>msg</code> object.
+    </p>
+    <h3 id="mode2">[2] ใช้ข้อมูลการส่งมาจาก Flow</h3>
+    <p>ใช้ข้อมูลการส่งมาจาก Flow สำหรับส่งไปยัง LINE Notify</p>
+    <h4>Inputs</h4>
     <dl class="message-properties">
         <dt>payload <span class="property-type">string</span></dt>
-        <dd>ข้อความความยาวไม่เกิน 1000 ตัวอักษร</dd>
+        <dd>payload ข้อความที่จะส่ง ข้อความความยาวไม่เกิน 1000 ตัวอักษร</dd>
         <dt class="optional">useImageUrl <span class="property-type">boolean</span></dt>
-        <dd><font color="blue"><i>ถ้าไม่ส่งมาจะมีค่าเป็น false อัตโนมัติ</i></font></dd>
-        <dd>true: ใช้งาน URL รูปภาพกับ LINE Notify ต้องระบุ <font color="blue"><i>imageFullsizeUrl</i></font> และ <font color="blue"><i>imageThumbnailUrl</i></font> เพิ่มเติม</dd>
-        <dd>false: ไม่ใช้งาน URL รูปภาพกับ LINE Notify.</dd>
+        <dd>ระบุ true/false เพื่อกำหนดว่าจะส่ง URL รูปภาพไปยัง LINE Notify หรือไม่</dd>
         <dt class="optional">imageFullsizeUrl <span class="property-type">URL string</span></dt>
-        <dd>ขนาดไม่เกิน 2048×2048px JPEG</dd>
-        <dd><font color="blue"><i>Required</i> กรณี useImageUrl เป็น true</font></dd>
+        <dd>URL รูปภาพขนาดขนาดจริงสำหรับส่ง ขนาดไม่เกิน 2048×2048px รูปแบบไฟล์ JPEG</dd>
         <dt class="optional">imageThumbnailUrl <span class="property-type">URL string</span></dt>
-        <dd>ขนาดไม่เกิน 240×240px JPEG</dd>
-        <dd><font color="blue"><i>Required</i> กรณี useImageUrl เป็น true</font></dd>
+        <dd>URL รูปภาพขนาด thumbnail สำหรับส่ง ขนาดไม่เกิน 240×240px รูปแบบไฟล์ JPEG</dd>
         <dt class="optional">useImageFile <span class="property-type">boolean</span></dt>
-        <dd><font color="blue"><i>ถ้าไม่ส่งมาจะมีค่าเป็น false อัตโนมัติ</i></font></dd>
-        <dd>true: ใช้งานอัพโหลดรูปภาพไปยัง LINE Server ต้องระบุ <font color="blue"><i>imageFile</i></font> เพิ่มเติม</dd>
-        <dd>false: ไม่ใช้งานอัพโหลดรูปภาพไปยัง LINE Server</dd>
+        <dd>ระบุ true/false เพื่อกำหนดว่าจะใช้งานอัพโหลดรูปภาพไปยัง LINE server หรือไม่</dd>
         <dt class="optional">imageFile <span class="property-type">string</span></dt>
-        <dd>เส้นทางไปยังไฟล์ที่ต้องการอัพโหลดแบบเต็มรูป เช่น C:\folder\image.jpg (รองรับเฉพาะ .png และ .jpg)</dd>
-        <dd><font color="blue"><i>Required</i> กรณี useImageFile เป็น true</font></dd>
-        <dd>กรณีระบุต้องการใช้การอัพโหลดรูปภาพพร้อมกับใช้งาน URL รูปภาพ การอัพโหลดรูปภาพจะถูกเลือกทำเพียงอันเดียว และจะไม่ทำงานในส่วนของ URL รูปภาพ ดูรายละเอียดเพิ่มเติมได้ที่ LINE Notify API Document</dd>
+        <dd>รูปภาพสำหรับอัพโหลด กำหนดเส้นทางไปยังไฟล์รูปภาพที่ต้องการอัพโหลดแบบเต็มรูป เช่น C:\folder\image.jpg (รองรับเฉพาะรูปแบบไฟล์ .png และ .jpg)</dd>
         <dt class="optional">useSticker <span class="property-type">boolean</span></dt>
-        <dd><font color="blue"><i>ถ้าไม่ส่งมาจะมีค่าเป็น false อัตโนมัติ</i></font></dd>
-        <dd>true: ใช้ sticker กับ LINE Notify ต้องระบุ <font color="blue"><i>stickerPackageId</i></font> และ <font color="blue"><i>stickerId</i></font> เพิ่มเติม</dd>
-        <dd>false: ไม่ใช้ sticker กับ LINE Notify</dd>
+        <dd>ระบุ true/false เพื่อกำหนดว่าจะส่งสติ๊กเกอร์ไปยัง LINE Notify หรือไม่</dd>
         <dt class="optional">stickerId <span class="property-type">number</span></dt>
         <dd>LINE Sticker Id ที่ต้องการส่ง</dd>
-        <dd><font color="blue"><i>Required</i> กรณี useSticker เป็น true</font></dd>
         <dt class="optional">stickerPackageId <span class="property-type">number</span></dt>
         <dd>LINE Package Id ของ sticker Id ที่ต้องการส่ง</dd>
-        <dd><font color="blue"><i>Required</i> กรณี useSticker เป็น true</font></dd>
     </dl>
-    <h3>ส่วนเอาท์พุต</h3>
-    <p>เอาท์พุตสำหรับทุกโหมด</p>
-    <dl class="message-properties">
-        <dt>msg.status <span class="property-type">number</span></dt>
-        <dd>code แสดงสถานะผลลัพธ์การส่ง</dd>
-        <dt>msg.payload <span class="property-type">string</span></dt>
-        <dd>ข้อความแสดงผลลัพธ์การส่ง</dd>
-    </dl>
-    <h3>Details</h3>
+    <h4>รายละเอียด</h4>
+    <p>
+        โหนด LINE Notify ใช้งาน <code>msg</code> object เป็นตัวหลัก ค่า property ที่ใช้งานต่าง ๆ จะอยู่ภายใต้ <code>msg</code> object นี้ ตัวอย่างเช่น <code>msg.payload</code>
+    </p>
+    <p>
+        <code>msg.useImageUrl</code> เป็นตัวเลือก ดังนั้นถ้าไม่มีการส่งค่านี้มาจะหมายความว่า ไม่มีการส่ง URL รูปภาพไปยัง LINE Notify แต่ว่าถ้ามีการส่งมาแล้วระบุค่าของ <code>msg.useImageUrl</code> เป็น <i>true</i> จะต้องมีการระบุค่า <code>msg.imageFullsizeUrl</code> และ <code>msg.imageThumbnailUrl</code> มาด้วย
+    </p>
+    <p>
+        <code>msg.useImageFile</code> เป็นตัวเลือก ดังนั้นถ้าไม่มีการส่งค่านี้มาจะหมายความว่า ไม่มีการอัพโหลดรูปภาพไปยัง LINE server แต่ว่าถ้ามีการส่งมาแล้วระบุค่าของ <code>msg.useImageFile</code> เป็น <i>true</i> จะต้องมีการระบุค่า <code>msg.imageFile</code> มาด้วย
+    </p>
+    <p>
+        ในกรณีที่ระบุค่า <code>msg.imageFullsizeUrl</code>, <code>msg.imageThumbnailUrl</code> และ <code>msg.imageFile</code> มาด้วยกัน จะเลือกทำอัพโหลดไฟล์ <code>msg.imageFile</code> เพียงอันเดียว และจะไม่ทำงานในส่วนของ URL รูปภาพ <code>msg.imageFullsizeUrl</code> และ <code>msg.imageThumbnailUrl</code> ดูรายละเอียดเพิ่มเติมได้ที่ LINE Notify API Document
+    </p>
+    <p>
+        <code>msg.useSticker</code> เป็นตัวเลือก ดังนั้นถ้าไม่มีการส่งค่านี้มาจะหมายความว่า ไม่มีการส่งสติ๊กเกอร์ไปยัง LINE Notify แต่ว่าถ้ามีการส่งมาแล้วระบุค่าของ <code>msg.useSticker</code> เป็น <i>true</i> จะต้องมีการระบุค่า <code>msg.stickerId</code> และ <code>msg.stickerPackageId</code> มาด้วย
+    </p>
+    <h4>Outputs</h4>
+    <ol class="node-ports">
+        <li>output มาตรฐาน
+            <dl class="message-properties">
+                <dt>status <span class="property-type">number</span></dt>
+                <dd>code สถานะผลลัพธ์การส่ง</dd>
+                <dt>payload <span class="property-type">string</span></dt>
+                <dd>ข้อความผลลัพธ์การส่ง</dd>
+            </dl>
+        </li>
+        <li>error มาตรฐาน
+            <dl class="message-properties">
+                <dt>status <span class="property-type">number</span></dt>
+                <dd>error code ของการส่ง</dd>
+                <dt>payload <span class="property-type">string</span></dt>
+                <dd>ข้อความแจ้ง error ของการส่ง</dd>
+            </dl>
+        </li>
+    </ol>
+    <h4>รายละเอียด</h4>
+    <p>
+        output properties อยู่ภายใต้ <code>msg</code> object.
+    </p>
+    <h3>อ้างอิง</h3>
     <p>สร้าง LINE Notify Access Token ได้ที่ <a target="_blank" href="https://notify-bot.line.me/">LINE Notify API</a>.</p>
     <p>ดูรายละเอียดเพิ่มเติมได้ที่ <a target="_blank" href="https://notify-bot.line.me/doc/en/">LINE Notify API Document</a>.</p>
     <p>ดูรายละเอียดเพิ่มเติมของ Sticker ID และ Package ID ได้ที่ <a target="_blank" href="https://developers.line.biz/en/docs/messaging-api/sticker-list/">LINE List of available stickers.</a></p>
+    <p><a target="_blank" href="https://github.com/jatu-studiobox/node-red-contrib-node-line-api">GitHub</a> - github repository ของโหนด</p>
 </script>

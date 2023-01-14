@@ -8,7 +8,7 @@
             "tabImage": "Image",
             "tabSticker": "Sticker",
             "message": "Message",
-            "extdata": "Use external data",
+            "extdata": "Use data from flow",
             "notUseImage": "Not Use",
             "useImageUrl": "Image URL",
             "useUploadImage": "Upload Image",

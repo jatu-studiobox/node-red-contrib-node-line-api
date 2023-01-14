@@ -1,82 +1,175 @@
+<style>
+    .help-label-header {
+        font-family: var(--red-ui-monospace-font);
+        font-weight: normal;
+        margin: 5px 3px 1px;
+        color: var(--red-ui-text-color-code);
+        white-space: nowrap;
+    }
+
+    .help-label-tab {
+        font-weight: bold;
+        margin: 5px 3px 1px;
+        white-space: nowrap;
+    }
+
+    .help-setting-value {
+        color: blue;
+        font-style: italic;
+    }
+</style>
 <script type="text/html" data-help-name="node-line-notify">
-    <p>LINE Notify Node. Send message notification to LINE Notify.</p>
-    <h3>Settings</h3>
-    <dl class="message-properties">
-        <dt>LINE Notify Access Token <span class="property-type">string</span></dt>
-        <dd>LINE Notify Access Token for using LINE Notify API</dd>
-        <dt>Use external data <span class="property-type">boolean</span></dt>
-        <dd>Use data from outside or node self. Please see mode detail section.</dd>
-        <dt>Disabled user push Notification <span class="property-type">boolean</span></dt>
-        <dd>check: The user doesn't receive Push Notification when the message is sent.</dd>
-        <dd>uncheck: The user receives Push Notification when the message is sent.</dd>
-    </dl>
-    <h3>Mode detail sections</h3>
-    <p>1. Node self data mode (default mode). Using node UI input data.</p>
-    <dl class="message-properties">
-        <dt>Message <span class="property-type">string</span></dt>
-        <dd>1000 characters max</dd>
-        <dt>Image URL <span class="property-type">boolean</span></dt>
-        <dd>Use image URL with LINE Notify.</dd>
-        <dt class="optional">Fullsize URL <span class="property-type">URL string</span></dt>
-        <dd>Maximum size of 2048×2048px JPEG</dd>
-        <dt class="optional">Thumbnail URL <span class="property-type">URL string</span></dt>
-        <dd>Maximum size of 240×240px JPEG</dd>
-        <dt>Upload Image <span class="property-type">boolean</span></dt>
-        <dd>Use upload a image file to the LINE server.</dd>
-        <dt class="optional">Upload Image <span class="property-type">string</span></dt>
-        <dd>Should be an absolute path to upload image file, e.g. C:\folder\image.jpg (Support .png and .jpg)</dd>
-        <dt>Use Sticker <span class="property-type">boolean</span></dt>
-        <dd>check: Use sticker with LINE Notify.</dd>
-        <dd>uncheck: Not use sticker with LINE Notify.</dd>
-        <dt class="optional">Package ID <span class="property-type">number</span></dt>
-        <dd>LINE Package Id of sticker Id</dd>
-        <dt class="optional">Sticker Id <span class="property-type">number</span></dt>
-        <dd>LINE Sticker Id</dd>
-    </dl>
-    <p>2. Use data from external node by using <font color="blue"><i>msg</i></font> object.</p>
-    <p>Inputs</p>
+    <p>LINE Notify Node. Publish message notification to LINE Notify.</p>
+    <p>Three types of messages can be sent.</p>
+    <ol>
+        <li>Text</li>
+        <li>Images</li>
+        <li>Sticker</li>
+    </ol>
+    <p>Two modes of usage node can be set.</p>
+    <ol>
+        <li>Manual input data</li>
+        <li>Use data from flow</li>
+    </ol>
+    <h3>Node settings</h3>
+    <p>Configure nodes before use.</p>
+    <ul>
+        <li><span class="help-label-header">LINE Notify Access Token</span> - LINE Notify Access Token for using LINE Notify API</li>
+        <li>
+            <span class="help-label-header">Disabled user push Notification</span> - determined that user doesn't receive Push Notification at LINE Notify when the message is sent.<br>
+            <span class="help-setting-value">Check</span> : user doesn't receive Push Notification<br>
+            <span class="help-setting-value">Uncheck</span> : user receives Push Notification
+        </li>
+        <li>
+            <span class="help-label-header">Use data from flow</span> - choose use data from flow or manual input data.<br>
+            <span class="help-setting-value">Uncheck</span> : Use data from manual input (default)<br>
+            <span class="help-setting-value">Check</span> : Use data from flow
+        </li>
+    </ul>
+    <h3 id="mode1">[1] Manual input data mode</h3>
+    <p>Default mode. Using data from manual input for publish message to LINE Notify.</p>
+    <h4>Inputs</h4>
+    <p>
+        <span class="help-label-tab">Tab [ <i class="fa fa-comment fa-fw"></i> Message ]</span>
+        <dl class="message-properties">
+            <dt>Message <span class="property-type">string</span></dt>
+            <dd>message to publish. 1000 characters max</dd>
+        </dl>
+    </p>
+    <p>
+        <span class="help-label-tab">Tab [ <i class="fa fa-picture-o"></i> Image ]</span>
+        <dl class="message-properties">
+            <dt>Image URL <span class="property-type">boolean</span></dt>
+            <dd>specify true/false to publish image URL to LINE Notify.</dd>
+            <dt class="optional">Fullsize URL <span class="property-type">URL string</span></dt>
+            <dd>image fullsize URL to publish. Maximum size of 2048×2048px JPEG</dd>
+            <dt class="optional">Thumbnail URL <span class="property-type">URL string</span></dt>
+            <dd>image thumbnail URL to publish. Maximum size of 240×240px JPEG</dd>
+            <dt>Upload Image <span class="property-type">boolean</span></dt>
+            <dd>specify true/false to use upload a image file to the LINE server.</dd>
+            <dt class="optional">Upload Image <span class="property-type">string</span></dt>
+            <dd>image to upload. Should be an absolute path to upload image file, e.g. C:\folder\image.jpg (Support .png and .jpg)</dd>
+        </dl>
+    </p>
+    <p>
+        <span class="help-label-tab">Tab [ <i class="fa fa-puzzle-piece"></i> Sticker ]</span>
+        <dl class="message-properties">
+            <dt>Use Sticker <span class="property-type">boolean</span></dt>
+            <dd>specify true/false to publish sticker to LINE Notify.</dd>
+            <dt class="optional">Package ID <span class="property-type">number</span></dt>
+            <dd>LINE Package Id of sticker Id</dd>
+            <dt class="optional">Sticker Id <span class="property-type">number</span></dt>
+            <dd>LINE Sticker Id</dd>
+        </dl>
+    </p>
+    <h4>Outputs</h4>
+    <ol class="node-ports">
+        <li>Standard output
+            <dl class="message-properties">
+                <dt>status <span class="property-type">number</span></dt>
+                <dd>standard result status code</dd>
+                <dt>payload <span class="property-type">string</span></dt>
+                <dd>result message</dd>
+            </dl>
+        </li>
+        <li>Standard error
+            <dl class="message-properties">
+                <dt>status <span class="property-type">number</span></dt>
+                <dd>standard error code</dd>
+                <dt>payload <span class="property-type">string</span></dt>
+                <dd>standard error message</dd>
+            </dl>
+        </li>
+    </ol>
+    <h4>Details</h4>
+    <p>
+        output properties is underneath <code>msg</code> object.
+    </p>
+    <h3 id="mode2">[2] Use data from flow</h3>
+    <p>Using data from flow for publish message to LINE Notify</p>
+    <h4>Inputs</h4>
     <dl class="message-properties">
         <dt>payload <span class="property-type">string</span></dt>
-        <dd>1000 characters max</dd>
+        <dd>the payload of the message to publish. 1000 characters max</dd>
         <dt class="optional">useImageUrl <span class="property-type">boolean</span></dt>
-        <dd><font color="blue"><i>If not send, automated set to false</i></font></dd>
-        <dd>true: Use image URL with LINE Notify. Additional <font color="blue"><i>imageFullsizeUrl</i></font> and <font color="blue"><i>imageThumbnailUrl</i></font> must be specified.</dd>
-        <dd>false: Not use image URL with LINE Notify.</dd>
+        <dd>specify true/false to publish image URL to LINE Notify.</dd>
         <dt class="optional">imageFullsizeUrl <span class="property-type">URL string</span></dt>
-        <dd>Maximum size of 2048×2048px JPEG</dd>
-        <dd><font color="blue"><i>Required</i> if useImageUrl is true.</font></dd>
+        <dd>image fullsize URL to publish. Maximum size of 2048×2048px JPEG</dd>
         <dt class="optional">imageThumbnailUrl <span class="property-type">URL string</span></dt>
-        <dd>Maximum size of 240×240px JPEG</dd>
-        <dd><font color="blue"><i>Required</i> if useImageUrl is true.</font></dd>
+        <dd>image thumbnail URL to publish. Maximum size of 240×240px JPEG</dd>
         <dt class="optional">useImageFile <span class="property-type">boolean</span></dt>
-        <dd><font color="blue"><i>If not send, automated set to false</i></font></dd>
-        <dd>true: Upload a image file to the LINE server. Additional <font color="blue"><i>imageFile</i></font> must be specified.</dd>
-        <dd>false: Not upload a image file to the LINE server.</dd>
+        <dd>specify true/false to use upload a image file to the LINE server.</dd>
         <dt class="optional">imageFile <span class="property-type">string</span></dt>
-        <dd>Should be an absolute path to upload image file, e.g. C:\folder\image.jpg (Support .png and .jpg)</dd>
-        <dd><font color="blue"><i>Required</i> if useImageFile is true.</font></dd>
-        <dd>If you specified imageFullsizeUrl ,imageThumbnailUrl and imageFile, imageFile takes precedence. See more detail at LINE Notify API Document</dd>
+        <dd>image to upload. Should be an absolute path to upload image file, e.g. C:\folder\image.jpg (Support .png and .jpg)</dd>
         <dt class="optional">useSticker <span class="property-type">boolean</span></dt>
-        <dd><font color="blue"><i>If not send, automated set to false</i></font></dd>
-        <dd>true: Use sticker with LINE Notify. Additional <font color="blue"><i>stickerPackageId</i></font> and <font color="blue"><i>stickerId</i></font> must be specified.</dd>
-        <dd>false: Not use sticker with LINE Notify.</dd>
+        <dd>specify true/false to publish sticker to LINE Notify.</dd>
         <dt class="optional">stickerId <span class="property-type">number</span></dt>
         <dd>LINE Sticker Id</dd>
-        <dd><font color="blue"><i>Required</i> if useSticker is true.</font></dd>
         <dt class="optional">stickerPackageId <span class="property-type">number</span></dt>
         <dd>LINE Package Id of sticker Id</dd>
-        <dd><font color="blue"><i>Required</i> if useSticker is true.</font></dd>
     </dl>
-    <h3>Output Section</h3>
-    <p>Output for all modes</p>
-    <dl class="message-properties">
-        <dt>msg.status <span class="property-type">number</span></dt>
-        <dd>result status code</dd>
-        <dt>msg.payload <span class="property-type">string</span></dt>
-        <dd>result status message</dd>
-    </dl>
-    <h3>Details</h3>
+    <h4>Details</h4>
+    <p>
+        <code>msg</code> object is main used for this LINE Notify node. All input properties is underneath <code>msg</code> object. Such as, <code>msg.payload</code>.
+    </p>
+    <p>
+        <code>msg.useImageUrl</code> is optional. If it does not sent from flow, this means not publish image url to LINE Notify. Likewise, if <code>msg.useImageUrl</code> is <i>true</i>, <code>msg.imageFullsizeUrl</code> and <code>msg.imageThumbnailUrl</code> must be specified.
+    </p>
+    <p>
+        <code>msg.useImageFile</code> is optional. If it does not sent from flow, this means not upload image file to LINE server. Likewise, if <code>msg.useImageFile</code> is <i>true</i>, <code>msg.imageFile</code> must be specified.
+    </p>
+    <p>
+        If you specified all <code>msg.imageFullsizeUrl</code>, <code>msg.imageThumbnailUrl</code> and <code>msg.imageFile</code>, the <code>msg.imageFile</code> takes precedence. See more detail at LINE Notify API Document
+    </p>
+    <p>
+        <code>msg.useSticker</code> is optional. If it does not sent from flow, this means not publish sticker to LINE Notify. Likewise, if <code>msg.useSticker</code> is <i>true</i>, <code>msg.stickerId</code> and <code>msg.stickerPackageId</code> must be specified.
+    </p>
+    <h4>Outputs</h4>
+    <ol class="node-ports">
+        <li>Standard output
+            <dl class="message-properties">
+                <dt>status <span class="property-type">number</span></dt>
+                <dd>standard result code</dd>
+                <dt>payload <span class="property-type">string</span></dt>
+                <dd>result message</dd>
+            </dl>
+        </li>
+        <li>Standard error
+            <dl class="message-properties">
+                <dt>status <span class="property-type">number</span></dt>
+                <dd>standard error code</dd>
+                <dt>payload <span class="property-type">string</span></dt>
+                <dd>standard error message</dd>
+            </dl>
+        </li>
+    </ol>
+    <h4>Details</h4>
+    <p>
+        output properties is underneath <code>msg</code> object.
+    </p>
+    <h3>References</h3>
     <p>Obtain LINE Notify Access Token at <a target="_blank" href="https://notify-bot.line.me/">LINE Notify API</a>.</p>
     <p>See more details at <a target="_blank" href="https://notify-bot.line.me/doc/en/">LINE Notify API Document</a>.</p>
     <p>See more details about Sticker ID and Package ID at <a target="_blank" href="https://developers.line.biz/en/docs/messaging-api/sticker-list/">LINE List of available stickers.</a></p>
- </script>
+    <p><a target="_blank" href="https://github.com/jatu-studiobox/node-red-contrib-node-line-api">GitHub</a> - the node's github repository</p>
+</script>
