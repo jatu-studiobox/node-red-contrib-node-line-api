@@ -1,10 +1,10 @@
 # node-red-contrib-node-line-api
 
-Current version: 0.8.6 [See change logs detail](https://github.com/jatu-studiobox/node-red-contrib-node-line-api/wiki/Change-Logs)
-
 ![Node-RED, LINE Notify API, LINE Messaging API](https://user-images.githubusercontent.com/43282496/160283800-ce97f39b-07d7-4305-87b8-bb0223eb4a2a.png)
 
 **LINE API nodes** for <a href="https://nodered.org/" target="_blank">Node-RED</a>, includes LINE Notify Nodes and LINE Messaging API Nodes, for easy to interact with LINE application.
+
+Current version: 0.8.6 [See change logs detail](https://github.com/jatu-studiobox/node-red-contrib-node-line-api/wiki/Change-Logs)
 
 ![node-red-contrib-node-line-api](https://user-images.githubusercontent.com/43282496/163944021-99bb0760-79a4-40af-ae0a-1498a2964169.png)
 
