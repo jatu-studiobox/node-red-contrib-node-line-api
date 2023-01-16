@@ -1,4 +1,7 @@
 # node-red-contrib-node-line-api
+
+Current version: 0.8.6
+
 ![Node-RED, LINE Notify API, LINE Messaging API](https://user-images.githubusercontent.com/43282496/160283800-ce97f39b-07d7-4305-87b8-bb0223eb4a2a.png)
 
 **LINE API nodes** for <a href="https://nodered.org/" target="_blank">Node-RED</a>, includes LINE Notify Nodes and LINE Messaging API Nodes, for easy to interact with LINE application.
