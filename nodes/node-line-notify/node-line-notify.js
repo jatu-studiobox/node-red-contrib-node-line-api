@@ -101,7 +101,6 @@ module.exports = function (RED) {
                     // check platform
                     if (process.platform === "win32") {
                         if (!msg.imageFile.match(/^[a-z]:((\\|\/)[a-z0-9\s_@\-^!#$%&+={}\[\]]+)+\.(png|jpg)$/i)) {
-                            console.log("not match");
                             result.isError = true;
                             result.message = RED._("node-line-notify.errors.imageFileInvalid");
                         }
