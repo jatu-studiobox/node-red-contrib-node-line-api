@@ -97,9 +97,20 @@ module.exports = function (RED) {
                 if (typeof msg.imageFile !== 'string') {
                     result.isError = true;
                     result.message = RED._("node-line-notify.errors.imageFileInvalid");
-                } else if (msg.imageFile.length > 0 && !msg.imageFile.match(/^[a-z]:((\\|\/)[a-z0-9\s_@\-^!#$%&+={}\[\]]+)+\.(png|jpg)$/i)) {
-                    result.isError = true;
-                    result.message = RED._("node-line-notify.errors.imageFileInvalid");
+                } else if (msg.imageFile.length > 0) {
+                    // check platform
+                    if (process.platform === "win32") {
+                        if (!msg.imageFile.match(/^[a-z]:((\\|\/)[a-z0-9\s_@\-^!#$%&+={}\[\]]+)+\.(png|jpg)$/i)) {
+                            console.log("not match");
+                            result.isError = true;
+                            result.message = RED._("node-line-notify.errors.imageFileInvalid");
+                        }
+                    } else {
+                        if (!msg.imageFile.match(/^(\/[\w-]+)+(.(png|jpg)+?)$/)) {
+                            result.isError = true;
+                            result.message = RED._("node-line-notify.errors.imageFileInvalid");
+                        }
+                    }
                 }
             } else {
                 result.isError = true;
