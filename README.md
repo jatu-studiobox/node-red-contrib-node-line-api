@@ -53,4 +53,4 @@ Use this official document <a href="https://developers.line.biz/en/docs/messagin
 
 ## You can support me
 
-<a href="https://www.buymeacoffee.com/innostudioj" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+<a href="https://www.buymeacoffee.com/innostudioj" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" width="217" height="60"></a>
