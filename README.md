@@ -50,4 +50,3 @@ Use this official document <a href="https://developers.line.biz/en/docs/messagin
 
 ## Change Logs
 [See change logs detail](https://github.com/jatu-studiobox/node-red-contrib-node-line-api/wiki/Change-Logs)
-
