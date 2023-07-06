@@ -4,7 +4,7 @@
 
 **LINE API nodes** for <a href="https://nodered.org/" target="_blank">Node-RED</a>, includes LINE Notify Nodes and LINE Messaging API Nodes, for easy to interact with LINE application.
 
-Current version: 0.8.9 [See change logs detail](https://github.com/jatu-studiobox/node-red-contrib-node-line-api/wiki/Change-Logs)
+Current version: 0.8.10 [See change logs detail](https://github.com/jatu-studiobox/node-red-contrib-node-line-api/wiki/Change-Logs)
 
 ![node-red-contrib-node-line-api](https://user-images.githubusercontent.com/43282496/163944021-99bb0760-79a4-40af-ae0a-1498a2964169.png)
 
